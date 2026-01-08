@@ -169,6 +169,63 @@ const HeroSection = () => {
         </defs>
       </svg>
       
+      {/* Virtual Event Elements - Distant from center */}
+      {/* Floating video play button - top left */}
+      <div className="absolute top-[12%] left-[8%] opacity-20 animate-float" style={{ animationDuration: "6s" }}>
+        <div className="w-12 h-12 rounded-xl bg-primary/30 backdrop-blur-sm border border-primary/20 flex items-center justify-center">
+          <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-primary/60 border-b-[6px] border-b-transparent ml-1" />
+        </div>
+      </div>
+      
+      {/* Floating chat bubble - top right */}
+      <div className="absolute top-[15%] right-[6%] opacity-15 animate-float" style={{ animationDuration: "7s", animationDelay: "-2s" }}>
+        <div className="w-14 h-10 rounded-lg bg-secondary/30 backdrop-blur-sm border border-secondary/20 flex items-center justify-center gap-1">
+          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{ animationDuration: "1.5s" }} />
+          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{ animationDuration: "1.5s", animationDelay: "0.2s" }} />
+          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{ animationDuration: "1.5s", animationDelay: "0.4s" }} />
+        </div>
+      </div>
+      
+      {/* Floating screen share icon - bottom left */}
+      <div className="absolute bottom-[18%] left-[5%] opacity-20 animate-float" style={{ animationDuration: "8s", animationDelay: "-3s" }}>
+        <div className="w-16 h-12 rounded-lg bg-accent/20 backdrop-blur-sm border border-accent/15 flex items-center justify-center">
+          <div className="w-8 h-5 rounded border border-accent/40 flex items-center justify-center">
+            <div className="w-3 h-3 border-t-2 border-r-2 border-accent/50 rotate-[-45deg]" />
+          </div>
+        </div>
+      </div>
+      
+      {/* Floating participant grid - bottom right */}
+      <div className="absolute bottom-[22%] right-[7%] opacity-15 animate-float" style={{ animationDuration: "9s", animationDelay: "-1s" }}>
+        <div className="grid grid-cols-2 gap-1 p-2 rounded-lg bg-primary/20 backdrop-blur-sm border border-primary/15">
+          <div className="w-4 h-4 rounded bg-primary/30" />
+          <div className="w-4 h-4 rounded bg-primary/40" />
+          <div className="w-4 h-4 rounded bg-primary/35" />
+          <div className="w-4 h-4 rounded bg-primary/25" />
+        </div>
+      </div>
+      
+      {/* Floating microphone - left side */}
+      <div className="absolute top-[45%] left-[3%] opacity-15 animate-float" style={{ animationDuration: "5s", animationDelay: "-4s" }}>
+        <div className="w-8 h-12 flex flex-col items-center">
+          <div className="w-6 h-8 rounded-t-full bg-secondary/30 border border-secondary/20" />
+          <div className="w-2 h-3 bg-secondary/25" />
+          <div className="w-6 h-1 rounded-full bg-secondary/20" />
+        </div>
+      </div>
+      
+      {/* Floating calendar/event icon - right side */}
+      <div className="absolute top-[50%] right-[4%] opacity-20 animate-float" style={{ animationDuration: "7s", animationDelay: "-5s" }}>
+        <div className="w-10 h-12 rounded-lg bg-accent/25 backdrop-blur-sm border border-accent/20 flex flex-col">
+          <div className="h-3 bg-accent/30 rounded-t-lg" />
+          <div className="flex-1 p-1 grid grid-cols-3 gap-0.5">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="w-1.5 h-1.5 rounded-sm bg-accent/40" />
+            ))}
+          </div>
+        </div>
+      </div>
+      
       {/* Subtle Animated Particles - Reduced */}
       <div className="absolute top-[20%] left-[25%] w-2 h-2 bg-primary/40 rounded-full animate-ping" style={{
       animationDuration: "3s"
