@@ -7,7 +7,6 @@ import avatarsSocialProof from "@/assets/avatars-social-proof.png";
 // Animated counter hook
 const useCounter = (end: number, duration: number = 2000, delay: number = 0) => {
   const [count, setCount] = useState(0);
-  
   useEffect(() => {
     const timeout = setTimeout(() => {
       let start = 0;
@@ -25,17 +24,13 @@ const useCounter = (end: number, duration: number = 2000, delay: number = 0) => 
     }, delay);
     return () => clearTimeout(timeout);
   }, [end, duration, delay]);
-  
   return count;
 };
-
 const HeroSection = () => {
   const eventsCount = useCounter(500, 2000, 500);
   const attendeesCount = useCounter(50, 2000, 700);
   const showRate = useCounter(95, 2000, 900);
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+  return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 bg-gradient-radial" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.2)_0%,transparent_50%)]" />
@@ -43,7 +38,9 @@ const HeroSection = () => {
       
       {/* Animated Gradient Orbs */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-float" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "-3s" }} />
+      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-float" style={{
+      animationDelay: "-3s"
+    }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl" />
       
       {/* Grid Pattern */}
@@ -51,8 +48,13 @@ const HeroSection = () => {
       
       {/* Network Connection Lines */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
-        <line x1="12%" y1="18%" x2="88%" y2="25%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{ animationDuration: "3s" }} />
-        <line x1="8%" y1="55%" x2="90%" y2="40%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{ animationDuration: "4s", animationDelay: "-1s" }} />
+        <line x1="12%" y1="18%" x2="88%" y2="25%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{
+        animationDuration: "3s"
+      }} />
+        <line x1="8%" y1="55%" x2="90%" y2="40%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{
+        animationDuration: "4s",
+        animationDelay: "-1s"
+      }} />
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
@@ -63,8 +65,13 @@ const HeroSection = () => {
       </svg>
       
       {/* Subtle Animated Particles - Reduced */}
-      <div className="absolute top-[20%] left-[25%] w-2 h-2 bg-primary/40 rounded-full animate-ping" style={{ animationDuration: "3s" }} />
-      <div className="absolute bottom-[35%] right-[20%] w-1.5 h-1.5 bg-secondary/40 rounded-full animate-ping" style={{ animationDuration: "4s", animationDelay: "-1.5s" }} />
+      <div className="absolute top-[20%] left-[25%] w-2 h-2 bg-primary/40 rounded-full animate-ping" style={{
+      animationDuration: "3s"
+    }} />
+      <div className="absolute bottom-[35%] right-[20%] w-1.5 h-1.5 bg-secondary/40 rounded-full animate-ping" style={{
+      animationDuration: "4s",
+      animationDelay: "-1.5s"
+    }} />
       
       <div className="container relative z-10 px-4 md:px-6 text-center">
         {/* Live Badge */}
@@ -86,12 +93,16 @@ const HeroSection = () => {
           </h1>
         </div>
         
-        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+        <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8 animate-fade-in" style={{
+        animationDelay: "0.1s"
+      }}>
           We market premium events that attract only your ideal clients, generate high-quality leads, and make your brand the one everyone talks about.
         </p>
         
         {/* CTA Button with Enhanced Glow - MOVED UP */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-in" style={{ animationDelay: "0.15s" }}>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-in" style={{
+        animationDelay: "0.15s"
+      }}>
           <div className="relative group">
             <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-lg blur opacity-40 group-hover:opacity-70 transition duration-500" />
             <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
@@ -104,16 +115,14 @@ const HeroSection = () => {
         </div>
         
         {/* Social Proof Bar - NOW BELOW BUTTON */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-10 animate-fade-in" style={{
+        animationDelay: "0.2s"
+      }}>
           {/* Animated Stars */}
           <div className="flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map((star, index) => (
-              <Star
-                key={star}
-                className="w-5 h-5 text-yellow-400 fill-yellow-400 animate-scale-in"
-                style={{ animationDelay: `${0.3 + index * 0.1}s` }}
-              />
-            ))}
+            {[1, 2, 3, 4, 5].map((star, index) => <Star key={star} className="w-5 h-5 text-yellow-400 fill-yellow-400 animate-scale-in" style={{
+            animationDelay: `${0.3 + index * 0.1}s`
+          }} />)}
             <span className="ml-2 text-sm font-semibold text-foreground">4.9/5</span>
           </div>
           
@@ -121,18 +130,17 @@ const HeroSection = () => {
           
           {/* Real Avatar Photos */}
           <div className="flex items-center gap-3">
-            <img 
-              src={avatarsSocialProof} 
-              alt="Happy event organizers" 
-              className="h-10 md:h-12 object-contain animate-scale-in"
-              style={{ animationDelay: "0.5s" }}
-            />
-            <span className="text-sm text-muted-foreground">500+ Event Organizers Trust Us</span>
+            <img src={avatarsSocialProof} alt="Happy event organizers" className="h-10 md:h-12 object-contain animate-scale-in" style={{
+            animationDelay: "0.5s"
+          }} />
+            <span className="text-sm text-muted-foreground">150+ Event Organizers Trust Us</span>
           </div>
         </div>
         
         {/* Animated Stats */}
-        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 animate-fade-in" style={{ animationDelay: "0.3s" }}>
+        <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 animate-fade-in" style={{
+        animationDelay: "0.3s"
+      }}>
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-1">
               <span className="text-2xl md:text-3xl font-bold text-foreground">{eventsCount}+</span>
@@ -167,8 +175,6 @@ const HeroSection = () => {
           <div className="w-1 h-2 bg-muted-foreground/50 rounded-full" />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
