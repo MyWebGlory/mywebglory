@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -6,6 +6,15 @@ import { Link } from "react-router-dom";
 const StrategyCallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
+  const hasTriggered = useRef(false);
+  const lastScrollY = useRef(0);
+
+  const showPopup = () => {
+    if (!hasTriggered.current) {
+      hasTriggered.current = true;
+      setIsVisible(true);
+    }
+  };
 
   useEffect(() => {
     // Check if already dismissed in this session
@@ -15,19 +24,53 @@ const StrategyCallPopup = () => {
       return;
     }
 
-    // Exit intent detection - when cursor leaves the viewport at the top
+    // STRATEGY 1: Fallback timer - show after 25 seconds
+    const timer = setTimeout(() => {
+      showPopup();
+    }, 25000);
+
+    // STRATEGY 2: Exit intent - mouse leaves viewport at top
     const handleMouseOut = (e: MouseEvent) => {
-      // Check if mouse is leaving the document at the top
-      if (e.clientY <= 0 && e.relatedTarget === null) {
-        setIsVisible(true);
-        // Remove listener after showing once
-        document.documentElement.removeEventListener("mouseout", handleMouseOut);
+      if (e.clientY <= 0) {
+        showPopup();
       }
     };
 
-    document.documentElement.addEventListener("mouseout", handleMouseOut);
+    // STRATEGY 3: Scroll up detection - user scrolling back up quickly
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // If user has scrolled down at least 500px and then scrolls up significantly
+      if (lastScrollY.current > 500 && currentScrollY < lastScrollY.current - 200) {
+        showPopup();
+      }
+      lastScrollY.current = currentScrollY;
+    };
 
-    return () => document.documentElement.removeEventListener("mouseout", handleMouseOut);
+    // STRATEGY 4: Back button / beforeunload hint
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      // This won't show our popup but we can try
+      showPopup();
+    };
+
+    // STRATEGY 5: Visibility change (tab switching)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden') {
+        showPopup();
+      }
+    };
+
+    document.addEventListener("mouseout", handleMouseOut);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   const handleDismiss = () => {
