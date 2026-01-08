@@ -96,7 +96,7 @@ const StrategyCallPopup = () => {
         
         {/* Header */}
         <div className="p-6 pb-4 text-center border-b border-border">
-          <p className="text-primary font-medium mb-2">⚡ Wait! Before you go...</p>
+          <p className="text-primary font-medium mb-2">⚡ Special Offer For You...</p>
           <h3 className="text-2xl font-bold mb-2">
             Your Competitors Are Already Booking Calls 🚀
           </h3>
