@@ -20,7 +20,11 @@ const pricingPlans = [
       "Event branding & main visual",
       "Basic analytics & attendance tracking",
     ],
-    results: "150–300 registrants • 35–45% attendance • 50–120 live attendees",
+    results: [
+      "150–300 qualified registrants",
+      "35–45% attendance rate",
+      "50–120 live attendees",
+    ],
     adSpend: "Recommended: $2,000–$5,000",
     cta: "Get Started",
     popular: false,
@@ -42,7 +46,11 @@ const pricingPlans = [
       "5 short video clips + 1 SEO blog article",
       "Full analytics with CTA tracking",
     ],
-    results: "400–700 registrants • 40–55% attendance • 160–350 live attendees",
+    results: [
+      "400–700 qualified registrants",
+      "40–55% attendance rate",
+      "160–350 live attendees",
+    ],
     adSpend: "Recommended: $5,000–$15,000",
     cta: "Let's Talk",
     popular: true,
@@ -64,7 +72,11 @@ const pricingPlans = [
       "15 video clips + 3 SEO blog articles",
       "Event-to-revenue attribution reporting",
     ],
-    results: "1,200–2,000 registrants • 45–60% attendance • 550–1,200 live attendees",
+    results: [
+      "1,200–2,000 qualified registrants",
+      "45–60% attendance rate",
+      "550–1,200 live attendees",
+    ],
     adSpend: "Recommended: $15,000–$30,000",
     cta: "Apply Now",
     popular: false,
@@ -108,24 +120,6 @@ const PricingSection = () => {
                 </div>
               )}
               
-              {/* Assured Results - Prominent at top */}
-              <div className={`-mx-8 -mt-8 mb-6 p-6 rounded-t-2xl ${
-                plan.popular 
-                  ? "bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-b border-primary/20" 
-                  : "bg-gradient-to-br from-secondary/30 via-muted to-transparent border-b border-border"
-              }`}>
-                <p className={`text-xs font-semibold uppercase tracking-wider mb-2 ${
-                  plan.popular ? "text-primary" : "text-secondary"
-                }`}>
-                  Assured Results (minimum)
-                </p>
-                <p className={`text-lg font-bold leading-relaxed ${
-                  plan.popular ? "text-foreground" : "text-foreground/90"
-                }`}>
-                  {plan.results}
-                </p>
-              </div>
-              
               <div className="flex items-center gap-3 mb-4">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                   plan.popular ? "bg-primary/20" : "bg-muted"
@@ -135,6 +129,29 @@ const PricingSection = () => {
                 <div>
                   <h3 className="text-xl font-bold">{plan.name}</h3>
                 </div>
+              </div>
+              
+              {/* Assured Results - Between title and price */}
+              <div className={`mb-5 p-4 rounded-xl ${
+                plan.popular 
+                  ? "bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20" 
+                  : "bg-muted/50 border border-border"
+              }`}>
+                <p className={`text-xs font-semibold uppercase tracking-wider mb-3 ${
+                  plan.popular ? "text-primary" : "text-secondary"
+                }`}>
+                  ✓ Assured Results (minimum)
+                </p>
+                <ul className="space-y-1.5">
+                  {plan.results.map((result, j) => (
+                    <li key={j} className={`text-sm font-medium flex items-center gap-2 ${
+                      plan.popular ? "text-foreground" : "text-foreground/90"
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
+                      {result}
+                    </li>
+                  ))}
+                </ul>
               </div>
               
               <div className="mb-2">
