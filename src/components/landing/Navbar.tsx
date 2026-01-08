@@ -51,8 +51,10 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <Button className="bg-primary hover:bg-primary/90">
-              Book a Call
+            <Button asChild className="bg-primary hover:bg-primary/90">
+              <a href="https://calendly.com/gabriel-ageron/mywebglory" target="_blank" rel="noopener noreferrer">
+                Book a Call
+              </a>
             </Button>
           </div>
 
@@ -83,8 +85,10 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
-              <Button className="bg-primary hover:bg-primary/90 w-full mt-4">
-                Book a Call
+              <Button asChild className="bg-primary hover:bg-primary/90 w-full mt-4">
+                <a href="https://calendly.com/gabriel-ageron/mywebglory" target="_blank" rel="noopener noreferrer">
+                  Book a Call
+                </a>
               </Button>
             </div>
           </div>

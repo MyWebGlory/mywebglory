@@ -2,6 +2,8 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Zap, Crown, Rocket } from "lucide-react";
 
+const CALENDLY_URL = "https://calendly.com/gabriel-ageron/mywebglory";
+
 const pricingPlans = [
   {
     name: "Event Launch Engine",
@@ -146,14 +148,17 @@ const PricingSection = () => {
               </div>
               
               <Button 
+                asChild
                 className={`w-full group py-6 text-lg mt-auto ${
                   plan.popular 
                     ? "bg-primary hover:bg-primary/90" 
                     : "bg-muted hover:bg-muted/80 text-foreground"
                 }`}
               >
-                {plan.cta}
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                  {plan.cta}
+                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </a>
               </Button>
             </div>
           ))}
