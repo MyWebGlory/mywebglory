@@ -67,11 +67,12 @@ const HeroSection = () => {
     return () => clearTimeout(showTimeout);
   }, []);
   
-  // Show booking notification once at random time between 30s-60s
+  // Show booking notification: first at 30-60s, then 5min wait, then 30-60s again, repeat
   useEffect(() => {
-    const randomDelay = Math.floor(Math.random() * 30000) + 30000; // 30-60s
+    let timeoutId: NodeJS.Timeout;
+    let isFirstShow = true;
     
-    const showTimeout = setTimeout(() => {
+    const showNotification = () => {
       setShowBookingNotif(true);
       playTingSound();
       
@@ -79,9 +80,38 @@ const HeroSection = () => {
       setTimeout(() => {
         setShowBookingNotif(false);
       }, 10000);
-    }, randomDelay);
+    };
     
-    return () => clearTimeout(showTimeout);
+    const scheduleNext = () => {
+      if (isFirstShow) {
+        // First show: random 30-60s
+        const randomDelay = Math.floor(Math.random() * 30000) + 30000;
+        timeoutId = setTimeout(() => {
+          showNotification();
+          isFirstShow = false;
+          
+          // After first show, wait 5 min then schedule random 30-60s
+          timeoutId = setTimeout(() => {
+            scheduleNext();
+          }, 300000); // 5 minutes
+        }, randomDelay);
+      } else {
+        // Subsequent shows: random 30-60s
+        const randomDelay = Math.floor(Math.random() * 30000) + 30000;
+        timeoutId = setTimeout(() => {
+          showNotification();
+          
+          // Wait 5 min then schedule next
+          timeoutId = setTimeout(() => {
+            scheduleNext();
+          }, 300000); // 5 minutes
+        }, randomDelay);
+      }
+    };
+    
+    scheduleNext();
+    
+    return () => clearTimeout(timeoutId);
   }, []);
   
   // Update counter every 30s with gradual changes
