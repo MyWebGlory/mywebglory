@@ -15,12 +15,19 @@ const StrategyCallPopup = () => {
       return;
     }
 
-    // Show popup after 10 seconds
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 10000);
+    // Exit intent detection - when cursor leaves the viewport at the top
+    const handleMouseOut = (e: MouseEvent) => {
+      // Check if mouse is leaving the document at the top
+      if (e.clientY <= 0 && e.relatedTarget === null) {
+        setIsVisible(true);
+        // Remove listener after showing once
+        document.documentElement.removeEventListener("mouseout", handleMouseOut);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    document.documentElement.addEventListener("mouseout", handleMouseOut);
+
+    return () => document.documentElement.removeEventListener("mouseout", handleMouseOut);
   }, []);
 
   const handleDismiss = () => {
