@@ -15,18 +15,19 @@ const StrategyCallPopup = () => {
       return;
     }
 
-    // Exit intent detection - when cursor leaves the viewport
-    const handleMouseLeave = (e: MouseEvent) => {
-      if (e.clientY <= 0) {
+    // Exit intent detection - when cursor leaves the viewport at the top
+    const handleMouseOut = (e: MouseEvent) => {
+      // Check if mouse is leaving the document at the top
+      if (e.clientY <= 0 && e.relatedTarget === null) {
         setIsVisible(true);
         // Remove listener after showing once
-        document.removeEventListener("mouseleave", handleMouseLeave);
+        document.documentElement.removeEventListener("mouseout", handleMouseOut);
       }
     };
 
-    document.addEventListener("mouseleave", handleMouseLeave);
+    document.documentElement.addEventListener("mouseout", handleMouseOut);
 
-    return () => document.removeEventListener("mouseleave", handleMouseLeave);
+    return () => document.documentElement.removeEventListener("mouseout", handleMouseOut);
   }, []);
 
   const handleDismiss = () => {
