@@ -36,12 +36,51 @@ const HeroSection = () => {
   const [isIncreasing, setIsIncreasing] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   
+  // Booking notification state
+  const [showBookingNotif, setShowBookingNotif] = useState(false);
+  
+  // Play ting sound
+  const playTingSound = () => {
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
+    oscillator.frequency.setValueAtTime(1100, audioContext.currentTime + 0.1);
+    
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+    
+    oscillator.start(audioContext.currentTime);
+    oscillator.stop(audioContext.currentTime + 0.5);
+  };
+  
   // Show counter after 10s delay
   useEffect(() => {
     const showTimeout = setTimeout(() => {
       setViewerCount(Math.floor(Math.random() * 6) + 3);
       setIsVisible(true);
     }, 10000);
+    return () => clearTimeout(showTimeout);
+  }, []);
+  
+  // Show booking notification once at random time between 30s-60s
+  useEffect(() => {
+    const randomDelay = Math.floor(Math.random() * 30000) + 30000; // 30-60s
+    
+    const showTimeout = setTimeout(() => {
+      setShowBookingNotif(true);
+      playTingSound();
+      
+      // Hide after 10s
+      setTimeout(() => {
+        setShowBookingNotif(false);
+      }, 10000);
+    }, randomDelay);
+    
     return () => clearTimeout(showTimeout);
   }, []);
   
@@ -205,26 +244,42 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* Live Viewers FOMO Pill */}
-      {isVisible && (
-        <div className="fixed bottom-6 left-6 z-50 animate-fade-in">
-          <div 
-            className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 bg-background/80 border-border/50 ${
-              isIncreasing ? 'shadow-green-500/30' : ''
-            }`}
-          >
-            <span className="relative flex h-2 w-2">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 ${
-                isIncreasing ? 'animate-pulse' : ''
-              }`}></span>
-              <span className={`relative inline-flex rounded-full h-2 w-2 bg-green-500 ${
-                isIncreasing ? 'animate-pulse' : ''
-              }`}></span>
-            </span>
-            <span className="text-xs text-muted-foreground">{viewerCount} viewing now</span>
+      {/* FOMO Elements Container */}
+      <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-2">
+        {/* Booking Notification */}
+        {showBookingNotif && (
+          <div className="animate-fade-in">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-xl backdrop-blur-md bg-background/90 border border-border/50 shadow-xl">
+              <span className="text-xl">🎉</span>
+              <div className="flex flex-col">
+                <span className="text-sm font-medium text-foreground">Someone just booked a call</span>
+                <span className="text-xs text-muted-foreground">A few seconds ago</span>
+              </div>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+        
+        {/* Live Viewers Pill */}
+        {isVisible && (
+          <div className="animate-fade-in">
+            <div 
+              className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 bg-background/80 border-border/50 ${
+                isIncreasing ? 'shadow-green-500/30' : ''
+              }`}
+            >
+              <span className="relative flex h-2 w-2">
+                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 ${
+                  isIncreasing ? 'animate-pulse' : ''
+                }`}></span>
+                <span className={`relative inline-flex rounded-full h-2 w-2 bg-green-500 ${
+                  isIncreasing ? 'animate-pulse' : ''
+                }`}></span>
+              </span>
+              <span className="text-xs text-muted-foreground">{viewerCount} viewing now</span>
+            </div>
+          </div>
+        )}
+      </div>
       
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
