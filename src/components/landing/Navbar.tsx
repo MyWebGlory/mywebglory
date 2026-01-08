@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import logoFull from "@/assets/logo-full.png";
 import logoIcon from "@/assets/logo-icon.png";
 
@@ -52,9 +53,9 @@ const Navbar = () => {
               </a>
             ))}
             <Button asChild className="bg-primary hover:bg-primary/90">
-              <a href="https://calendly.com/gabriel-ageron/mywebglory" target="_blank" rel="noopener noreferrer">
+              <Link to="/contact">
                 Book a Call
-              </a>
+              </Link>
             </Button>
           </div>
 
@@ -86,9 +87,9 @@ const Navbar = () => {
                 </a>
               ))}
               <Button asChild className="bg-primary hover:bg-primary/90 w-full mt-4">
-                <a href="https://calendly.com/gabriel-ageron/mywebglory" target="_blank" rel="noopener noreferrer">
+                <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
                   Book a Call
-                </a>
+                </Link>
               </Button>
             </div>
           </div>
