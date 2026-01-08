@@ -108,7 +108,7 @@ const HeroSection = () => {
             {[1, 2, 3, 4, 5].map((star, index) => <Star key={star} className="w-5 h-5 text-yellow-400 fill-yellow-400 animate-scale-in" style={{
             animationDelay: `${0.3 + index * 0.1}s`
           }} />)}
-            <span className="ml-2 text-sm font-semibold text-foreground">4.9/5</span>
+            <span className="ml-2 text-sm text-muted-foreground">4.9/5</span>
           </div>
           
           <div className="hidden sm:block w-px h-6 bg-border" />
@@ -143,28 +143,28 @@ const HeroSection = () => {
       }}>
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-1">
-              <span className="text-2xl md:text-3xl font-bold text-foreground">{eventsCount}+</span>
+              <span className="text-2xl md:text-3xl font-medium text-muted-foreground">{eventsCount}+</span>
             </div>
-            <span className="text-sm text-muted-foreground">Events Marketed</span>
+            <span className="text-xs text-muted-foreground/70">Events Marketed</span>
           </div>
           
-          <div className="w-px h-10 bg-border hidden md:block" />
+          <div className="w-px h-8 bg-border/50 hidden md:block" />
           
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-1">
-              <span className="text-2xl md:text-3xl font-bold text-foreground">{attendeesCount}K+</span>
+              <span className="text-2xl md:text-3xl font-medium text-muted-foreground">{attendeesCount}K+</span>
             </div>
-            <span className="text-sm text-muted-foreground">Attendees Reached</span>
+            <span className="text-xs text-muted-foreground/70">Attendees Reached</span>
           </div>
           
-          <div className="w-px h-10 bg-border hidden md:block" />
+          <div className="w-px h-8 bg-border/50 hidden md:block" />
           
           <div className="flex flex-col items-center">
             <div className="flex items-center gap-1">
-              <CheckCircle className="w-5 h-5 text-green-500 mr-1" />
-              <span className="text-2xl md:text-3xl font-bold text-foreground">{showRate}%</span>
+              <CheckCircle className="w-4 h-4 text-muted-foreground/70 mr-1" />
+              <span className="text-2xl md:text-3xl font-medium text-muted-foreground">{showRate}%</span>
             </div>
-            <span className="text-sm text-muted-foreground">Average Show Rate</span>
+            <span className="text-xs text-muted-foreground/70">Average Show Rate</span>
           </div>
         </div>
       </div>
