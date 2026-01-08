@@ -10,28 +10,29 @@ const StrategyCallPopup = () => {
   const lastScrollY = useRef(0);
 
   const showPopup = () => {
-    if (!hasTriggered.current) {
+    if (!hasTriggered.current && !isDismissed) {
+      console.log("🚀 POPUP TRIGGERED!");
       hasTriggered.current = true;
       setIsVisible(true);
     }
   };
 
   useEffect(() => {
-    // Check if already dismissed in this session
-    const dismissed = sessionStorage.getItem("popup-dismissed");
-    if (dismissed) {
-      setIsDismissed(true);
-      return;
-    }
+    // TEMPORARY: Clear sessionStorage for testing - REMOVE THIS IN PRODUCTION
+    sessionStorage.removeItem("popup-dismissed");
+    console.log("📋 Popup component mounted, sessionStorage cleared for testing");
 
-    // STRATEGY 1: Fallback timer - show after 25 seconds
+    // STRATEGY 1: Fallback timer - show after 5 seconds (for testing, increase later)
     const timer = setTimeout(() => {
+      console.log("⏰ Timer triggered!");
       showPopup();
-    }, 25000);
+    }, 5000);
 
     // STRATEGY 2: Exit intent - mouse leaves viewport at top
-    const handleMouseOut = (e: MouseEvent) => {
-      if (e.clientY <= 0) {
+    const handleMouseLeave = (e: MouseEvent) => {
+      // Check if mouse left at the top of the page
+      if (e.clientY <= 5) {
+        console.log("🖱️ Exit intent detected! clientY:", e.clientY);
         showPopup();
       }
     };
@@ -39,39 +40,33 @@ const StrategyCallPopup = () => {
     // STRATEGY 3: Scroll up detection - user scrolling back up quickly
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      // If user has scrolled down at least 500px and then scrolls up significantly
-      if (lastScrollY.current > 500 && currentScrollY < lastScrollY.current - 200) {
+      if (lastScrollY.current > 300 && currentScrollY < lastScrollY.current - 150) {
+        console.log("📜 Scroll up detected!");
         showPopup();
       }
       lastScrollY.current = currentScrollY;
     };
 
-    // STRATEGY 4: Back button / beforeunload hint
-    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-      // This won't show our popup but we can try
-      showPopup();
-    };
-
-    // STRATEGY 5: Visibility change (tab switching)
+    // STRATEGY 4: Visibility change (tab switching)
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
+        console.log("👁️ Tab switch detected!");
         showPopup();
       }
     };
 
-    document.addEventListener("mouseout", handleMouseOut);
+    // Add event listeners
+    document.addEventListener("mouseleave", handleMouseLeave);
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("beforeunload", handleBeforeUnload);
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       clearTimeout(timer);
-      document.removeEventListener("mouseout", handleMouseOut);
+      document.removeEventListener("mouseleave", handleMouseLeave);
       window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("beforeunload", handleBeforeUnload);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [isDismissed]);
 
   const handleDismiss = () => {
     setIsVisible(false);
