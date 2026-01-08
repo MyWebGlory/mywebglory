@@ -88,7 +88,7 @@ const StrategyCallPopup = () => {
           <h3 className="text-2xl font-bold mb-2">
             Your Competitors Are Already Booking Calls 🚀
           </h3>
-          <p className="text-muted-foreground">While you're thinking about it, other brands are filling their events with clients. Don't let them get ahead.<span className="text-foreground font-medium"> Don't let them get ahead.</span>
+          <p className="text-muted-foreground">While you're thinking about it, other brands are filling their events with clients.<span className="text-foreground font-medium"> Don't let them get ahead.</span>
           </p>
           <p className="text-sm text-primary mt-2">
             🎯 Free 30-min strategy call • 🔥 Limited spots this week
