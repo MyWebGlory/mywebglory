@@ -30,30 +30,28 @@ const HeroSection = () => {
   const eventsCount = useCounter(150, 2000, 500);
   const attendeesCount = useCounter(50, 2000, 700);
   const showRate = useCounter(60, 2000, 900);
-  
+
   // Random viewer count for FOMO with gradual changes
   const [viewerCount, setViewerCount] = useState(() => Math.floor(Math.random() * 6) + 3);
   const [isIncreasing, setIsIncreasing] = useState(false);
-  
   useEffect(() => {
     const interval = setInterval(() => {
       setViewerCount(prev => {
         // Random change between -3 and +3
         const change = Math.floor(Math.random() * 7) - 3;
         const newCount = prev + change;
-        
+
         // Occasionally (10% chance) go to 0
         if (Math.random() < 0.1) {
           setIsIncreasing(false);
           return 0;
         }
-        
+
         // Keep between 1 and 12, but allow 0
         const clampedCount = Math.max(1, Math.min(12, newCount));
-        
+
         // Track if increasing for animation
         setIsIncreasing(clampedCount > prev);
-        
         return clampedCount;
       });
     }, 30000);
@@ -105,10 +103,7 @@ const HeroSection = () => {
       <div className="container relative z-10 px-4 md:px-6 text-center">
         {/* Live Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 animate-fade-in">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-          </span>
+          
           <span className="text-sm text-muted-foreground">#1 Event Marketing Agency for Premium Events</span>
         </div>
         
@@ -199,29 +194,15 @@ const HeroSection = () => {
       </div>
       
       {/* Live Viewers FOMO Pill */}
-      {viewerCount > 0 && (
-        <div className="fixed bottom-6 left-6 z-50 animate-fade-in">
-          <div 
-            className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 ${
-              isIncreasing 
-                ? 'bg-green-500/20 border-green-500/50 shadow-green-500/20' 
-                : 'bg-background/80 border-border/50'
-            }`}
-          >
+      {viewerCount > 0 && <div className="fixed bottom-6 left-6 z-50 animate-fade-in">
+          <div className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 ${isIncreasing ? 'bg-green-500/20 border-green-500/50 shadow-green-500/20' : 'bg-background/80 border-border/50'}`}>
             <span className="relative flex h-2 w-2">
-              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${
-                isIncreasing ? 'bg-green-300' : 'bg-green-400'
-              }`}></span>
-              <span className={`relative inline-flex rounded-full h-2 w-2 ${
-                isIncreasing ? 'bg-green-400 animate-pulse' : 'bg-green-500'
-              }`}></span>
+              <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isIncreasing ? 'bg-green-300' : 'bg-green-400'}`}></span>
+              <span className={`relative inline-flex rounded-full h-2 w-2 ${isIncreasing ? 'bg-green-400 animate-pulse' : 'bg-green-500'}`}></span>
             </span>
-            <span className={`text-xs transition-colors duration-500 ${
-              isIncreasing ? 'text-green-400 font-medium' : 'text-muted-foreground'
-            }`}>{viewerCount} viewing now</span>
+            <span className={`text-xs transition-colors duration-500 ${isIncreasing ? 'text-green-400 font-medium' : 'text-muted-foreground'}`}>{viewerCount} viewing now</span>
           </div>
-        </div>
-      )}
+        </div>}
       
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
