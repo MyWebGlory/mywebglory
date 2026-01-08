@@ -57,7 +57,7 @@ const pricingPlans = [
   },
   {
     name: "Event Authority Flywheel",
-    price: "$50,000",
+    price: "$49,000",
     duration: "90 days",
     description: "For companies serious about authority, pipeline, and long-term leverage. Build FOMO and deal flow.",
     icon: Rocket,
