@@ -108,6 +108,24 @@ const PricingSection = () => {
                 </div>
               )}
               
+              {/* Assured Results - Prominent at top */}
+              <div className={`-mx-8 -mt-8 mb-6 p-6 rounded-t-2xl ${
+                plan.popular 
+                  ? "bg-gradient-to-br from-primary/20 via-primary/10 to-transparent border-b border-primary/20" 
+                  : "bg-gradient-to-br from-secondary/30 via-muted to-transparent border-b border-border"
+              }`}>
+                <p className={`text-xs font-semibold uppercase tracking-wider mb-2 ${
+                  plan.popular ? "text-primary" : "text-secondary"
+                }`}>
+                  Assured Results (minimum)
+                </p>
+                <p className={`text-lg font-bold leading-relaxed ${
+                  plan.popular ? "text-foreground" : "text-foreground/90"
+                }`}>
+                  {plan.results}
+                </p>
+              </div>
+              
               <div className="flex items-center gap-3 mb-4">
                 <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                   plan.popular ? "bg-primary/20" : "bg-muted"
@@ -134,11 +152,6 @@ const PricingSection = () => {
                   </li>
                 ))}
               </ul>
-              
-              <div className={`p-4 rounded-xl mb-4 ${plan.popular ? "bg-primary/10" : "bg-muted/50"}`}>
-                <p className="text-xs font-medium text-muted-foreground mb-1">Assured Results (minimum)</p>
-                <p className={`text-sm font-semibold ${plan.popular ? "text-primary" : "text-foreground"}`}>{plan.results}</p>
-              </div>
               
               <div className="p-3 rounded-lg bg-muted/30 border border-border/50 mb-6">
                 <p className="text-xs text-muted-foreground">
