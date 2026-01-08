@@ -1,42 +1,69 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
-import { Check, ArrowRight, Zap, Crown } from "lucide-react";
+import { Check, ArrowRight, Zap, Crown, Rocket } from "lucide-react";
 
 const pricingPlans = [
   {
-    name: "Starter",
+    name: "Event Launch Engine",
     price: "$9,000",
-    description: "Perfect for smaller events and conferences up to 1,000 attendees.",
+    duration: "30–45 days",
+    description: "For companies testing events or running them inconsistently. Validate demand and fill seats.",
     icon: Zap,
     features: [
-      "Single-channel ad campaigns",
-      "Registration funnel setup",
-      "Basic email reminder sequence",
-      "Landing page design",
-      "Weekly performance reports",
-      "30-day campaign duration",
+      "1 event positioning & ICP definition",
+      "1 conversion-focused landing page",
+      "6 emails (3 pre-event, 2 reminder, 1 replay)",
+      "2 SMS reminders (24h + 1h before)",
+      "5 promotional social posts",
+      "CRM integration & lead capture",
+      "Event branding & main visual",
+      "Basic analytics & attendance tracking",
     ],
+    results: "150–300 registrants • 35–45% attendance • 50–120 live attendees",
     cta: "Get Started",
     popular: false,
   },
   {
-    name: "Scale",
+    name: "Event Revenue System",
     price: "$25,000",
-    description: "For flagship events and conferences requiring maximum reach and results.",
+    duration: "60–75 days",
+    description: "For companies that want pipeline + sales, not just visibility. Turn events into revenue assets.",
     icon: Crown,
     features: [
-      "Multi-channel campaigns (Meta, Google, LinkedIn)",
-      "Complete marketing funnel system",
-      "Advanced email & SMS sequences",
-      "Retargeting & lookalike audiences",
-      "Custom landing pages",
-      "Real-time analytics dashboard",
-      "Dedicated account strategist",
-      "60-day campaign duration",
-      "Post-event engagement campaigns",
+      "Event positioning + offer alignment",
+      "1 high-converting landing page",
+      "11 emails (5 pre, 3 reminder, 3 post-event)",
+      "3 SMS reminders",
+      "10 social posts (pre + post event)",
+      "Lead scoring & attendee segmentation",
+      "Sales-ready tagging & lead routing",
+      "5 short video clips + 1 SEO blog article",
+      "Full analytics with CTA tracking",
     ],
+    results: "400–700 registrants • 40–55% attendance • 160–350 live attendees",
     cta: "Let's Talk",
     popular: true,
+  },
+  {
+    name: "Event Authority Flywheel",
+    price: "$50,000",
+    duration: "90 days",
+    description: "For companies serious about authority, pipeline, and long-term leverage. Build FOMO and deal flow.",
+    icon: Rocket,
+    features: [
+      "Full 3-event series strategy",
+      "3 high-converting landing pages",
+      "39 emails across all events",
+      "9 SMS reminders total",
+      "20 social posts",
+      "Advanced segmentation & lead scoring",
+      "Sales handoff + calling coordination",
+      "15 video clips + 3 SEO blog articles",
+      "Event-to-revenue attribution reporting",
+    ],
+    results: "1,200–2,000 registrants • 45–60% attendance • 550–1,200 live attendees",
+    cta: "Apply Now",
+    popular: false,
   },
 ];
 
@@ -49,22 +76,22 @@ const PricingSection = () => {
       
       <div className="container relative z-10 px-4 md:px-6" ref={ref}>
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
-          <span className="text-primary font-medium tracking-wide uppercase text-sm">Pricing</span>
+          <span className="text-primary font-medium tracking-wide uppercase text-sm">Our Offers</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
-            Invest in Dominance
+            Event Marketing Systems
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Choose the package that fuels your event's triumph. No hidden fees, no surprises—just results.
+            ICP-aligned attendees. Sales-ready leads. Authority & repeatability.
           </p>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {pricingPlans.map((plan, i) => (
             <div
               key={i}
-              className={`relative p-8 rounded-2xl transition-all duration-300 ${
+              className={`relative p-8 rounded-2xl transition-all duration-300 flex flex-col ${
                 plan.popular 
-                  ? "bg-gradient-to-b from-primary/10 to-card border-2 border-primary scale-[1.02]" 
+                  ? "bg-gradient-to-b from-primary/10 to-card border-2 border-primary lg:scale-[1.02]" 
                   : "bg-card border border-border hover:border-primary/30"
               } ${isVisible ? "animate-fade-in" : "opacity-0"}`}
               style={{ animationDelay: `${0.1 * i}s` }}
@@ -84,28 +111,33 @@ const PricingSection = () => {
                   <plan.icon className={`w-6 h-6 ${plan.popular ? "text-primary" : "text-muted-foreground"}`} />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold">{plan.name}</h3>
+                  <h3 className="text-xl font-bold">{plan.name}</h3>
                 </div>
               </div>
               
-              <div className="mb-4">
-                <span className="text-5xl font-bold">{plan.price}</span>
-                <span className="text-muted-foreground ml-2">one-time</span>
+              <div className="mb-2">
+                <span className="text-4xl font-bold">{plan.price}</span>
               </div>
+              <p className="text-sm text-muted-foreground mb-4">{plan.duration}</p>
               
-              <p className="text-muted-foreground mb-8">{plan.description}</p>
+              <p className="text-muted-foreground mb-6 text-sm">{plan.description}</p>
               
-              <ul className="space-y-4 mb-8">
+              <ul className="space-y-3 mb-6 flex-1">
                 {plan.features.map((feature, j) => (
                   <li key={j} className="flex items-start gap-3">
-                    <Check className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
-                    <span className="text-foreground/90">{feature}</span>
+                    <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
+                    <span className="text-foreground/90 text-sm">{feature}</span>
                   </li>
                 ))}
               </ul>
               
+              <div className={`p-4 rounded-xl mb-6 ${plan.popular ? "bg-primary/10" : "bg-muted/50"}`}>
+                <p className="text-xs font-medium text-muted-foreground mb-1">Assured Results (minimum)</p>
+                <p className={`text-sm font-semibold ${plan.popular ? "text-primary" : "text-foreground"}`}>{plan.results}</p>
+              </div>
+              
               <Button 
-                className={`w-full group py-6 text-lg ${
+                className={`w-full group py-6 text-lg mt-auto ${
                   plan.popular 
                     ? "bg-primary hover:bg-primary/90" 
                     : "bg-muted hover:bg-muted/80 text-foreground"
@@ -118,8 +150,8 @@ const PricingSection = () => {
           ))}
         </div>
         
-        <p className="text-center text-muted-foreground mt-8 text-sm">
-          Need a custom solution? <a href="#" className="text-primary hover:underline">Contact us</a> for enterprise pricing.
+        <p className="text-center text-muted-foreground mt-12 text-sm max-w-xl mx-auto">
+          We promise ICP-aligned attendees, sales-ready leads, and authority — not revenue guarantees. That keeps us premium and accountable.
         </p>
       </div>
     </section>
