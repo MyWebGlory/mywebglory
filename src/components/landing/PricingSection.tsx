@@ -51,10 +51,10 @@ const PricingSection = () => {
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           <span className="text-primary font-medium tracking-wide uppercase text-sm">Pricing</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
-            Simple, Transparent Pricing
+            Invest in Dominance
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Choose the package that fits your event. No hidden fees, no surprises.
+            Choose the package that fuels your event's triumph. No hidden fees, no surprises—just results.
           </p>
         </div>
         

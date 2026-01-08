@@ -34,10 +34,10 @@ const TestimonialsSection = () => {
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           <span className="text-primary font-medium tracking-wide uppercase text-sm">Testimonials</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
-            What Our Clients Say
+            Voices of Triumph
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Don't take our word for it. Here's what event organizers have to say.
+            Don't take our word for it. Here's what event organizers say about their path to dominance.
           </p>
         </div>
         

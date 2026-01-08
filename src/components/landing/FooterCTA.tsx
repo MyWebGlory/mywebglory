@@ -15,23 +15,23 @@ const FooterCTA = () => {
       <div className="container relative z-10 px-4 md:px-6">
         <div className={`text-center max-w-3xl mx-auto ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Ready to Fill Your Next Event?
+            Ready to Dominate Your Next Event?
           </h2>
           <p className="text-xl text-muted-foreground mb-10">
-            Let's build a marketing system that delivers real attendees—not just registrations. 
-            Book a free strategy call and see what's possible.
+            We do everything. You just gotta ask. Let's architect a marketing system that delivers 
+            real attendees—not just registrations.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button size="lg" className="group bg-primary hover:bg-primary/90 px-8 py-6 text-lg animate-pulse-glow">
               <Calendar className="mr-2 w-5 h-5" />
-              Book Your Strategy Call
+              Build My Empire
               <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
           
           <p className="text-sm text-muted-foreground mt-6">
-            30-minute call • No obligation • Custom strategy for your event
+            30-minute strategy session • No obligation • Custom roadmap for your event's triumph
           </p>
         </div>
       </div>
