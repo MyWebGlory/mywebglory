@@ -140,7 +140,7 @@ const PricingSection = () => {
                 <p className={`text-xs font-semibold uppercase tracking-wider mb-3 ${
                   plan.popular ? "text-primary" : "text-secondary"
                 }`}>
-                  ✓ Assured Results (minimum)
+                  ✓ Minimum Results
                 </p>
                 <ul className="space-y-1.5">
                   {plan.results.map((result, j) => (
