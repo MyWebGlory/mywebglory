@@ -13,13 +13,14 @@ const pricingPlans = [
       "1 event positioning & ICP definition",
       "1 conversion-focused landing page",
       "6 emails (3 pre-event, 2 reminder, 1 replay)",
-      "2 SMS reminders (24h + 1h before)",
+      "4 SMS reminders",
       "5 promotional social posts",
       "CRM integration & lead capture",
       "Event branding & main visual",
       "Basic analytics & attendance tracking",
     ],
     results: "150–300 registrants • 35–45% attendance • 50–120 live attendees",
+    adSpend: "Recommended: $2,000–$5,000",
     cta: "Get Started",
     popular: false,
   },
@@ -33,7 +34,7 @@ const pricingPlans = [
       "Event positioning + offer alignment",
       "1 high-converting landing page",
       "11 emails (5 pre, 3 reminder, 3 post-event)",
-      "3 SMS reminders",
+      "6 SMS reminders",
       "10 social posts (pre + post event)",
       "Lead scoring & attendee segmentation",
       "Sales-ready tagging & lead routing",
@@ -41,6 +42,7 @@ const pricingPlans = [
       "Full analytics with CTA tracking",
     ],
     results: "400–700 registrants • 40–55% attendance • 160–350 live attendees",
+    adSpend: "Recommended: $5,000–$15,000",
     cta: "Let's Talk",
     popular: true,
   },
@@ -54,7 +56,7 @@ const pricingPlans = [
       "Full 3-event series strategy",
       "3 high-converting landing pages",
       "39 emails across all events",
-      "9 SMS reminders total",
+      "15 SMS reminders total",
       "20 social posts",
       "Advanced segmentation & lead scoring",
       "Sales handoff + calling coordination",
@@ -62,6 +64,7 @@ const pricingPlans = [
       "Event-to-revenue attribution reporting",
     ],
     results: "1,200–2,000 registrants • 45–60% attendance • 550–1,200 live attendees",
+    adSpend: "Recommended: $15,000–$30,000",
     cta: "Apply Now",
     popular: false,
   },
@@ -85,7 +88,7 @@ const PricingSection = () => {
           </p>
         </div>
         
-        <div className="grid lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto items-stretch">
           {pricingPlans.map((plan, i) => (
             <div
               key={i}
@@ -131,9 +134,15 @@ const PricingSection = () => {
                 ))}
               </ul>
               
-              <div className={`p-4 rounded-xl mb-6 ${plan.popular ? "bg-primary/10" : "bg-muted/50"}`}>
+              <div className={`p-4 rounded-xl mb-4 ${plan.popular ? "bg-primary/10" : "bg-muted/50"}`}>
                 <p className="text-xs font-medium text-muted-foreground mb-1">Assured Results (minimum)</p>
                 <p className={`text-sm font-semibold ${plan.popular ? "text-primary" : "text-foreground"}`}>{plan.results}</p>
+              </div>
+              
+              <div className="p-3 rounded-lg bg-muted/30 border border-border/50 mb-6">
+                <p className="text-xs text-muted-foreground">
+                  <span className="font-medium text-foreground/80">Ad spend separate.</span> {plan.adSpend} for best results — scales with your budget.
+                </p>
               </div>
               
               <Button 
