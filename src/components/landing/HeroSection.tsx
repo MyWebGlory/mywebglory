@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, Users, Video, Mic, MessageSquare, Monitor, Presentation, CheckCircle } from "lucide-react";
+import { ArrowRight, Star, CheckCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import avatarsSocialProof from "@/assets/avatars-social-proof.png";
 
 // Animated counter hook
 const useCounter = (end: number, duration: number = 2000, delay: number = 0) => {
@@ -28,24 +29,6 @@ const useCounter = (end: number, duration: number = 2000, delay: number = 0) => 
   return count;
 };
 
-// Avatar data for floating participants
-const floatingAvatars = [
-  { id: 1, top: "18%", left: "12%", delay: "0s", size: "w-10 h-10 md:w-14 md:h-14" },
-  { id: 2, top: "25%", right: "18%", delay: "-1.5s", size: "w-8 h-8 md:w-12 md:h-12" },
-  { id: 3, bottom: "35%", left: "8%", delay: "-2.5s", size: "w-12 h-12 md:w-16 md:h-16" },
-  { id: 4, top: "40%", right: "10%", delay: "-3.5s", size: "w-9 h-9 md:w-12 md:h-12" },
-  { id: 5, bottom: "28%", right: "22%", delay: "-4s", size: "w-10 h-10 md:w-14 md:h-14" },
-  { id: 6, top: "55%", left: "18%", delay: "-1s", size: "w-8 h-8 md:w-10 md:h-10" },
-];
-
-// Avatar stack for social proof
-const avatarStack = [
-  { id: 1, gradient: "from-primary to-secondary" },
-  { id: 2, gradient: "from-secondary to-accent" },
-  { id: 3, gradient: "from-accent to-primary" },
-  { id: 4, gradient: "from-primary to-accent" },
-];
-
 const HeroSection = () => {
   const eventsCount = useCounter(500, 2000, 500);
   const attendeesCount = useCounter(50, 2000, 700);
@@ -66,45 +49,10 @@ const HeroSection = () => {
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
       
-      {/* Floating Participant Avatars */}
-      {floatingAvatars.map((avatar) => (
-        <div
-          key={avatar.id}
-          className={`absolute ${avatar.size} rounded-full animate-float bg-gradient-to-br from-primary/30 to-secondary/30 backdrop-blur-sm border border-white/10 flex items-center justify-center`}
-          style={{
-            top: avatar.top,
-            left: avatar.left,
-            right: avatar.right,
-            bottom: avatar.bottom,
-            animationDelay: avatar.delay,
-          }}
-        >
-          <div className="w-3/4 h-3/4 rounded-full bg-gradient-to-br from-primary/50 to-secondary/50" />
-          {/* Online indicator */}
-          <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 md:w-4 md:h-4 bg-green-500 rounded-full border-2 border-background animate-pulse" />
-        </div>
-      ))}
-      
-      {/* Virtual Event Floating Icons - Reduced and repositioned */}
-      <div className="absolute top-16 left-[22%] text-primary/25 animate-float" style={{ animationDelay: "0s" }}>
-        <Video className="w-6 h-6 md:w-8 md:h-8" />
-      </div>
-      <div className="absolute bottom-48 left-[5%] text-accent/25 animate-float" style={{ animationDelay: "-2s" }}>
-        <Mic className="w-5 h-5 md:w-7 md:h-7" />
-      </div>
-      <div className="absolute top-1/3 right-[5%] text-primary/20 animate-float" style={{ animationDelay: "-3.5s" }}>
-        <Monitor className="w-8 h-8 md:w-10 md:h-10" />
-      </div>
-      <div className="absolute bottom-36 right-[8%] text-secondary/25 animate-float" style={{ animationDelay: "-4s" }}>
-        <MessageSquare className="w-6 h-6 md:w-8 md:h-8" />
-      </div>
-      
       {/* Network Connection Lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-30">
+      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
         <line x1="12%" y1="18%" x2="88%" y2="25%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{ animationDuration: "3s" }} />
-        <line x1="8%" y1="35%" x2="90%" y2="40%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{ animationDuration: "4s", animationDelay: "-1s" }} />
-        <line x1="18%" y1="55%" x2="82%" y2="28%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{ animationDuration: "3.5s", animationDelay: "-2s" }} />
-        <line x1="22%" y1="72%" x2="78%" y2="65%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{ animationDuration: "4.5s", animationDelay: "-0.5s" }} />
+        <line x1="8%" y1="55%" x2="90%" y2="40%" stroke="url(#lineGradient)" strokeWidth="1" className="animate-pulse" style={{ animationDuration: "4s", animationDelay: "-1s" }} />
         <defs>
           <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
@@ -114,12 +62,9 @@ const HeroSection = () => {
         </defs>
       </svg>
       
-      {/* Animated Particles */}
-      <div className="absolute top-[15%] left-[30%] w-2 h-2 bg-primary/60 rounded-full animate-ping" style={{ animationDuration: "2s" }} />
-      <div className="absolute top-[35%] right-[25%] w-1.5 h-1.5 bg-secondary/60 rounded-full animate-ping" style={{ animationDuration: "2.5s", animationDelay: "-0.5s" }} />
-      <div className="absolute bottom-[40%] left-[25%] w-1.5 h-1.5 bg-accent/60 rounded-full animate-ping" style={{ animationDuration: "3s", animationDelay: "-1s" }} />
-      <div className="absolute bottom-[30%] right-[30%] w-2 h-2 bg-primary/50 rounded-full animate-ping" style={{ animationDuration: "2.2s", animationDelay: "-1.5s" }} />
-      <div className="absolute top-[60%] right-[15%] w-1 h-1 bg-secondary/50 rounded-full animate-ping" style={{ animationDuration: "2.8s", animationDelay: "-2s" }} />
+      {/* Subtle Animated Particles - Reduced */}
+      <div className="absolute top-[20%] left-[25%] w-2 h-2 bg-primary/40 rounded-full animate-ping" style={{ animationDuration: "3s" }} />
+      <div className="absolute bottom-[35%] right-[20%] w-1.5 h-1.5 bg-secondary/40 rounded-full animate-ping" style={{ animationDuration: "4s", animationDelay: "-1.5s" }} />
       
       <div className="container relative z-10 px-4 md:px-6 text-center">
         {/* Live Badge */}
@@ -145,8 +90,21 @@ const HeroSection = () => {
           We market premium events that attract only your ideal clients, generate high-quality leads, and make your brand the one everyone talks about.
         </p>
         
-        {/* Social Proof Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 animate-fade-in" style={{ animationDelay: "0.15s" }}>
+        {/* CTA Button with Enhanced Glow - MOVED UP */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-in" style={{ animationDelay: "0.15s" }}>
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-lg blur opacity-40 group-hover:opacity-70 transition duration-500" />
+            <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
+              <Link to="/contact">
+                Apply for an Event Strategy Call
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+        
+        {/* Social Proof Bar - NOW BELOW BUTTON */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
           {/* Animated Stars */}
           <div className="flex items-center gap-1">
             {[1, 2, 3, 4, 5].map((star, index) => (
@@ -161,39 +119,15 @@ const HeroSection = () => {
           
           <div className="hidden sm:block w-px h-6 bg-border" />
           
-          {/* Avatar Stack */}
-          <div className="flex items-center">
-            <div className="flex -space-x-3">
-              {avatarStack.map((avatar, index) => (
-                <div
-                  key={avatar.id}
-                  className={`w-9 h-9 rounded-full bg-gradient-to-br ${avatar.gradient} border-2 border-background flex items-center justify-center animate-scale-in`}
-                  style={{ animationDelay: `${0.4 + index * 0.1}s`, zIndex: avatarStack.length - index }}
-                >
-                  <Users className="w-4 h-4 text-white/80" />
-                </div>
-              ))}
-              <div
-                className="w-9 h-9 rounded-full bg-muted border-2 border-background flex items-center justify-center text-xs font-semibold text-muted-foreground animate-scale-in"
-                style={{ animationDelay: "0.8s" }}
-              >
-                +500
-              </div>
-            </div>
-            <span className="ml-3 text-sm text-muted-foreground">Event Organizers Trust Us</span>
-          </div>
-        </div>
-        
-        {/* CTA Button with Enhanced Glow */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-lg blur opacity-40 group-hover:opacity-70 transition duration-500" />
-            <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
-              <Link to="/contact">
-                Apply for an Event Strategy Call
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
+          {/* Real Avatar Photos */}
+          <div className="flex items-center gap-3">
+            <img 
+              src={avatarsSocialProof} 
+              alt="Happy event organizers" 
+              className="h-10 md:h-12 object-contain animate-scale-in"
+              style={{ animationDelay: "0.5s" }}
+            />
+            <span className="text-sm text-muted-foreground">500+ Event Organizers Trust Us</span>
           </div>
         </div>
         
