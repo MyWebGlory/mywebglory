@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
-import { X, Calendar, ArrowRight } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 
 const StrategyCallPopup = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
-  const [showCalendly, setShowCalendly] = useState(false);
 
   useEffect(() => {
     // Check if already dismissed in this session
@@ -16,12 +15,18 @@ const StrategyCallPopup = () => {
       return;
     }
 
-    // Show popup after 5 seconds
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 5000);
+    // Exit intent detection - when cursor leaves the viewport
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+        setIsVisible(true);
+        // Remove listener after showing once
+        document.removeEventListener("mouseleave", handleMouseLeave);
+      }
+    };
 
-    return () => clearTimeout(timer);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => document.removeEventListener("mouseleave", handleMouseLeave);
   }, []);
 
   const handleDismiss = () => {
@@ -41,7 +46,7 @@ const StrategyCallPopup = () => {
       />
       
       {/* Popup */}
-      <div className={`relative bg-card border border-border rounded-2xl shadow-2xl w-full animate-scale-in ${showCalendly ? "max-w-3xl" : "max-w-md"}`}>
+      <div className="relative bg-card border border-border rounded-2xl shadow-2xl w-full max-w-3xl animate-scale-in overflow-hidden">
         {/* Close button */}
         <button 
           onClick={handleDismiss}
@@ -50,60 +55,46 @@ const StrategyCallPopup = () => {
           <X className="w-5 h-5" />
         </button>
         
-        {showCalendly ? (
-          <div className="p-2">
-            <iframe
-              src="https://calendly.com/gabriel-ageron/mywebglory?hide_gdpr_banner=1&background_color=0a0a0a&text_color=ffffff&primary_color=f97316"
-              width="100%"
-              height="650"
-              frameBorder="0"
-              title="Schedule a call"
-              className="w-full rounded-xl"
-            />
-          </div>
-        ) : (
-          <div className="p-8">
-            {/* Icon */}
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Calendar className="w-8 h-8 text-primary" />
-            </div>
-            
-            {/* Content */}
-            <h3 className="text-2xl font-bold text-center mb-3">
-              Ready to Fill Every Seat?
-            </h3>
-            <p className="text-muted-foreground text-center mb-6">
-              Get a free 30-minute strategy call. We'll map out exactly how to attract your ideal clients to your next event.
-            </p>
-            
-            {/* CTAs */}
-            <div className="space-y-3">
-              <Button 
-                size="lg" 
-                className="w-full bg-primary hover:bg-primary/90 py-6 text-lg group"
-                onClick={() => setShowCalendly(true)}
-              >
-                Book Now
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Button>
-              
-              <Button 
-                asChild
-                variant="outline"
-                size="lg" 
-                className="w-full py-6"
-              >
-                <Link to="/contact" onClick={handleDismiss}>
-                  View All Contact Options
-                </Link>
-              </Button>
-            </div>
-            
-            <p className="text-xs text-muted-foreground text-center mt-4">
-              No obligation • Custom roadmap for your event
-            </p>
-          </div>
-        )}
+        {/* Header */}
+        <div className="p-6 pb-4 text-center border-b border-border">
+          <p className="text-primary font-medium mb-2">⚡ Wait! Before you go...</p>
+          <h3 className="text-2xl font-bold mb-2">
+            Your Competitors Are Already Booking Calls 🚀
+          </h3>
+          <p className="text-muted-foreground">
+            While you're thinking about it, other coaches and consultants are filling their events with premium clients. 
+            <span className="text-foreground font-medium"> Don't let them get ahead.</span>
+          </p>
+          <p className="text-sm text-primary mt-2">
+            🎯 Free 30-min strategy call • 🔥 Limited spots this week
+          </p>
+        </div>
+
+        {/* Calendly Embed */}
+        <div className="p-2">
+          <iframe
+            src="https://calendly.com/gabriel-ageron/mywebglory?hide_gdpr_banner=1&background_color=0a0a0a&text_color=ffffff&primary_color=f97316"
+            width="100%"
+            height="500"
+            frameBorder="0"
+            title="Schedule a call"
+            className="w-full rounded-xl"
+          />
+        </div>
+
+        {/* Footer */}
+        <div className="p-4 border-t border-border text-center">
+          <Button 
+            asChild
+            variant="ghost"
+            size="sm"
+            className="text-muted-foreground"
+          >
+            <Link to="/contact" onClick={handleDismiss}>
+              View All Contact Options →
+            </Link>
+          </Button>
+        </div>
       </div>
     </div>
   );
