@@ -27,9 +27,9 @@ const useCounter = (end: number, duration: number = 2000, delay: number = 0) => 
   return count;
 };
 const HeroSection = () => {
-  const eventsCount = useCounter(500, 2000, 500);
+  const eventsCount = useCounter(150, 2000, 500);
   const attendeesCount = useCounter(50, 2000, 700);
-  const showRate = useCounter(95, 2000, 900);
+  const showRate = useCounter(60, 2000, 900);
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 bg-gradient-radial" />
@@ -80,7 +80,7 @@ const HeroSection = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
           </span>
-          <span className="text-sm text-muted-foreground">Trusted by Leading Event Organizers</span>
+          <span className="text-sm text-muted-foreground">#1 Event Marketing Agency for Premium Events</span>
         </div>
         
         {/* Main Headline with Glow */}
@@ -99,24 +99,9 @@ const HeroSection = () => {
           We market premium events that attract only your ideal clients, generate high-quality leads, and make your brand the one everyone talks about.
         </p>
         
-        {/* CTA Button with Enhanced Glow - MOVED UP */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8 animate-fade-in" style={{
+        {/* Social Proof Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 animate-fade-in" style={{
         animationDelay: "0.15s"
-      }}>
-          <div className="relative group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-lg blur opacity-40 group-hover:opacity-70 transition duration-500" />
-            <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
-              <Link to="/contact">
-                Apply for an Event Strategy Call
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-        
-        {/* Social Proof Bar - NOW BELOW BUTTON */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-10 animate-fade-in" style={{
-        animationDelay: "0.2s"
       }}>
           {/* Animated Stars */}
           <div className="flex items-center gap-1">
@@ -128,12 +113,27 @@ const HeroSection = () => {
           
           <div className="hidden sm:block w-px h-6 bg-border" />
           
-          {/* Real Avatar Photos */}
+          {/* Real Avatar Photos - Smaller */}
           <div className="flex items-center gap-3">
-            <img src={avatarsSocialProof} alt="Happy event organizers" className="h-10 md:h-12 object-contain animate-scale-in" style={{
+            <img src={avatarsSocialProof} alt="Happy event organizers" className="h-7 md:h-8 object-contain animate-scale-in" style={{
             animationDelay: "0.5s"
           }} />
             <span className="text-sm text-muted-foreground">150+ Event Organizers Trust Us</span>
+          </div>
+        </div>
+        
+        {/* CTA Button with Enhanced Glow */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 animate-fade-in" style={{
+        animationDelay: "0.2s"
+      }}>
+          <div className="relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-lg blur opacity-40 group-hover:opacity-70 transition duration-500" />
+            <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
+              <Link to="/contact">
+                Apply for an Event Strategy Call
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
           </div>
         </div>
         
