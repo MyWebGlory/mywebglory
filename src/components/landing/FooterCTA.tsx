@@ -1,6 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar } from "lucide-react";
+import logoFull from "@/assets/logo-full.png";
 
 const FooterCTA = () => {
   const { ref, isVisible } = useScrollAnimation();
@@ -40,7 +41,7 @@ const FooterCTA = () => {
       <footer className="mt-24 border-t border-border pt-12">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="text-2xl font-bold text-gradient">MyWebGlory</div>
+            <img src={logoFull} alt="MyWebGlory" className="h-8" />
             
             <nav className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
               <a href="#services" className="hover:text-foreground transition-colors">Services</a>
