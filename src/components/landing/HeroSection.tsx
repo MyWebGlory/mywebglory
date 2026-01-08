@@ -32,12 +32,21 @@ const HeroSection = () => {
   const showRate = useCounter(60, 2000, 900);
   
   // Random viewer count for FOMO
-  const [viewerCount, setViewerCount] = useState(() => Math.floor(Math.random() * 9) + 1);
+  const [viewerCount, setViewerCount] = useState(() => Math.floor(Math.random() * 5) + 3); // Start between 3-7
+  const [isIncreasing, setIsIncreasing] = useState(false);
   
   useEffect(() => {
     const interval = setInterval(() => {
-      setViewerCount(Math.floor(Math.random() * 9) + 1);
-    }, 10000);
+      setViewerCount(prev => {
+        const change = Math.floor(Math.random() * 7) - 3; // -3 to +3
+        const newCount = Math.max(1, Math.min(12, prev + change)); // Keep between 1-12
+        if (newCount > prev) {
+          setIsIncreasing(true);
+          setTimeout(() => setIsIncreasing(false), 2000);
+        }
+        return newCount;
+      });
+    }, 30000);
     return () => clearInterval(interval);
   }, []);
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -181,12 +190,16 @@ const HeroSection = () => {
       
       {/* Live Viewers FOMO Pill */}
       <div className="fixed bottom-6 left-6 z-50 animate-fade-in">
-        <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-lg">
+        <div className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 ${
+          isIncreasing 
+            ? 'bg-primary/20 border-primary/50 shadow-primary/20 scale-105' 
+            : 'bg-background/80 border-border/50'
+        }`}>
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${isIncreasing ? 'bg-primary' : 'bg-green-400'}`}></span>
+            <span className={`relative inline-flex rounded-full h-2 w-2 ${isIncreasing ? 'bg-primary' : 'bg-green-500'}`}></span>
           </span>
-          <span className="text-xs text-muted-foreground">{viewerCount} viewing now</span>
+          <span className={`text-xs transition-colors duration-500 ${isIncreasing ? 'text-primary font-medium' : 'text-muted-foreground'}`}>{viewerCount} viewing now</span>
         </div>
       </div>
       
