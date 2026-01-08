@@ -65,9 +65,11 @@ const HeroSection = () => {
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-          <Button size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg animate-pulse-glow">
-            Apply for an Event Strategy Call
-            <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+          <Button asChild size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg animate-pulse-glow">
+            <a href="https://calendly.com/gabriel-ageron/mywebglory" target="_blank" rel="noopener noreferrer">
+              Apply for an Event Strategy Call
+              <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </a>
           </Button>
         </div>
       </div>

@@ -1,7 +1,10 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Mail } from "lucide-react";
 import logoFull from "@/assets/logo-full.png";
+
+const CALENDLY_URL = "https://calendly.com/gabriel-ageron/mywebglory";
+const EMAIL = "gabriel@mywebglory.com";
 
 const FooterCTA = () => {
   const { ref, isVisible } = useScrollAnimation();
@@ -24,14 +27,23 @@ const FooterCTA = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="group bg-primary hover:bg-primary/90 px-8 py-6 text-lg animate-pulse-glow">
-              <Calendar className="mr-2 w-5 h-5" />
-              Build My Empire
-              <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+            <Button asChild size="lg" className="group bg-primary hover:bg-primary/90 px-8 py-6 text-lg animate-pulse-glow">
+              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+                <Calendar className="mr-2 w-5 h-5" />
+                Build My Empire
+                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </a>
             </Button>
           </div>
           
-          <p className="text-sm text-muted-foreground mt-6">
+          <div className="flex items-center justify-center gap-2 mt-6 text-muted-foreground">
+            <Mail className="w-4 h-4" />
+            <a href={`mailto:${EMAIL}`} className="hover:text-foreground transition-colors">
+              {EMAIL}
+            </a>
+          </div>
+          
+          <p className="text-sm text-muted-foreground mt-4">
             30-minute strategy session • No obligation • Custom roadmap for your event's triumph
           </p>
         </div>
