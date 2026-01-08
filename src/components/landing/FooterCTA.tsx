@@ -1,9 +1,9 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import logoFull from "@/assets/logo-full.png";
 
-const CALENDLY_URL = "https://calendly.com/gabriel-ageron/mywebglory";
 const EMAIL = "gabriel@mywebglory.com";
 
 const FooterCTA = () => {
@@ -28,11 +28,11 @@ const FooterCTA = () => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button asChild size="lg" className="group bg-primary hover:bg-primary/90 px-8 py-6 text-lg animate-pulse-glow">
-              <a href={CALENDLY_URL} target="_blank" rel="noopener noreferrer">
+              <Link to="/contact">
                 <Calendar className="mr-2 w-5 h-5" />
                 Build My Empire
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
             </Button>
           </div>
           

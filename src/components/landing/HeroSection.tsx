@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, Video, Mic, MessageSquare, Monitor, Presentation } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -66,10 +67,10 @@ const HeroSection = () => {
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.2s" }}>
           <Button asChild size="lg" className="group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg animate-pulse-glow">
-            <a href="https://calendly.com/gabriel-ageron/mywebglory" target="_blank" rel="noopener noreferrer">
+            <Link to="/contact">
               Apply for an Event Strategy Call
               <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>
