@@ -30,6 +30,16 @@ const HeroSection = () => {
   const eventsCount = useCounter(150, 2000, 500);
   const attendeesCount = useCounter(50, 2000, 700);
   const showRate = useCounter(60, 2000, 900);
+  
+  // Random viewer count for FOMO
+  const [viewerCount, setViewerCount] = useState(() => Math.floor(Math.random() * 9) + 1);
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setViewerCount(Math.floor(Math.random() * 9) + 1);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
   return <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 bg-gradient-radial" />
@@ -166,6 +176,17 @@ const HeroSection = () => {
             </div>
             <span className="text-xs text-muted-foreground/70">Average Show Rate</span>
           </div>
+        </div>
+      </div>
+      
+      {/* Live Viewers FOMO Pill */}
+      <div className="fixed bottom-6 left-6 z-50 animate-fade-in">
+        <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-lg">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+          </span>
+          <span className="text-xs text-muted-foreground">{viewerCount} viewing now</span>
         </div>
       </div>
       
