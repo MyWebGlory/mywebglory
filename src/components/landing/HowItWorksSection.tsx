@@ -6,25 +6,25 @@ const steps = [
     icon: Phone,
     number: "01",
     title: "Discovery Call",
-    description: "We learn about your event, audience, and goals. No fluff—just a focused 30-minute strategy session.",
+    description: "We learn your event, audience, and mission. No fluff—just a razor-focused strategy session to find your North-Star.",
   },
   {
     icon: Lightbulb,
     number: "02",
     title: "Strategy & Setup",
-    description: "We design your custom marketing system—ads, funnels, emails, and automations tailored to your event.",
+    description: "We architect your custom marketing system—precision ads, funnels, emails, and automations tailored to dominate your market.",
   },
   {
     icon: Rocket,
     number: "03",
     title: "Launch & Optimize",
-    description: "Campaigns go live. We monitor, test, and optimize daily to maximize registrations and minimize costs.",
+    description: "Campaigns go live. We monitor, test, and optimize in real-time for maximum ROI—keeping your budget lean and results mean.",
   },
   {
     icon: Trophy,
     number: "04",
     title: "Deliver Attendees",
-    description: "Watch your registration count climb. Our reminder sequences ensure attendees actually show up.",
+    description: "Watch your registration count climb. Our reminder sequences ensure attendees actually show up—turning signups into impact.",
   },
 ];
 
@@ -37,10 +37,10 @@ const HowItWorksSection = () => {
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           <span className="text-primary font-medium tracking-wide uppercase text-sm">The Process</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
-            How We Work
+            Architect Your Event's Triumph
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A proven four-step process that consistently delivers sold-out events.
+            A proven four-step process that consistently delivers sold-out events. Data-driven with razor-sharp precision.
           </p>
         </div>
         

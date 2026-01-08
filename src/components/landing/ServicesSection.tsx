@@ -12,32 +12,32 @@ const services = [
   {
     icon: Megaphone,
     title: "Paid Advertising",
-    description: "Strategic campaigns across Meta, Google, and LinkedIn to reach your ideal attendees.",
+    description: "Our PPC pros dominate the ads market, crafting precision campaigns across Meta, Google, and LinkedIn that drive clicks and conversions.",
   },
   {
     icon: Target,
     title: "Registration Funnels",
-    description: "High-converting landing pages and registration flows optimized for maximum signups.",
+    description: "Sleek, mobile-first landing pages built to turn clicks into action. Strategic CTAs that drive signups with flawless design.",
   },
   {
     icon: Mail,
     title: "Email & SMS Sequences",
-    description: "Automated reminder campaigns that boost show rates and reduce no-shows.",
+    description: "Personalized campaigns that keep audiences engaged. Our targeted messages drive conversions with every send.",
   },
   {
     icon: Users,
     title: "Audience Retargeting",
-    description: "Re-engage interested prospects with strategic retargeting and lookalike audiences.",
+    description: "We tap into lookalike audiences and retargeting to boost your reach. Turn interested browsers into registered attendees.",
   },
   {
     icon: BarChart3,
     title: "Analytics & Reporting",
-    description: "Real-time dashboards and insights so you know exactly what's working.",
+    description: "Crystal-clear insights. Our reports track every metric, empowering smarter strategies and bigger results.",
   },
   {
     icon: Layout,
     title: "Landing Pages",
-    description: "Custom-designed event pages that convert browsers into registered attendees.",
+    description: "Pages that convert. Custom-designed event pages optimized for speed and impact that turn visitors into loyal attendees.",
   },
 ];
 
@@ -52,10 +52,10 @@ const ServicesSection = () => {
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           <span className="text-primary font-medium tracking-wide uppercase text-sm">What We Do</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
-            Full-Funnel Event Marketing
+            Full-Funnel Event Dominance
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            From first impression to final reminder, we build complete marketing systems that fill your events.
+            We don't just plan—we strategize and find your North-Star. From first impression to final reminder, we architect complete marketing systems.
           </p>
         </div>
         

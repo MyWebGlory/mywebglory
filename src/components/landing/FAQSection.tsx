@@ -42,10 +42,10 @@ const FAQSection = () => {
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           <span className="text-primary font-medium tracking-wide uppercase text-sm">FAQ</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
-            Frequently Asked Questions
+            Got Questions? We've Got Answers.
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Everything you need to know about working with us.
+            Everything you need to know about partnering with MyWebGlory.
           </p>
         </div>
         
