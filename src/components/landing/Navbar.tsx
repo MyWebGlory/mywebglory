@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import logoFull from "@/assets/logo-full.png";
+import logoIcon from "@/assets/logo-icon.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,8 +35,9 @@ const Navbar = () => {
       <div className="container px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="#" className="text-xl md:text-2xl font-bold text-gradient">
-            MyWebGlory
+          <a href="#" className="flex items-center">
+            <img src={logoIcon} alt="MyWebGlory" className="h-10 md:hidden" />
+            <img src={logoFull} alt="MyWebGlory" className="h-8 hidden md:block" />
           </a>
 
           {/* Desktop Navigation */}
