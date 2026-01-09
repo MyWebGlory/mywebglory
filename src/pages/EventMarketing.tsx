@@ -1251,49 +1251,58 @@ const FinalCTA = () => {
     offset: ["start start", "end end"],
   });
 
-  // Portal ring expansions - already visible from start
-  const ring1Scale = useTransform(scrollYProgress, [0, 0.1], [0.7, 1]);
-  const ring2Scale = useTransform(scrollYProgress, [0, 0.12], [0.7, 1]);
-  const ring3Scale = useTransform(scrollYProgress, [0, 0.14], [0.7, 1]);
-  const ringOpacity = useTransform(scrollYProgress, [0, 0.02], [0.7, 1]);
+  // Portal ring expansions - de-zoom from huge
+  const ring1Scale = useTransform(scrollYProgress, [0, 0.08], [3, 1]);
+  const ring2Scale = useTransform(scrollYProgress, [0, 0.1], [4, 1]);
+  const ring3Scale = useTransform(scrollYProgress, [0, 0.12], [5, 1]);
+  const ringOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
-  // Glow intensity
-  const glowScale = useTransform(scrollYProgress, [0, 0.3, 1], [1, 1.3, 1.5]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0.4, 0.5, 0.6, 0.7]);
+  // Glow intensity - de-zoom
+  const glowScale = useTransform(scrollYProgress, [0, 0.1], [6, 1]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 0.5]);
 
-  // Title reveal - visible immediately
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.03], [0.8, 1]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.03], [0.95, 1]);
-  const titleY = useTransform(scrollYProgress, [0, 0.03], [10, 0]);
+  // Title reveal - massive de-zoom from front
+  const titleOpacity = useTransform(scrollYProgress, [0.08, 0.15], [0, 1]);
+  const titleScale = useTransform(scrollYProgress, [0.08, 0.15], [5, 1]);
 
-  // Subtitle reveal - very fast
-  const subtitleOpacity = useTransform(scrollYProgress, [0.02, 0.08], [0, 1]);
-  const subtitleY = useTransform(scrollYProgress, [0.02, 0.08], [15, 0]);
+  // Subtitle reveal - de-zoom
+  const subtitleOpacity = useTransform(scrollYProgress, [0.15, 0.22], [0, 1]);
+  const subtitleScale = useTransform(scrollYProgress, [0.15, 0.22], [4, 1]);
 
-  // Growth lever text
-  const leverOpacity = useTransform(scrollYProgress, [0.08, 0.15], [0, 1]);
-  const leverScale = useTransform(scrollYProgress, [0.08, 0.15], [0.97, 1]);
+  // Growth lever text - de-zoom
+  const leverOpacity = useTransform(scrollYProgress, [0.22, 0.30], [0, 1]);
+  const leverScale = useTransform(scrollYProgress, [0.22, 0.30], [5, 1]);
 
-  // Badges reveal
-  const badge1Opacity = useTransform(scrollYProgress, [0.15, 0.22], [0, 1]);
-  const badge2Opacity = useTransform(scrollYProgress, [0.18, 0.25], [0, 1]);
-  const badge3Opacity = useTransform(scrollYProgress, [0.21, 0.28], [0, 1]);
-  const badgeY = useTransform(scrollYProgress, [0.15, 0.25], [10, 0]);
+  // Badges intro text
+  const badgeIntroOpacity = useTransform(scrollYProgress, [0.30, 0.36], [0, 1]);
+  const badgeIntroScale = useTransform(scrollYProgress, [0.30, 0.36], [4, 1]);
 
-  // Final text
-  const finalTextOpacity = useTransform(scrollYProgress, [0.28, 0.36], [0, 1]);
+  // Badges reveal - staggered de-zoom
+  const badge1Opacity = useTransform(scrollYProgress, [0.36, 0.42], [0, 1]);
+  const badge1Scale = useTransform(scrollYProgress, [0.36, 0.42], [5, 1]);
+  const badge2Opacity = useTransform(scrollYProgress, [0.42, 0.48], [0, 1]);
+  const badge2Scale = useTransform(scrollYProgress, [0.42, 0.48], [5, 1]);
+  const badge3Opacity = useTransform(scrollYProgress, [0.48, 0.54], [0, 1]);
+  const badge3Scale = useTransform(scrollYProgress, [0.48, 0.54], [5, 1]);
 
-  // CTAs
-  const ctaOpacity = useTransform(scrollYProgress, [0.36, 0.45], [0, 1]);
-  const ctaY = useTransform(scrollYProgress, [0.36, 0.45], [15, 0]);
+  // Final text - de-zoom
+  const finalTextOpacity = useTransform(scrollYProgress, [0.54, 0.62], [0, 1]);
+  const finalTextScale = useTransform(scrollYProgress, [0.54, 0.62], [4, 1]);
+
+  // CTAs - de-zoom
+  const ctaOpacity = useTransform(scrollYProgress, [0.62, 0.72], [0, 1]);
+  const ctaScale = useTransform(scrollYProgress, [0.62, 0.72], [4, 1]);
+
+  const badgeScales = [badge1Scale, badge2Scale, badge3Scale];
+  const badgeOpacities = [badge1Opacity, badge2Opacity, badge3Opacity];
 
   return (
     <section
       ref={ref}
-      className="relative h-[110vh] md:h-[120vh] bg-background overflow-hidden"
+      className="relative h-[300vh] bg-background overflow-hidden"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated portal rings */}
+        {/* Animated portal rings - de-zoom from huge */}
         <motion.div
           className="absolute w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full border-2 border-primary/20"
           style={{ scale: ring1Scale, opacity: ringOpacity }}
@@ -1307,7 +1316,7 @@ const FinalCTA = () => {
           style={{ scale: ring3Scale, opacity: ringOpacity }}
         />
 
-        {/* Central glow */}
+        {/* Central glow - de-zoom */}
         <motion.div
           className="absolute w-[200px] h-[200px] md:w-[400px] md:h-[400px] rounded-full bg-primary/20 blur-3xl"
           style={{ scale: glowScale, opacity: glowOpacity }}
@@ -1382,23 +1391,23 @@ const FinalCTA = () => {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-4xl mx-auto">
-            {/* Title */}
+            {/* Title - de-zoom from huge */}
             <motion.h2
-              style={{ opacity: titleOpacity, scale: titleScale, y: titleY }}
+              style={{ opacity: titleOpacity, scale: titleScale }}
               className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-8"
             >
               THE <span className="text-gradient">BOTTOM LINE</span>
             </motion.h2>
 
-            {/* Subtitle */}
+            {/* Subtitle - de-zoom */}
             <motion.p
-              style={{ opacity: subtitleOpacity, y: subtitleY }}
+              style={{ opacity: subtitleOpacity, scale: subtitleScale }}
               className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-4 md:mb-6"
             >
               Event marketing is not a tactic.
             </motion.p>
 
-            {/* Growth lever */}
+            {/* Growth lever - de-zoom */}
             <motion.p
               style={{ opacity: leverOpacity, scale: leverScale }}
               className="text-2xl md:text-3xl lg:text-5xl font-bold text-foreground mb-6 md:mb-8"
@@ -1406,32 +1415,32 @@ const FinalCTA = () => {
               It's a <span className="text-gradient">growth lever</span>.
             </motion.p>
 
-            {/* Badges */}
-            <div className="mb-6 md:mb-8">
-              <motion.p
-                style={{ opacity: badge1Opacity }}
-                className="text-base md:text-lg text-foreground mb-4"
-              >
-                When engineered correctly, it becomes:
-              </motion.p>
-              <motion.div style={{ y: badgeY }} className="flex flex-wrap justify-center gap-2 md:gap-4">
-                {["A lead machine", "A sales accelerator", "An authority amplifier"].map(
-                  (item, i) => (
-                    <motion.span
-                      key={i}
-                      style={{ opacity: i === 0 ? badge1Opacity : i === 1 ? badge2Opacity : badge3Opacity }}
-                      className="px-3 py-1.5 md:px-5 md:py-2.5 rounded-full bg-primary/20 text-primary font-medium text-sm md:text-base border border-primary/30"
-                    >
-                      {item}
-                    </motion.span>
-                  )
-                )}
-              </motion.div>
+            {/* Badges intro - de-zoom */}
+            <motion.p
+              style={{ opacity: badgeIntroOpacity, scale: badgeIntroScale }}
+              className="text-base md:text-lg text-foreground mb-4"
+            >
+              When engineered correctly, it becomes:
+            </motion.p>
+
+            {/* Badges - staggered de-zoom */}
+            <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-6 md:mb-8">
+              {["A lead machine", "A sales accelerator", "An authority amplifier"].map(
+                (item, i) => (
+                  <motion.span
+                    key={i}
+                    style={{ opacity: badgeOpacities[i], scale: badgeScales[i] }}
+                    className="px-3 py-1.5 md:px-5 md:py-2.5 rounded-full bg-primary/20 text-primary font-medium text-sm md:text-base border border-primary/30"
+                  >
+                    {item}
+                  </motion.span>
+                )
+              )}
             </div>
 
-            {/* Final text */}
+            {/* Final text - de-zoom */}
             <motion.p
-              style={{ opacity: finalTextOpacity }}
+              style={{ opacity: finalTextOpacity, scale: finalTextScale }}
               className="text-base md:text-lg text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto px-4"
             >
               Most companies never experience this — not because events don't
@@ -1440,9 +1449,9 @@ const FinalCTA = () => {
               them.
             </motion.p>
 
-            {/* CTAs */}
+            {/* CTAs - de-zoom */}
             <motion.div
-              style={{ opacity: ctaOpacity, y: ctaY }}
+              style={{ opacity: ctaOpacity, scale: ctaScale }}
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4"
             >
               <Link to="/how-it-works">
