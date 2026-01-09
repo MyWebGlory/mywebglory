@@ -262,10 +262,10 @@ const HeroSection = () => {
         transition={{ duration: 4, repeat: Infinity, delay: 1 }}
       />
       
-      <div className="container relative z-10 px-4 md:px-6 text-center">
+      <div className="container relative z-10 px-4 sm:px-6 text-center pt-20 md:pt-0">
         {/* Live Badge */}
         <motion.div 
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
+          className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6"
           initial={{ opacity: 0, y: 30, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
@@ -274,7 +274,7 @@ const HeroSection = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
           </span>
-          <span className="text-sm text-muted-foreground">#1 Event Marketing Agency for Premium Events</span>
+          <span className="text-xs sm:text-sm text-muted-foreground">#1 Event Marketing Agency for Premium Events</span>
         </motion.div>
         
         {/* Main Headline with Glow */}
@@ -286,7 +286,7 @@ const HeroSection = () => {
             transition={{ duration: 1.5, delay: 0.3 }}
           />
           <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6"
+            className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-4 sm:mb-6"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -311,7 +311,7 @@ const HeroSection = () => {
         </div>
         
         <motion.p 
-          className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8"
+          className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 sm:mb-8 px-2"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -321,7 +321,7 @@ const HeroSection = () => {
         
         {/* Social Proof Bar */}
         <motion.div 
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8"
+          className="flex flex-col items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
@@ -335,35 +335,33 @@ const HeroSection = () => {
                 animate={{ opacity: 1, scale: 1, rotate: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
               >
-                <Star className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                <Star className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-yellow-400" />
               </motion.div>
             ))}
-            <span className="ml-2 text-sm text-muted-foreground">4.9/5</span>
+            <span className="ml-2 text-xs sm:text-sm text-muted-foreground">4.9/5</span>
           </div>
-          
-          <div className="hidden sm:block w-px h-6 bg-border" />
           
           {/* Real Avatar Photos */}
           <motion.div 
-            className="flex items-center gap-3"
+            className="flex items-center gap-2 sm:gap-3"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
           >
-            <img src={avatarsSocialProof} alt="Happy event organizers" className="h-7 md:h-8 object-contain" />
-            <span className="text-sm text-muted-foreground">100+ Event Organizers Trust Us</span>
+            <img src={avatarsSocialProof} alt="Happy event organizers" className="h-6 sm:h-7 md:h-8 object-contain" />
+            <span className="text-xs sm:text-sm text-muted-foreground">100+ Event Organizers Trust Us</span>
           </motion.div>
         </motion.div>
         
         {/* CTA Buttons */}
         <motion.div 
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-10 px-2"
           initial={{ opacity: 0, y: 40, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.9, type: "spring", stiffness: 100 }}
         >
           {/* Event Marketing Button (Left) */}
-          <Button asChild size="lg" variant="outline" className="group border-primary/50 hover:bg-primary/10 px-6 py-6 text-base">
+          <Button asChild size="lg" variant="outline" className="group border-primary/50 hover:bg-primary/10 px-4 sm:px-6 py-5 sm:py-6 text-sm sm:text-base w-full sm:w-auto">
             <Link to="/event-marketing">
               What is Event Marketing?
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -371,16 +369,16 @@ const HeroSection = () => {
           </Button>
 
           {/* Main CTA with Glow */}
-          <div className="relative group">
+          <div className="relative group w-full sm:w-auto">
             <motion.div 
               className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-lg blur opacity-40"
               animate={{ opacity: [0.4, 0.7, 0.4] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-            <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
+            <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto">
               <Link to="/contact">
                 Apply for a Free Strategy Call
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
@@ -388,44 +386,44 @@ const HeroSection = () => {
         
         {/* Animated Stats */}
         <motion.div 
-          className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mb-8"
+          className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-10 mb-6 sm:mb-8"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.1 }}
         >
           <motion.div 
-            className="flex flex-col items-center"
+            className="flex flex-col items-center min-w-[80px]"
             whileHover={{ scale: 1.05 }}
           >
             <div className="flex items-center gap-1">
-              <span className="text-2xl md:text-3xl font-medium text-muted-foreground">{eventsCount}+</span>
+              <span className="text-xl sm:text-2xl md:text-3xl font-medium text-muted-foreground">{eventsCount}+</span>
             </div>
-            <span className="text-xs text-muted-foreground/70">Events Marketed</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground/70">Events Marketed</span>
           </motion.div>
           
-          <div className="w-px h-8 bg-border/50 hidden md:block" />
+          <div className="w-px h-6 sm:h-8 bg-border/50" />
           
           <motion.div 
-            className="flex flex-col items-center"
+            className="flex flex-col items-center min-w-[80px]"
             whileHover={{ scale: 1.05 }}
           >
             <div className="flex items-center gap-1">
-              <span className="text-2xl md:text-3xl font-medium text-muted-foreground">{attendeesCount}K+</span>
+              <span className="text-xl sm:text-2xl md:text-3xl font-medium text-muted-foreground">{attendeesCount}K+</span>
             </div>
-            <span className="text-xs text-muted-foreground/70">Attendees Reached</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground/70">Attendees Reached</span>
           </motion.div>
           
-          <div className="w-px h-8 bg-border/50 hidden md:block" />
+          <div className="w-px h-6 sm:h-8 bg-border/50" />
           
           <motion.div 
-            className="flex flex-col items-center"
+            className="flex flex-col items-center min-w-[80px]"
             whileHover={{ scale: 1.05 }}
           >
             <div className="flex items-center gap-1">
-              <CheckCircle className="w-4 h-4 text-muted-foreground/70 mr-1" />
-              <span className="text-2xl md:text-3xl font-medium text-muted-foreground">{showRate}%</span>
+              <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground/70 mr-1" />
+              <span className="text-xl sm:text-2xl md:text-3xl font-medium text-muted-foreground">{showRate}%</span>
             </div>
-            <span className="text-xs text-muted-foreground/70">Average Show Rate</span>
+            <span className="text-[10px] sm:text-xs text-muted-foreground/70">Average Show Rate</span>
           </motion.div>
         </motion.div>
 
@@ -436,14 +434,14 @@ const HeroSection = () => {
           transition={{ duration: 0.6, delay: 1.3 }}
           className="flex justify-center"
         >
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/50 bg-primary/10 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/50 bg-primary/10 backdrop-blur-sm">
             <motion.div
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
             >
-              <Shield className="w-4 h-4 text-primary" />
+              <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
             </motion.div>
-            <span className="text-sm font-medium">
+            <span className="text-xs sm:text-sm font-medium">
               Limited to <span className="text-primary font-bold">4 clients</span> per month
             </span>
           </div>
