@@ -458,7 +458,7 @@ const PricingSection = () => {
                     setSelectedPlan(i);
                     setShowAllFeatures(false);
                   }}
-                  className={`relative p-6 transition-all duration-200 ${
+                  className={`relative p-3 md:p-6 transition-all duration-200 ${
                     isSelected 
                       ? "bg-card" 
                       : "bg-muted/30 hover:bg-muted/50"
@@ -472,35 +472,37 @@ const PricingSection = () => {
                     </div>
                   )}
                   
-                  <div className="flex flex-col items-center text-center gap-2 pt-2">
+                  <div className="flex md:flex-col items-center md:text-center gap-3 md:gap-2 md:pt-2">
                     {p.popular && (
-                      <span className="md:hidden bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
-                        Most Popular
+                      <span className="md:hidden bg-primary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider absolute top-1 right-2">
+                        Popular
                       </span>
                     )}
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
                       isSelected && p.popular ? "bg-primary/20" : isSelected ? "bg-muted" : "bg-muted/50"
                     }`}>
-                      <p.icon className={`w-6 h-6 ${
+                      <p.icon className={`w-5 h-5 md:w-6 md:h-6 ${
                         isSelected && p.popular ? "text-primary" : isSelected ? "text-foreground" : "text-muted-foreground"
                       }`} />
                     </div>
-                    <h3 className={`text-lg md:text-xl font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
-                      {p.name}
-                    </h3>
-                    <div className="flex items-baseline gap-1">
-                      <span className={`font-bold ${
-                        p.popular 
-                          ? "text-4xl md:text-5xl bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent animate-gradient-x" 
-                          : `text-3xl md:text-4xl ${isSelected ? "text-foreground" : "text-muted-foreground"}`
-                      } ${!isSelected && !p.popular ? "opacity-60" : ""}`}>
-                        {p.price}
-                      </span>
-                      <span className={`text-sm ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
-                        /event
-                      </span>
+                    <div className="flex flex-col items-start md:items-center">
+                      <h3 className={`text-sm md:text-lg font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
+                        {p.name}
+                      </h3>
+                      <div className="flex items-baseline gap-1">
+                        <span className={`font-bold ${
+                          p.popular 
+                            ? "text-xl md:text-3xl bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent animate-gradient-x" 
+                            : `text-lg md:text-2xl ${isSelected ? "text-foreground" : "text-muted-foreground"}`
+                        } ${!isSelected && !p.popular ? "opacity-60" : ""}`}>
+                          {p.price}
+                        </span>
+                        <span className={`text-xs md:text-sm ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
+                          /event
+                        </span>
+                      </div>
                     </div>
-                    <p className={`text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
+                    <p className={`hidden md:block text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
                       {p.duration}
                     </p>
                   </div>
