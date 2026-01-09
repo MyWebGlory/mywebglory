@@ -421,30 +421,10 @@ const HeroSection = () => {
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </motion.div>
-
-        {/* Scarcity Badge */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
-          className="flex justify-center mb-10"
-        >
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/50 bg-primary/10 backdrop-blur-sm">
-            <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <Shield className="w-4 h-4 text-primary" />
-            </motion.div>
-            <span className="text-sm font-medium">
-              Limited to <span className="text-primary font-bold">4 clients</span> per month
-            </span>
-          </div>
-        </motion.div>
         
         {/* Animated Stats */}
         <motion.div 
-          className="flex flex-wrap items-center justify-center gap-6 md:gap-10"
+          className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mb-8"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.1 }}
@@ -483,6 +463,26 @@ const HeroSection = () => {
             </div>
             <span className="text-xs text-muted-foreground/70">Average Show Rate</span>
           </motion.div>
+        </motion.div>
+
+        {/* Scarcity Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="flex justify-center"
+        >
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/50 bg-primary/10 backdrop-blur-sm">
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Shield className="w-4 h-4 text-primary" />
+            </motion.div>
+            <span className="text-sm font-medium">
+              Limited to <span className="text-primary font-bold">4 clients</span> per month
+            </span>
+          </div>
         </motion.div>
       </div>
       
