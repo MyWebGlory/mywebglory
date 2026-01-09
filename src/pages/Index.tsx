@@ -1,6 +1,7 @@
 import { useParallax } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/landing/Navbar";
 import HeroSection from "@/components/landing/HeroSection";
+import WhyEventsSection from "@/components/landing/WhyEventsSection";
 import ProblemSection from "@/components/landing/ProblemSection";
 import SolutionSection from "@/components/landing/SolutionSection";
 import PricingSection from "@/components/landing/PricingSection";
@@ -19,6 +20,7 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
       <Navbar />
       <HeroSection />
+      <WhyEventsSection />
       <ProblemSection />
       <SolutionSection />
       <HowItWorksSection />
