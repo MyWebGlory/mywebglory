@@ -33,11 +33,6 @@ const HeroSection = () => {
   const attendeesCount = useCounter(50, 2000, 1700);
   const showRate = useCounter(60, 2000, 1900);
 
-  // Random viewer count for FOMO with gradual changes
-  const [viewerCount, setViewerCount] = useState(0);
-  const [isIncreasing, setIsIncreasing] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-
   // Booking notification state
   const [showBookingNotif, setShowBookingNotif] = useState(false);
 
@@ -55,15 +50,6 @@ const HeroSection = () => {
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.5);
   };
-
-  // Show counter after 10s delay
-  useEffect(() => {
-    const showTimeout = setTimeout(() => {
-      setViewerCount(Math.floor(Math.random() * 6) + 3);
-      setIsVisible(true);
-    }, 10000);
-    return () => clearTimeout(showTimeout);
-  }, []);
 
   // Show booking notification: first at 30-60s, then 5min wait, then 30-60s again, repeat
   useEffect(() => {
@@ -107,26 +93,6 @@ const HeroSection = () => {
     scheduleNext();
     return () => clearTimeout(timeoutId);
   }, []);
-
-  // Update counter every 30s with gradual changes
-  useEffect(() => {
-    if (!isVisible) return;
-    const interval = setInterval(() => {
-      setViewerCount(prev => {
-        // Random change between -3 and +3
-        const change = Math.floor(Math.random() * 7) - 3;
-        const newCount = prev + change;
-
-        // Keep between 1 and 12
-        const clampedCount = Math.max(1, Math.min(12, newCount));
-
-        // Track if increasing for animation
-        setIsIncreasing(clampedCount > prev);
-        return clampedCount;
-      });
-    }, 30000);
-    return () => clearInterval(interval);
-  }, [isVisible]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -504,22 +470,6 @@ const HeroSection = () => {
           </motion.div>
         )}
         
-        {/* Live Viewers Pill */}
-        {isVisible && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <div className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 bg-background/80 border-border/50 ${isIncreasing ? 'shadow-green-500/30' : ''}`}>
-              <span className="relative flex h-2 w-2">
-                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 ${isIncreasing ? 'animate-pulse' : ''}`}></span>
-                <span className={`relative inline-flex rounded-full h-2 w-2 bg-green-500 ${isIncreasing ? 'animate-pulse' : ''}`}></span>
-              </span>
-              <span className="text-xs text-muted-foreground">{viewerCount} viewing now</span>
-            </div>
-          </motion.div>
-        )}
       </div>
       
       {/* Scroll Indicator */}
