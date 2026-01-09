@@ -1,5 +1,5 @@
 import Navbar from "@/components/landing/Navbar";
-import FooterCTA from "@/components/landing/FooterCTA";
+import Footer from "@/components/landing/Footer";
 import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -50,7 +50,7 @@ const PageLayout = ({ title, description, children }: PageLayoutProps) => {
         </section>
       )}
       
-      <FooterCTA />
+      <Footer />
     </div>
   );
 };

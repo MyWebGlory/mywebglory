@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/landing/Navbar";
-import FooterCTA from "@/components/landing/FooterCTA";
+import Footer from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { 
@@ -728,7 +728,7 @@ const Pricing = () => {
         </div>
       </section>
 
-      <FooterCTA />
+      <Footer />
     </motion.div>
   );
 };
