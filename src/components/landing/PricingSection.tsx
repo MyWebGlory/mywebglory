@@ -460,8 +460,8 @@ const PricingSection = () => {
                   }}
                   className={`relative p-3 md:p-6 transition-all duration-200 ${
                     isSelected 
-                      ? "bg-card" 
-                      : "bg-muted/30 hover:bg-muted/50"
+                      ? "bg-card ring-2 ring-primary/30 shadow-lg" 
+                      : "bg-muted/50 hover:bg-muted/70 border border-border/30"
                   } ${i === 0 ? "rounded-t-xl md:rounded-t-none md:rounded-tl-xl" : ""} ${i === 2 ? "md:rounded-tr-xl" : ""}`}
                 >
                   {p.popular && (
