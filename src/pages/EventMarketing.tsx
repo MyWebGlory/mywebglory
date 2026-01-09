@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/landing/Navbar";
+import Footer from "@/components/landing/Footer";
 import {
   Target,
   Users,
@@ -801,39 +802,39 @@ const SystemSection = () => {
     { icon: MessageSquare, title: "Post-event follow-up" },
   ];
 
-  // Title transforms - appear immediately
-  const titleScale = useTransform(scrollYProgress, [0, 0.05], [0.8, 1]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.03], [0, 1]);
+  // Title transforms - appear immediately, visible from start
+  const titleScale = useTransform(scrollYProgress, [0, 0.02], [0.95, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.01], [0.8, 1]);
 
-  // Node visibility based on scroll - appear faster
+  // Node visibility based on scroll - appear much faster
   const getNodeOpacity = (index: number) => {
-    const start = 0.03 + index * 0.08;
-    const end = start + 0.06;
+    const start = 0.01 + index * 0.06;
+    const end = start + 0.05;
     return useTransform(scrollYProgress, [start, end], [0, 1]);
   };
 
   const getNodeScale = (index: number) => {
-    const start = 0.03 + index * 0.08;
-    const end = start + 0.06;
-    return useTransform(scrollYProgress, [start, end], [0.3, 1]);
+    const start = 0.01 + index * 0.06;
+    const end = start + 0.05;
+    return useTransform(scrollYProgress, [start, end], [0.5, 1]);
   };
 
   const getNodeY = (index: number) => {
-    const start = 0.03 + index * 0.08;
-    const end = start + 0.06;
-    return useTransform(scrollYProgress, [start, end], [50, 0]);
+    const start = 0.01 + index * 0.06;
+    const end = start + 0.05;
+    return useTransform(scrollYProgress, [start, end], [30, 0]);
   };
 
   // Connection line progress
   const getLineProgress = (index: number) => {
-    const start = 0.06 + index * 0.08;
+    const start = 0.02 + index * 0.06;
     const end = start + 0.04;
     return useTransform(scrollYProgress, [start, end], [0, 1]);
   };
 
-  // Closing text - appear earlier
-  const closingOpacity = useTransform(scrollYProgress, [0.65, 0.75], [0, 1]);
-  const closingY = useTransform(scrollYProgress, [0.65, 0.75], [30, 0]);
+  // Closing text - appear much earlier
+  const closingOpacity = useTransform(scrollYProgress, [0.45, 0.55], [0, 1]);
+  const closingY = useTransform(scrollYProgress, [0.45, 0.55], [20, 0]);
 
   // Center glow intensity
   const glowScale = useTransform(scrollYProgress, [0.3, 0.7], [0.5, 1.5]);
@@ -842,7 +843,7 @@ const SystemSection = () => {
   return (
     <section
       ref={ref}
-      className="relative h-[180vh] md:h-[200vh] bg-background overflow-hidden"
+      className="relative h-[130vh] md:h-[140vh] bg-background overflow-hidden"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Animated background grid */}
@@ -1252,46 +1253,46 @@ const FinalCTA = () => {
     offset: ["start start", "end end"],
   });
 
-  // Portal ring expansions - start immediately visible
-  const ring1Scale = useTransform(scrollYProgress, [0, 0.15], [0.5, 1]);
-  const ring2Scale = useTransform(scrollYProgress, [0, 0.2], [0.5, 1]);
-  const ring3Scale = useTransform(scrollYProgress, [0, 0.25], [0.5, 1]);
-  const ringOpacity = useTransform(scrollYProgress, [0, 0.05], [0.5, 1]);
+  // Portal ring expansions - already visible from start
+  const ring1Scale = useTransform(scrollYProgress, [0, 0.1], [0.7, 1]);
+  const ring2Scale = useTransform(scrollYProgress, [0, 0.12], [0.7, 1]);
+  const ring3Scale = useTransform(scrollYProgress, [0, 0.14], [0.7, 1]);
+  const ringOpacity = useTransform(scrollYProgress, [0, 0.02], [0.7, 1]);
 
   // Glow intensity
-  const glowScale = useTransform(scrollYProgress, [0, 0.4, 1], [0.8, 1.5, 2]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.2, 0.6, 1], [0.3, 0.5, 0.6, 0.8]);
+  const glowScale = useTransform(scrollYProgress, [0, 0.3, 1], [1, 1.3, 1.5]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.1, 0.5, 1], [0.4, 0.5, 0.6, 0.7]);
 
-  // Title reveal - appear immediately
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
-  const titleScale = useTransform(scrollYProgress, [0, 0.08], [0.9, 1]);
-  const titleY = useTransform(scrollYProgress, [0, 0.08], [30, 0]);
+  // Title reveal - visible immediately
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.03], [0.8, 1]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.03], [0.95, 1]);
+  const titleY = useTransform(scrollYProgress, [0, 0.03], [10, 0]);
 
-  // Subtitle reveal
-  const subtitleOpacity = useTransform(scrollYProgress, [0.08, 0.18], [0, 1]);
-  const subtitleY = useTransform(scrollYProgress, [0.08, 0.18], [20, 0]);
+  // Subtitle reveal - very fast
+  const subtitleOpacity = useTransform(scrollYProgress, [0.02, 0.08], [0, 1]);
+  const subtitleY = useTransform(scrollYProgress, [0.02, 0.08], [15, 0]);
 
   // Growth lever text
-  const leverOpacity = useTransform(scrollYProgress, [0.18, 0.28], [0, 1]);
-  const leverScale = useTransform(scrollYProgress, [0.18, 0.28], [0.95, 1]);
+  const leverOpacity = useTransform(scrollYProgress, [0.08, 0.15], [0, 1]);
+  const leverScale = useTransform(scrollYProgress, [0.08, 0.15], [0.97, 1]);
 
   // Badges reveal
-  const badge1Opacity = useTransform(scrollYProgress, [0.28, 0.35], [0, 1]);
-  const badge2Opacity = useTransform(scrollYProgress, [0.32, 0.39], [0, 1]);
-  const badge3Opacity = useTransform(scrollYProgress, [0.36, 0.43], [0, 1]);
-  const badgeY = useTransform(scrollYProgress, [0.28, 0.4], [15, 0]);
+  const badge1Opacity = useTransform(scrollYProgress, [0.15, 0.22], [0, 1]);
+  const badge2Opacity = useTransform(scrollYProgress, [0.18, 0.25], [0, 1]);
+  const badge3Opacity = useTransform(scrollYProgress, [0.21, 0.28], [0, 1]);
+  const badgeY = useTransform(scrollYProgress, [0.15, 0.25], [10, 0]);
 
   // Final text
-  const finalTextOpacity = useTransform(scrollYProgress, [0.43, 0.53], [0, 1]);
+  const finalTextOpacity = useTransform(scrollYProgress, [0.28, 0.36], [0, 1]);
 
   // CTAs
-  const ctaOpacity = useTransform(scrollYProgress, [0.53, 0.63], [0, 1]);
-  const ctaY = useTransform(scrollYProgress, [0.53, 0.63], [25, 0]);
+  const ctaOpacity = useTransform(scrollYProgress, [0.36, 0.45], [0, 1]);
+  const ctaY = useTransform(scrollYProgress, [0.36, 0.45], [15, 0]);
 
   return (
     <section
       ref={ref}
-      className="relative h-[150vh] md:h-[180vh] bg-background overflow-hidden"
+      className="relative h-[110vh] md:h-[120vh] bg-background overflow-hidden"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Animated portal rings */}
@@ -1557,14 +1558,7 @@ const EventMarketing = () => {
         <FinalCTA />
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 py-12 border-t border-border/50 bg-card/30 backdrop-blur-sm">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground">
-            © {new Date().getFullYear()} All rights reserved.
-          </p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
