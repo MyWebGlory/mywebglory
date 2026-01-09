@@ -1448,17 +1448,6 @@ const FinalCTA = () => {
               className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4"
             >
               <Link to="/how-it-works">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="group text-base md:text-lg px-6 md:px-8 py-5 md:py-6 border-primary/50 hover:bg-primary/10 w-full sm:w-auto"
-                >
-                  <Play className="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:scale-110 transition-transform" />
-                  See How We Work
-                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/contact">
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   className="relative group"
@@ -1473,8 +1462,8 @@ const FinalCTA = () => {
                     size="lg"
                     className="relative text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-primary hover:bg-primary/90 w-full sm:w-auto"
                   >
-                    <Calendar className="w-4 h-4 md:w-5 md:h-5 mr-2" />
-                    Book a Strategy Call
+                    <Play className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                    See How We Work
                     <motion.span
                       className="ml-2"
                       animate={{ x: [0, 5, 0] }}
@@ -1484,6 +1473,17 @@ const FinalCTA = () => {
                     </motion.span>
                   </Button>
                 </motion.div>
+              </Link>
+              <Link to="/contact">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="group text-base md:text-lg px-6 md:px-8 py-5 md:py-6 border-primary/50 hover:bg-primary/10 w-full sm:w-auto"
+                >
+                  <Calendar className="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  Book a Strategy Call
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
               </Link>
             </motion.div>
           </div>
