@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Star, CheckCircle } from "lucide-react";
+import { ArrowRight, Star, CheckCircle, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -420,6 +420,26 @@ const HeroSection = () => {
             </span>
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
           </Link>
+        </motion.div>
+
+        {/* Scarcity Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 1.3 }}
+          className="flex justify-center mb-10"
+        >
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/50 bg-primary/10 backdrop-blur-sm">
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Shield className="w-4 h-4 text-primary" />
+            </motion.div>
+            <span className="text-sm font-medium">
+              Limited to <span className="text-primary font-bold">4 clients</span> per month
+            </span>
+          </div>
         </motion.div>
         
         {/* Animated Stats */}
