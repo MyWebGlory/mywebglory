@@ -50,12 +50,10 @@ const HeroTunnel = () => {
   const textY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.3], [1, 0]);
 
-  const letters = "WHAT IS EVENT MARKETING?".split("");
-
   return (
     <section
       ref={ref}
-      className="relative h-[150vh] md:h-[200vh] bg-background overflow-hidden"
+      className="relative h-[120vh] md:h-[150vh] bg-background overflow-hidden"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Perspective grid converging to center */}
@@ -159,25 +157,36 @@ const HeroTunnel = () => {
           style={{ y: textY, opacity: textOpacity }}
           className="relative z-10 text-center px-4"
         >
-          <motion.div className="flex flex-wrap justify-center gap-0.5 sm:gap-1 md:gap-2 mb-6 md:mb-8">
-            {letters.map((letter, i) => (
-              <motion.span
-                key={i}
-                initial={{ opacity: 0, y: 50, rotateX: -90 }}
-                animate={{ opacity: 1, y: 0, rotateX: 0 }}
-                transition={{
-                  duration: 0.6,
-                  delay: i * 0.04,
-                  ease: "easeOut",
-                }}
-                className={`text-2xl sm:text-4xl md:text-6xl lg:text-8xl font-bold ${
-                  letter === " " ? "w-2 sm:w-4 md:w-8" : "text-gradient"
-                }`}
-              >
-                {letter}
-              </motion.span>
-            ))}
-          </motion.div>
+          {/* Two-line headline */}
+          <div className="mb-6 md:mb-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-2"
+            >
+              <span className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-medium text-muted-foreground tracking-wider uppercase">
+                What Is
+              </span>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 50, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
+            >
+              <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-9xl font-bold text-gradient tracking-tight">
+                EVENT MARKETING
+              </h1>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-primary mt-2"
+            >
+              ?
+            </motion.div>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -241,16 +250,16 @@ const RealityCheck = () => {
     "And it's definitely not 'brand awareness'.",
   ];
 
-  const strikeProgress1 = useTransform(scrollYProgress, [0.1, 0.25], [0, 1]);
-  const strikeProgress2 = useTransform(scrollYProgress, [0.25, 0.4], [0, 1]);
-  const strikeProgress3 = useTransform(scrollYProgress, [0.4, 0.55], [0, 1]);
-  const truthOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
-  const truthY = useTransform(scrollYProgress, [0.6, 0.8], [50, 0]);
+  const strikeProgress1 = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
+  const strikeProgress2 = useTransform(scrollYProgress, [0.2, 0.35], [0, 1]);
+  const strikeProgress3 = useTransform(scrollYProgress, [0.35, 0.5], [0, 1]);
+  const truthOpacity = useTransform(scrollYProgress, [0.5, 0.65], [0, 1]);
+  const truthY = useTransform(scrollYProgress, [0.5, 0.65], [50, 0]);
 
   const strikeProgresses = [strikeProgress1, strikeProgress2, strikeProgress3];
 
   return (
-    <section ref={ref} className="relative h-[300vh] bg-background">
+  <section ref={ref} className="relative h-[200vh] bg-background">
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Background pulse */}
         <motion.div
@@ -792,39 +801,39 @@ const SystemSection = () => {
     { icon: MessageSquare, title: "Post-event follow-up" },
   ];
 
-  // Title transforms
-  const titleScale = useTransform(scrollYProgress, [0, 0.15], [0.8, 1]);
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+  // Title transforms - appear immediately
+  const titleScale = useTransform(scrollYProgress, [0, 0.05], [0.8, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.03], [0, 1]);
 
-  // Node visibility based on scroll
+  // Node visibility based on scroll - appear faster
   const getNodeOpacity = (index: number) => {
-    const start = 0.1 + index * 0.1;
-    const end = start + 0.08;
+    const start = 0.03 + index * 0.08;
+    const end = start + 0.06;
     return useTransform(scrollYProgress, [start, end], [0, 1]);
   };
 
   const getNodeScale = (index: number) => {
-    const start = 0.1 + index * 0.1;
-    const end = start + 0.08;
+    const start = 0.03 + index * 0.08;
+    const end = start + 0.06;
     return useTransform(scrollYProgress, [start, end], [0.3, 1]);
   };
 
   const getNodeY = (index: number) => {
-    const start = 0.1 + index * 0.1;
-    const end = start + 0.08;
+    const start = 0.03 + index * 0.08;
+    const end = start + 0.06;
     return useTransform(scrollYProgress, [start, end], [50, 0]);
   };
 
   // Connection line progress
   const getLineProgress = (index: number) => {
-    const start = 0.15 + index * 0.1;
-    const end = start + 0.05;
+    const start = 0.06 + index * 0.08;
+    const end = start + 0.04;
     return useTransform(scrollYProgress, [start, end], [0, 1]);
   };
 
-  // Closing text
-  const closingOpacity = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
-  const closingY = useTransform(scrollYProgress, [0.85, 0.95], [30, 0]);
+  // Closing text - appear earlier
+  const closingOpacity = useTransform(scrollYProgress, [0.65, 0.75], [0, 1]);
+  const closingY = useTransform(scrollYProgress, [0.65, 0.75], [30, 0]);
 
   // Center glow intensity
   const glowScale = useTransform(scrollYProgress, [0.3, 0.7], [0.5, 1.5]);
@@ -833,7 +842,7 @@ const SystemSection = () => {
   return (
     <section
       ref={ref}
-      className="relative h-[250vh] md:h-[300vh] bg-background overflow-hidden"
+      className="relative h-[180vh] md:h-[200vh] bg-background overflow-hidden"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Animated background grid */}
@@ -1243,46 +1252,46 @@ const FinalCTA = () => {
     offset: ["start start", "end end"],
   });
 
-  // Portal ring expansions
-  const ring1Scale = useTransform(scrollYProgress, [0, 0.3], [0.3, 1]);
-  const ring2Scale = useTransform(scrollYProgress, [0.1, 0.4], [0.3, 1]);
-  const ring3Scale = useTransform(scrollYProgress, [0.2, 0.5], [0.3, 1]);
-  const ringOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  // Portal ring expansions - start immediately visible
+  const ring1Scale = useTransform(scrollYProgress, [0, 0.15], [0.5, 1]);
+  const ring2Scale = useTransform(scrollYProgress, [0, 0.2], [0.5, 1]);
+  const ring3Scale = useTransform(scrollYProgress, [0, 0.25], [0.5, 1]);
+  const ringOpacity = useTransform(scrollYProgress, [0, 0.05], [0.5, 1]);
 
   // Glow intensity
-  const glowScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.5, 1.5, 2]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.1, 0.4, 0.6, 0.8]);
+  const glowScale = useTransform(scrollYProgress, [0, 0.4, 1], [0.8, 1.5, 2]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.2, 0.6, 1], [0.3, 0.5, 0.6, 0.8]);
 
-  // Title reveal
-  const titleOpacity = useTransform(scrollYProgress, [0.15, 0.3], [0, 1]);
-  const titleScale = useTransform(scrollYProgress, [0.15, 0.3], [0.8, 1]);
-  const titleY = useTransform(scrollYProgress, [0.15, 0.3], [50, 0]);
+  // Title reveal - appear immediately
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 1]);
+  const titleScale = useTransform(scrollYProgress, [0, 0.08], [0.9, 1]);
+  const titleY = useTransform(scrollYProgress, [0, 0.08], [30, 0]);
 
   // Subtitle reveal
-  const subtitleOpacity = useTransform(scrollYProgress, [0.3, 0.45], [0, 1]);
-  const subtitleY = useTransform(scrollYProgress, [0.3, 0.45], [30, 0]);
+  const subtitleOpacity = useTransform(scrollYProgress, [0.08, 0.18], [0, 1]);
+  const subtitleY = useTransform(scrollYProgress, [0.08, 0.18], [20, 0]);
 
   // Growth lever text
-  const leverOpacity = useTransform(scrollYProgress, [0.4, 0.55], [0, 1]);
-  const leverScale = useTransform(scrollYProgress, [0.4, 0.55], [0.9, 1]);
+  const leverOpacity = useTransform(scrollYProgress, [0.18, 0.28], [0, 1]);
+  const leverScale = useTransform(scrollYProgress, [0.18, 0.28], [0.95, 1]);
 
   // Badges reveal
-  const badge1Opacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1]);
-  const badge2Opacity = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
-  const badge3Opacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
-  const badgeY = useTransform(scrollYProgress, [0.5, 0.65], [20, 0]);
+  const badge1Opacity = useTransform(scrollYProgress, [0.28, 0.35], [0, 1]);
+  const badge2Opacity = useTransform(scrollYProgress, [0.32, 0.39], [0, 1]);
+  const badge3Opacity = useTransform(scrollYProgress, [0.36, 0.43], [0, 1]);
+  const badgeY = useTransform(scrollYProgress, [0.28, 0.4], [15, 0]);
 
   // Final text
-  const finalTextOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
+  const finalTextOpacity = useTransform(scrollYProgress, [0.43, 0.53], [0, 1]);
 
   // CTAs
-  const ctaOpacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
-  const ctaY = useTransform(scrollYProgress, [0.8, 0.9], [40, 0]);
+  const ctaOpacity = useTransform(scrollYProgress, [0.53, 0.63], [0, 1]);
+  const ctaY = useTransform(scrollYProgress, [0.53, 0.63], [25, 0]);
 
   return (
     <section
       ref={ref}
-      className="relative h-[200vh] md:h-[250vh] bg-background overflow-hidden"
+      className="relative h-[150vh] md:h-[180vh] bg-background overflow-hidden"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Animated portal rings */}
