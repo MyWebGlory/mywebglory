@@ -55,9 +55,26 @@ const HeroTunnel = () => {
   return (
     <section
       ref={ref}
-      className="relative h-[200vh] bg-background overflow-hidden"
+      className="relative h-[150vh] md:h-[200vh] bg-background overflow-hidden"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+        {/* Perspective grid converging to center */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-20 hidden md:block"
+          style={{
+            backgroundImage: `
+              linear-gradient(hsl(var(--primary) / 0.15) 1px, transparent 1px),
+              linear-gradient(90deg, hsl(var(--primary) / 0.15) 1px, transparent 1px)
+            `,
+            backgroundSize: "60px 60px",
+            transform: "perspective(500px) rotateX(60deg)",
+            transformOrigin: "center top",
+          }}
+        />
+
+        {/* Vignette overlay */}
+        <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-background/80 pointer-events-none" />
+
         {/* Tunnel rings */}
         <motion.div
           style={{ scale: tunnelScale, opacity: tunnelOpacity }}
@@ -68,8 +85,8 @@ const HeroTunnel = () => {
               key={i}
               className="absolute border border-primary/20 rounded-full"
               style={{
-                width: `${(i + 1) * 120}px`,
-                height: `${(i + 1) * 120}px`,
+                width: `${(i + 1) * 80}px`,
+                height: `${(i + 1) * 80}px`,
               }}
               animate={{
                 scale: [1, 1.1, 1],
@@ -84,31 +101,55 @@ const HeroTunnel = () => {
             />
           ))}
 
-          {/* Center glow */}
-          <div className="absolute w-32 h-32 bg-primary/30 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute w-16 h-16 bg-primary rounded-full blur-xl animate-pulse" />
+          {/* Center glow layers */}
+          <div className="absolute w-48 h-48 md:w-64 md:h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
+          <div className="absolute w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-pulse" />
+          <div className="absolute w-16 h-16 bg-primary/40 rounded-full blur-xl animate-pulse" />
+          <div className="absolute w-8 h-8 bg-primary rounded-full blur-lg" />
         </motion.div>
 
-        {/* Floating particles */}
-        {[...Array(30)].map((_, i) => (
+        {/* Floating particles - more on desktop */}
+        {[...Array(50)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-primary/60 rounded-full"
+            className={`absolute rounded-full ${i < 20 ? 'w-1 h-1' : i < 35 ? 'w-0.5 h-0.5' : 'w-1.5 h-1.5'} ${i % 3 === 0 ? 'bg-primary/80' : i % 3 === 1 ? 'bg-primary/40' : 'bg-primary/60'}`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
             }}
             animate={{
-              y: [0, -30, 0],
-              x: [0, Math.random() * 20 - 10, 0],
-              opacity: [0.2, 0.8, 0.2],
-              scale: [1, 1.5, 1],
+              y: [0, -40 - Math.random() * 20, 0],
+              x: [0, Math.random() * 30 - 15, 0],
+              opacity: [0.1, 0.9, 0.1],
+              scale: [1, 1.5 + Math.random(), 1],
             }}
             transition={{
-              duration: 3 + Math.random() * 2,
-              delay: Math.random() * 2,
+              duration: 3 + Math.random() * 3,
+              delay: Math.random() * 3,
               repeat: Infinity,
               ease: "easeInOut",
+            }}
+          />
+        ))}
+
+        {/* Spark bursts */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={`spark-${i}`}
+            className="absolute w-2 h-2 bg-primary rounded-full hidden md:block"
+            style={{
+              left: `${30 + Math.random() * 40}%`,
+              top: `${30 + Math.random() * 40}%`,
+            }}
+            animate={{
+              scale: [0, 2, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              delay: i * 0.8,
+              repeat: Infinity,
+              repeatDelay: 3,
             }}
           />
         ))}
@@ -118,7 +159,7 @@ const HeroTunnel = () => {
           style={{ y: textY, opacity: textOpacity }}
           className="relative z-10 text-center px-4"
         >
-          <motion.div className="flex flex-wrap justify-center gap-1 md:gap-2 mb-8">
+          <motion.div className="flex flex-wrap justify-center gap-0.5 sm:gap-1 md:gap-2 mb-6 md:mb-8">
             {letters.map((letter, i) => (
               <motion.span
                 key={i}
@@ -126,11 +167,11 @@ const HeroTunnel = () => {
                 animate={{ opacity: 1, y: 0, rotateX: 0 }}
                 transition={{
                   duration: 0.6,
-                  delay: i * 0.05,
+                  delay: i * 0.04,
                   ease: "easeOut",
                 }}
-                className={`text-4xl md:text-7xl lg:text-8xl font-bold ${
-                  letter === " " ? "w-4 md:w-8" : "text-gradient"
+                className={`text-2xl sm:text-4xl md:text-6xl lg:text-8xl font-bold ${
+                  letter === " " ? "w-2 sm:w-4 md:w-8" : "text-gradient"
                 }`}
               >
                 {letter}
@@ -139,10 +180,10 @@ const HeroTunnel = () => {
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 1 }}
-            className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto"
+            className="text-muted-foreground text-base sm:text-lg md:text-xl max-w-md md:max-w-2xl mx-auto px-4"
           >
             Scroll to enter the system that transforms events into revenue
             machines
@@ -152,18 +193,18 @@ const HeroTunnel = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2, duration: 1 }}
-            className="mt-12"
+            className="mt-8 md:mt-12"
           >
             <motion.div
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 1.5, repeat: Infinity }}
               className="text-primary"
             >
-              <div className="w-6 h-10 border-2 border-primary rounded-full mx-auto flex justify-center">
+              <div className="w-5 h-8 md:w-6 md:h-10 border-2 border-primary rounded-full mx-auto flex justify-center">
                 <motion.div
-                  animate={{ y: [0, 12, 0] }}
+                  animate={{ y: [0, 10, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
-                  className="w-1.5 h-3 bg-primary rounded-full mt-2"
+                  className="w-1 h-2 md:w-1.5 md:h-3 bg-primary rounded-full mt-1.5 md:mt-2"
                 />
               </div>
             </motion.div>
@@ -176,7 +217,7 @@ const HeroTunnel = () => {
           style={{
             backgroundImage: `linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
                             linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px)`,
-            backgroundSize: "50px 50px",
+            backgroundSize: "40px 40px",
           }}
         />
       </div>
@@ -732,118 +773,227 @@ const WhoIsForSection = () => {
 };
 
 // ============================================
-// SECTION 7: The System (Connected Nodes)
+// SECTION 7: The System (Connected Nodes) - STICKY SCROLL
 // ============================================
 const SystemSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
 
   const nodes = [
-    { icon: Target, title: "Deep ICP understanding", delay: 0 },
-    { icon: Sparkles, title: "Clear event angle", delay: 0.2 },
-    { icon: TrendingUp, title: "Strategic acquisition", delay: 0.4 },
-    { icon: BarChart3, title: "Conversion-focused paths", delay: 0.6 },
-    { icon: Database, title: "CRM tracking", delay: 0.8 },
-    { icon: Bell, title: "Reminder systems", delay: 1 },
-    { icon: MessageSquare, title: "Post-event follow-up", delay: 1.2 },
+    { icon: Target, title: "Deep ICP understanding" },
+    { icon: Sparkles, title: "Clear event angle" },
+    { icon: TrendingUp, title: "Strategic acquisition" },
+    { icon: BarChart3, title: "Conversion-focused paths" },
+    { icon: Database, title: "CRM tracking" },
+    { icon: Bell, title: "Reminder systems" },
+    { icon: MessageSquare, title: "Post-event follow-up" },
   ];
+
+  // Title transforms
+  const titleScale = useTransform(scrollYProgress, [0, 0.15], [0.8, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0, 0.1], [0, 1]);
+
+  // Node visibility based on scroll
+  const getNodeOpacity = (index: number) => {
+    const start = 0.1 + index * 0.1;
+    const end = start + 0.08;
+    return useTransform(scrollYProgress, [start, end], [0, 1]);
+  };
+
+  const getNodeScale = (index: number) => {
+    const start = 0.1 + index * 0.1;
+    const end = start + 0.08;
+    return useTransform(scrollYProgress, [start, end], [0.3, 1]);
+  };
+
+  const getNodeY = (index: number) => {
+    const start = 0.1 + index * 0.1;
+    const end = start + 0.08;
+    return useTransform(scrollYProgress, [start, end], [50, 0]);
+  };
+
+  // Connection line progress
+  const getLineProgress = (index: number) => {
+    const start = 0.15 + index * 0.1;
+    const end = start + 0.05;
+    return useTransform(scrollYProgress, [start, end], [0, 1]);
+  };
+
+  // Closing text
+  const closingOpacity = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
+  const closingY = useTransform(scrollYProgress, [0.85, 0.95], [30, 0]);
+
+  // Center glow intensity
+  const glowScale = useTransform(scrollYProgress, [0.3, 0.7], [0.5, 1.5]);
+  const glowOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0.2, 0.6, 0.3]);
 
   return (
     <section
       ref={ref}
-      className="relative min-h-screen py-32 bg-background overflow-hidden"
+      className="relative h-[250vh] md:h-[300vh] bg-background overflow-hidden"
     >
-      {/* Animated connection lines background */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        style={{ opacity: 0.3 }}
-      >
-        <motion.path
-          d="M 100 200 Q 300 100 500 200 T 900 200"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={isInView ? { pathLength: 1 } : {}}
-          transition={{ duration: 2, delay: 0.5 }}
+      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated background grid */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-10"
+          style={{
+            backgroundImage: `radial-gradient(circle at center, hsl(var(--primary) / 0.3) 1px, transparent 1px)`,
+            backgroundSize: "40px 40px",
+          }}
         />
-        <motion.path
-          d="M 100 400 Q 400 300 700 400 T 1100 400"
-          stroke="hsl(var(--primary))"
-          strokeWidth="2"
-          fill="none"
-          initial={{ pathLength: 0 }}
-          animate={isInView ? { pathLength: 1 } : {}}
-          transition={{ duration: 2, delay: 1 }}
-        />
-      </svg>
 
-      <div className="container mx-auto px-4 relative z-10">
+        {/* Central glow */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-center mb-20"
-        >
-          <p className="text-xl text-muted-foreground mb-4">
-            Real event marketing is not one action.
-          </p>
-          <h2 className="text-4xl md:text-6xl font-bold">
-            IT'S A <span className="text-gradient">SYSTEM</span>
-          </h2>
-        </motion.div>
+          className="absolute w-96 h-96 rounded-full bg-primary/20 blur-3xl"
+          style={{ scale: glowScale, opacity: glowOpacity }}
+        />
 
-        {/* Nodes grid */}
-        <div className="flex flex-wrap justify-center gap-6 max-w-5xl mx-auto">
-          {nodes.map((node, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{
-                duration: 0.5,
-                delay: node.delay,
-                type: "spring",
-                stiffness: 200,
-              }}
-              whileHover={{ scale: 1.1 }}
-              className="relative group"
-            >
-              {/* Connection line to next node */}
-              {i < nodes.length - 1 && (
+        {/* Electric spark effects */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-primary rounded-full"
+            style={{
+              left: `${30 + Math.random() * 40}%`,
+              top: `${30 + Math.random() * 40}%`,
+            }}
+            animate={{
+              scale: [0, 2, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              delay: i * 0.3,
+              repeat: Infinity,
+              repeatDelay: 2,
+            }}
+          />
+        ))}
+
+        {/* Rotating connection circle */}
+        <motion.div
+          className="absolute w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
+        />
+
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Title */}
+          <motion.div
+            style={{ scale: titleScale, opacity: titleOpacity }}
+            className="text-center mb-8 md:mb-16"
+          >
+            <p className="text-lg md:text-xl text-muted-foreground mb-2 md:mb-4">
+              Real event marketing is not one action.
+            </p>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold">
+              IT'S A <span className="text-gradient">SYSTEM</span>
+            </h2>
+          </motion.div>
+
+          {/* Nodes in circular/grid layout */}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Desktop: Circular layout */}
+            <div className="hidden md:block relative h-[350px]">
+              {nodes.map((node, i) => {
+                const angle = (i / nodes.length) * 2 * Math.PI - Math.PI / 2;
+                const radius = 160;
+                const x = Math.cos(angle) * radius;
+                const y = Math.sin(angle) * radius;
+
+                return (
+                  <motion.div
+                    key={i}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                    style={{
+                      x,
+                      y,
+                      opacity: getNodeOpacity(i),
+                      scale: getNodeScale(i),
+                    }}
+                  >
+                    {/* Connection line to center */}
+                    <motion.div
+                      className="absolute top-1/2 left-1/2 h-0.5 bg-gradient-to-r from-primary/60 to-transparent origin-left"
+                      style={{
+                        width: `${radius - 50}px`,
+                        rotate: `${180 + (angle * 180) / Math.PI}deg`,
+                        scaleX: getLineProgress(i),
+                      }}
+                    />
+
+                    <motion.div
+                      whileHover={{ scale: 1.15 }}
+                      className="relative w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br from-card to-card/50 border-2 border-primary/40 flex flex-col items-center justify-center p-3 cursor-pointer group"
+                    >
+                      {/* Pulse ring */}
+                      <motion.div
+                        className="absolute inset-0 rounded-full border-2 border-primary/30"
+                        animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
+                        transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }}
+                      />
+                      
+                      {/* Glow effect */}
+                      <div className="absolute inset-0 rounded-full bg-primary/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                      <node.icon className="w-6 h-6 lg:w-7 lg:h-7 text-primary mb-1.5 relative z-10" />
+                      <span className="text-[10px] lg:text-xs text-center font-medium text-muted-foreground relative z-10 leading-tight">
+                        {node.title}
+                      </span>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+
+              {/* Center hub */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center"
+                style={{ opacity: titleOpacity }}
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Zap className="w-8 h-8 text-primary" />
+              </motion.div>
+            </div>
+
+            {/* Mobile: Grid layout */}
+            <div className="md:hidden grid grid-cols-2 gap-3 px-2">
+              {nodes.map((node, i) => (
                 <motion.div
-                  className="hidden md:block absolute top-1/2 -right-3 w-6 h-0.5 bg-primary/50"
-                  initial={{ scaleX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : {}}
-                  transition={{ delay: node.delay + 0.3, duration: 0.3 }}
-                />
-              )}
+                  key={i}
+                  style={{
+                    opacity: getNodeOpacity(i),
+                    scale: getNodeScale(i),
+                    y: getNodeY(i),
+                  }}
+                  className="relative"
+                >
+                  <div className="p-4 rounded-xl bg-card/50 border border-primary/30 flex flex-col items-center gap-2">
+                    <node.icon className="w-6 h-6 text-primary" />
+                    <span className="text-xs text-center font-medium text-muted-foreground">
+                      {node.title}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
-              <div className="relative w-32 h-32 rounded-full bg-gradient-to-br from-card to-card/50 border-2 border-primary/30 flex flex-col items-center justify-center p-4 group-hover:border-primary transition-colors">
-                {/* Glow effect */}
-                <div className="absolute inset-0 rounded-full bg-primary/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                <node.icon className="w-8 h-8 text-primary mb-2 relative z-10" />
-                <span className="text-xs text-center font-medium text-muted-foreground relative z-10 leading-tight">
-                  {node.title}
-                </span>
-              </div>
-            </motion.div>
-          ))}
+          {/* Closing statement */}
+          <motion.p
+            style={{ opacity: closingOpacity, y: closingY }}
+            className="text-center text-lg md:text-xl lg:text-2xl text-muted-foreground mt-8 md:mt-16 max-w-2xl mx-auto px-4"
+          >
+            The event itself is just one moment in a{" "}
+            <span className="text-foreground font-semibold">
+              much bigger pipeline
+            </span>
+            .
+          </motion.p>
         </div>
-
-        {/* Closing statement */}
-        <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5 }}
-          className="text-center text-xl md:text-2xl text-muted-foreground mt-20 max-w-2xl mx-auto"
-        >
-          The event itself is just one moment in a{" "}
-          <span className="text-foreground font-semibold">
-            much bigger pipeline
-          </span>
-          .
-        </motion.p>
       </div>
     </section>
   );
@@ -1084,175 +1234,308 @@ const GainsTimeline = () => {
 };
 
 // ============================================
-// SECTION 10: Final CTA (The Portal)
+// SECTION 10: Final CTA (The Portal) - STICKY SCROLL
 // ============================================
 const FinalCTA = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end end"],
+  });
+
+  // Portal ring expansions
+  const ring1Scale = useTransform(scrollYProgress, [0, 0.3], [0.3, 1]);
+  const ring2Scale = useTransform(scrollYProgress, [0.1, 0.4], [0.3, 1]);
+  const ring3Scale = useTransform(scrollYProgress, [0.2, 0.5], [0.3, 1]);
+  const ringOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+
+  // Glow intensity
+  const glowScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.5, 1.5, 2]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.1, 0.4, 0.6, 0.8]);
+
+  // Title reveal
+  const titleOpacity = useTransform(scrollYProgress, [0.15, 0.3], [0, 1]);
+  const titleScale = useTransform(scrollYProgress, [0.15, 0.3], [0.8, 1]);
+  const titleY = useTransform(scrollYProgress, [0.15, 0.3], [50, 0]);
+
+  // Subtitle reveal
+  const subtitleOpacity = useTransform(scrollYProgress, [0.3, 0.45], [0, 1]);
+  const subtitleY = useTransform(scrollYProgress, [0.3, 0.45], [30, 0]);
+
+  // Growth lever text
+  const leverOpacity = useTransform(scrollYProgress, [0.4, 0.55], [0, 1]);
+  const leverScale = useTransform(scrollYProgress, [0.4, 0.55], [0.9, 1]);
+
+  // Badges reveal
+  const badge1Opacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1]);
+  const badge2Opacity = useTransform(scrollYProgress, [0.55, 0.65], [0, 1]);
+  const badge3Opacity = useTransform(scrollYProgress, [0.6, 0.7], [0, 1]);
+  const badgeY = useTransform(scrollYProgress, [0.5, 0.65], [20, 0]);
+
+  // Final text
+  const finalTextOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
+
+  // CTAs
+  const ctaOpacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
+  const ctaY = useTransform(scrollYProgress, [0.8, 0.9], [40, 0]);
 
   return (
     <section
       ref={ref}
-      className="relative min-h-screen py-32 bg-background overflow-hidden flex items-center"
+      className="relative h-[200vh] md:h-[250vh] bg-background overflow-hidden"
     >
-      {/* Portal glow effect */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+        {/* Animated portal rings */}
         <motion.div
-          className="w-[600px] h-[600px] rounded-full bg-primary/10 blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full border-2 border-primary/20"
+          style={{ scale: ring1Scale, opacity: ringOpacity }}
         />
         <motion.div
-          className="absolute w-[400px] h-[400px] rounded-full bg-primary/20 blur-2xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.6, 0.4],
-          }}
-          transition={{ duration: 3, repeat: Infinity }}
+          className="absolute w-[220px] h-[220px] md:w-[450px] md:h-[450px] rounded-full border-2 border-primary/30"
+          style={{ scale: ring2Scale, opacity: ringOpacity }}
         />
         <motion.div
-          className="absolute w-[200px] h-[200px] rounded-full bg-primary/30 blur-xl"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full border-2 border-primary/40"
+          style={{ scale: ring3Scale, opacity: ringOpacity }}
         />
-      </div>
 
-      {/* Rotating ring */}
-      <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full border border-primary/30"
-        style={{
-          left: "50%",
-          top: "50%",
-          marginLeft: "-250px",
-          marginTop: "-250px",
-        }}
-        animate={{ rotate: 360 }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      >
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-4 h-4 bg-primary rounded-full"
-            style={{
-              top: "50%",
-              left: "50%",
-              transform: `rotate(${i * 45}deg) translateX(250px) translateY(-50%)`,
-            }}
-          />
-        ))}
-      </motion.div>
-
-      <div className="container mx-auto px-4 relative z-10">
+        {/* Central glow */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="text-center max-w-4xl mx-auto"
+          className="absolute w-[200px] h-[200px] md:w-[400px] md:h-[400px] rounded-full bg-primary/20 blur-3xl"
+          style={{ scale: glowScale, opacity: glowOpacity }}
+        />
+        <motion.div
+          className="absolute w-[100px] h-[100px] md:w-[200px] md:h-[200px] rounded-full bg-primary/30 blur-2xl"
+          style={{ scale: glowScale, opacity: glowOpacity }}
+        />
+
+        {/* Energy particles being absorbed */}
+        {[...Array(12)].map((_, i) => {
+          const angle = (i / 12) * 2 * Math.PI;
+          const startX = Math.cos(angle) * 400;
+          const startY = Math.sin(angle) * 400;
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-primary rounded-full"
+              style={{ left: "50%", top: "50%" }}
+              animate={{
+                x: [startX, 0],
+                y: [startY, 0],
+                opacity: [0, 1, 0],
+                scale: [0.5, 1.5, 0],
+              }}
+              transition={{
+                duration: 3,
+                delay: i * 0.25,
+                repeat: Infinity,
+                ease: "easeIn",
+              }}
+            />
+          );
+        })}
+
+        {/* Rotating outer ring */}
+        <motion.div
+          className="absolute w-[280px] h-[280px] md:w-[550px] md:h-[550px] rounded-full border border-primary/20 hidden md:block"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-8">
-            THE <span className="text-gradient">BOTTOM LINE</span>
-          </h2>
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-3 h-3 bg-primary/60 rounded-full"
+              style={{
+                top: "50%",
+                left: "50%",
+                transform: `rotate(${i * 45}deg) translateX(275px) translateY(-50%)`,
+              }}
+              animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
+              transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }}
+            />
+          ))}
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3 }}
-            className="mb-12"
-          >
-            <p className="text-xl md:text-2xl text-muted-foreground mb-6">
+        {/* Light rays */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute top-1/2 left-1/2 w-1 bg-gradient-to-t from-primary/40 to-transparent origin-bottom"
+              style={{
+                height: "50vh",
+                transform: `rotate(${i * 60}deg)`,
+              }}
+              animate={{ opacity: [0.1, 0.4, 0.1] }}
+              transition={{ duration: 3, delay: i * 0.3, repeat: Infinity }}
+            />
+          ))}
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center max-w-4xl mx-auto">
+            {/* Title */}
+            <motion.h2
+              style={{ opacity: titleOpacity, scale: titleScale, y: titleY }}
+              className="text-3xl md:text-5xl lg:text-7xl font-bold mb-4 md:mb-8"
+            >
+              THE <span className="text-gradient">BOTTOM LINE</span>
+            </motion.h2>
+
+            {/* Subtitle */}
+            <motion.p
+              style={{ opacity: subtitleOpacity, y: subtitleY }}
+              className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-4 md:mb-6"
+            >
               Event marketing is not a tactic.
-            </p>
-            <p className="text-3xl md:text-4xl font-bold text-foreground mb-8">
+            </motion.p>
+
+            {/* Growth lever */}
+            <motion.p
+              style={{ opacity: leverOpacity, scale: leverScale }}
+              className="text-2xl md:text-3xl lg:text-5xl font-bold text-foreground mb-6 md:mb-8"
+            >
               It's a <span className="text-gradient">growth lever</span>.
-            </p>
-            <div className="space-y-3 mb-8">
-              <p className="text-lg md:text-xl text-foreground">
+            </motion.p>
+
+            {/* Badges */}
+            <div className="mb-6 md:mb-8">
+              <motion.p
+                style={{ opacity: badge1Opacity }}
+                className="text-base md:text-lg text-foreground mb-4"
+              >
                 When engineered correctly, it becomes:
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
+              </motion.p>
+              <motion.div style={{ y: badgeY }} className="flex flex-wrap justify-center gap-2 md:gap-4">
                 {["A lead machine", "A sales accelerator", "An authority amplifier"].map(
                   (item, i) => (
                     <motion.span
                       key={i}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.5 + i * 0.15 }}
-                      className="px-4 py-2 rounded-full bg-primary/20 text-primary font-medium"
+                      style={{ opacity: i === 0 ? badge1Opacity : i === 1 ? badge2Opacity : badge3Opacity }}
+                      className="px-3 py-1.5 md:px-5 md:py-2.5 rounded-full bg-primary/20 text-primary font-medium text-sm md:text-base border border-primary/30"
                     >
                       {item}
                     </motion.span>
                   )
                 )}
-              </div>
+              </motion.div>
             </div>
-          </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-            className="text-lg text-muted-foreground mb-12 max-w-2xl mx-auto"
-          >
-            Most companies never experience this — not because events don't
-            work, but because they never build the{" "}
-            <span className="text-foreground font-semibold">system</span> behind
-            them.
-          </motion.p>
+            {/* Final text */}
+            <motion.p
+              style={{ opacity: finalTextOpacity }}
+              className="text-base md:text-lg text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto px-4"
+            >
+              Most companies never experience this — not because events don't
+              work, but because they never build the{" "}
+              <span className="text-foreground font-semibold">system</span> behind
+              them.
+            </motion.p>
 
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link to="/how-it-works">
-              <Button
-                size="lg"
-                variant="outline"
-                className="group text-lg px-8 py-6 border-primary/50 hover:bg-primary/10"
-              >
-                <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
-                See How We Work
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <Link to="/contact">
-              <Button
-                size="lg"
-                className="group text-lg px-8 py-6 bg-primary hover:bg-primary/90"
-              >
-                <Calendar className="w-5 h-5 mr-2" />
-                Book a Strategy Call
-                <motion.span
-                  className="ml-2"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+            {/* CTAs */}
+            <motion.div
+              style={{ opacity: ctaOpacity, y: ctaY }}
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4"
+            >
+              <Link to="/how-it-works">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="group text-base md:text-lg px-6 md:px-8 py-5 md:py-6 border-primary/50 hover:bg-primary/10 w-full sm:w-auto"
                 >
-                  →
-                </motion.span>
-              </Button>
-            </Link>
-          </motion.div>
-        </motion.div>
+                  <Play className="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:scale-110 transition-transform" />
+                  See How We Work
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <Link to="/contact">
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="relative group"
+                >
+                  {/* Glow effect */}
+                  <motion.div
+                    className="absolute -inset-1 bg-gradient-to-r from-primary via-primary/80 to-primary rounded-lg blur opacity-40"
+                    animate={{ opacity: [0.4, 0.7, 0.4] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                  <Button
+                    size="lg"
+                    className="relative text-base md:text-lg px-6 md:px-8 py-5 md:py-6 bg-primary hover:bg-primary/90 w-full sm:w-auto"
+                  >
+                    <Calendar className="w-4 h-4 md:w-5 md:h-5 mr-2" />
+                    Book a Strategy Call
+                    <motion.span
+                      className="ml-2"
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.span>
+                  </Button>
+                </motion.div>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
 // ============================================
+// GLOBAL VISUAL EFFECTS
+// ============================================
+const NoiseOverlay = () => (
+  <div 
+    className="fixed inset-0 pointer-events-none z-50 opacity-[0.015]"
+    style={{
+      backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+    }}
+  />
+);
+
+const AmbientOrbs = () => (
+  <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <motion.div
+      className="absolute -top-1/4 -left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"
+      animate={{
+        x: [0, 100, 0],
+        y: [0, 50, 0],
+      }}
+      transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+    />
+    <motion.div
+      className="absolute -bottom-1/4 -right-1/4 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-3xl"
+      animate={{
+        x: [0, -80, 0],
+        y: [0, -60, 0],
+      }}
+      transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+    />
+    <motion.div
+      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/3 rounded-full blur-3xl"
+      animate={{
+        scale: [1, 1.2, 1],
+      }}
+      transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+    />
+  </div>
+);
+
+// ============================================
 // MAIN PAGE COMPONENT
 // ============================================
 const EventMarketing = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Global ambient effects */}
+      <NoiseOverlay />
+      <AmbientOrbs />
+      
       <Navbar />
 
-      <main>
+      <main className="relative z-10">
         <HeroTunnel />
         <RealityCheck />
         <MarketplaceSection />
@@ -1266,7 +1549,7 @@ const EventMarketing = () => {
       </main>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-border/50 bg-card/30">
+      <footer className="relative z-10 py-12 border-t border-border/50 bg-card/30 backdrop-blur-sm">
         <div className="container mx-auto px-4 text-center">
           <p className="text-muted-foreground">
             © {new Date().getFullYear()} All rights reserved.
