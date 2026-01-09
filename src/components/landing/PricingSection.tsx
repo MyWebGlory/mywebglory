@@ -1,7 +1,24 @@
+import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Zap, Crown, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const adSpendOptions = [3000, 5000, 10000, 15000, 20000, 30000, 40000, 50000];
+
+const calculateRegistrants = (adSpend: number) => {
+  const registrants = Math.round(adSpend / 19);
+  const lowEnd = Math.round(registrants * 0.85);
+  const highEnd = Math.round(registrants * 1.15);
+  return `${lowEnd.toLocaleString()}–${highEnd.toLocaleString()}`;
+};
+
+const calculateAttendees = (adSpend: number, attendanceRate: [number, number]) => {
+  const registrants = Math.round(adSpend / 19);
+  const lowEnd = Math.round(registrants * 0.85 * attendanceRate[0]);
+  const highEnd = Math.round(registrants * 1.15 * attendanceRate[1]);
+  return `${lowEnd.toLocaleString()}–${highEnd.toLocaleString()}`;
+};
 
 const pricingPlans = [
   {
@@ -25,7 +42,8 @@ const pricingPlans = [
       "35–45% attendance rate",
       "50–120 live attendees",
     ],
-    adSpend: "Recommended: $2,000–$5,000",
+    hasAdSpend: false,
+    attendanceRate: [0.35, 0.45] as [number, number],
     cta: "Get Started",
     popular: false,
   },
@@ -46,12 +64,9 @@ const pricingPlans = [
       "5 short video clips + 1 SEO blog article",
       "Full analytics with CTA tracking",
     ],
-    results: [
-      "400–700 qualified registrants",
-      "40–55% attendance rate",
-      "160–350 live attendees",
-    ],
-    adSpend: "Recommended: $5,000–$15,000",
+    hasAdSpend: true,
+    attendanceRate: [0.40, 0.55] as [number, number],
+    defaultAdSpend: 10000,
     cta: "Let's Talk",
     popular: true,
   },
@@ -72,12 +87,9 @@ const pricingPlans = [
       "15 video clips + 3 SEO blog articles",
       "Event-to-revenue attribution reporting",
     ],
-    results: [
-      "1,200–2,000 qualified registrants",
-      "45–60% attendance rate",
-      "550–1,200 live attendees",
-    ],
-    adSpend: "Recommended: $15,000–$30,000",
+    hasAdSpend: true,
+    attendanceRate: [0.45, 0.60] as [number, number],
+    defaultAdSpend: 20000,
     cta: "Apply Now",
     popular: false,
   },
@@ -85,6 +97,26 @@ const pricingPlans = [
 
 const PricingSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [adSpends, setAdSpends] = useState<{ [key: number]: number }>({
+    1: 10000,
+    2: 20000,
+  });
+
+  const handleAdSpendChange = (planIndex: number, value: number) => {
+    setAdSpends(prev => ({ ...prev, [planIndex]: value }));
+  };
+
+  const getResults = (plan: typeof pricingPlans[0], index: number) => {
+    if (!plan.hasAdSpend) {
+      return plan.results;
+    }
+    const adSpend = adSpends[index] || plan.defaultAdSpend || 10000;
+    return [
+      `${calculateRegistrants(adSpend)} qualified registrants`,
+      `${Math.round(plan.attendanceRate[0] * 100)}–${Math.round(plan.attendanceRate[1] * 100)}% attendance rate`,
+      `${calculateAttendees(adSpend, plan.attendanceRate)} live attendees`,
+    ];
+  };
 
   return (
     <section className="py-24 relative" id="pricing">
@@ -142,8 +174,29 @@ const PricingSection = () => {
                 }`}>
                   ✓ Minimum Results
                 </p>
+                
+                {/* Ad Spend Selector for plans with ads */}
+                {plan.hasAdSpend && (
+                  <div className="mb-3 pb-3 border-b border-border/50">
+                    <label className="text-xs text-muted-foreground font-light block mb-2">
+                      Ad spend
+                    </label>
+                    <select
+                      value={adSpends[i] || plan.defaultAdSpend}
+                      onChange={(e) => handleAdSpendChange(i, Number(e.target.value))}
+                      className="w-full bg-background/50 border border-border/50 rounded-lg px-3 py-1.5 text-sm font-light text-foreground focus:outline-none focus:border-primary/50 cursor-pointer"
+                    >
+                      {adSpendOptions.map((amount) => (
+                        <option key={amount} value={amount}>
+                          ${amount.toLocaleString()}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                
                 <ul className="space-y-1.5">
-                  {plan.results.map((result, j) => (
+                  {getResults(plan, i).map((result, j) => (
                     <li key={j} className={`text-sm font-medium flex items-center gap-2 ${
                       plan.popular ? "text-foreground" : "text-foreground/90"
                     }`}>
@@ -170,11 +223,19 @@ const PricingSection = () => {
                 ))}
               </ul>
               
-              <div className="p-3 rounded-lg bg-muted/30 border border-border/50 mb-6">
-                <p className="text-xs text-muted-foreground">
-                  <span className="font-medium text-foreground/80">Ad spend separate.</span> {plan.adSpend} for best results — scales with your budget.
-                </p>
-              </div>
+              {plan.hasAdSpend ? (
+                <div className="p-3 rounded-lg bg-muted/30 border border-border/50 mb-6">
+                  <p className="text-xs text-muted-foreground font-light">
+                    Ad spend separate — results scale with your budget.
+                  </p>
+                </div>
+              ) : (
+                <div className="p-3 rounded-lg bg-muted/30 border border-border/50 mb-6">
+                  <p className="text-xs text-muted-foreground font-light">
+                    No ads included. Organic reach only.
+                  </p>
+                </div>
+              )}
               
               <Button 
                 asChild
