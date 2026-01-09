@@ -2,28 +2,105 @@ import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Check, ArrowRight, Zap, Crown, Rocket, ChevronDown, ChevronUp } from "lucide-react";
+import { Check, ArrowRight, Zap, Crown, Rocket, ChevronDown, ChevronUp, X } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const pricingPlans = [
+interface FeatureCategory {
+  title: string;
+  items: string[];
+}
+
+interface PricingPlan {
+  name: string;
+  price: string;
+  duration: string;
+  purpose: string;
+  acquisitionFocus: string;
+  icon: typeof Zap;
+  featureCategories: FeatureCategory[];
+  notIncluded: string[];
+  baseRegistrants: [number, number];
+  attendanceRate: [number, number];
+  attendeesRange: [number, number];
+  extraResult?: string;
+  costPerRegistrant: number;
+  cta: string;
+  popular: boolean;
+}
+
+const pricingPlans: PricingPlan[] = [
   {
     name: "Event Launch Engine",
     price: "$9,000",
     duration: "30–45 days",
-    description: "For companies testing events or running them inconsistently. Validate demand and fill seats.",
+    purpose: "🚀 Ready to test the waters? Launch your event with solid fundamentals, attract quality leads, and see what's possible!",
+    acquisitionFocus: "Organic + light paid",
     icon: Zap,
-    features: [
-      "1 event positioning & ICP definition",
-      "1 conversion-focused landing page",
-      "6 emails (3 pre-event, 2 reminder, 1 replay)",
-      "4 SMS reminders",
-      "5 promotional social posts",
-      "CRM integration & lead capture",
-      "Event branding & main visual",
-      "Basic analytics & attendance tracking",
+    featureCategories: [
+      {
+        title: "🎯 Deep Study & Strategy",
+        items: [
+          "1 client intake form",
+          "1 strategy call (90 min)",
+          "Market + ICP analysis",
+          "Event angle & offer alignment",
+          "High-level funnel & pipeline design",
+        ],
+      },
+      {
+        title: "✨ Branding & Messaging",
+        items: [
+          "Messaging & positioning document (PDF)",
+          "Tone, wording, ICP pain points",
+          "1 event narrative",
+        ],
+      },
+      {
+        title: "📢 Acquisition Setup",
+        items: [
+          "1 channel only (chosen strategically)",
+          "Organic acquisition plan OR light ads",
+          "Ads: 1 ad account setup, 1 creative round, up to 3 static creatives OR 1 video, 1 targeting setup",
+          "Organic: 5 social posts, 10 story frames, comment/engagement plan",
+        ],
+      },
+      {
+        title: "🎯 Event Conversion",
+        items: [
+          "1 branded, high-converting landing page",
+          "Single delivery (no optimization cycles)",
+        ],
+      },
+      {
+        title: "📧 Communication & Reminders",
+        items: [
+          "6 emails (3 pre-event, 2 reminder, 1 post-event)",
+          "2 SMS reminders",
+          "No phone calls",
+        ],
+      },
+      {
+        title: "📊 Post-Event & Reporting",
+        items: [
+          "Basic thank-you & replay email",
+          "Attendee list + performance summary",
+          "Registrations & attendance rate tracking",
+          "Acquisition channel breakdown",
+        ],
+      },
+    ],
+    notIncluded: [
+      "CRM setup or integration",
+      "Lead qualification",
+      "Phone calls",
+      "Advanced ads optimization",
+      "Post-production content",
+      "Sales closing",
+      "Media buying budget",
     ],
     baseRegistrants: [150, 300],
-    attendanceRate: [0.35, 0.45] as [number, number],
+    attendanceRate: [0.35, 0.45],
+    attendeesRange: [50, 120],
     costPerRegistrant: 35,
     cta: "Get Started",
     popular: false,
@@ -32,44 +109,194 @@ const pricingPlans = [
     name: "Event Revenue System",
     price: "$25,000",
     duration: "60–75 days",
-    description: "For companies that want pipeline + sales, not just visibility. Turn events into revenue assets.",
+    purpose: "💰 Time to turn events into real pipeline! Generate sales-ready leads and watch your revenue grow.",
+    acquisitionFocus: "Multi-channel organic + ads",
     icon: Crown,
-    features: [
-      "Event positioning + offer alignment",
-      "1 high-converting landing page",
-      "11 emails (5 pre, 3 reminder, 3 post-event)",
-      "6 SMS reminders",
-      "10 social posts (pre + post event)",
-      "Lead scoring & attendee segmentation",
-      "Sales-ready tagging & lead routing",
-      "5 short video clips + 1 SEO blog article",
-      "Full analytics with CTA tracking",
+    featureCategories: [
+      {
+        title: "🎯 Deep Study & Strategy",
+        items: [
+          "Everything in $9k plan",
+          "Competitor event analysis",
+          "CTA & monetization strategy",
+        ],
+      },
+      {
+        title: "✨ Branding & Messaging",
+        items: [
+          "Full messaging & branding doc",
+          "Event + offer positioning",
+          "Speaker / brand authority framing",
+        ],
+      },
+      {
+        title: "🔧 Operations & Communication",
+        items: [
+          "Slack + ClickUp setup",
+          "Structured workflows",
+          "Shared Drive organization",
+        ],
+      },
+      {
+        title: "📢 Acquisition Setup",
+        items: [
+          "Up to 3 channels combined",
+          "Organic + Ads strategy",
+          "Ads: up to 3 creative rounds, up to 10 creatives (static + video), ICP targeting + 1 lookalike, iterative optimization",
+          "Organic: 12 social posts, 20 story frames, DM/outreach strategy with scripts",
+        ],
+      },
+      {
+        title: "🎯 Event Conversion",
+        items: [
+          "1 landing page with 3 optimization cycles",
+          "Heatmaps & engagement monitoring",
+          "Conversion improvements",
+        ],
+      },
+      {
+        title: "🏷️ CRM & Lead Qualification",
+        items: [
+          "CRM setup or integration",
+          "Lead tagging: Attended, Interested, Warm, Dead",
+          "Pipeline visibility",
+        ],
+      },
+      {
+        title: "📧 Reminders & Activation",
+        items: [
+          "Up to 1,000 phone calls with custom script",
+          "11 emails (5 pre-event, 3 reminder, 3 post-event)",
+          "4 SMS reminders",
+        ],
+      },
+      {
+        title: "📊 Post-Event & Reporting",
+        items: [
+          "Lead follow-up flows & nurture emails",
+          "5 short clips + 1 recap post",
+          "Funnel analytics & lead quality breakdown",
+          "Event performance report",
+        ],
+      },
+    ],
+    notIncluded: [
+      "Sales closing",
+      "Unlimited creatives",
+      "Unlimited channels",
+      "Affiliate program management",
+      "Ongoing community management",
+      "Media buying budget",
     ],
     baseRegistrants: [400, 700],
-    attendanceRate: [0.40, 0.55] as [number, number],
+    attendanceRate: [0.40, 0.55],
+    attendeesRange: [160, 350],
+    extraResult: "Sales-ready leads identified",
     costPerRegistrant: 22,
     cta: "Let's Talk",
     popular: true,
   },
   {
     name: "Event Authority Flywheel",
-    price: "$49,000",
+    price: "$50,000",
     duration: "90 days",
-    description: "For companies serious about authority, pipeline, and long-term leverage. Build FOMO and deal flow.",
+    purpose: "👑 Go all in! Maximum reach, unstoppable authority, serious FOMO, and a pipeline that keeps flowing.",
+    acquisitionFocus: "Full-scale, ads-driven, multi-channel domination",
     icon: Rocket,
-    features: [
-      "Full 3-event series strategy",
-      "3 high-converting landing pages",
-      "39 emails across all events",
-      "15 SMS reminders total",
-      "20 social posts",
-      "Advanced segmentation & lead scoring",
-      "Sales handoff + calling coordination",
-      "15 video clips + 3 SEO blog articles",
-      "Event-to-revenue attribution reporting",
+    featureCategories: [
+      {
+        title: "🎯 Deep Study & Strategy",
+        items: [
+          "Full business immersion",
+          "Offer restructuring if needed",
+          "Advanced ICP & segmentation",
+          "Event authority & FOMO strategy",
+        ],
+      },
+      {
+        title: "✨ Branding & Messaging",
+        items: [
+          "Premium brand & messaging system",
+          "Event narrative + long-term positioning",
+          "Authority content angles",
+        ],
+      },
+      {
+        title: "🔧 Operations & Team Integration",
+        items: [
+          "Premium ClickUp workspace",
+          "MWG departments & workflows",
+          "Weekly sync calls",
+          "Full process streamlining",
+        ],
+      },
+      {
+        title: "📢 Acquisition Setup",
+        items: [
+          "Up to 6 channels (Organic + Ads + Outreach)",
+          "Unlimited optimization cycles",
+          "Up to 30 creatives (static, video, UGC, AI)",
+          "Multiple targeting: Broad, Lookalike, Retargeting",
+          "Continuous testing & scaling",
+          "UGC actors/editors coordination (cost not included)",
+          "Organic: 25 posts, 40 story frames, forum/community activation",
+          "DM & email outreach campaigns",
+        ],
+      },
+      {
+        title: "🎯 Event Conversion",
+        items: [
+          "1 landing page with up to 10 optimization cycles",
+          "UX, copy, conversion path testing",
+          "Form vs page testing",
+        ],
+      },
+      {
+        title: "🏷️ CRM & Lead Qualification",
+        items: [
+          "Advanced CRM setup with custom pipeline stages",
+          "Lead scoring system",
+          "Sales handoff system",
+        ],
+      },
+      {
+        title: "📧 Reminders & Activation",
+        items: [
+          "Up to 3,000 phone calls",
+          "15 emails (6 pre-event, 4 reminder, 5 post-event)",
+          "6 SMS reminders",
+        ],
+      },
+      {
+        title: "🚀 Post-Event Authority Engine",
+        items: [
+          "15 short clips + 3 long-form videos",
+          "3 authority posts",
+          "Weeks of post-event activity",
+          "Audience retention & FOMO building",
+        ],
+      },
+      {
+        title: "📊 Reporting",
+        items: [
+          "Full funnel analytics",
+          "Acquisition ROI by channel",
+          "Lead quality & pipeline impact",
+          "Strategic debrief report",
+        ],
+      },
     ],
-    baseRegistrants: [1200, 2000],
-    attendanceRate: [0.45, 0.60] as [number, number],
+    notIncluded: [
+      "Ad spend",
+      "Sales closing",
+      "Affiliate payout budgets",
+      "Influencer fees",
+      "Ongoing monthly management beyond event scope",
+    ],
+    baseRegistrants: [800, 1500],
+    attendanceRate: [0.45, 0.60],
+    attendeesRange: [360, 900],
+    extraResult: "Strong pipeline + authority effect",
     costPerRegistrant: 11,
     cta: "Apply Now",
     popular: false,
@@ -89,7 +316,7 @@ const PricingSection = () => {
     setAdSpends(prev => ({ ...prev, [planIndex]: value[0] }));
   };
 
-  const getResults = (plan: typeof pricingPlans[0], index: number) => {
+  const getResults = (plan: PricingPlan, index: number) => {
     const adSpend = adSpends[index] || 0;
     const adsRegistrants = adSpend > 0 ? Math.round(adSpend / plan.costPerRegistrant) : 0;
     
@@ -101,9 +328,22 @@ const PricingSection = () => {
     
     return {
       registrants: `${totalLow.toLocaleString()}–${totalHigh.toLocaleString()} qualified registrants`,
-      attendanceRate: `${Math.round(plan.attendanceRate[0] * 100)}–${Math.round(plan.attendanceRate[1] * 100)}% attendance rate`,
+      attendanceRate: `${Math.round(plan.attendanceRate[0] * 100)}–${Math.round(plan.attendanceRate[1] * 100)}% attendance`,
       attendees: `${attendeesLow.toLocaleString()}–${attendeesHigh.toLocaleString()} live attendees`,
     };
+  };
+
+  // Get first 3 feature items across all categories for preview
+  const getPreviewFeatures = (plan: PricingPlan) => {
+    const allItems: { category: string; item: string }[] = [];
+    for (const cat of plan.featureCategories) {
+      for (const item of cat.items) {
+        allItems.push({ category: cat.title, item });
+        if (allItems.length >= 3) break;
+      }
+      if (allItems.length >= 3) break;
+    }
+    return allItems;
   };
 
   return (
@@ -117,14 +357,14 @@ const PricingSection = () => {
             Event Marketing Systems
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            ICP-aligned attendees. Sales-ready leads. Authority & repeatability.
+            Price per event — ad spend not included
           </p>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto items-stretch">
+        <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto items-start">
           {pricingPlans.map((plan, i) => {
             const results = getResults(plan, i);
-            const visibleFeatures = showAllFeatures ? plan.features : plan.features.slice(0, 3);
+            const previewFeatures = getPreviewFeatures(plan);
             
             return (
               <div
@@ -157,10 +397,14 @@ const PricingSection = () => {
                 
                 <div className="mb-2">
                   <span className="text-4xl font-bold">{plan.price}</span>
+                  <span className="text-muted-foreground text-sm ml-2">/ event</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">{plan.duration}</p>
                 
-                <p className="text-muted-foreground mb-5 text-sm">{plan.description}</p>
+                <p className="text-foreground/90 mb-2 text-sm leading-relaxed">{plan.purpose}</p>
+                <p className="text-xs text-muted-foreground mb-5 italic">
+                  📍 Focus: {plan.acquisitionFocus}
+                </p>
                 
                 {/* Assured Results with Ad Spend Slider */}
                 <div className={`mb-5 p-4 rounded-xl ${
@@ -171,7 +415,7 @@ const PricingSection = () => {
                   <p className={`text-xs font-semibold uppercase tracking-wider mb-3 ${
                     plan.popular ? "text-primary" : "text-secondary"
                   }`}>
-                    ✓ Minimum Results
+                    ✓ Minimum Results Guaranteed
                   </p>
                   
                   <ul className="space-y-1.5 mb-4">
@@ -193,12 +437,20 @@ const PricingSection = () => {
                       <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
                       {results.attendees}
                     </li>
+                    {plan.extraResult && (
+                      <li className={`text-sm font-medium flex items-center gap-2 ${
+                        plan.popular ? "text-foreground" : "text-foreground/90"
+                      }`}>
+                        <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
+                        {plan.extraResult}
+                      </li>
+                    )}
                   </ul>
                   
                   {/* Ad Spend Slider inside results box */}
                   <div className="pt-3 border-t border-border/50">
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-xs text-muted-foreground font-light">Ad spend</span>
+                      <span className="text-xs text-muted-foreground font-light">💸 Ad spend</span>
                       <span className="text-sm font-medium text-foreground">
                         {adSpends[i] === 0 ? "$0" : `$${adSpends[i].toLocaleString()}`}
                       </span>
@@ -212,43 +464,81 @@ const PricingSection = () => {
                       className="w-full"
                     />
                     <p className="text-xs text-muted-foreground font-light mt-2">
-                      Results scale with your budget.
+                      Results scale with your budget ↑
                     </p>
                   </div>
                 </div>
                 
                 {/* Features with fade and see more */}
-                <div className="relative mb-6 flex-1">
-                  <ul className="space-y-3">
-                    {visibleFeatures.map((feature, j) => (
-                      <li key={j} className="flex items-start gap-3">
-                        <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
-                        <span className="text-foreground/90 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  {!showAllFeatures && plan.features.length > 3 && (
-                    <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
+                <div className="relative mb-4 flex-1">
+                  {!showAllFeatures ? (
+                    <>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-3">
+                        📦 What's Included
+                      </p>
+                      <ul className="space-y-2">
+                        {previewFeatures.map((feature, j) => (
+                          <li key={j} className="flex items-start gap-2">
+                            <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
+                            <span className="text-foreground/90 text-sm">{feature.item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-card to-transparent pointer-events-none" />
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-3">
+                        📦 What's Included
+                      </p>
+                      <div className="space-y-4">
+                        {plan.featureCategories.map((category, catIndex) => (
+                          <div key={catIndex}>
+                            <p className="text-xs font-semibold text-foreground/80 mb-2">{category.title}</p>
+                            <ul className="space-y-1.5 pl-1">
+                              {category.items.map((item, itemIndex) => (
+                                <li key={itemIndex} className="flex items-start gap-2">
+                                  <Check className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
+                                  <span className="text-foreground/80 text-xs">{item}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                      
+                      {/* Not Included Section */}
+                      <div className="mt-5 pt-4 border-t border-border/50">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+                          ❌ Not Included
+                        </p>
+                        <ul className="space-y-1.5">
+                          {plan.notIncluded.map((item, j) => (
+                            <li key={j} className="flex items-start gap-2">
+                              <X className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-destructive/60" />
+                              <span className="text-muted-foreground text-xs">{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </>
                   )}
                 </div>
                 
-                {plan.features.length > 3 && (
-                  <button
-                    onClick={() => setShowAllFeatures(!showAllFeatures)}
-                    className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors mb-6 font-light"
-                  >
-                    {showAllFeatures ? (
-                      <>
-                        See less <ChevronUp className="w-3 h-3" />
-                      </>
-                    ) : (
-                      <>
-                        See more <ChevronDown className="w-3 h-3" />
-                      </>
-                    )}
-                  </button>
-                )}
+                <button
+                  onClick={() => setShowAllFeatures(!showAllFeatures)}
+                  className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors mb-6 font-light"
+                >
+                  {showAllFeatures ? (
+                    <>
+                      See less <ChevronUp className="w-3 h-3" />
+                    </>
+                  ) : (
+                    <>
+                      See all features <ChevronDown className="w-3 h-3" />
+                    </>
+                  )}
+                </button>
                 
                 <Button 
                   asChild
