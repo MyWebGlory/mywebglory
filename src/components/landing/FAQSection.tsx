@@ -5,6 +5,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { HelpCircle } from "lucide-react";
 
 const faqs = [
   {
@@ -40,7 +41,10 @@ const FAQSection = () => {
     <section className="py-24 relative" id="faq">
       <div className="container relative z-10 px-4 md:px-6" ref={ref}>
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
-          <span className="text-primary font-medium tracking-wide uppercase text-sm">FAQ</span>
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 mb-4">
+            <HelpCircle className="w-7 h-7 text-primary" />
+          </div>
+          <span className="block text-primary font-medium tracking-wide uppercase text-sm">FAQ</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
             Got Questions? We've Got Answers.
           </h2>
