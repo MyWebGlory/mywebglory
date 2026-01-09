@@ -80,8 +80,8 @@ const PricingSection = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [adSpends, setAdSpends] = useState<{ [key: number]: number }>({
     0: 0,
-    1: 0,
-    2: 0,
+    1: 5000,
+    2: 15000,
   });
   const [showAllFeatures, setShowAllFeatures] = useState(false);
 
