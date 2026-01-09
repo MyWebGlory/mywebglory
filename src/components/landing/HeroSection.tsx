@@ -389,13 +389,22 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
         
-        {/* CTA Button with Enhanced Glow */}
+        {/* CTA Buttons */}
         <motion.div 
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10"
           initial={{ opacity: 0, y: 40, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.9, type: "spring", stiffness: 100 }}
         >
+          {/* Event Marketing Button (Left) */}
+          <Button asChild size="lg" variant="outline" className="group border-primary/50 hover:bg-primary/10 px-6 py-6 text-base">
+            <Link to="/event-marketing">
+              What is Event Marketing?
+              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Button>
+
+          {/* Main CTA with Glow */}
           <div className="relative group">
             <motion.div 
               className="absolute -inset-1 bg-gradient-to-r from-primary via-accent to-secondary rounded-lg blur opacity-40"
@@ -404,22 +413,11 @@ const HeroSection = () => {
             />
             <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-6 text-lg">
               <Link to="/contact">
-                Apply for an Event Strategy Call
+                Apply for a Free Strategy Call
                 <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
-          
-          {/* Discrete Event Marketing CTA */}
-          <Link 
-            to="/event-marketing"
-            className="group inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm"
-          >
-            <span className="relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left">
-              What is Event Marketing?
-            </span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
         </motion.div>
         
         {/* Animated Stats */}
