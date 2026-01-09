@@ -10,6 +10,21 @@ interface FeatureCategory {
   items: string[];
 }
 
+interface PerformanceData {
+  registrants: [number, number];
+  attendanceRate: [number, number];
+  liveAttendees: [number, number];
+  qualifiedLeads: [number, number];
+  followers: [number, number];
+  emails: [number, number];
+  sms: [number, number];
+  bookedCalls: [number, number];
+  warmLeads?: [number, number];
+  salesConversations?: [number, number];
+  estimatedClients?: [number, number];
+  longTerm: string[];
+}
+
 interface PricingPlan {
   name: string;
   price: string;
@@ -19,13 +34,11 @@ interface PricingPlan {
   icon: typeof Zap;
   featureCategories: FeatureCategory[];
   notIncluded: string[];
-  baseRegistrants: [number, number];
-  attendanceRate: [number, number];
-  attendeesRange: [number, number];
-  extraResult?: string;
+  performance: PerformanceData;
   costPerRegistrant: number;
   cta: string;
   popular: boolean;
+  hasAds: boolean;
 }
 
 const pricingPlans: PricingPlan[] = [
@@ -98,12 +111,26 @@ const pricingPlans: PricingPlan[] = [
       "Sales closing",
       "Media buying budget",
     ],
-    baseRegistrants: [150, 300],
-    attendanceRate: [0.35, 0.45],
-    attendeesRange: [50, 120],
-    costPerRegistrant: 35,
+    performance: {
+      registrants: [200, 350],
+      attendanceRate: [45, 55],
+      liveAttendees: [90, 190],
+      qualifiedLeads: [15, 40],
+      followers: [150, 350],
+      emails: [200, 350],
+      sms: [160, 280],
+      bookedCalls: [8, 20],
+      warmLeads: [5, 15],
+      longTerm: [
+        "Retargetable audience for next event",
+        "Email list growth for content + upsells",
+        "Improved funnel data for optimization",
+      ],
+    },
+    costPerRegistrant: 19,
     cta: "Get Started",
     popular: false,
+    hasAds: false,
   },
   {
     name: "Event Revenue System",
@@ -188,13 +215,28 @@ const pricingPlans: PricingPlan[] = [
       "Ongoing community management",
       "Media buying budget",
     ],
-    baseRegistrants: [400, 700],
-    attendanceRate: [0.40, 0.55],
-    attendeesRange: [160, 350],
-    extraResult: "Sales-ready leads identified",
-    costPerRegistrant: 22,
+    performance: {
+      registrants: [450, 800],
+      attendanceRate: [50, 60],
+      liveAttendees: [225, 480],
+      qualifiedLeads: [40, 90],
+      followers: [400, 800],
+      emails: [450, 800],
+      sms: [420, 640],
+      bookedCalls: [40, 80],
+      salesConversations: [25, 60],
+      estimatedClients: [6, 18],
+      longTerm: [
+        "Retargetable pools + lookalikes",
+        "Email list for evergreen campaigns",
+        "Stronger authority positioning",
+        "Better data for future ads optimization",
+      ],
+    },
+    costPerRegistrant: 19,
     cta: "Let's Talk",
     popular: true,
+    hasAds: true,
   },
   {
     name: "Event Authority Flywheel",
@@ -293,13 +335,28 @@ const pricingPlans: PricingPlan[] = [
       "Influencer fees",
       "Ongoing monthly management beyond event scope",
     ],
-    baseRegistrants: [800, 1500],
-    attendanceRate: [0.45, 0.60],
-    attendeesRange: [360, 900],
-    extraResult: "Strong pipeline + authority effect",
-    costPerRegistrant: 11,
+    performance: {
+      registrants: [900, 1600],
+      attendanceRate: [55, 65],
+      liveAttendees: [495, 1040],
+      qualifiedLeads: [120, 250],
+      followers: [900, 1600],
+      emails: [900, 1600],
+      sms: [800, 1400],
+      bookedCalls: [120, 240],
+      salesConversations: [80, 180],
+      estimatedClients: [15, 45],
+      longTerm: [
+        "Evergreen retargeting pools",
+        "Increased organic reach",
+        "LOIs for future events",
+        "Brand authority → easier sales",
+      ],
+    },
+    costPerRegistrant: 19,
     cta: "Apply Now",
     popular: false,
+    hasAds: true,
   },
 ];
 
@@ -317,22 +374,41 @@ const PricingSection = () => {
     setAdSpends(prev => ({ ...prev, [planIndex]: value[0] }));
   };
 
-  const getResults = (plan: PricingPlan, index: number) => {
+  const getScaledPerformance = (plan: PricingPlan, index: number) => {
     const adSpend = adSpends[index] || 0;
-    const adsRegistrants = adSpend > 0 ? Math.round(adSpend / plan.costPerRegistrant) : 0;
+    const perf = plan.performance;
     
-    const totalLow = plan.baseRegistrants[0] + Math.round(adsRegistrants * 0.85);
-    const totalHigh = plan.baseRegistrants[1] + Math.round(adsRegistrants * 1.15);
+    // Calculate additional registrants from ad spend
+    const adsRegistrants = plan.hasAds && adSpend > 0 ? Math.round(adSpend / plan.costPerRegistrant) : 0;
     
-    const attendeesLow = Math.round(totalLow * plan.attendanceRate[0]);
-    const attendeesHigh = Math.round(totalHigh * plan.attendanceRate[1]);
+    // Scale all metrics based on additional registrants
+    const scaleFactor = adsRegistrants > 0 ? 1 + (adsRegistrants / perf.registrants[0]) * 0.5 : 1;
+    
+    const scale = (range: [number, number]): [number, number] => {
+      if (!plan.hasAds) return range;
+      return [
+        Math.round(range[0] * scaleFactor),
+        Math.round(range[1] * scaleFactor)
+      ];
+    };
     
     return {
-      registrants: `${totalLow.toLocaleString()}–${totalHigh.toLocaleString()} qualified registrants`,
-      attendanceRate: `${Math.round(plan.attendanceRate[0] * 100)}–${Math.round(plan.attendanceRate[1] * 100)}% attendance`,
-      attendees: `${attendeesLow.toLocaleString()}–${attendeesHigh.toLocaleString()} live attendees`,
+      registrants: scale(perf.registrants),
+      attendanceRate: perf.attendanceRate,
+      liveAttendees: scale(perf.liveAttendees),
+      qualifiedLeads: scale(perf.qualifiedLeads),
+      followers: scale(perf.followers),
+      emails: scale(perf.emails),
+      sms: scale(perf.sms),
+      bookedCalls: scale(perf.bookedCalls),
+      warmLeads: perf.warmLeads ? scale(perf.warmLeads) : undefined,
+      salesConversations: perf.salesConversations ? scale(perf.salesConversations) : undefined,
+      estimatedClients: perf.estimatedClients ? scale(perf.estimatedClients) : undefined,
+      longTerm: perf.longTerm,
     };
   };
+
+  const formatRange = (range: [number, number]) => `${range[0].toLocaleString()}–${range[1].toLocaleString()}`;
 
   const getPreviewFeatures = (plan: PricingPlan) => {
     const allItems: { category: string; item: string }[] = [];
@@ -347,7 +423,7 @@ const PricingSection = () => {
   };
 
   const plan = pricingPlans[selectedPlan];
-  const results = getResults(plan, selectedPlan);
+  const scaledPerf = getScaledPerformance(plan, selectedPlan);
   const previewFeatures = getPreviewFeatures(plan);
 
   return (
@@ -434,67 +510,135 @@ const PricingSection = () => {
               </p>
             </div>
             
-            {/* Assured Results with Ad Spend Slider */}
-            <div className={`mb-6 p-5 rounded-xl ${
+            {/* Your Investment Returns - Comprehensive Results Box */}
+            <div className={`mb-6 p-6 rounded-xl ${
               plan.popular 
-                ? "bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20" 
-                : "bg-muted/50 border border-border"
+                ? "bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 border border-primary/30" 
+                : "bg-gradient-to-br from-muted/80 to-muted/40 border border-border"
             }`}>
-              <p className={`text-xs font-semibold uppercase tracking-wider mb-3 flex items-center gap-2 ${
-                plan.popular ? "text-primary" : "text-secondary"
-              }`}>
-                <Check className="w-4 h-4" />
-                Minimum Results
-              </p>
-              
-              <ul className="space-y-2 mb-4">
-                <li className={`text-sm font-medium flex items-center gap-2 ${
-                  plan.popular ? "text-foreground" : "text-foreground/90"
-                }`}>
-                  <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
-                  {results.registrants}
-                </li>
-                <li className={`text-sm font-medium flex items-center gap-2 ${
-                  plan.popular ? "text-foreground" : "text-foreground/90"
-                }`}>
-                  <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
-                  {results.attendanceRate}
-                </li>
-                <li className={`text-sm font-medium flex items-center gap-2 ${
-                  plan.popular ? "text-foreground" : "text-foreground/90"
-                }`}>
-                  <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
-                  {results.attendees}
-                </li>
-                {plan.extraResult && (
-                  <li className={`text-sm font-medium flex items-center gap-2 ${
-                    plan.popular ? "text-foreground" : "text-foreground/90"
-                  }`}>
-                    <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
-                    {plan.extraResult}
-                  </li>
-                )}
-              </ul>
-              
-              {/* Ad Spend Slider */}
-              <div className="pt-4 border-t border-border/50">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-xs text-muted-foreground font-light">Ad spend</span>
-                  <span className="text-sm font-medium text-foreground">
-                    {adSpends[selectedPlan] === 0 ? "$0" : `$${adSpends[selectedPlan].toLocaleString()}`}
-                  </span>
+              {/* Header with Ad Spend Slider */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                <div>
+                  <h4 className={`text-lg font-bold mb-1 ${plan.popular ? "text-primary" : "text-foreground"}`}>
+                    Your Investment Returns
+                  </h4>
+                  <p className="text-xs text-muted-foreground">Expected performance outcomes</p>
                 </div>
-                <Slider
-                  value={[adSpends[selectedPlan] || 0]}
-                  onValueChange={(value) => handleAdSpendChange(selectedPlan, value)}
-                  min={0}
-                  max={50000}
-                  step={1000}
-                  className="w-full"
-                />
-                <p className="text-xs text-muted-foreground font-light mt-2">
-                  Results scale with your budget ↑
-                </p>
+                
+                {/* Ad Spend Slider - Only for plans with ads */}
+                {plan.hasAds && (
+                  <div className="sm:w-48">
+                    <div className="flex justify-between items-center mb-1.5">
+                      <span className="text-xs text-muted-foreground">Ad Budget</span>
+                      <span className={`text-sm font-semibold ${plan.popular ? "text-primary" : "text-foreground"}`}>
+                        ${adSpends[selectedPlan].toLocaleString()}
+                      </span>
+                    </div>
+                    <Slider
+                      value={[adSpends[selectedPlan] || 0]}
+                      onValueChange={(value) => handleAdSpendChange(selectedPlan, value)}
+                      min={0}
+                      max={50000}
+                      step={1000}
+                      className="w-full"
+                    />
+                  </div>
+                )}
+              </div>
+              
+              {/* Results Grid */}
+              <div className="grid sm:grid-cols-2 gap-6">
+                {/* Audience Growth */}
+                <div className="space-y-3">
+                  <p className={`text-xs font-semibold uppercase tracking-wider ${plan.popular ? "text-primary" : "text-secondary"}`}>
+                    📈 Audience Growth
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Qualified Registrants</span>
+                      <span className="text-sm font-semibold text-foreground">{formatRange(scaledPerf.registrants)}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Attendance Rate</span>
+                      <span className="text-sm font-semibold text-foreground">{scaledPerf.attendanceRate[0]}–{scaledPerf.attendanceRate[1]}%</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Live Attendees</span>
+                      <span className="text-sm font-semibold text-foreground">{formatRange(scaledPerf.liveAttendees)}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">New Followers</span>
+                      <span className="text-sm font-semibold text-foreground">+{formatRange(scaledPerf.followers)}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Lead Capture */}
+                <div className="space-y-3">
+                  <p className={`text-xs font-semibold uppercase tracking-wider ${plan.popular ? "text-primary" : "text-secondary"}`}>
+                    🎯 Lead Capture
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Qualified Leads</span>
+                      <span className="text-sm font-semibold text-foreground">{formatRange(scaledPerf.qualifiedLeads)}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Emails Collected</span>
+                      <span className="text-sm font-semibold text-foreground">{formatRange(scaledPerf.emails)}</span>
+                    </div>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">SMS Collected</span>
+                      <span className="text-sm font-semibold text-foreground">{formatRange(scaledPerf.sms)}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Conversion Pipeline */}
+                <div className="space-y-3">
+                  <p className={`text-xs font-semibold uppercase tracking-wider ${plan.popular ? "text-primary" : "text-secondary"}`}>
+                    💼 Conversion Pipeline
+                  </p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm text-muted-foreground">Booked Calls</span>
+                      <span className="text-sm font-semibold text-foreground">{formatRange(scaledPerf.bookedCalls)}</span>
+                    </div>
+                    {scaledPerf.warmLeads && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">Warm Leads</span>
+                        <span className="text-sm font-semibold text-foreground">{formatRange(scaledPerf.warmLeads)}</span>
+                      </div>
+                    )}
+                    {scaledPerf.salesConversations && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">Sales Conversations</span>
+                        <span className="text-sm font-semibold text-foreground">{formatRange(scaledPerf.salesConversations)}</span>
+                      </div>
+                    )}
+                    {scaledPerf.estimatedClients && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm text-muted-foreground">Est. New Clients</span>
+                        <span className={`text-sm font-bold ${plan.popular ? "text-primary" : "text-secondary"}`}>{formatRange(scaledPerf.estimatedClients)}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Long-Term Value */}
+                <div className="space-y-3">
+                  <p className={`text-xs font-semibold uppercase tracking-wider ${plan.popular ? "text-primary" : "text-secondary"}`}>
+                    🚀 Long-Term Value
+                  </p>
+                  <ul className="space-y-1.5">
+                    {scaledPerf.longTerm.map((item, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className={`w-3.5 h-3.5 mt-0.5 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
+                        <span className="text-sm text-foreground/80">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
             
@@ -504,7 +648,7 @@ const PricingSection = () => {
                 <>
                   <p className="text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-3 flex items-center gap-2">
                     <Check className={`w-4 h-4 ${plan.popular ? "text-primary" : "text-secondary"}`} />
-                    What's Included
+                    How We Do It
                   </p>
                   <ul className="space-y-2">
                     {previewFeatures.map((feature, j) => (
@@ -520,7 +664,7 @@ const PricingSection = () => {
                 <>
                   <p className="text-xs font-semibold uppercase tracking-wider text-foreground/70 mb-3 flex items-center gap-2">
                     <Check className={`w-4 h-4 ${plan.popular ? "text-primary" : "text-secondary"}`} />
-                    What's Included
+                    How We Do It
                   </p>
                   <div className="grid md:grid-cols-2 gap-6">
                     {plan.featureCategories.map((category, catIndex) => (
