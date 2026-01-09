@@ -36,7 +36,7 @@ const Navbar = () => {
 
   const allPages = [
     { label: "Event Marketing", href: "/event-marketing" },
-    { label: "How It Works", href: "/how-it-works" },
+    { label: "How We Work", href: "/how-it-works" },
     { label: "Pricing", href: "/pricing" },
     { label: "Ads & Acquisition", href: "/ads-acquisition" },
     { label: "Case Studies", href: "/case-studies" },
