@@ -706,11 +706,22 @@ const Step4Communication = () => (
 
 // ============ STEP 5: ACQUISITION ============
 const Step5Acquisition = () => {
-  const channels = [
-    { name: "Meta Ads", color: "from-blue-500 to-purple-500" },
-    { name: "LinkedIn", color: "from-blue-600 to-blue-400" },
-    { name: "Email", color: "from-green-500 to-emerald-400" },
-    { name: "Organic Social", color: "from-pink-500 to-rose-400" },
+  const adChannels = [
+    { name: "Meta Ads", icon: "🔵", color: "from-blue-600 to-blue-400" },
+    { name: "Google Ads", icon: "🔴", color: "from-red-500 to-yellow-500" },
+    { name: "LinkedIn Ads", icon: "🔷", color: "from-blue-700 to-blue-500" },
+    { name: "TikTok Ads", icon: "⬛", color: "from-gray-900 to-pink-500" },
+    { name: "YouTube Ads", icon: "▶️", color: "from-red-600 to-red-400" },
+    { name: "X (Twitter) Ads", icon: "✖️", color: "from-gray-800 to-gray-600" },
+  ];
+
+  const organicChannels = [
+    { name: "Email Marketing", icon: "📧", color: "from-green-500 to-emerald-400" },
+    { name: "Organic Social", icon: "📱", color: "from-pink-500 to-rose-400" },
+    { name: "Content Marketing", icon: "📝", color: "from-purple-500 to-violet-400" },
+    { name: "SEO", icon: "🔍", color: "from-orange-500 to-amber-400" },
+    { name: "Partnerships", icon: "🤝", color: "from-teal-500 to-cyan-400" },
+    { name: "Referrals", icon: "🎯", color: "from-indigo-500 to-blue-400" },
   ];
 
   return (
@@ -723,18 +734,38 @@ const Step5Acquisition = () => {
     >
       <div className="space-y-6">
         <div>
-          <h4 className="font-semibold text-foreground mb-3">We deploy acquisition through:</h4>
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            {channels.map((channel, i) => (
+          <h4 className="font-semibold text-foreground mb-3">Paid Channels:</h4>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+            {adChannels.map((channel, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.8 }}
                 whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
+                transition={{ delay: i * 0.08 }}
                 whileHover={{ scale: 1.05 }}
-                className={`p-3 rounded-xl bg-gradient-to-r ${channel.color} text-white text-center font-medium text-sm`}
+                className={`p-3 rounded-xl bg-gradient-to-r ${channel.color} text-white text-center font-medium text-sm flex items-center justify-center gap-2`}
               >
-                {channel.name}
+                <span>{channel.icon}</span>
+                <span>{channel.name}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h4 className="font-semibold text-foreground mb-3">Organic Channels:</h4>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+            {organicChannels.map((channel, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 + i * 0.08 }}
+                whileHover={{ scale: 1.05 }}
+                className={`p-3 rounded-xl bg-gradient-to-r ${channel.color} text-white text-center font-medium text-sm flex items-center justify-center gap-2`}
+              >
+                <span>{channel.icon}</span>
+                <span>{channel.name}</span>
               </motion.div>
             ))}
           </div>
