@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Users, Shield, MessageSquare, Database, TrendingUp, DollarSign, Zap, BarChart3 } from "lucide-react";
+import { Users, Shield, MessageSquare, Database, TrendingUp, DollarSign, Zap, Rocket } from "lucide-react";
 
 const benefits = [
   {
@@ -86,11 +86,19 @@ const WhyEventsSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={isInView ? { scale: 1, rotate: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
+            className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 mb-4"
+          >
+            <Rocket className="w-8 h-8 text-primary" />
+          </motion.div>
           <motion.h2 
             className="text-3xl md:text-5xl font-bold mb-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
             Why Events Are the Fastest Way to Grow Revenue
           </motion.h2>

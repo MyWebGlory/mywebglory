@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Phone, Lightbulb, Rocket, Trophy } from "lucide-react";
+import { Phone, Lightbulb, Rocket, Trophy, Cog } from "lucide-react";
 
 const steps = [
   {
@@ -76,11 +76,19 @@ const HowItWorksSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={isInView ? { scale: 1, rotate: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
+            className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 mb-4"
+          >
+            <Cog className="w-7 h-7 text-primary" />
+          </motion.div>
           <motion.span 
-            className="text-primary font-medium tracking-wide uppercase text-sm"
+            className="block text-primary font-medium tracking-wide uppercase text-sm"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
             The Process
           </motion.span>
@@ -88,7 +96,7 @@ const HowItWorksSection = () => {
             className="text-3xl md:text-5xl font-bold mt-3 mb-4"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
             Architect Your Event's Triumph
           </motion.h2>
@@ -96,7 +104,7 @@ const HowItWorksSection = () => {
             className="text-muted-foreground text-lg max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
           >
             A proven four-step process that consistently delivers sold-out events. Data-driven with razor-sharp precision.
           </motion.p>
