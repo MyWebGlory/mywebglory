@@ -7,20 +7,28 @@ import { Link } from "react-router-dom";
 
 const pricingPlans = [
   {
-    name: "Event Launch Engine",
+    name: "Event Launch",
+    subtitle: "Foundation",
     price: "$9,000",
-    duration: "30–45 days",
-    description: "For companies testing events or running them inconsistently. Validate demand and fill seats.",
+    priceNote: "per event",
+    description: "Test your event with solid fundamentals, quality leads, and controlled acquisition.",
+    acquisitionFocus: "Organic + light paid",
     icon: Zap,
     features: [
-      "1 event positioning & ICP definition",
-      "1 conversion-focused landing page",
-      "6 emails (3 pre-event, 2 reminder, 1 replay)",
-      "4 SMS reminders",
-      "5 promotional social posts",
-      "CRM integration & lead capture",
-      "Event branding & main visual",
-      "Basic analytics & attendance tracking",
+      "Deep study & strategy (intake, ICP, funnel design)",
+      "Messaging & positioning document",
+      "1 channel acquisition (organic or light ads)",
+      "Up to 3 static creatives or 1 video",
+      "1 high-converting landing page",
+      "6 emails + 2 SMS reminders",
+      "Basic thank-you & replay sequence",
+      "Performance summary & attendance report",
+    ],
+    notIncluded: [
+      "CRM setup",
+      "Lead qualification",
+      "Phone calls",
+      "Post-production content",
     ],
     baseRegistrants: [150, 300],
     attendanceRate: [0.35, 0.45] as [number, number],
@@ -29,21 +37,29 @@ const pricingPlans = [
     popular: false,
   },
   {
-    name: "Event Revenue System",
+    name: "Event Growth",
+    subtitle: "Pipeline",
     price: "$25,000",
-    duration: "60–75 days",
-    description: "For companies that want pipeline + sales, not just visibility. Turn events into revenue assets.",
+    priceNote: "per event",
+    description: "Generate sales-ready leads and build real pipeline from your events.",
+    acquisitionFocus: "Multi-channel organic + ads",
     icon: Crown,
     features: [
-      "Event positioning + offer alignment",
-      "1 high-converting landing page",
-      "11 emails (5 pre, 3 reminder, 3 post-event)",
-      "6 SMS reminders",
-      "10 social posts (pre + post event)",
-      "Lead scoring & attendee segmentation",
-      "Sales-ready tagging & lead routing",
-      "5 short video clips + 1 SEO blog article",
-      "Full analytics with CTA tracking",
+      "Everything in Event Launch",
+      "Competitor analysis & CTA strategy",
+      "Slack + ClickUp workspace setup",
+      "Up to 3 channels (organic + ads)",
+      "Up to 10 creatives with optimization",
+      "Landing page with 3 optimization cycles",
+      "CRM setup + lead tagging & scoring",
+      "Up to 1,000 phone calls + setter script",
+      "11 emails + 4 SMS reminders",
+      "5 short clips + 1 recap post",
+    ],
+    notIncluded: [
+      "Sales closing",
+      "Unlimited creatives",
+      "Affiliate management",
     ],
     baseRegistrants: [400, 700],
     attendanceRate: [0.40, 0.55] as [number, number],
@@ -52,23 +68,33 @@ const pricingPlans = [
     popular: true,
   },
   {
-    name: "Event Authority Flywheel",
-    price: "$49,000",
-    duration: "90 days",
-    description: "For companies serious about authority, pipeline, and long-term leverage. Build FOMO and deal flow.",
+    name: "Event Dominance",
+    subtitle: "Authority",
+    price: "$50,000",
+    priceNote: "per event",
+    description: "Maximum reach, authority, FOMO, and deal flow. Full-scale multi-channel domination.",
+    acquisitionFocus: "Ads-driven multi-channel",
     icon: Rocket,
     features: [
-      "Full 3-event series strategy",
-      "3 high-converting landing pages",
-      "39 emails across all events",
-      "15 SMS reminders total",
-      "20 social posts",
-      "Advanced segmentation & lead scoring",
-      "Sales handoff + calling coordination",
-      "15 video clips + 3 SEO blog articles",
-      "Event-to-revenue attribution reporting",
+      "Everything in Event Growth",
+      "Full business immersion & offer restructuring",
+      "Premium brand & messaging system",
+      "Up to 6 channels with outreach",
+      "Up to 30 creatives (static, video, UGC, AI)",
+      "Unlimited optimization cycles",
+      "Landing page with 10 optimization cycles",
+      "Advanced CRM + lead scoring + sales handoff",
+      "Up to 3,000 phone calls",
+      "15 emails + 6 SMS reminders",
+      "15 short clips + 3 long-form videos",
+      "Post-event authority engine (weeks of content)",
     ],
-    baseRegistrants: [1200, 2000],
+    notIncluded: [
+      "Ad spend",
+      "Sales closing",
+      "Influencer fees",
+    ],
+    baseRegistrants: [800, 1500],
     attendanceRate: [0.45, 0.60] as [number, number],
     costPerRegistrant: 11,
     cta: "Apply Now",
@@ -155,10 +181,11 @@ const PricingSection = () => {
                   </div>
                 </div>
                 
-                <div className="mb-2">
+                <div className="mb-1">
                   <span className="text-4xl font-bold">{plan.price}</span>
                 </div>
-                <p className="text-sm text-muted-foreground mb-4">{plan.duration}</p>
+                <p className="text-xs text-muted-foreground mb-1">{plan.priceNote}</p>
+                <p className="text-xs text-muted-foreground/70 mb-4 font-light">{plan.acquisitionFocus}</p>
                 
                 <p className="text-muted-foreground mb-5 text-sm">{plan.description}</p>
                 
