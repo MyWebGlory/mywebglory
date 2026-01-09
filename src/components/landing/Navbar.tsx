@@ -30,7 +30,7 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: "Event Marketing", href: "/event-marketing" },
+    { label: "What's Event Marketing?", href: "/event-marketing" },
     { label: "Pricing", href: "/pricing" },
   ];
 
