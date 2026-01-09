@@ -489,7 +489,7 @@ const PricingSection = () => {
                       <h3 className={`text-sm md:text-lg font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
                         {p.name}
                       </h3>
-                      <div className="flex items-baseline gap-1">
+                      <div className="flex items-baseline gap-1 flex-wrap">
                         <span className={`font-bold ${
                           p.popular 
                             ? "text-xl md:text-3xl bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent animate-gradient-x" 
@@ -498,13 +498,10 @@ const PricingSection = () => {
                           {p.price}
                         </span>
                         <span className={`text-xs md:text-sm ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
-                          /event
+                          /event · {p.duration}
                         </span>
                       </div>
                     </div>
-                    <p className={`hidden md:block text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
-                      {p.duration}
-                    </p>
                   </div>
                 </button>
               );
