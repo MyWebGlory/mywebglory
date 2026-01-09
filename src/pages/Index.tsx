@@ -9,7 +9,7 @@ import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import CaseStudiesSection from "@/components/landing/CaseStudiesSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import FAQSection from "@/components/landing/FAQSection";
-import FooterCTA from "@/components/landing/FooterCTA";
+import Footer from "@/components/landing/Footer";
 
 const Index = () => {
   useParallax();
@@ -26,7 +26,7 @@ const Index = () => {
       <TestimonialsSection />
       <PricingSection />
       <FAQSection />
-      <FooterCTA />
+      <Footer />
     </div>
   );
 };
