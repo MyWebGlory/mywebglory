@@ -377,25 +377,18 @@ const PricingSection = () => {
                     setSelectedPlan(i);
                     setShowAllFeatures(false);
                   }}
-                  className={`relative p-6 transition-all duration-300 ${
+                  className={`relative p-6 transition-all duration-200 rounded-t-2xl border-2 ${
                     isSelected 
-                      ? "bg-card z-10" 
-                      : "bg-muted/30 hover:bg-muted/50"
-                  } ${
-                    i === 0 ? "rounded-tl-2xl" : ""
-                  } ${
-                    i === 2 ? "rounded-tr-2xl" : ""
+                      ? p.popular 
+                        ? "bg-card border-primary" 
+                        : "bg-card border-border"
+                      : "bg-muted/30 hover:bg-muted/50 border-transparent"
                   }`}
-                  style={{
-                    borderTop: isSelected ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : '2px solid transparent',
-                    borderLeft: i === 0 ? (isSelected ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : '2px solid transparent') : 'none',
-                    borderRight: i === 2 ? (isSelected ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : '2px solid transparent') : (i === 0 || i === 1) && isSelected ? 'none' : '1px solid hsl(var(--border) / 0.3)',
-                  }}
                 >
                   {p.popular && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2">
                       <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        Popular
+                        Most Popular
                       </span>
                     </div>
                   )}
@@ -408,12 +401,15 @@ const PricingSection = () => {
                         isSelected && p.popular ? "text-primary" : isSelected ? "text-foreground" : "text-muted-foreground"
                       }`} />
                     </div>
-                    <h3 className={`text-sm font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
+                    <h3 className={`text-base font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
                       {p.name}
                     </h3>
-                    <div>
-                      <span className={`text-2xl font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
+                    <div className="flex items-baseline gap-1">
+                      <span className={`text-3xl font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
                         {p.price}
+                      </span>
+                      <span className={`text-sm ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
+                        /event
                       </span>
                     </div>
                     <p className={`text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
@@ -427,13 +423,10 @@ const PricingSection = () => {
           
           {/* Content Card - Connected to selected tab */}
           <div 
-            className={`bg-card p-8 rounded-b-2xl transition-all duration-300 ${
-              plan.popular ? "border-2 border-t-0 border-primary" : "border-2 border-t-0 border-border"
+            key={selectedPlan}
+            className={`bg-card p-8 rounded-b-2xl border-2 border-t-0 animate-fade-in ${
+              plan.popular ? "border-primary" : "border-border"
             }`}
-            style={{
-              borderTopLeftRadius: selectedPlan === 0 ? 0 : undefined,
-              borderTopRightRadius: selectedPlan === 2 ? 0 : undefined,
-            }}
           >
             {/* Purpose & Focus */}
             <div className="mb-6">
@@ -453,7 +446,7 @@ const PricingSection = () => {
                 plan.popular ? "text-primary" : "text-secondary"
               }`}>
                 <Check className="w-4 h-4" />
-                Minimum Results Guaranteed
+                Minimum Results
               </p>
               
               <ul className="space-y-2 mb-4">
