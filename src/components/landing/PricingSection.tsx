@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
-import { Check, ArrowRight, Zap, Crown, Rocket, ChevronDown, ChevronUp, X } from "lucide-react";
+import { Check, ArrowRight, Zap, Crown, Rocket, ChevronDown, ChevronUp, X, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 interface FeatureCategory {
@@ -432,7 +432,10 @@ const PricingSection = () => {
       
       <div className="container relative z-10 px-4 md:px-6" ref={ref}>
         <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
-          <span className="text-primary font-medium tracking-wide uppercase text-sm">Our Offers</span>
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 mb-4">
+            <Sparkles className="w-7 h-7 text-primary" />
+          </div>
+          <span className="block text-primary font-medium tracking-wide uppercase text-sm">Our Offers</span>
           <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
             Event Marketing Systems
           </h2>

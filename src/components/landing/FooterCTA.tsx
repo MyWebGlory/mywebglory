@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Calendar, Mail } from "lucide-react";
+import { ArrowRight, Calendar, Mail, Flame } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoFull from "@/assets/logo-full.png";
 
@@ -18,6 +18,9 @@ const FooterCTA = () => {
       
       <div className="container relative z-10 px-4 md:px-6">
         <div className={`text-center max-w-3xl mx-auto ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 mb-4">
+            <Flame className="w-7 h-7 text-primary" />
+          </div>
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
             Ready to Dominate Your Next Event?
           </h2>
