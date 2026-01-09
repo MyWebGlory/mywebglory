@@ -1248,50 +1248,50 @@ const FinalCTA = () => {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end end"],
+    offset: ["start end", "end end"],
   });
 
-  // Portal ring expansions - de-zoom from huge
-  const ring1Scale = useTransform(scrollYProgress, [0, 0.08], [3, 1]);
-  const ring2Scale = useTransform(scrollYProgress, [0, 0.1], [4, 1]);
-  const ring3Scale = useTransform(scrollYProgress, [0, 0.12], [5, 1]);
-  const ringOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
+  // Portal ring expansions - de-zoom from huge (start immediately visible)
+  const ring1Scale = useTransform(scrollYProgress, [0.1, 0.2], [3, 1]);
+  const ring2Scale = useTransform(scrollYProgress, [0.1, 0.22], [4, 1]);
+  const ring3Scale = useTransform(scrollYProgress, [0.1, 0.24], [5, 1]);
+  const ringOpacity = useTransform(scrollYProgress, [0.1, 0.15], [0, 1]);
 
   // Glow intensity - de-zoom
-  const glowScale = useTransform(scrollYProgress, [0, 0.1], [6, 1]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.08], [0, 0.5]);
+  const glowScale = useTransform(scrollYProgress, [0.1, 0.2], [6, 1]);
+  const glowOpacity = useTransform(scrollYProgress, [0.1, 0.18], [0, 0.5]);
 
   // Title reveal - massive de-zoom from front
-  const titleOpacity = useTransform(scrollYProgress, [0.08, 0.15], [0, 1]);
-  const titleScale = useTransform(scrollYProgress, [0.08, 0.15], [5, 1]);
+  const titleOpacity = useTransform(scrollYProgress, [0.2, 0.28], [0, 1]);
+  const titleScale = useTransform(scrollYProgress, [0.2, 0.28], [5, 1]);
 
   // Subtitle reveal - de-zoom
-  const subtitleOpacity = useTransform(scrollYProgress, [0.15, 0.22], [0, 1]);
-  const subtitleScale = useTransform(scrollYProgress, [0.15, 0.22], [4, 1]);
+  const subtitleOpacity = useTransform(scrollYProgress, [0.28, 0.35], [0, 1]);
+  const subtitleScale = useTransform(scrollYProgress, [0.28, 0.35], [4, 1]);
 
   // Growth lever text - de-zoom
-  const leverOpacity = useTransform(scrollYProgress, [0.22, 0.30], [0, 1]);
-  const leverScale = useTransform(scrollYProgress, [0.22, 0.30], [5, 1]);
+  const leverOpacity = useTransform(scrollYProgress, [0.35, 0.42], [0, 1]);
+  const leverScale = useTransform(scrollYProgress, [0.35, 0.42], [5, 1]);
 
   // Badges intro text
-  const badgeIntroOpacity = useTransform(scrollYProgress, [0.30, 0.36], [0, 1]);
-  const badgeIntroScale = useTransform(scrollYProgress, [0.30, 0.36], [4, 1]);
+  const badgeIntroOpacity = useTransform(scrollYProgress, [0.42, 0.48], [0, 1]);
+  const badgeIntroScale = useTransform(scrollYProgress, [0.42, 0.48], [4, 1]);
 
   // Badges reveal - staggered de-zoom
-  const badge1Opacity = useTransform(scrollYProgress, [0.36, 0.42], [0, 1]);
-  const badge1Scale = useTransform(scrollYProgress, [0.36, 0.42], [5, 1]);
-  const badge2Opacity = useTransform(scrollYProgress, [0.42, 0.48], [0, 1]);
-  const badge2Scale = useTransform(scrollYProgress, [0.42, 0.48], [5, 1]);
-  const badge3Opacity = useTransform(scrollYProgress, [0.48, 0.54], [0, 1]);
-  const badge3Scale = useTransform(scrollYProgress, [0.48, 0.54], [5, 1]);
+  const badge1Opacity = useTransform(scrollYProgress, [0.48, 0.54], [0, 1]);
+  const badge1Scale = useTransform(scrollYProgress, [0.48, 0.54], [5, 1]);
+  const badge2Opacity = useTransform(scrollYProgress, [0.54, 0.60], [0, 1]);
+  const badge2Scale = useTransform(scrollYProgress, [0.54, 0.60], [5, 1]);
+  const badge3Opacity = useTransform(scrollYProgress, [0.60, 0.66], [0, 1]);
+  const badge3Scale = useTransform(scrollYProgress, [0.60, 0.66], [5, 1]);
 
   // Final text - de-zoom
-  const finalTextOpacity = useTransform(scrollYProgress, [0.54, 0.62], [0, 1]);
-  const finalTextScale = useTransform(scrollYProgress, [0.54, 0.62], [4, 1]);
+  const finalTextOpacity = useTransform(scrollYProgress, [0.66, 0.74], [0, 1]);
+  const finalTextScale = useTransform(scrollYProgress, [0.66, 0.74], [4, 1]);
 
   // CTAs - de-zoom
-  const ctaOpacity = useTransform(scrollYProgress, [0.62, 0.72], [0, 1]);
-  const ctaScale = useTransform(scrollYProgress, [0.62, 0.72], [4, 1]);
+  const ctaOpacity = useTransform(scrollYProgress, [0.74, 0.85], [0, 1]);
+  const ctaScale = useTransform(scrollYProgress, [0.74, 0.85], [4, 1]);
 
   const badgeScales = [badge1Scale, badge2Scale, badge3Scale];
   const badgeOpacities = [badge1Opacity, badge2Opacity, badge3Opacity];
