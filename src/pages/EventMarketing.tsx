@@ -820,32 +820,33 @@ const SystemSection = () => {
   };
 
   const getNodeY = (index: number) => {
-    const start = 0.01 + index * 0.06;
-    const end = start + 0.05;
+    const start = 0.05 + index * 0.08;
+    const end = start + 0.06;
     return useTransform(scrollYProgress, [start, end], [30, 0]);
   };
 
   // Connection line progress
   const getLineProgress = (index: number) => {
-    const start = 0.02 + index * 0.06;
-    const end = start + 0.04;
+    const start = 0.06 + index * 0.08;
+    const end = start + 0.05;
     return useTransform(scrollYProgress, [start, end], [0, 1]);
   };
 
-  // Closing text - appear much earlier
-  const closingOpacity = useTransform(scrollYProgress, [0.45, 0.55], [0, 1]);
-  const closingY = useTransform(scrollYProgress, [0.45, 0.55], [20, 0]);
+  // Closing text - appears after all nodes
+  const closingOpacity = useTransform(scrollYProgress, [0.7, 0.8], [0, 1]);
+  const closingY = useTransform(scrollYProgress, [0.7, 0.8], [30, 0]);
 
   // Center glow intensity
-  const glowScale = useTransform(scrollYProgress, [0.3, 0.7], [0.5, 1.5]);
-  const glowOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0.2, 0.6, 0.3]);
+  const glowScale = useTransform(scrollYProgress, [0.2, 0.6], [0.5, 1.5]);
+  const glowOpacity = useTransform(scrollYProgress, [0.1, 0.4, 0.7], [0.2, 0.6, 0.4]);
 
   return (
     <section
       ref={ref}
-      className="relative h-[180vh] md:h-[200vh] bg-background overflow-hidden"
+      className="relative h-[300vh] bg-background"
     >
-      <div className="sticky top-0 h-screen flex flex-col items-center justify-start pt-24 md:pt-32 overflow-hidden">
+      {/* Sticky container - everything stays fixed while scrolling */}
+      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Animated background grid */}
         <div
           className="absolute inset-0 pointer-events-none opacity-10"
@@ -857,7 +858,7 @@ const SystemSection = () => {
 
         {/* Central glow */}
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-primary/20 blur-3xl"
+          className="absolute w-96 h-96 rounded-full bg-primary/20 blur-3xl"
           style={{ scale: glowScale, opacity: glowOpacity }}
         />
 
@@ -885,33 +886,23 @@ const SystemSection = () => {
 
         {/* Rotating connection circle */}
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10"
+          className="absolute w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10"
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         />
 
-        <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
-          {/* Title - Sticky at top */}
+        <div className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center">
+          {/* Title - Fixed in center, doesn't move */}
           <div className="text-center mb-8 md:mb-12">
-            <motion.p 
-              className="text-lg md:text-xl text-muted-foreground mb-2 md:mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <p className="text-lg md:text-xl text-muted-foreground mb-2 md:mb-4">
               Real event marketing is not one action.
-            </motion.p>
-            <motion.h2 
-              className="text-3xl md:text-5xl lg:text-7xl font-bold"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
+            </p>
+            <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold">
               IT'S A <span className="text-gradient">SYSTEM</span>
-            </motion.h2>
+            </h2>
           </div>
 
-          {/* Nodes in circular/grid layout - centered */}
+          {/* Nodes in circular/grid layout - centered, elements appear on scroll */}
           <div className="relative w-full max-w-4xl mx-auto flex items-center justify-center">
             {/* Desktop: Circular layout */}
             <div className="hidden md:block relative h-[350px] w-full">
@@ -999,10 +990,10 @@ const SystemSection = () => {
             </div>
           </div>
 
-          {/* Closing statement - more space above */}
+          {/* Closing statement - appears after all nodes */}
           <motion.p
             style={{ opacity: closingOpacity, y: closingY }}
-            className="text-center text-lg md:text-xl lg:text-2xl text-muted-foreground mt-16 md:mt-24 max-w-2xl mx-auto px-4"
+            className="text-center text-lg md:text-xl lg:text-2xl text-muted-foreground mt-12 md:mt-16 max-w-2xl mx-auto px-4"
           >
             The event itself is just one moment in a{" "}
             <span className="text-foreground font-semibold">
