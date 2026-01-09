@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
 import { Check, ArrowRight, Zap, Crown, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
-
-const adSpendOptions = [3000, 5000, 10000, 15000, 20000, 30000, 40000, 50000];
 
 const calculateRegistrants = (adSpend: number) => {
   const registrants = Math.round(adSpend / 19);
@@ -89,7 +88,7 @@ const pricingPlans = [
     ],
     hasAdSpend: true,
     attendanceRate: [0.45, 0.60] as [number, number],
-    defaultAdSpend: 20000,
+    defaultAdSpend: 22500,
     cta: "Apply Now",
     popular: false,
   },
@@ -99,11 +98,11 @@ const PricingSection = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [adSpends, setAdSpends] = useState<{ [key: number]: number }>({
     1: 10000,
-    2: 20000,
+    2: 22500,
   });
 
-  const handleAdSpendChange = (planIndex: number, value: number) => {
-    setAdSpends(prev => ({ ...prev, [planIndex]: value }));
+  const handleAdSpendChange = (planIndex: number, value: number[]) => {
+    setAdSpends(prev => ({ ...prev, [planIndex]: value[0] }));
   };
 
   const getResults = (plan: typeof pricingPlans[0], index: number) => {
@@ -163,7 +162,7 @@ const PricingSection = () => {
                 </div>
               </div>
               
-              {/* Assured Results - Between title and price */}
+              {/* Assured Results */}
               <div className={`mb-5 p-4 rounded-xl ${
                 plan.popular 
                   ? "bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20" 
@@ -174,26 +173,6 @@ const PricingSection = () => {
                 }`}>
                   ✓ Minimum Results
                 </p>
-                
-                {/* Ad Spend Selector for plans with ads */}
-                {plan.hasAdSpend && (
-                  <div className="mb-3 pb-3 border-b border-border/50">
-                    <label className="text-xs text-muted-foreground font-light block mb-2">
-                      Ad spend
-                    </label>
-                    <select
-                      value={adSpends[i] || plan.defaultAdSpend}
-                      onChange={(e) => handleAdSpendChange(i, Number(e.target.value))}
-                      className="w-full bg-background/50 border border-border/50 rounded-lg px-3 py-1.5 text-sm font-light text-foreground focus:outline-none focus:border-primary/50 cursor-pointer"
-                    >
-                      {adSpendOptions.map((amount) => (
-                        <option key={amount} value={amount}>
-                          ${amount.toLocaleString()}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
                 
                 <ul className="space-y-1.5">
                   {getResults(plan, i).map((result, j) => (
@@ -225,8 +204,22 @@ const PricingSection = () => {
               
               {plan.hasAdSpend ? (
                 <div className="p-3 rounded-lg bg-muted/30 border border-border/50 mb-6">
-                  <p className="text-xs text-muted-foreground font-light">
-                    Ad spend separate — results scale with your budget.
+                  <div className="flex justify-between items-center mb-3">
+                    <span className="text-xs text-muted-foreground font-light">Ad spend</span>
+                    <span className="text-sm font-medium text-foreground">
+                      ${(adSpends[i] || plan.defaultAdSpend || 10000).toLocaleString()}
+                    </span>
+                  </div>
+                  <Slider
+                    value={[adSpends[i] || plan.defaultAdSpend || 10000]}
+                    onValueChange={(value) => handleAdSpendChange(i, value)}
+                    min={3000}
+                    max={50000}
+                    step={1000}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-muted-foreground font-light mt-3">
+                    Results scale with your budget.
                   </p>
                 </div>
               ) : (
