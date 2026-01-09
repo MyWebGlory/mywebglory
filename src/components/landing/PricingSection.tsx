@@ -489,9 +489,11 @@ const PricingSection = () => {
                       {p.name}
                     </h3>
                     <div className="flex items-baseline gap-1">
-                      <span className={`text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent animate-gradient-x ${
-                        !isSelected ? "opacity-60" : ""
-                      }`}>
+                      <span className={`font-bold ${
+                        p.popular 
+                          ? "text-4xl md:text-5xl bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent animate-gradient-x" 
+                          : `text-3xl md:text-4xl ${isSelected ? "text-foreground" : "text-muted-foreground"}`
+                      } ${!isSelected && !p.popular ? "opacity-60" : ""}`}>
                         {p.price}
                       </span>
                       <span className={`text-sm ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
