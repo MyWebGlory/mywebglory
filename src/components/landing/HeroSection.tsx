@@ -450,8 +450,8 @@ const HeroSection = () => {
         </motion.div>
       </div>
       
-      {/* FOMO Elements Container */}
-      <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-2">
+      {/* FOMO Elements Container - positioned above the viewing widget */}
+      <div className="fixed bottom-20 left-4 z-50 flex flex-col gap-2">
         {/* Booking Notification */}
         {showBookingNotif && (
           <motion.div
