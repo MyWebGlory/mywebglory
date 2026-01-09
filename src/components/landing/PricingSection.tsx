@@ -367,73 +367,93 @@ const PricingSection = () => {
         
         <div className={`max-w-4xl mx-auto ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           {/* Tab Buttons - Connected to card below */}
-          <div className="grid grid-cols-3 relative">
-            {pricingPlans.map((p, i) => {
-              const isSelected = selectedPlan === i;
-              return (
-                <button
-                  key={i}
-                  onClick={() => {
-                    setSelectedPlan(i);
-                    setShowAllFeatures(false);
-                  }}
-                  className={`relative p-6 transition-all duration-300 ${
-                    isSelected 
-                      ? "bg-card z-10" 
-                      : "bg-muted/30 hover:bg-muted/50"
-                  } ${
-                    i === 0 ? "rounded-tl-2xl" : ""
-                  } ${
-                    i === 2 ? "rounded-tr-2xl" : ""
-                  }`}
-                  style={{
-                    borderTop: isSelected ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : '2px solid transparent',
-                    borderLeft: i === 0 ? (isSelected ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : '2px solid transparent') : 'none',
-                    borderRight: i === 2 ? (isSelected ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : '2px solid transparent') : (i === 0 || i === 1) && isSelected ? 'none' : '1px solid hsl(var(--border) / 0.3)',
-                  }}
-                >
-                  {p.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        Popular
-                      </span>
+          <div className="relative">
+            {/* Background line that goes behind inactive tabs */}
+            <div 
+              className="absolute top-0 left-0 right-0 h-full pointer-events-none"
+              style={{
+                borderTop: `2px solid hsl(var(--${plan.popular ? 'primary' : 'border'}))`,
+                borderLeft: `2px solid hsl(var(--${plan.popular ? 'primary' : 'border'}))`,
+                borderRight: `2px solid hsl(var(--${plan.popular ? 'primary' : 'border'}))`,
+                borderTopLeftRadius: '1rem',
+                borderTopRightRadius: '1rem',
+              }}
+            />
+            
+            <div className="grid grid-cols-3 relative">
+              {pricingPlans.map((p, i) => {
+                const isSelected = selectedPlan === i;
+                const isPopular = pricingPlans[selectedPlan].popular;
+                
+                return (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setSelectedPlan(i);
+                      setShowAllFeatures(false);
+                    }}
+                    className={`relative py-4 px-3 transition-all duration-300 ${
+                      isSelected 
+                        ? "bg-card z-10" 
+                        : "bg-muted/50 hover:bg-muted/70"
+                    } ${
+                      i === 0 ? "rounded-tl-2xl" : ""
+                    } ${
+                      i === 2 ? "rounded-tr-2xl" : ""
+                    }`}
+                    style={{
+                      borderTop: isSelected ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : 'none',
+                      borderLeft: isSelected && i === 0 ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : 'none',
+                      borderRight: isSelected && i === 2 ? `2px solid hsl(var(--${p.popular ? 'primary' : 'border'}))` : 'none',
+                      borderBottom: !isSelected ? `2px solid hsl(var(--${isPopular ? 'primary' : 'border'}))` : 'none',
+                      marginTop: isSelected ? '0' : '0',
+                    }}
+                  >
+                    {p.popular && (
+                      <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-20">
+                        <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                          Popular
+                        </span>
+                      </div>
+                    )}
+                    
+                    <div className="flex items-center justify-center gap-3">
+                      <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 ${
+                        isSelected && p.popular ? "bg-primary/20" : isSelected ? "bg-muted" : "bg-muted/50"
+                      }`}>
+                        <p.icon className={`w-4 h-4 ${
+                          isSelected && p.popular ? "text-primary" : isSelected ? "text-foreground" : "text-muted-foreground"
+                        }`} />
+                      </div>
+                      <div className="text-left">
+                        <h3 className={`text-base font-bold leading-tight ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
+                          {p.name}
+                        </h3>
+                        <div className="flex items-baseline gap-1.5">
+                          <span className={`text-lg font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
+                            {p.price}
+                          </span>
+                          <span className={`text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
+                            per event
+                          </span>
+                        </div>
+                        <p className={`text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
+                          {p.duration}
+                        </p>
+                      </div>
                     </div>
-                  )}
-                  
-                  <div className="flex flex-col items-center text-center gap-2">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
-                      isSelected && p.popular ? "bg-primary/20" : isSelected ? "bg-muted" : "bg-muted/50"
-                    }`}>
-                      <p.icon className={`w-5 h-5 ${
-                        isSelected && p.popular ? "text-primary" : isSelected ? "text-foreground" : "text-muted-foreground"
-                      }`} />
-                    </div>
-                    <h3 className={`text-sm font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
-                      {p.name}
-                    </h3>
-                    <div>
-                      <span className={`text-2xl font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
-                        {p.price}
-                      </span>
-                    </div>
-                    <p className={`text-xs ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
-                      {p.duration}
-                    </p>
-                  </div>
-                </button>
-              );
-            })}
+                  </button>
+                );
+              })}
+            </div>
           </div>
           
           {/* Content Card - Connected to selected tab */}
           <div 
-            className={`bg-card p-8 rounded-b-2xl transition-all duration-300 ${
+            key={selectedPlan}
+            className={`bg-card p-8 rounded-b-2xl transition-all duration-300 animate-fade-in ${
               plan.popular ? "border-2 border-t-0 border-primary" : "border-2 border-t-0 border-border"
             }`}
-            style={{
-              borderTopLeftRadius: selectedPlan === 0 ? 0 : undefined,
-              borderTopRightRadius: selectedPlan === 2 ? 0 : undefined,
-            }}
           >
             {/* Purpose & Focus */}
             <div className="mb-6">
@@ -453,7 +473,7 @@ const PricingSection = () => {
                 plan.popular ? "text-primary" : "text-secondary"
               }`}>
                 <Check className="w-4 h-4" />
-                Minimum Results Guaranteed
+                Minimum Results
               </p>
               
               <ul className="space-y-2 mb-4">
@@ -486,7 +506,7 @@ const PricingSection = () => {
               </ul>
               
               {/* Ad Spend Slider */}
-              <div className="pt-4 border-t border-border/50">
+              <div className="pt-4 border-t border-border/50 max-w-sm">
                 <div className="flex justify-between items-center mb-2">
                   <span className="text-xs text-muted-foreground font-light">Ad spend</span>
                   <span className="text-sm font-medium text-foreground">
