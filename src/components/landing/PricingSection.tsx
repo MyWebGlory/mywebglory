@@ -365,9 +365,11 @@ const PricingSection = () => {
           </p>
         </div>
         
-        <div className={`max-w-4xl mx-auto ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
+        <div className={`max-w-4xl mx-auto border-2 rounded-2xl overflow-hidden transition-colors duration-300 ${
+          plan.popular ? "border-primary" : "border-border"
+        } ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           {/* Tab Buttons - Connected to card below */}
-          <div className="grid grid-cols-3 relative">
+          <div className="grid grid-cols-3">
             {pricingPlans.map((p, i) => {
               const isSelected = selectedPlan === i;
               return (
@@ -377,23 +379,21 @@ const PricingSection = () => {
                     setSelectedPlan(i);
                     setShowAllFeatures(false);
                   }}
-                  className={`relative p-6 transition-all duration-200 rounded-t-2xl border-2 ${
+                  className={`relative p-6 transition-all duration-200 ${
                     isSelected 
-                      ? p.popular 
-                        ? "bg-card border-primary" 
-                        : "bg-card border-border"
-                      : "bg-muted/30 hover:bg-muted/50 border-transparent"
+                      ? "bg-card" 
+                      : "bg-muted/30 hover:bg-muted/50"
                   }`}
                 >
                   {p.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    <div className="absolute -top-0.5 left-1/2 -translate-x-1/2">
+                      <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-b-full uppercase tracking-wider">
                         Most Popular
                       </span>
                     </div>
                   )}
                   
-                  <div className="flex flex-col items-center text-center gap-2">
+                  <div className="flex flex-col items-center text-center gap-2 pt-2">
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
                       isSelected && p.popular ? "bg-primary/20" : isSelected ? "bg-muted" : "bg-muted/50"
                     }`}>
@@ -424,9 +424,7 @@ const PricingSection = () => {
           {/* Content Card - Connected to selected tab */}
           <div 
             key={selectedPlan}
-            className={`bg-card p-8 rounded-b-2xl border-2 border-t-0 animate-fade-in ${
-              plan.popular ? "border-primary" : "border-border"
-            }`}
+            className="bg-card p-8 border-t border-border/50 animate-fade-in"
           >
             {/* Purpose & Focus */}
             <div className="mb-6">
