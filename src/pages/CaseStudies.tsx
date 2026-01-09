@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { ChevronLeft, ChevronRight, ArrowRight, Building2, Target, Zap, BarChart3, Rocket, TrendingUp, Award, Lightbulb } from "lucide-react";
+import { ChevronLeft, ChevronRight, ArrowRight, Building2, Target, Zap, BarChart3, Rocket, TrendingUp, Award, Lightbulb, Globe, Mail, Phone, MessageSquare, Users, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
@@ -14,275 +14,169 @@ import {
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
+// Import Kornit assets
+import kornitEventBanner from "@/assets/case-studies/kornit/event-banner.png";
+import kornitEventPanel from "@/assets/case-studies/kornit/event-panel.png";
+import kornitEmailMarketing from "@/assets/case-studies/kornit/email-marketing.png";
+import kornitSocialPosts from "@/assets/case-studies/kornit/social-posts.png";
+import kornitEventBanners from "@/assets/case-studies/kornit/event-banners.png";
+import kornitSignatureBanners from "@/assets/case-studies/kornit/signature-banners.png";
+import kornitClientComment1 from "@/assets/case-studies/kornit/client-comment-1.png";
+import kornitClientComment2 from "@/assets/case-studies/kornit/client-comment-2.png";
+import kornitClientComment3 from "@/assets/case-studies/kornit/client-comment-3.png";
+
 // Types
 interface SlideContent {
   title: string;
   points: string[];
+  image?: string;
+  imageAlt?: string;
+}
+
+interface ResultMetric {
+  label: string;
+  value: string;
+  icon?: React.ElementType;
 }
 
 interface CaseStudyData {
   id: string;
   clientName: string;
+  clientLogo?: string;
   industry: string;
   offerChosen: string;
+  duration: string;
   boldOutcome: string;
   slides: {
     context: SlideContent;
     challenge: SlideContent;
     strategy: SlideContent;
     system: SlideContent;
-    execution: SlideContent;
-    results: { metrics: { label: string; value: string }[] };
+    execution: SlideContent & { images?: string[] };
+    results: { 
+      metrics: ResultMetric[];
+      highlights: string[];
+    };
     longTermImpact: SlideContent;
-    takeaway: { insights: string[]; quote?: { text: string; author: string } };
+    takeaway: { 
+      insights: string[]; 
+      quote?: { text: string; author: string };
+      clientComments?: string[];
+    };
   };
 }
 
-// Placeholder case studies data
-const caseStudies: CaseStudyData[] = [
-  {
-    id: "case-1",
-    clientName: "TechScale Solutions",
-    industry: "B2B SaaS",
-    offerChosen: "Event Dominance — $50k",
-    boldOutcome: "1,200+ ICP registrants. Authority secured.",
-    slides: {
-      context: {
-        title: "Context",
-        points: [
-          "Enterprise SaaS platform targeting CFOs at mid-market companies",
-          "Strong product, but low market awareness in a crowded space",
-          "Needed to establish thought leadership quickly",
-          "Chose MWG to engineer a flagship industry event"
-        ]
-      },
-      challenge: {
-        title: "The Challenge",
-        points: [
-          "Fill 1,000+ seats with qualified decision-makers",
-          "Position the brand as the category leader",
-          "Generate pipeline worth 10x the investment",
-          "Execute flawlessly with 8-week timeline"
-        ]
-      },
-      strategy: {
-        title: "The Strategy",
-        points: [
-          "Positioned event as 'The CFO Summit' — not a product pitch",
-          "Targeted ICP through precision paid media",
-          "Built authority through speaker curation",
-          "Engineered every touchpoint for conversion"
-        ]
-      },
-      system: {
-        title: "The System",
-        points: [
-          "Multi-channel acquisition funnel",
-          "Automated reminder & nurture sequences",
-          "CRM integration for real-time lead scoring",
-          "Post-event follow-up automation"
-        ]
-      },
-      execution: {
-        title: "Execution",
-        points: [
-          "42 unique ad creatives tested",
-          "Landing page conversion rate: 34%",
-          "3 reminder sequences with 89% open rate",
-          "Day-of activation team of 12"
-        ]
-      },
-      results: {
-        metrics: [
-          { label: "Registrants", value: "1,247" },
-          { label: "Attendance Rate", value: "78%" },
-          { label: "Qualified Leads", value: "412" },
-          { label: "Pipeline Generated", value: "$2.4M" }
-        ]
-      },
-      longTermImpact: {
-        title: "Long-term Impact",
-        points: [
-          "12,000+ retargeting audience built",
-          "47 content assets created",
-          "Industry recognition as thought leader",
-          "Foundation for quarterly event series"
-        ]
-      },
-      takeaway: {
-        insights: [
-          "Events are not one-time marketing activities. They're system-building opportunities.",
-          "The real ROI comes from what you build, not what you run."
-        ],
-        quote: {
-          text: "MWG didn't just fill seats. They repositioned our entire brand.",
-          author: "CMO, TechScale Solutions"
-        }
-      }
-    }
-  },
-  {
-    id: "case-2",
-    clientName: "GrowthPath Advisory",
-    industry: "Financial Services",
-    offerChosen: "Pipeline Accelerator — $25k",
-    boldOutcome: "340 HNW leads. $8M in AUM opportunities.",
-    slides: {
-      context: {
-        title: "Context",
-        points: [
-          "Boutique wealth management firm targeting high-net-worth individuals",
-          "Relied on referrals — needed scalable acquisition",
-          "Wanted to host intimate, high-conversion events",
-          "Partnered with MWG to build event-driven pipeline"
-        ]
-      },
-      challenge: {
-        title: "The Challenge",
-        points: [
-          "Attract HNW individuals without appearing salesy",
-          "Convert attendees into qualified consultations",
-          "Build repeatable event model",
-          "Maintain exclusivity while scaling"
-        ]
-      },
-      strategy: {
-        title: "The Strategy",
-        points: [
-          "Positioned events as exclusive 'Wealth Strategy Dinners'",
-          "Invitation-only model with qualification process",
-          "Content focused on value, not product",
-          "Post-event consultation pathway engineered"
-        ]
-      },
-      system: {
-        title: "The System",
-        points: [
-          "Qualification funnel for invitations",
-          "Personalized follow-up sequences",
-          "Consultation booking automation",
-          "Long-term nurture for non-converters"
-        ]
-      },
-      execution: {
-        title: "Execution",
-        points: [
-          "6 intimate dinners across 3 months",
-          "Average 28 qualified attendees per event",
-          "92% consultation booking rate",
-          "White-glove experience throughout"
-        ]
-      },
-      results: {
-        metrics: [
-          { label: "Total Attendees", value: "168" },
-          { label: "Consultations", value: "154" },
-          { label: "New Clients", value: "47" },
-          { label: "AUM Opportunity", value: "$8.2M" }
-        ]
-      },
-      longTermImpact: {
-        title: "Long-term Impact",
-        points: [
-          "Referral network activated through events",
-          "Brand positioned as exclusive advisor",
-          "Quarterly dinner series established",
-          "70% of new business now event-sourced"
-        ]
-      },
-      takeaway: {
-        insights: [
-          "Intimacy scales when systems do the heavy lifting.",
-          "High-ticket requires high-touch — events bridge that gap."
-        ],
-        quote: {
-          text: "Our cost per acquisition dropped 60% while client quality increased.",
-          author: "Managing Partner, GrowthPath Advisory"
-        }
-      }
-    }
-  },
-  {
-    id: "case-3",
-    clientName: "InnovateTech Labs",
-    industry: "Deep Tech / AI",
-    offerChosen: "Authority Engine — $75k",
-    boldOutcome: "2,400 registrants. Category leadership claimed.",
-    slides: {
-      context: {
-        title: "Context",
-        points: [
-          "AI infrastructure company with complex, technical offering",
-          "Needed to simplify message for business decision-makers",
-          "Wanted to establish category leadership",
-          "Engaged MWG for full authority positioning through events"
-        ]
-      },
-      challenge: {
-        title: "The Challenge",
-        points: [
-          "Translate technical capabilities into business outcomes",
-          "Attract both technical and business audiences",
-          "Stand out in noisy AI market",
-          "Build pipeline across multiple ICPs"
-        ]
-      },
-      strategy: {
-        title: "The Strategy",
-        points: [
-          "Created 'AI Operations Summit' — neutral industry platform",
-          "Two-track content: technical deep-dives + business strategy",
-          "Partnered with industry analysts for credibility",
-          "Built media presence around the event"
-        ]
-      },
-      system: {
-        title: "The System",
-        points: [
-          "Dual-track registration and segmentation",
-          "Content recommendation engine for follow-up",
-          "Lead scoring by engagement and ICP fit",
-          "Sales enablement integration"
-        ]
-      },
-      execution: {
-        title: "Execution",
-        points: [
-          "Virtual summit with 2,400 registrants",
-          "18 sessions across 2 days",
-          "Live Q&A with 400+ questions",
-          "On-demand library driving ongoing leads"
-        ]
-      },
-      results: {
-        metrics: [
-          { label: "Registrants", value: "2,412" },
-          { label: "Live Attendance", value: "1,847" },
-          { label: "SQLs Generated", value: "287" },
-          { label: "Pipeline Created", value: "$4.8M" }
-        ]
-      },
-      longTermImpact: {
-        title: "Long-term Impact",
-        points: [
-          "Recognized as category thought leader",
-          "Content library drives 200+ leads/month",
-          "Media mentions increased 340%",
-          "Annual summit now flagship event"
-        ]
-      },
-      takeaway: {
-        insights: [
-          "Technical companies need non-technical positioning.",
-          "Events build categories, not just pipelines."
-        ],
-        quote: {
-          text: "We're no longer explaining who we are. The market knows.",
-          author: "CEO, InnovateTech Labs"
-        }
-      }
+// Kornit Digital Case Study
+const kornitCaseStudy: CaseStudyData = {
+  id: "kornit-digital",
+  clientName: "Kornit Digital",
+  industry: "Apparel / Printing Technology",
+  offerChosen: "Event Dominance — $50k",
+  duration: "8 weeks (Sep–Oct 2025)",
+  boldOutcome: "1,208 total registrations. Authority secured.",
+  slides: {
+    context: {
+      title: "Context",
+      points: [
+        "Kornit Digital launched Evolve Summit 2025, their first large-scale virtual event under the Konnections brand.",
+        "Objective: Build awareness, trust, and engagement for Kornit's innovative ecosystem — from zero.",
+        "We engineered a full event system in just 8 weeks, turning a completely new brand identity into a recognized industry touchpoint.",
+        "Global apparel producers, brands, and supply-chain innovators had never encountered 'Kornit Konnections' before.",
+        "The goal: generate high-quality, revenue-ready registrations with authority and FOMO baked into every step."
+      ],
+      image: kornitEventBanner,
+      imageAlt: "Kornit Konnections Evolve Summit 2025 Event Banner"
+    },
+    challenge: {
+      title: "The Challenge",
+      points: [
+        "Launching a large-scale event from scratch is brutal.",
+        "No organic traffic. No historical event data.",
+        "Audience: cold, highly specialized — apparel decorators, print-on-demand operators, brand decision-makers.",
+        "Timeline: 8 weeks — aggressive, high-stakes.",
+        "The challenge was to build a full-funnel system, create content assets, coordinate partners, and drive registrations without losing quality."
+      ]
+    },
+    strategy: {
+      title: "The Strategy",
+      points: [
+        "Deep ICP analysis → messaging library tailored to apparel industry pain points",
+        "Event positioning → clear, benefit-driven narrative that resonated with decision-makers",
+        "Acquisition plan → organic + Meta ads + email campaigns working in sync",
+        "Partner engagement → toolkits, trackable links, QR codes for amplification",
+        "Post-event leverage → clips, recordings, highlights for ongoing content"
+      ]
+    },
+    system: {
+      title: "The System",
+      points: [
+        "Landing page → high-converting, fully branded experience",
+        "CRM integration → lead qualification & segmentation from day one",
+        "Reminder & activation flows → email, SMS, and phone outreach",
+        "Ads → Meta campaigns with lookalike audiences and iterative creative testing",
+        "Organic → social posts, stories, community activations",
+        "Partner toolkit → dozens of trackable links, assets, QR codes",
+        "Slack, ClickUp, Drive → efficient coordination with partners fully integrated"
+      ],
+      image: kornitEventPanel,
+      imageAlt: "Live event panel with engaged audience discussion"
+    },
+    execution: {
+      title: "Execution",
+      points: [
+        "Graphic design: banners, PDFs, slides — all premium quality",
+        "Social media posts & stories — consistent, branded content",
+        "Event videos & trailers — high-energy, attention-grabbing",
+        "Meta Ads campaign → multiple creative rounds, targeting cold and lookalike audiences",
+        "Emails → to existing leads + ad-generated leads",
+        "Calls & SMS → high-touch activation for high-value registrants",
+        "Post-production: session recordings, clips, highlight reels"
+      ],
+      images: [kornitSocialPosts, kornitEventBanners, kornitSignatureBanners, kornitEmailMarketing]
+    },
+    results: {
+      metrics: [
+        { label: "Total Registrations", value: "1,208", icon: Users },
+        { label: "Paid Ad Registrations", value: "528", icon: Target },
+        { label: "Live Attendance", value: "~503", icon: Calendar },
+        { label: "Emails Sent", value: "4,438", icon: Mail },
+        { label: "SMS Sent", value: "18,840+", icon: MessageSquare },
+        { label: "Phone Outreach", value: "2,044", icon: Phone },
+        { label: "Geographic Reach", value: "64 countries", icon: Globe },
+        { label: "US Audience", value: "73%", icon: Users }
+      ],
+      highlights: [
+        "Meta Ads CPR: $9.50 — top-quartile B2B performance",
+        "CTR: 2.33% — well above industry average (1-1.5%)",
+        "AI & UGC creatives drove 75% of ad registrations",
+        "Multi-touch flows (email + SMS + phone) significantly boosted show-up rate"
+      ]
+    },
+    longTermImpact: {
+      title: "Long-term Impact",
+      points: [
+        "Partners engaged with trackable assets, building long-term network visibility",
+        "Hundreds of video assets, clips, and session recordings → repurposable content library",
+        "Email/SMS lists → ready for future campaigns and nurturing",
+        "Authority established in apparel and printing ecosystem",
+        "Proven system → scalable blueprint for future Kornit events"
+      ]
+    },
+    takeaway: {
+      insights: [
+        "8 weeks from zero to 1,208 registrations proves the power of a fully orchestrated system.",
+        "Integration of creative, ads, reminders, partners, and post-production maximizes pipeline and authority.",
+        "The winning formula: human + automation + ICP precision.",
+        "Future Kornit events can scale faster using this blueprint."
+      ],
+      clientComments: [kornitClientComment1, kornitClientComment2, kornitClientComment3]
     }
   }
+};
+
+// All case studies (Kornit is the real one, others are placeholders for structure)
+const caseStudies: CaseStudyData[] = [
+  kornitCaseStudy
 ];
 
 // Slide icon mapping
@@ -364,23 +258,51 @@ const StorySlide = ({
     if (type === 'results') {
       const resultsContent = content as CaseStudyData['slides']['results'];
       return (
-        <div className="grid grid-cols-2 gap-4 sm:gap-6">
-          {resultsContent.metrics.map((metric, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: idx * 0.1 }}
-              className="bg-primary/10 rounded-xl p-4 sm:p-6 text-center"
-            >
-              <div className="text-2xl sm:text-4xl font-bold text-primary mb-1">
-                {metric.value}
-              </div>
-              <div className="text-xs sm:text-sm text-muted-foreground">
-                {metric.label}
-              </div>
-            </motion.div>
-          ))}
+        <div className="space-y-6">
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            {resultsContent.metrics.map((metric, idx) => {
+              const MetricIcon = metric.icon;
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: idx * 0.05 }}
+                  className="bg-primary/10 rounded-xl p-3 sm:p-4 text-center"
+                >
+                  {MetricIcon && (
+                    <MetricIcon className="w-4 h-4 sm:w-5 sm:h-5 text-primary mx-auto mb-1" />
+                  )}
+                  <div className="text-lg sm:text-2xl font-bold text-primary mb-0.5">
+                    {metric.value}
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-muted-foreground leading-tight">
+                    {metric.label}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+          
+          {/* Performance Highlights */}
+          <div className="bg-card/50 rounded-xl p-4 sm:p-6 border border-border/50">
+            <h4 className="text-sm font-semibold mb-3 text-primary">Performance Highlights</h4>
+            <ul className="space-y-2">
+              {resultsContent.highlights.map((highlight, idx) => (
+                <motion.li
+                  key={idx}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="flex items-start gap-2 text-xs sm:text-sm text-foreground/80"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  {highlight}
+                </motion.li>
+              ))}
+            </ul>
+          </div>
         </div>
       );
     }
@@ -389,37 +311,57 @@ const StorySlide = ({
       const takeawayContent = content as CaseStudyData['slides']['takeaway'];
       return (
         <div className="space-y-6">
-          <div className="space-y-4">
+          {/* Key Insights */}
+          <div className="space-y-3">
             {takeawayContent.insights.map((insight, idx) => (
               <motion.p
                 key={idx}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.2 }}
-                className="text-base sm:text-lg text-foreground/90 italic border-l-2 border-primary pl-4"
+                transition={{ delay: idx * 0.1 }}
+                className="text-sm sm:text-base text-foreground/90 border-l-2 border-primary pl-4"
               >
-                "{insight}"
+                {insight}
               </motion.p>
             ))}
           </div>
           
-          {takeawayContent.quote && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-8 p-6 bg-primary/5 rounded-xl"
-            >
-              <p className="text-lg sm:text-xl font-medium mb-2">
-                "{takeawayContent.quote.text}"
-              </p>
-              <p className="text-sm text-muted-foreground">
-                — {takeawayContent.quote.author}
-              </p>
-            </motion.div>
+          {/* Client Comments */}
+          {takeawayContent.clientComments && (
+            <div className="space-y-3">
+              <h4 className="text-sm font-semibold text-primary">What the Client Said</h4>
+              <div className="grid grid-cols-1 gap-3">
+                {takeawayContent.clientComments.map((comment, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: idx * 0.1 }}
+                  >
+                    <img 
+                      src={comment} 
+                      alt={`Client testimonial ${idx + 1}`}
+                      className="rounded-lg border border-border/50 shadow-sm max-w-full"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           )}
+
+          {/* Closing statement */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="text-base sm:text-lg font-medium text-center pt-4 border-t border-border/50"
+          >
+            When you work with us, your success doesn't just happen.
+            <br />
+            <span className="text-primary">It runs through MWG.</span>
+          </motion.p>
           
-          <div className="pt-6 flex flex-col sm:flex-row gap-4">
+          <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild size="lg" className="group">
               <Link to="/how-it-works">
                 See How This Applies to You
@@ -427,9 +369,52 @@ const StorySlide = ({
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link to="/contact">Apply to Work With Us</Link>
+              <Link to="/contact">Book a Strategy Call</Link>
             </Button>
           </div>
+        </div>
+      );
+    }
+
+    if (type === 'execution') {
+      const execContent = content as SlideContent & { images?: string[] };
+      return (
+        <div className="space-y-4">
+          <ul className="space-y-2">
+            {execContent.points.map((point, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-start gap-2"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                <span className="text-xs sm:text-sm text-foreground/80">{point}</span>
+              </motion.li>
+            ))}
+          </ul>
+          
+          {/* Execution Images Grid */}
+          {execContent.images && (
+            <div className="grid grid-cols-2 gap-2 mt-4">
+              {execContent.images.map((img, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="rounded-lg overflow-hidden border border-border/50"
+                >
+                  <img 
+                    src={img} 
+                    alt={`Execution asset ${idx + 1}`}
+                    className="w-full h-auto object-cover"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       );
     }
@@ -437,42 +422,61 @@ const StorySlide = ({
     // Default content rendering for other slide types
     const slideContent = content as SlideContent;
     return (
-      <ul className="space-y-3 sm:space-y-4">
-        {slideContent.points.map((point, idx) => (
-          <motion.li
-            key={idx}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="flex items-start gap-3"
+      <div className="space-y-4">
+        <ul className="space-y-2 sm:space-y-3">
+          {slideContent.points.map((point, idx) => (
+            <motion.li
+              key={idx}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: idx * 0.05 }}
+              className="flex items-start gap-2"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+              <span className="text-xs sm:text-sm text-foreground/80">{point}</span>
+            </motion.li>
+          ))}
+        </ul>
+        
+        {/* Slide Image */}
+        {slideContent.image && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-4 rounded-xl overflow-hidden border border-border/50 shadow-lg"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-            <span className="text-sm sm:text-base text-foreground/80">{point}</span>
-          </motion.li>
-        ))}
-      </ul>
+            <img 
+              src={slideContent.image} 
+              alt={slideContent.imageAlt || "Case study visual"}
+              className="w-full h-auto"
+            />
+          </motion.div>
+        )}
+      </div>
     );
   };
   
   const getSlideTitle = () => {
     if (type === 'results') return 'Results';
     if (type === 'takeaway') return 'Key Takeaway';
+    if (type === 'longTermImpact') return 'Long-term Impact';
     return (content as SlideContent).title;
   };
   
   return (
-    <div className="relative min-h-[400px] sm:min-h-[450px] flex flex-col justify-center px-4 sm:px-8 py-8">
+    <div className="relative min-h-[500px] sm:min-h-[550px] flex flex-col justify-start px-4 sm:px-8 py-6 overflow-y-auto">
       {/* Large slide number watermark */}
-      <div className="absolute top-4 right-4 sm:top-8 sm:right-8 text-[80px] sm:text-[120px] font-bold text-primary/5 select-none pointer-events-none">
+      <div className="absolute top-2 right-4 sm:top-4 sm:right-8 text-[60px] sm:text-[100px] font-bold text-primary/5 select-none pointer-events-none">
         {String(slideNumber).padStart(2, '0')}
       </div>
       
-      <div className="relative z-10 max-w-xl">
-        <div className="flex items-center gap-3 mb-4 sm:mb-6">
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-            <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+      <div className="relative z-10 max-w-2xl">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-semibold">{getSlideTitle()}</h3>
+          <h3 className="text-lg sm:text-xl font-semibold">{getSlideTitle()}</h3>
         </div>
         
         {renderContent()}
@@ -485,24 +489,21 @@ const StorySlide = ({
 const HorizontalStoryBand = ({ caseStudy }: { caseStudy: CaseStudyData }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
-  const [count, setCount] = useState(0);
   
   const slideTypes: (keyof typeof slideIcons)[] = [
     'context', 'challenge', 'strategy', 'system', 
     'execution', 'results', 'longTermImpact', 'takeaway'
   ];
   
-  // Update current slide index
-  useState(() => {
+  useEffect(() => {
     if (!api) return;
     
-    setCount(api.scrollSnapList().length);
     setCurrent(api.selectedScrollSnap());
     
     api.on("select", () => {
       setCurrent(api.selectedScrollSnap());
     });
-  });
+  }, [api]);
   
   return (
     <div className="relative">
@@ -588,10 +589,10 @@ const CaseHeader = ({
     >
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
         <div className="flex items-center gap-4">
-          {/* Placeholder logo */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-border/50">
-            <span className="text-xl sm:text-2xl font-bold text-primary">
-              {caseStudy.clientName.charAt(0)}
+          {/* Client Logo */}
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-violet-500/20 to-cyan-500/20 flex items-center justify-center border border-border/50 overflow-hidden">
+            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent">
+              K
             </span>
           </div>
           
@@ -605,6 +606,9 @@ const CaseHeader = ({
                 {caseStudy.offerChosen}
               </span>
             </div>
+            <p className="text-xs text-muted-foreground mt-1">
+              {caseStudy.duration}
+            </p>
           </div>
         </div>
         
@@ -627,7 +631,7 @@ const CaseHeader = ({
 
 // Case Module
 const CaseModule = ({ caseStudy, index }: { caseStudy: CaseStudyData; index: number }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(index === 0); // First case expanded by default
   const moduleRef = useRef<HTMLDivElement>(null);
   
   const handleExplore = () => {
