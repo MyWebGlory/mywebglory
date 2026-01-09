@@ -466,7 +466,7 @@ const PricingSection = () => {
                 >
                   {p.popular && (
                     <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 hidden md:block">
-                      <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-b-full uppercase tracking-wider">
+                      <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-b-full uppercase tracking-wider whitespace-nowrap">
                         Most Popular
                       </span>
                     </div>
