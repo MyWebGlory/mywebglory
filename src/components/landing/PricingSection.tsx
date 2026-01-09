@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
 import { Check, ArrowRight, Zap, Crown, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
+
+const COST_PER_REGISTRANT = 19;
 
 const pricingPlans = [
   {
@@ -20,12 +24,9 @@ const pricingPlans = [
       "Event branding & main visual",
       "Basic analytics & attendance tracking",
     ],
-    results: [
-      "150–300 qualified registrants",
-      "35–45% attendance rate",
-      "50–120 live attendees",
-    ],
-    adSpend: "Recommended: $2,000–$5,000",
+    baseAttendanceRate: [35, 45],
+    adSpendRange: [2000, 5000],
+    adSpendDefault: 3500,
     cta: "Get Started",
     popular: false,
   },
@@ -46,12 +47,9 @@ const pricingPlans = [
       "5 short video clips + 1 SEO blog article",
       "Full analytics with CTA tracking",
     ],
-    results: [
-      "400–700 qualified registrants",
-      "40–55% attendance rate",
-      "160–350 live attendees",
-    ],
-    adSpend: "Recommended: $5,000–$15,000",
+    baseAttendanceRate: [40, 55],
+    adSpendRange: [5000, 15000],
+    adSpendDefault: 10000,
     cta: "Let's Talk",
     popular: true,
   },
@@ -72,12 +70,9 @@ const pricingPlans = [
       "15 video clips + 3 SEO blog articles",
       "Event-to-revenue attribution reporting",
     ],
-    results: [
-      "1,200–2,000 qualified registrants",
-      "45–60% attendance rate",
-      "550–1,200 live attendees",
-    ],
-    adSpend: "Recommended: $15,000–$30,000",
+    baseAttendanceRate: [45, 60],
+    adSpendRange: [15000, 30000],
+    adSpendDefault: 22500,
     cta: "Apply Now",
     popular: false,
   },
@@ -85,6 +80,29 @@ const pricingPlans = [
 
 const PricingSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [adSpends, setAdSpends] = useState<number[]>(
+    pricingPlans.map(plan => plan.adSpendDefault)
+  );
+
+  const calculateRegistrants = (adSpend: number) => {
+    return Math.floor(adSpend / COST_PER_REGISTRANT);
+  };
+
+  const calculateAttendees = (registrants: number, attendanceRate: [number, number]) => {
+    const minAttendees = Math.floor(registrants * (attendanceRate[0] / 100));
+    const maxAttendees = Math.floor(registrants * (attendanceRate[1] / 100));
+    return [minAttendees, maxAttendees];
+  };
+
+  const formatNumber = (num: number) => {
+    return num.toLocaleString();
+  };
+
+  const handleAdSpendChange = (index: number, value: number[]) => {
+    const newAdSpends = [...adSpends];
+    newAdSpends[index] = value[0];
+    setAdSpends(newAdSpends);
+  };
 
   return (
     <section className="py-24 relative" id="pricing">
@@ -102,95 +120,140 @@ const PricingSection = () => {
         </div>
         
         <div className="grid md:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto items-stretch">
-          {pricingPlans.map((plan, i) => (
-            <div
-              key={i}
-              className={`relative p-8 rounded-2xl transition-all duration-300 flex flex-col ${
-                plan.popular 
-                  ? "bg-gradient-to-b from-primary/10 to-card border-2 border-primary lg:scale-[1.02]" 
-                  : "bg-card border border-border hover:border-primary/30"
-              } ${isVisible ? "animate-fade-in" : "opacity-0"}`}
-              style={{ animationDelay: `${0.1 * i}s` }}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
-                    Most Popular
-                  </span>
+          {pricingPlans.map((plan, i) => {
+            const registrants = calculateRegistrants(adSpends[i]);
+            const [minAttendees, maxAttendees] = calculateAttendees(registrants, plan.baseAttendanceRate as [number, number]);
+            
+            return (
+              <div
+                key={i}
+                className={`relative p-8 rounded-2xl transition-all duration-300 flex flex-col ${
+                  plan.popular 
+                    ? "bg-gradient-to-b from-primary/10 to-card border-2 border-primary lg:scale-[1.02]" 
+                    : "bg-card border border-border hover:border-primary/30"
+                } ${isVisible ? "animate-fade-in" : "opacity-0"}`}
+                style={{ animationDelay: `${0.1 * i}s` }}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                    <span className="bg-primary text-primary-foreground text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
+                      Most Popular
+                    </span>
+                  </div>
+                )}
+                
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                    plan.popular ? "bg-primary/20" : "bg-muted"
+                  }`}>
+                    <plan.icon className={`w-6 h-6 ${plan.popular ? "text-primary" : "text-muted-foreground"}`} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold">{plan.name}</h3>
+                  </div>
                 </div>
-              )}
-              
-              <div className="flex items-center gap-3 mb-4">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                  plan.popular ? "bg-primary/20" : "bg-muted"
+                
+                {/* Ad Spend Selector */}
+                <div className={`mb-4 p-4 rounded-xl ${
+                  plan.popular 
+                    ? "bg-gradient-to-br from-secondary/20 to-secondary/5 border border-secondary/30" 
+                    : "bg-muted/30 border border-border/50"
                 }`}>
-                  <plan.icon className={`w-6 h-6 ${plan.popular ? "text-primary" : "text-muted-foreground"}`} />
+                  <div className="flex items-center justify-between mb-3">
+                    <p className={`text-xs font-semibold uppercase tracking-wider ${
+                      plan.popular ? "text-secondary" : "text-muted-foreground"
+                    }`}>
+                      Ad Spend Budget
+                    </p>
+                    <span className={`text-lg font-bold ${plan.popular ? "text-secondary" : "text-foreground"}`}>
+                      ${formatNumber(adSpends[i])}
+                    </span>
+                  </div>
+                  <Slider
+                    value={[adSpends[i]]}
+                    onValueChange={(value) => handleAdSpendChange(i, value)}
+                    min={plan.adSpendRange[0]}
+                    max={plan.adSpendRange[1]}
+                    step={500}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between mt-2 text-xs text-muted-foreground">
+                    <span>${formatNumber(plan.adSpendRange[0])}</span>
+                    <span>${formatNumber(plan.adSpendRange[1])}</span>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold">{plan.name}</h3>
-                </div>
-              </div>
-              
-              {/* Assured Results - Between title and price */}
-              <div className={`mb-5 p-4 rounded-xl ${
-                plan.popular 
-                  ? "bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20" 
-                  : "bg-muted/50 border border-border"
-              }`}>
-                <p className={`text-xs font-semibold uppercase tracking-wider mb-3 ${
-                  plan.popular ? "text-primary" : "text-secondary"
+                
+                {/* Assured Results - Dynamic based on ad spend */}
+                <div className={`mb-5 p-4 rounded-xl ${
+                  plan.popular 
+                    ? "bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20" 
+                    : "bg-muted/50 border border-border"
                 }`}>
-                  ✓ Minimum Results
-                </p>
-                <ul className="space-y-1.5">
-                  {plan.results.map((result, j) => (
-                    <li key={j} className={`text-sm font-medium flex items-center gap-2 ${
+                  <p className={`text-xs font-semibold uppercase tracking-wider mb-3 ${
+                    plan.popular ? "text-primary" : "text-secondary"
+                  }`}>
+                    ✓ Minimum Results
+                  </p>
+                  <ul className="space-y-1.5">
+                    <li className={`text-sm font-medium flex items-center gap-2 ${
                       plan.popular ? "text-foreground" : "text-foreground/90"
                     }`}>
                       <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
-                      {result}
+                      <span className="font-bold text-base">{formatNumber(registrants)}</span> qualified registrants
+                    </li>
+                    <li className={`text-sm font-medium flex items-center gap-2 ${
+                      plan.popular ? "text-foreground" : "text-foreground/90"
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
+                      {plan.baseAttendanceRate[0]}–{plan.baseAttendanceRate[1]}% attendance rate
+                    </li>
+                    <li className={`text-sm font-medium flex items-center gap-2 ${
+                      plan.popular ? "text-foreground" : "text-foreground/90"
+                    }`}>
+                      <span className={`w-1.5 h-1.5 rounded-full ${plan.popular ? "bg-primary" : "bg-secondary"}`} />
+                      <span className="font-bold">{formatNumber(minAttendees)}–{formatNumber(maxAttendees)}</span> live attendees
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="mb-2">
+                  <span className="text-4xl font-bold">{plan.price}</span>
+                </div>
+                <p className="text-sm text-muted-foreground mb-4">{plan.duration}</p>
+                
+                <p className="text-muted-foreground mb-6 text-sm">{plan.description}</p>
+                
+                <ul className="space-y-3 mb-6 flex-1">
+                  {plan.features.map((feature, j) => (
+                    <li key={j} className="flex items-start gap-3">
+                      <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
+                      <span className="text-foreground/90 text-sm">{feature}</span>
                     </li>
                   ))}
                 </ul>
+                
+                <div className="p-3 rounded-lg bg-muted/30 border border-border/50 mb-6">
+                  <p className="text-xs text-muted-foreground">
+                    <span className="font-medium text-foreground/80">Ad spend separate.</span> ~${COST_PER_REGISTRANT}/registrant — scales with your budget.
+                  </p>
+                </div>
+                
+                <Button 
+                  asChild
+                  className={`w-full group py-6 text-lg mt-auto ${
+                    plan.popular 
+                      ? "bg-primary hover:bg-primary/90" 
+                      : "bg-muted hover:bg-muted/80 text-foreground"
+                  }`}
+                >
+                  <Link to="/contact">
+                    {plan.cta}
+                    <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </Button>
               </div>
-              
-              <div className="mb-2">
-                <span className="text-4xl font-bold">{plan.price}</span>
-              </div>
-              <p className="text-sm text-muted-foreground mb-4">{plan.duration}</p>
-              
-              <p className="text-muted-foreground mb-6 text-sm">{plan.description}</p>
-              
-              <ul className="space-y-3 mb-6 flex-1">
-                {plan.features.map((feature, j) => (
-                  <li key={j} className="flex items-start gap-3">
-                    <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${plan.popular ? "text-primary" : "text-secondary"}`} />
-                    <span className="text-foreground/90 text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              
-              <div className="p-3 rounded-lg bg-muted/30 border border-border/50 mb-6">
-                <p className="text-xs text-muted-foreground">
-                  <span className="font-medium text-foreground/80">Ad spend separate.</span> {plan.adSpend} for best results — scales with your budget.
-                </p>
-              </div>
-              
-              <Button 
-                asChild
-                className={`w-full group py-6 text-lg mt-auto ${
-                  plan.popular 
-                    ? "bg-primary hover:bg-primary/90" 
-                    : "bg-muted hover:bg-muted/80 text-foreground"
-                }`}
-              >
-                <Link to="/contact">
-                  {plan.cta}
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
-            </div>
-          ))}
+            );
+          })}
         </div>
         
         <p className="text-center text-muted-foreground mt-12 text-sm max-w-xl mx-auto">
