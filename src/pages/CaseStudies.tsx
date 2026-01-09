@@ -24,6 +24,10 @@ import kornitSignatureBanners from "@/assets/case-studies/kornit/signature-banne
 import kornitClientComment1 from "@/assets/case-studies/kornit/client-comment-1.png";
 import kornitClientComment2 from "@/assets/case-studies/kornit/client-comment-2.png";
 import kornitClientComment3 from "@/assets/case-studies/kornit/client-comment-3.png";
+import kornitLogo from "@/assets/case-studies/kornit/kornit-logo.png";
+import kornitTeamMeeting from "@/assets/case-studies/kornit/team-meeting.png";
+import kornitEventTrailer from "@/assets/case-studies/kornit/event-trailer.mp4";
+import kornitAiAdUgc from "@/assets/case-studies/kornit/ai-ad-ugc.mp4";
 
 // Types
 interface SlideContent {
@@ -31,6 +35,8 @@ interface SlideContent {
   points: string[];
   image?: string;
   imageAlt?: string;
+  video?: string;
+  secondaryImage?: string;
 }
 
 interface ResultMetric {
@@ -52,7 +58,7 @@ interface CaseStudyData {
     challenge: SlideContent;
     strategy: SlideContent;
     system: SlideContent;
-    execution: SlideContent & { images?: string[] };
+    execution: SlideContent & { images?: string[]; videos?: string[] };
     results: { 
       metrics: ResultMetric[];
       highlights: string[];
@@ -70,6 +76,7 @@ interface CaseStudyData {
 const kornitCaseStudy: CaseStudyData = {
   id: "kornit-digital",
   clientName: "Kornit Digital",
+  clientLogo: kornitLogo,
   industry: "Apparel / Printing Technology",
   offerChosen: "Event Dominance — $50k",
   duration: "8 weeks (Sep–Oct 2025)",
@@ -105,7 +112,9 @@ const kornitCaseStudy: CaseStudyData = {
         "Acquisition plan → organic + Meta ads + email campaigns working in sync",
         "Partner engagement → toolkits, trackable links, QR codes for amplification",
         "Post-event leverage → clips, recordings, highlights for ongoing content"
-      ]
+      ],
+      image: kornitTeamMeeting,
+      imageAlt: "Team coordination meeting with client"
     },
     system: {
       title: "The System",
@@ -132,7 +141,8 @@ const kornitCaseStudy: CaseStudyData = {
         "Calls & SMS → high-touch activation for high-value registrants",
         "Post-production: session recordings, clips, highlight reels"
       ],
-      images: [kornitSocialPosts, kornitEventBanners, kornitSignatureBanners, kornitEmailMarketing]
+      images: [kornitSocialPosts, kornitEventBanners, kornitSignatureBanners, kornitEmailMarketing],
+      videos: [kornitEventTrailer, kornitAiAdUgc]
     },
     results: {
       metrics: [
@@ -330,7 +340,7 @@ const StorySlide = ({
           {takeawayContent.clientComments && (
             <div className="space-y-3">
               <h4 className="text-sm font-semibold text-primary">What the Client Said</h4>
-              <div className="grid grid-cols-1 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {takeawayContent.clientComments.map((comment, idx) => (
                   <motion.div
                     key={idx}
@@ -341,7 +351,7 @@ const StorySlide = ({
                     <img 
                       src={comment} 
                       alt={`Client testimonial ${idx + 1}`}
-                      className="rounded-lg border border-border/50 shadow-sm max-w-full"
+                      className="rounded-lg border border-border/50 shadow-sm w-full h-auto max-h-32 object-contain"
                     />
                   </motion.div>
                 ))}
@@ -377,7 +387,7 @@ const StorySlide = ({
     }
 
     if (type === 'execution') {
-      const execContent = content as SlideContent & { images?: string[] };
+      const execContent = content as SlideContent & { images?: string[]; videos?: string[] };
       return (
         <div className="space-y-4">
           <ul className="space-y-2">
@@ -395,6 +405,29 @@ const StorySlide = ({
             ))}
           </ul>
           
+          {/* Execution Videos */}
+          {execContent.videos && execContent.videos.length > 0 && (
+            <div className="grid grid-cols-2 gap-2 mt-4">
+              {execContent.videos.map((video, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: idx * 0.1 }}
+                  className="rounded-lg overflow-hidden border border-border/50"
+                >
+                  <video 
+                    src={video} 
+                    controls
+                    muted
+                    playsInline
+                    className="w-full max-h-40 object-cover"
+                  />
+                </motion.div>
+              ))}
+            </div>
+          )}
+          
           {/* Execution Images Grid */}
           {execContent.images && (
             <div className="grid grid-cols-2 gap-2 mt-4">
@@ -409,7 +442,7 @@ const StorySlide = ({
                   <img 
                     src={img} 
                     alt={`Execution asset ${idx + 1}`}
-                    className="w-full h-auto object-cover"
+                    className="w-full h-auto max-h-36 object-cover"
                   />
                 </motion.div>
               ))}
@@ -449,7 +482,25 @@ const StorySlide = ({
             <img 
               src={slideContent.image} 
               alt={slideContent.imageAlt || "Case study visual"}
-              className="w-full h-auto"
+              className="w-full h-auto max-h-48 object-cover"
+            />
+          </motion.div>
+        )}
+        
+        {/* Slide Video */}
+        {slideContent.video && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="mt-4 rounded-xl overflow-hidden border border-border/50 shadow-lg"
+          >
+            <video 
+              src={slideContent.video} 
+              controls
+              muted
+              playsInline
+              className="w-full max-h-48 object-cover"
             />
           </motion.div>
         )}
@@ -590,10 +641,18 @@ const CaseHeader = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
         <div className="flex items-center gap-4">
           {/* Client Logo */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-violet-500/20 to-cyan-500/20 flex items-center justify-center border border-border/50 overflow-hidden">
-            <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent">
-              K
-            </span>
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white flex items-center justify-center border border-border/50 overflow-hidden p-1.5">
+            {caseStudy.clientLogo ? (
+              <img 
+                src={caseStudy.clientLogo} 
+                alt={`${caseStudy.clientName} logo`}
+                className="w-full h-full object-contain"
+              />
+            ) : (
+              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent">
+                {caseStudy.clientName.charAt(0)}
+              </span>
+            )}
           </div>
           
           <div>
