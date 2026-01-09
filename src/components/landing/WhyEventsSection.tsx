@@ -1,7 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Users, Shield, MessageSquare, Database, TrendingUp, DollarSign, Zap, Rocket } from "lucide-react";
-
+import { Link } from "react-router-dom";
+import { Users, Shield, MessageSquare, Database, TrendingUp, DollarSign, Zap, Rocket, ArrowRight } from "lucide-react";
 const benefits = [
   {
     icon: Users,
@@ -216,13 +216,30 @@ const WhyEventsSection = () => {
               When done right, events are not marketing.
             </motion.p>
             <motion.p 
-              className="text-2xl md:text-3xl font-bold text-primary relative z-10"
+              className="text-2xl md:text-3xl font-bold text-primary relative z-10 mb-4"
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.8, delay: 1.4, type: "spring" }}
             >
               They're revenue engines.
             </motion.p>
+            
+            {/* Discrete Event Marketing CTA */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 1.6, duration: 0.5 }}
+            >
+              <Link 
+                to="/event-marketing"
+                className="group inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm"
+              >
+                <span className="relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left">
+                  Learn more about Event Marketing
+                </span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>

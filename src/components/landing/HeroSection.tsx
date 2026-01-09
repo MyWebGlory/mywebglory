@@ -409,6 +409,17 @@ const HeroSection = () => {
               </Link>
             </Button>
           </div>
+          
+          {/* Discrete Event Marketing CTA */}
+          <Link 
+            to="/event-marketing"
+            className="group inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm"
+          >
+            <span className="relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left">
+              What is Event Marketing?
+            </span>
+            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          </Link>
         </motion.div>
         
         {/* Animated Stats */}
