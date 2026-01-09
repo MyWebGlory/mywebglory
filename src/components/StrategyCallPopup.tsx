@@ -19,11 +19,11 @@ const StrategyCallPopup = () => {
     sessionStorage.removeItem("popup-dismissed");
     console.log("📋 Popup component mounted, sessionStorage cleared for testing");
 
-    // STRATEGY 1: Fallback timer - show after 5 seconds (for testing, increase later)
+    // STRATEGY 1: Fallback timer - show after 2 minutes
     const timer = setTimeout(() => {
       console.log("⏰ Timer triggered!");
       showPopup();
-    }, 5000);
+    }, 120000);
 
     // STRATEGY 2: Exit intent - mouse leaves viewport at top
     const handleMouseLeave = (e: MouseEvent) => {
