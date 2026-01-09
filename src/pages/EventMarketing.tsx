@@ -1299,7 +1299,7 @@ const FinalCTA = () => {
   return (
     <section
       ref={ref}
-      className="relative h-[300vh] bg-background overflow-hidden"
+      className="relative h-[300vh] bg-background"
     >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Animated portal rings - de-zoom from huge */}
