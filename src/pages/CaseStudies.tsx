@@ -268,9 +268,9 @@ const StorySlide = ({
     if (type === 'results') {
       const resultsContent = content as CaseStudyData['slides']['results'];
       return (
-        <div className="space-y-6">
+        <div className="space-y-3">
           {/* Metrics Grid */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <div className="grid grid-cols-4 gap-2">
             {resultsContent.metrics.map((metric, idx) => {
               const MetricIcon = metric.icon;
               return (
@@ -278,16 +278,16 @@ const StorySlide = ({
                   key={idx}
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.05 }}
-                  className="bg-primary/10 rounded-xl p-3 sm:p-4 text-center"
+                  transition={{ delay: idx * 0.03 }}
+                  className="bg-primary/10 rounded-lg p-2 text-center"
                 >
                   {MetricIcon && (
-                    <MetricIcon className="w-4 h-4 sm:w-5 sm:h-5 text-primary mx-auto mb-1" />
+                    <MetricIcon className="w-3 h-3 text-primary mx-auto mb-0.5" />
                   )}
-                  <div className="text-lg sm:text-2xl font-bold text-primary mb-0.5">
+                  <div className="text-sm sm:text-base font-bold text-primary">
                     {metric.value}
                   </div>
-                  <div className="text-[10px] sm:text-xs text-muted-foreground leading-tight">
+                  <div className="text-[9px] text-muted-foreground leading-tight">
                     {metric.label}
                   </div>
                 </motion.div>
@@ -296,18 +296,18 @@ const StorySlide = ({
           </div>
           
           {/* Performance Highlights */}
-          <div className="bg-card/50 rounded-xl p-4 sm:p-6 border border-border/50">
-            <h4 className="text-sm font-semibold mb-3 text-primary">Performance Highlights</h4>
-            <ul className="space-y-2">
+          <div className="bg-card/50 rounded-lg p-3 border border-border/50">
+            <h4 className="text-xs font-semibold mb-2 text-primary">Performance Highlights</h4>
+            <ul className="space-y-1">
               {resultsContent.highlights.map((highlight, idx) => (
                 <motion.li
                   key={idx}
                   initial={{ opacity: 0, x: -10 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="flex items-start gap-2 text-xs sm:text-sm text-foreground/80"
+                  transition={{ delay: idx * 0.05 }}
+                  className="flex items-start gap-1.5 text-[11px] text-foreground/80"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
+                  <span className="w-1 h-1 rounded-full bg-primary mt-1 flex-shrink-0" />
                   {highlight}
                 </motion.li>
               ))}
@@ -338,20 +338,21 @@ const StorySlide = ({
           
           {/* Client Comments */}
           {takeawayContent.clientComments && (
-            <div className="space-y-3">
-              <h4 className="text-sm font-semibold text-primary">What the Client Said</h4>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="space-y-2">
+              <h4 className="text-xs font-semibold text-primary">What the Client Said</h4>
+              <div className="grid grid-cols-3 gap-2">
                 {takeawayContent.clientComments.map((comment, idx) => (
                   <motion.div
                     key={idx}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 5 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.1 }}
+                    className="bg-muted/30 rounded-md overflow-hidden border border-border/50"
                   >
                     <img 
                       src={comment} 
                       alt={`Client testimonial ${idx + 1}`}
-                      className="rounded-lg border border-border/50 shadow-sm w-full h-auto max-h-32 object-contain"
+                      className="w-full h-20 object-contain"
                     />
                   </motion.div>
                 ))}
@@ -407,21 +408,21 @@ const StorySlide = ({
           
           {/* Execution Videos */}
           {execContent.videos && execContent.videos.length > 0 && (
-            <div className="grid grid-cols-2 gap-2 mt-4">
+            <div className="grid grid-cols-2 gap-2 mt-3">
               {execContent.videos.map((video, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="rounded-lg overflow-hidden border border-border/50"
+                  className="rounded-lg overflow-hidden border border-border/50 bg-black/50"
                 >
                   <video 
                     src={video} 
                     controls
                     muted
                     playsInline
-                    className="w-full max-h-40 object-cover"
+                    className="w-full h-28 object-contain"
                   />
                 </motion.div>
               ))}
@@ -430,19 +431,19 @@ const StorySlide = ({
           
           {/* Execution Images Grid */}
           {execContent.images && (
-            <div className="grid grid-cols-2 gap-2 mt-4">
+            <div className="grid grid-cols-2 gap-2 mt-2">
               {execContent.images.map((img, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="rounded-lg overflow-hidden border border-border/50"
+                  className="rounded-lg overflow-hidden border border-border/50 bg-muted/30"
                 >
                   <img 
                     src={img} 
                     alt={`Execution asset ${idx + 1}`}
-                    className="w-full h-auto max-h-36 object-cover"
+                    className="w-full h-24 object-contain"
                   />
                 </motion.div>
               ))}
@@ -474,15 +475,15 @@ const StorySlide = ({
         {/* Slide Image */}
         {slideContent.image && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mt-4 rounded-xl overflow-hidden border border-border/50 shadow-lg"
+            transition={{ delay: 0.2 }}
+            className="mt-3 rounded-lg overflow-hidden border border-border/50 shadow-md bg-muted/30"
           >
             <img 
               src={slideContent.image} 
               alt={slideContent.imageAlt || "Case study visual"}
-              className="w-full h-auto max-h-48 object-cover"
+              className="w-full h-36 object-contain"
             />
           </motion.div>
         )}
@@ -490,17 +491,17 @@ const StorySlide = ({
         {/* Slide Video */}
         {slideContent.video && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="mt-4 rounded-xl overflow-hidden border border-border/50 shadow-lg"
+            transition={{ delay: 0.25 }}
+            className="mt-3 rounded-lg overflow-hidden border border-border/50 shadow-md bg-black/50"
           >
             <video 
               src={slideContent.video} 
               controls
               muted
               playsInline
-              className="w-full max-h-48 object-cover"
+              className="w-full h-36 object-contain"
             />
           </motion.div>
         )}
@@ -516,18 +517,18 @@ const StorySlide = ({
   };
   
   return (
-    <div className="relative min-h-[500px] sm:min-h-[550px] flex flex-col justify-start px-4 sm:px-8 py-6 overflow-y-auto">
+    <div className="relative h-[380px] sm:h-[420px] flex flex-col justify-start px-4 sm:px-8 py-4 overflow-y-auto">
       {/* Large slide number watermark */}
-      <div className="absolute top-2 right-4 sm:top-4 sm:right-8 text-[60px] sm:text-[100px] font-bold text-primary/5 select-none pointer-events-none">
+      <div className="absolute top-1 right-4 sm:top-2 sm:right-8 text-[50px] sm:text-[80px] font-bold text-primary/5 select-none pointer-events-none">
         {String(slideNumber).padStart(2, '0')}
       </div>
       
       <div className="relative z-10 max-w-2xl">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-            <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+            <Icon className="w-4 h-4 text-primary" />
           </div>
-          <h3 className="text-lg sm:text-xl font-semibold">{getSlideTitle()}</h3>
+          <h3 className="text-base sm:text-lg font-semibold">{getSlideTitle()}</h3>
         </div>
         
         {renderContent()}
@@ -566,10 +567,13 @@ const HorizontalStoryBand = ({ caseStudy }: { caseStudy: CaseStudyData }) => {
         }}
         className="w-full"
       >
+        {/* Left Arrow - Centered vertically */}
+        <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background" />
+        
         <CarouselContent className="-ml-0">
           {slideTypes.map((type, index) => (
             <CarouselItem key={type} className="pl-0 basis-full">
-              <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl mx-2 sm:mx-4">
+              <div className="bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl mx-10 sm:mx-14">
                 <StorySlide
                   slideNumber={index + 1}
                   type={type}
@@ -581,36 +585,22 @@ const HorizontalStoryBand = ({ caseStudy }: { caseStudy: CaseStudyData }) => {
           ))}
         </CarouselContent>
         
-        {/* Navigation */}
-        <div className="flex items-center justify-between mt-4 px-4">
-          <CarouselPrevious className="relative left-0 translate-x-0 translate-y-0 h-10 w-10" />
-          
-          {/* Progress dots */}
-          <div className="flex gap-1.5">
-            {slideTypes.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => api?.scrollTo(index)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === current 
-                    ? 'bg-primary w-6' 
-                    : 'bg-primary/20 hover:bg-primary/40'
-                }`}
-              />
-            ))}
-          </div>
-          
-          <CarouselNext className="relative right-0 translate-x-0 translate-y-0 h-10 w-10" />
-        </div>
+        {/* Right Arrow - Centered vertically */}
+        <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-10 w-10 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background" />
         
-        {/* Progress bar */}
-        <div className="mt-4 mx-4 h-1 bg-border/50 rounded-full overflow-hidden">
-          <motion.div
-            className="h-full bg-primary rounded-full"
-            initial={{ width: '12.5%' }}
-            animate={{ width: `${((current + 1) / slideTypes.length) * 100}%` }}
-            transition={{ duration: 0.3 }}
-          />
+        {/* Progress dots + bar at bottom */}
+        <div className="flex items-center justify-center gap-1.5 mt-3 px-14">
+          {slideTypes.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => api?.scrollTo(index)}
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                index === current 
+                  ? 'bg-primary w-5' 
+                  : 'bg-primary/20 hover:bg-primary/40'
+              }`}
+            />
+          ))}
         </div>
       </Carousel>
     </div>
