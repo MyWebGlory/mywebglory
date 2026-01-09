@@ -5,15 +5,15 @@ import { Slider } from "@/components/ui/slider";
 import { Check, ArrowRight, Zap, Crown, Rocket } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const calculateRegistrants = (adSpend: number) => {
-  const registrants = Math.round(adSpend / 19);
+const calculateRegistrants = (adSpend: number, costPerRegistrant: number) => {
+  const registrants = Math.round(adSpend / costPerRegistrant);
   const lowEnd = Math.round(registrants * 0.85);
   const highEnd = Math.round(registrants * 1.15);
   return `${lowEnd.toLocaleString()}–${highEnd.toLocaleString()}`;
 };
 
-const calculateAttendees = (adSpend: number, attendanceRate: [number, number]) => {
-  const registrants = Math.round(adSpend / 19);
+const calculateAttendees = (adSpend: number, costPerRegistrant: number, attendanceRate: [number, number]) => {
+  const registrants = Math.round(adSpend / costPerRegistrant);
   const lowEnd = Math.round(registrants * 0.85 * attendanceRate[0]);
   const highEnd = Math.round(registrants * 1.15 * attendanceRate[1]);
   return `${lowEnd.toLocaleString()}–${highEnd.toLocaleString()}`;
@@ -65,6 +65,7 @@ const pricingPlans = [
     ],
     hasAdSpend: true,
     attendanceRate: [0.40, 0.55] as [number, number],
+    costPerRegistrant: 35,
     defaultAdSpend: 10000,
     cta: "Let's Talk",
     popular: true,
@@ -88,6 +89,7 @@ const pricingPlans = [
     ],
     hasAdSpend: true,
     attendanceRate: [0.45, 0.60] as [number, number],
+    costPerRegistrant: 11,
     defaultAdSpend: 22500,
     cta: "Apply Now",
     popular: false,
@@ -110,10 +112,11 @@ const PricingSection = () => {
       return plan.results;
     }
     const adSpend = adSpends[index] || plan.defaultAdSpend || 10000;
+    const costPerRegistrant = plan.costPerRegistrant || 19;
     return [
-      `${calculateRegistrants(adSpend)} qualified registrants`,
+      `${calculateRegistrants(adSpend, costPerRegistrant)} qualified registrants`,
       `${Math.round(plan.attendanceRate[0] * 100)}–${Math.round(plan.attendanceRate[1] * 100)}% attendance rate`,
-      `${calculateAttendees(adSpend, plan.attendanceRate)} live attendees`,
+      `${calculateAttendees(adSpend, costPerRegistrant, plan.attendanceRate)} live attendees`,
     ];
   };
 
