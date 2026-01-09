@@ -448,7 +448,7 @@ const PricingSection = () => {
           plan.popular ? "border-primary" : "border-border"
         } ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
           {/* Tab Buttons - Connected to card below */}
-          <div className="grid grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-3">
             {pricingPlans.map((p, i) => {
               const isSelected = selectedPlan === i;
               return (
@@ -462,10 +462,10 @@ const PricingSection = () => {
                     isSelected 
                       ? "bg-card" 
                       : "bg-muted/30 hover:bg-muted/50"
-                  }`}
+                  } ${i === 0 ? "rounded-t-xl md:rounded-t-none md:rounded-tl-xl" : ""} ${i === 2 ? "md:rounded-tr-xl" : ""}`}
                 >
                   {p.popular && (
-                    <div className="absolute -top-0.5 left-1/2 -translate-x-1/2">
+                    <div className="absolute -top-0.5 left-1/2 -translate-x-1/2 hidden md:block">
                       <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-b-full uppercase tracking-wider">
                         Most Popular
                       </span>
@@ -473,18 +473,25 @@ const PricingSection = () => {
                   )}
                   
                   <div className="flex flex-col items-center text-center gap-2 pt-2">
-                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${
+                    {p.popular && (
+                      <span className="md:hidden bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                        Most Popular
+                      </span>
+                    )}
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
                       isSelected && p.popular ? "bg-primary/20" : isSelected ? "bg-muted" : "bg-muted/50"
                     }`}>
-                      <p.icon className={`w-5 h-5 ${
+                      <p.icon className={`w-6 h-6 ${
                         isSelected && p.popular ? "text-primary" : isSelected ? "text-foreground" : "text-muted-foreground"
                       }`} />
                     </div>
-                    <h3 className={`text-base font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
+                    <h3 className={`text-lg md:text-xl font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
                       {p.name}
                     </h3>
                     <div className="flex items-baseline gap-1">
-                      <span className={`text-3xl font-bold ${isSelected ? "text-foreground" : "text-muted-foreground"}`}>
+                      <span className={`text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-purple-400 to-secondary bg-clip-text text-transparent animate-gradient-x ${
+                        !isSelected ? "opacity-60" : ""
+                      }`}>
                         {p.price}
                       </span>
                       <span className={`text-sm ${isSelected ? "text-muted-foreground" : "text-muted-foreground/70"}`}>
