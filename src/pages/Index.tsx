@@ -10,8 +10,6 @@ import CaseStudiesSection from "@/components/landing/CaseStudiesSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import FAQSection from "@/components/landing/FAQSection";
 import FooterCTA from "@/components/landing/FooterCTA";
-import WhatsAppWidget from "@/components/WhatsAppWidget";
-import StrategyCallPopup from "@/components/StrategyCallPopup";
 
 const Index = () => {
   useParallax();
@@ -29,8 +27,6 @@ const Index = () => {
       <PricingSection />
       <FAQSection />
       <FooterCTA />
-      <WhatsAppWidget />
-      <StrategyCallPopup />
     </div>
   );
 };
