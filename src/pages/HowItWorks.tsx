@@ -795,7 +795,7 @@ const Step5Acquisition = () => {
           className="p-4 rounded-xl bg-primary/20 border border-primary/40 text-center"
         >
           <p className="font-bold text-lg">
-            We don't run ads.
+            We don't just run ads.
             <br />
             <span className="text-primary">We run acquisition systems.</span>
           </p>
