@@ -1,75 +1,93 @@
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { HelpCircle } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 const faqs = [
   {
-    question: "What types of events do you work with?",
-    answer: "We work with all types of events—conferences, summits, webinars, workshops, virtual events, and hybrid experiences. Whether you're expecting 100 or 100,000 attendees, our systems scale to meet your needs.",
-  },
-  {
-    question: "How quickly can you launch campaigns?",
-    answer: "We can typically have campaigns live within 7-10 business days after kickoff. This includes strategy development, creative production, funnel setup, and automation configuration. For urgent timelines, we offer an expedited launch option.",
-  },
-  {
-    question: "What's included in the pricing?",
-    answer: "Our pricing includes everything: strategy, creative production, ad spend management, funnel building, email/SMS setup, landing pages, and ongoing optimization. The only additional cost is your actual ad spend, which you control directly.",
-  },
-  {
     question: "Do you guarantee results?",
-    answer: "While we can't guarantee specific numbers (no ethical marketer can), we do guarantee our proven process. Our average client sees 4-6x ROAS and 85%+ show rates. We're committed to transparency and will provide realistic projections during our strategy call.",
+    answer: "We guarantee execution, systems, and best-in-class event marketing practices — not revenue. Events depend on multiple factors outside our control. What we do guarantee is qualified acquisition, high show-up engineering, clean pipelines, and measurable outcomes."
   },
   {
-    question: "How do you improve show rates?",
-    answer: "We use a multi-touch reminder system that includes strategic email sequences, SMS notifications, calendar integrations, and pre-event engagement content. This approach consistently delivers 80-92% show rates versus industry averages of 40-60%.",
+    question: "Is ad spend included?",
+    answer: "No. Ad spend is not included in our fees and is paid directly by the client to the platforms. This gives you full transparency, full control, and no hidden margins. We manage strategy, setup, creatives, and optimization."
   },
   {
-    question: "Can you work with our existing systems?",
-    answer: "Absolutely. We integrate with all major platforms including HubSpot, Salesforce, Eventbrite, Zoom, Hopin, and most registration systems. We'll work with your existing tech stack or recommend solutions based on your needs.",
+    question: "Do you bring random attendees or qualified leads?",
+    answer: "Never random. Every event is built around a defined ICP, market-specific messaging, and targeted acquisition channels. We optimize for quality over volume. Attendance is important — who attends is everything."
   },
+  {
+    question: "How long does an event project take?",
+    answer: "Most events run on a 30 to 90-day timeline, depending on market maturity, acquisition channels, and event complexity. We define the timeline clearly before starting."
+  },
+  {
+    question: "Do you handle sales closing?",
+    answer: "No. We build the pipeline and deliver qualified leads. Sales closing stays with you or your team. That separation keeps incentives clean and execution sharp."
+  },
+  {
+    question: "How many clients do you work with at the same time?",
+    answer: "We cap our capacity at 4 clients per month. This ensures focus, speed, quality, and accountability. If we're full, we'll tell you."
+  }
 ];
 
 const FAQSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="py-24 relative" id="faq">
-      <div className="container relative z-10 px-4 md:px-6" ref={ref}>
-        <div className={`text-center mb-16 ${isVisible ? "animate-fade-in" : "opacity-0"}`}>
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 mb-4">
-            <HelpCircle className="w-7 h-7 text-primary" />
+    <section className="py-20 md:py-32 bg-background relative overflow-hidden" id="faq">
+      <div className="absolute top-1/4 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      
+      <div className="container px-4 md:px-6 relative z-10">
+        <div 
+          ref={ref}
+          className={`max-w-3xl mx-auto transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
+              FAQ
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+              Common Questions
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Clear answers to help you decide.
+            </p>
           </div>
-          <span className="block text-primary font-medium tracking-wide uppercase text-sm">FAQ</span>
-          <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-4">
-            Got Questions? We've Got Answers.
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Everything you need to know about partnering with MyWebGlory.
-          </p>
-        </div>
-        
-        <div className={`max-w-3xl mx-auto ${isVisible ? "animate-fade-in" : "opacity-0"}`} style={{ animationDelay: "0.1s" }}>
-          <Accordion type="single" collapsible className="space-y-4">
-            {faqs.map((faq, i) => (
+          
+          <Accordion type="single" collapsible className="w-full space-y-4">
+            {faqs.map((faq, index) => (
               <AccordionItem 
-                key={i} 
-                value={`item-${i}`}
-                className="bg-card border border-border rounded-xl px-6 data-[state=open]:border-primary/50 transition-colors"
+                key={index} 
+                value={`item-${index}`}
+                className="border border-border/50 rounded-xl px-6 bg-card/50 hover:bg-card/80 transition-colors data-[state=open]:bg-card"
               >
-                <AccordionTrigger className="text-left text-lg font-medium hover:text-primary transition-colors py-6">
+                <AccordionTrigger className="text-left font-medium py-5 hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-6 leading-relaxed">
+                <AccordionContent className="text-muted-foreground pb-5">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
+          
+          {/* View All FAQs Button */}
+          <div className="mt-10 text-center">
+            <Link to="/faq">
+              <Button variant="outline" size="lg" className="group">
+                View All FAQs
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>
