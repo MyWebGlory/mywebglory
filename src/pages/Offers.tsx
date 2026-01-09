@@ -237,29 +237,19 @@ const performanceData: PerformanceMetric[] = [
 ];
 
 const Offers = () => {
-  const [adSpends, setAdSpends] = useState<{ [key: number]: number }>({
-    0: 0,
-    1: 5000,
-    2: 15000,
-    3: 25000,
-  });
-
-  const handleAdSpendChange = (planIndex: number, value: number[]) => {
-    setAdSpends(prev => ({ ...prev, [planIndex]: value[0] }));
-  };
+  const [globalAdSpend, setGlobalAdSpend] = useState(10000);
 
   const getScaledValue = (baseValue: [number, number] | string | null, planIndex: number, costPerRegistrant: number): string => {
     if (baseValue === null) return "—";
     if (typeof baseValue === "string") return baseValue;
     
-    const adSpend = adSpends[planIndex] || 0;
     const plan = plans[planIndex];
     
-    if (!plan.hasAds || adSpend === 0) {
+    if (!plan.hasAds || globalAdSpend === 0) {
       return `${baseValue[0].toLocaleString()}–${baseValue[1].toLocaleString()}`;
     }
     
-    const adsRegistrants = Math.round(adSpend / costPerRegistrant);
+    const adsRegistrants = Math.round(globalAdSpend / costPerRegistrant);
     const scaleFactor = 1 + (adsRegistrants / baseValue[0]) * 0.5;
     
     const scaled: [number, number] = [
@@ -305,9 +295,12 @@ const Offers = () => {
               <span className="text-gradient">Revenue Engine</span>
             </h1>
             
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
-              Every dollar invested today compounds into pipeline, authority, and long-term brand value. 
-              <span className="text-foreground font-medium"> These aren't costs — they're multipliers.</span>
+            <p className="text-xl md:text-2xl text-muted-foreground mb-4 max-w-3xl mx-auto leading-relaxed">
+              <span className="text-foreground font-medium">While your competitors settle for basic events,</span> every dollar you invest today compounds into pipeline, authority, and long-term brand value.
+            </p>
+            
+            <p className="text-lg text-muted-foreground mb-8">
+              These aren't costs — <span className="text-primary font-semibold">they're multipliers</span>.
             </p>
             
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-8">
@@ -333,7 +326,7 @@ const Offers = () => {
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center md:text-left">
             <p className="text-foreground font-semibold">
-              ⚡ Limited capacity: We only take <span className="text-primary">4 clients per month</span> to ensure quality delivery
+              ⚡ <span className="text-primary">Your competitors are already booking their spots.</span> We only take <span className="text-primary">4 clients per month</span> to ensure quality delivery
             </p>
             <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
               <Link to="/contact">
@@ -344,7 +337,7 @@ const Offers = () => {
         </div>
       </section>
 
-      {/* Plan Cards Overview */}
+      {/* Plan Cards Overview - Simplified without sliders */}
       <section className="py-16 relative">
         <div className="container px-4 md:px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -387,43 +380,36 @@ const Offers = () => {
                   )}
                 </div>
                 
-                <p className="text-sm text-muted-foreground mb-4">
+                <p className="text-sm text-muted-foreground mb-6">
                   <Calendar className="w-4 h-4 inline mr-1" />
                   {plan.duration}
                 </p>
                 
-                {plan.hasAds && plan.price !== "Let's Talk" && (
-                  <div className="mb-4 p-3 bg-muted/50 rounded-lg">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-xs text-muted-foreground">Ad Budget</span>
-                      <span className="text-sm font-semibold text-primary">
-                        ${adSpends[index].toLocaleString()}
-                      </span>
-                    </div>
-                    <Slider
-                      value={[adSpends[index] || 0]}
-                      onValueChange={(value) => handleAdSpendChange(index, value)}
-                      min={0}
-                      max={50000}
-                      step={1000}
-                      className="w-full"
-                    />
-                  </div>
-                )}
-                
-                <Button 
-                  asChild 
-                  className={`w-full group ${
-                    plan.popular 
-                      ? "bg-primary hover:bg-primary/90" 
-                      : "bg-muted hover:bg-muted/80 text-foreground"
-                  }`}
-                >
-                  <Link to="/contact">
-                    {plan.cta}
-                    <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
+                <div className="flex flex-col gap-2">
+                  <Button 
+                    asChild 
+                    className={`w-full group ${
+                      plan.popular 
+                        ? "bg-primary hover:bg-primary/90" 
+                        : "bg-muted hover:bg-muted/80 text-foreground"
+                    }`}
+                  >
+                    <Link to="/contact">
+                      {plan.cta}
+                      <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
+                  <Button 
+                    asChild 
+                    variant="ghost"
+                    size="sm"
+                    className="w-full text-muted-foreground hover:text-foreground"
+                  >
+                    <a href="#comparison">
+                      Compare All Features
+                    </a>
+                  </Button>
+                </div>
               </div>
             ))}
           </div>
@@ -440,7 +426,7 @@ const Offers = () => {
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
               A $25,000 investment that generates 10+ new clients paying $5,000–$50,000 each isn't a cost — 
               <span className="text-foreground font-medium"> it's a 10x–20x return engine</span>. 
-              Plus, every event builds retargetable audiences, email lists, and brand authority that compound for years.
+              <span className="text-primary font-medium"> While others experiment, you execute.</span> Plus, every event builds retargetable audiences, email lists, and brand authority that compound for years.
             </p>
             
             <div className="grid md:grid-cols-3 gap-6">
@@ -449,7 +435,7 @@ const Offers = () => {
                   <TrendingUp className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-bold mb-2">Immediate Pipeline</h3>
-                <p className="text-sm text-muted-foreground">Qualified leads and booked calls from day one of your event</p>
+                <p className="text-sm text-muted-foreground">Qualified leads and booked calls from day one of your event — results your competitors can only dream of</p>
               </div>
               
               <div className="p-6 bg-card rounded-xl border border-border">
@@ -457,7 +443,7 @@ const Offers = () => {
                   <Users className="w-6 h-6 text-secondary" />
                 </div>
                 <h3 className="font-bold mb-2">Audience Assets</h3>
-                <p className="text-sm text-muted-foreground">Email lists, SMS lists, and retargeting pools you own forever</p>
+                <p className="text-sm text-muted-foreground">Email lists, SMS lists, and retargeting pools you own forever — assets your competitors have to rebuild every time</p>
               </div>
               
               <div className="p-6 bg-card rounded-xl border border-border">
@@ -465,25 +451,50 @@ const Offers = () => {
                   <Award className="w-6 h-6 text-accent" />
                 </div>
                 <h3 className="font-bold mb-2">Authority Positioning</h3>
-                <p className="text-sm text-muted-foreground">Brand authority that makes future sales easier and cheaper</p>
+                <p className="text-sm text-muted-foreground">Brand authority that makes future sales easier and cheaper — while competitors struggle to be heard</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Expected Results Table */}
+      {/* Expected Results Table with Ad Spend Slider */}
       <section className="py-16 relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
         
         <div className="container relative z-10 px-4 md:px-6">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Expected <span className="text-gradient">Performance Results</span>
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              Real numbers based on our track record. Adjust ad spend sliders above to see scaled projections.
+            <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
+              Real numbers based on our track record. <span className="text-foreground font-medium">Results your competitors can only dream of.</span>
             </p>
+            
+            {/* Single Ad Spend Slider */}
+            <div className="max-w-md mx-auto p-6 bg-card rounded-xl border border-border mb-8">
+              <div className="flex justify-between items-center mb-4">
+                <div className="text-left">
+                  <span className="text-sm font-semibold text-foreground">Ad Budget Projection</span>
+                  <p className="text-xs text-muted-foreground">Adjust to see scaled performance</p>
+                </div>
+                <span className="text-2xl font-bold text-primary">
+                  ${globalAdSpend.toLocaleString()}
+                </span>
+              </div>
+              <Slider
+                value={[globalAdSpend]}
+                onValueChange={(value) => setGlobalAdSpend(value[0])}
+                min={0}
+                max={50000}
+                step={1000}
+                className="w-full"
+              />
+              <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                <span>$0</span>
+                <span>$50,000</span>
+              </div>
+            </div>
           </div>
           
           <div className="overflow-x-auto rounded-xl border border-border bg-card">
@@ -541,14 +552,14 @@ const Offers = () => {
       </section>
 
       {/* Full Comparison Table */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-muted/30" id="comparison">
         <div className="container px-4 md:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Complete Feature <span className="text-primary">Comparison</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Every detail of what's included in each plan. No hidden fees, no surprises.
+              Every detail of what's included in each plan. No hidden fees, no surprises. <span className="text-foreground font-medium">See exactly why competitors can't match our value.</span>
             </p>
           </div>
           
@@ -675,9 +686,12 @@ const Offers = () => {
               <span className="text-gradient">Revenue Engines</span>?
             </h2>
             
-            <p className="text-xl text-muted-foreground mb-8">
-              Book a strategy call and let's design your custom event marketing system. 
-              <span className="text-foreground font-medium"> No pressure, just clarity.</span>
+            <p className="text-xl text-muted-foreground mb-4">
+              <span className="text-foreground font-medium">Don't let competitors fill the room while you wait.</span> Book a strategy call and let's design your custom event marketing system.
+            </p>
+            
+            <p className="text-lg text-muted-foreground mb-8">
+              No pressure, just clarity.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

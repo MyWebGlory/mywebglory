@@ -730,19 +730,31 @@ const PricingSection = () => {
               )}
             </button>
             
-            <Button 
-              asChild
-              className={`w-full group py-6 text-lg ${
-                plan.popular 
-                  ? "bg-primary hover:bg-primary/90" 
-                  : "bg-muted hover:bg-muted/80 text-foreground"
-              }`}
-            >
-              <Link to="/contact">
-                {plan.cta}
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            <div className="flex flex-col gap-2">
+              <Button 
+                asChild
+                className={`w-full group py-6 text-lg ${
+                  plan.popular 
+                    ? "bg-primary hover:bg-primary/90" 
+                    : "bg-muted hover:bg-muted/80 text-foreground"
+                }`}
+              >
+                <Link to="/contact">
+                  {plan.cta}
+                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+              <Button 
+                asChild
+                variant="ghost"
+                size="sm"
+                className="w-full text-muted-foreground hover:text-foreground"
+              >
+                <Link to="/offers">
+                  See Full Details →
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
         

@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, MoreVertical } from "lucide-react";
 import { Link } from "react-router-dom";
 import logoFull from "@/assets/logo-full.png";
 import logoIcon from "@/assets/logo-icon.png";
@@ -8,6 +8,8 @@ import logoIcon from "@/assets/logo-icon.png";
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMoreMenuOpen, setIsMoreMenuOpen] = useState(false);
+  const moreMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,9 +19,31 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
+        setIsMoreMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const navLinks = [
-    { label: "Event Marketing", href: "/event-marketing", isRoute: true },
-    { label: "Offers", href: "/offers", isRoute: true },
+    { label: "Event Marketing", href: "/event-marketing" },
+    { label: "Offers", href: "/offers" },
+  ];
+
+  const allPages = [
+    { label: "Event Marketing", href: "/event-marketing" },
+    { label: "How It Works", href: "/how-it-works" },
+    { label: "Our Offers", href: "/offers" },
+    { label: "Ads & Acquisition", href: "/ads-acquisition" },
+    { label: "Case Studies", href: "/case-studies" },
+    { label: "About Us", href: "/about" },
+    { label: "Contact", href: "/contact" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Privacy & Legal", href: "/privacy" },
   ];
 
   return (
@@ -32,38 +56,57 @@ const Navbar = () => {
     >
       <div className="container px-4 md:px-6">
         <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <a href="#" className="flex items-center">
+          {/* Logo - Links to home */}
+          <Link to="/" className="flex items-center">
             <img src={logoIcon} alt="MyWebGlory" className="h-10 md:hidden" />
             <img src={logoFull} alt="MyWebGlory" className="h-8 hidden md:block" />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              link.isRoute ? (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link.label}
-                </a>
-              )
+              <Link
+                key={link.href}
+                to={link.href}
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {link.label}
+              </Link>
             ))}
             <Button asChild className="bg-primary hover:bg-primary/90">
               <Link to="/contact">
                 Book a Call
               </Link>
             </Button>
+            
+            {/* More Menu (Burger) */}
+            <div className="relative" ref={moreMenuRef}>
+              <button
+                onClick={() => setIsMoreMenuOpen(!isMoreMenuOpen)}
+                className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
+                aria-label="More pages"
+              >
+                <MoreVertical className="w-5 h-5" />
+              </button>
+              
+              {isMoreMenuOpen && (
+                <div className="absolute top-full right-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-xl py-2 animate-fade-in z-50">
+                  <div className="px-3 py-2 border-b border-border mb-1">
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">All Pages</span>
+                  </div>
+                  {allPages.map((page) => (
+                    <Link
+                      key={page.href}
+                      to={page.href}
+                      className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+                      onClick={() => setIsMoreMenuOpen(false)}
+                    >
+                      {page.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -82,27 +125,19 @@ const Navbar = () => {
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border animate-fade-in">
-            <div className="container px-4 py-6 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                link.isRoute ? (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    className="text-lg text-muted-foreground hover:text-foreground transition-colors py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.href}
-                    href={link.href}
-                    className="text-lg text-muted-foreground hover:text-foreground transition-colors py-2"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
-                )
+            <div className="container px-4 py-6 flex flex-col gap-2">
+              <div className="pb-2 mb-2 border-b border-border">
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Navigate</span>
+              </div>
+              {allPages.map((page) => (
+                <Link
+                  key={page.href}
+                  to={page.href}
+                  className="text-base text-muted-foreground hover:text-foreground transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {page.label}
+                </Link>
               ))}
               <Button asChild className="bg-primary hover:bg-primary/90 w-full mt-4">
                 <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
