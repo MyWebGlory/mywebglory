@@ -474,8 +474,8 @@ const PricingSection = () => {
                   
                   <div className="flex md:flex-col items-center md:text-center gap-3 md:gap-2 md:pt-2">
                     {p.popular && (
-                      <span className="md:hidden bg-primary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider absolute top-1 right-2 whitespace-nowrap">
-                        Most Popular
+                      <span className="md:hidden bg-primary text-primary-foreground text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider absolute top-1 right-2">
+                        Popular
                       </span>
                     )}
                     <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center flex-shrink-0 ${
