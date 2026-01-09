@@ -15,54 +15,20 @@ const StrategyCallPopup = () => {
     }
   };
   useEffect(() => {
-    // TEMPORARY: Clear sessionStorage for testing - REMOVE THIS IN PRODUCTION
-    sessionStorage.removeItem("popup-dismissed");
-    console.log("📋 Popup component mounted, sessionStorage cleared for testing");
+    // Check if already dismissed this session
+    const wasDismissed = sessionStorage.getItem("popup-dismissed") === "true";
+    if (wasDismissed) {
+      setIsDismissed(true);
+      return;
+    }
 
-    // STRATEGY 1: Fallback timer - show after 2 minutes
+    // Show popup after 2 minutes (120000ms)
     const timer = setTimeout(() => {
-      console.log("⏰ Timer triggered!");
       showPopup();
     }, 120000);
 
-    // STRATEGY 2: Exit intent - mouse leaves viewport at top
-    const handleMouseLeave = (e: MouseEvent) => {
-      // Check if mouse left at the top of the page
-      if (e.clientY <= 5) {
-        console.log("🖱️ Exit intent detected! clientY:", e.clientY);
-        showPopup();
-      }
-    };
-
-    // STRATEGY 3: Scroll up detection - user scrolling back up quickly
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (lastScrollY.current > 300 && currentScrollY < lastScrollY.current - 150) {
-        console.log("📜 Scroll up detected!");
-        showPopup();
-      }
-      lastScrollY.current = currentScrollY;
-    };
-
-    // STRATEGY 4: Visibility change (tab switching)
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden') {
-        console.log("👁️ Tab switch detected!");
-        showPopup();
-      }
-    };
-
-    // Add event listeners
-    document.addEventListener("mouseleave", handleMouseLeave);
-    window.addEventListener("scroll", handleScroll, {
-      passive: true
-    });
-    document.addEventListener("visibilitychange", handleVisibilityChange);
     return () => {
       clearTimeout(timer);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      window.removeEventListener("scroll", handleScroll);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [isDismissed]);
   const handleDismiss = () => {
