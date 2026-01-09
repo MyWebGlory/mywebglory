@@ -31,13 +31,13 @@ const Navbar = () => {
 
   const navLinks = [
     { label: "Event Marketing", href: "/event-marketing" },
-    { label: "Offers", href: "/offers" },
+    { label: "Pricing", href: "/pricing" },
   ];
 
   const allPages = [
     { label: "Event Marketing", href: "/event-marketing" },
     { label: "How It Works", href: "/how-it-works" },
-    { label: "Our Offers", href: "/offers" },
+    { label: "Pricing", href: "/pricing" },
     { label: "Ads & Acquisition", href: "/ads-acquisition" },
     { label: "Case Studies", href: "/case-studies" },
     { label: "About Us", href: "/about" },

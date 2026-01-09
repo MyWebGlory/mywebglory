@@ -750,7 +750,7 @@ const PricingSection = () => {
                 size="sm"
                 className="w-full text-muted-foreground hover:text-foreground"
               >
-                <Link to="/offers">
+                <Link to="/pricing">
                   See Full Details →
                 </Link>
               </Button>
