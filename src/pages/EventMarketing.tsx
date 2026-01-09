@@ -843,9 +843,9 @@ const SystemSection = () => {
   return (
     <section
       ref={ref}
-      className="relative h-[130vh] md:h-[140vh] bg-background overflow-hidden"
+      className="relative h-[180vh] md:h-[200vh] bg-background overflow-hidden"
     >
-      <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-start pt-24 md:pt-32 overflow-hidden">
         {/* Animated background grid */}
         <div
           className="absolute inset-0 pointer-events-none opacity-10"
@@ -857,7 +857,7 @@ const SystemSection = () => {
 
         {/* Central glow */}
         <motion.div
-          className="absolute w-96 h-96 rounded-full bg-primary/20 blur-3xl"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-primary/20 blur-3xl"
           style={{ scale: glowScale, opacity: glowOpacity }}
         />
 
@@ -885,29 +885,36 @@ const SystemSection = () => {
 
         {/* Rotating connection circle */}
         <motion.div
-          className="absolute w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10"
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         />
 
-        <div className="container mx-auto px-4 relative z-10">
-          {/* Title */}
-          <motion.div
-            style={{ scale: titleScale, opacity: titleOpacity }}
-            className="text-center mb-8 md:mb-16"
-          >
-            <p className="text-lg md:text-xl text-muted-foreground mb-2 md:mb-4">
+        <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+          {/* Title - Sticky at top */}
+          <div className="text-center mb-8 md:mb-12">
+            <motion.p 
+              className="text-lg md:text-xl text-muted-foreground mb-2 md:mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
               Real event marketing is not one action.
-            </p>
-            <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold">
+            </motion.p>
+            <motion.h2 
+              className="text-3xl md:text-5xl lg:text-7xl font-bold"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
               IT'S A <span className="text-gradient">SYSTEM</span>
-            </h2>
-          </motion.div>
+            </motion.h2>
+          </div>
 
-          {/* Nodes in circular/grid layout */}
-          <div className="relative max-w-4xl mx-auto">
+          {/* Nodes in circular/grid layout - centered */}
+          <div className="relative w-full max-w-4xl mx-auto flex items-center justify-center">
             {/* Desktop: Circular layout */}
-            <div className="hidden md:block relative h-[350px]">
+            <div className="hidden md:block relative h-[350px] w-full">
               {nodes.map((node, i) => {
                 const angle = (i / nodes.length) * 2 * Math.PI - Math.PI / 2;
                 const radius = 160;
@@ -969,8 +976,8 @@ const SystemSection = () => {
               </motion.div>
             </div>
 
-            {/* Mobile: Grid layout */}
-            <div className="md:hidden grid grid-cols-2 gap-3 px-2">
+            {/* Mobile: Grid layout - centered */}
+            <div className="md:hidden grid grid-cols-2 gap-3 px-2 w-full max-w-sm mx-auto">
               {nodes.map((node, i) => (
                 <motion.div
                   key={i}
@@ -992,10 +999,10 @@ const SystemSection = () => {
             </div>
           </div>
 
-          {/* Closing statement */}
+          {/* Closing statement - more space above */}
           <motion.p
             style={{ opacity: closingOpacity, y: closingY }}
-            className="text-center text-lg md:text-xl lg:text-2xl text-muted-foreground mt-8 md:mt-16 max-w-2xl mx-auto px-4"
+            className="text-center text-lg md:text-xl lg:text-2xl text-muted-foreground mt-16 md:mt-24 max-w-2xl mx-auto px-4"
           >
             The event itself is just one moment in a{" "}
             <span className="text-foreground font-semibold">
