@@ -321,7 +321,7 @@ const HeroSection = () => {
         
         {/* Social Proof Bar */}
         <motion.div 
-          className="flex flex-col items-center justify-center gap-3 sm:gap-4 mb-6 sm:mb-8"
+          className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-6 mb-6 sm:mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
@@ -340,6 +340,9 @@ const HeroSection = () => {
             ))}
             <span className="ml-2 text-xs sm:text-sm text-muted-foreground">4.9/5</span>
           </div>
+          
+          {/* Divider - hidden on mobile */}
+          <div className="hidden md:block w-px h-5 bg-border" />
           
           {/* Real Avatar Photos */}
           <motion.div 
