@@ -71,37 +71,37 @@ const StrategyCallPopup = () => {
     sessionStorage.setItem("popup-dismissed", "true");
   };
   if (isDismissed || !isVisible) return null;
-  return <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+  return <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 py-8">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-background/80 backdrop-blur-sm animate-fade-in" onClick={handleDismiss} />
       
       {/* Popup */}
-      <div className="relative bg-card border border-border rounded-2xl shadow-2xl w-full max-w-3xl animate-scale-in overflow-hidden">
-        {/* Close button */}
-        <button onClick={handleDismiss} className="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors z-10">
+      <div className="relative bg-card border border-border rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] flex flex-col animate-scale-in overflow-hidden">
+        {/* Close button - sticky positioning */}
+        <button onClick={handleDismiss} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors z-20 bg-card/80 backdrop-blur-sm rounded-full p-1.5 hover:bg-muted">
           <X className="w-5 h-5" />
         </button>
         
         {/* Header */}
-        <div className="p-6 pb-4 text-center border-b border-border">
-          <p className="text-primary font-medium mb-2">⚡ Special Offer For You...</p>
-          <h3 className="text-2xl font-bold mb-2">
+        <div className="p-4 pb-3 text-center border-b border-border shrink-0">
+          <p className="text-primary font-medium mb-1 text-sm">⚡ Special Offer For You...</p>
+          <h3 className="text-xl md:text-2xl font-bold mb-1">
             Your Competitors Are Already Booking Calls 🚀
           </h3>
-          <p className="text-muted-foreground">While you're thinking about it, other brands are filling their events with clients.<span className="text-foreground font-medium"> Don't let them get ahead.</span>
+          <p className="text-muted-foreground text-sm">While you're thinking about it, other brands are filling their events with clients.<span className="text-foreground font-medium"> Don't let them get ahead.</span>
           </p>
-          <p className="text-sm text-primary mt-2">
+          <p className="text-xs text-primary mt-1">
             🎯 Free 30-min strategy call • 🔥 Limited spots this week
           </p>
         </div>
 
-        {/* Calendly Embed */}
-        <div className="p-2">
-          <iframe src="https://calendly.com/gabriel-ageron/mywebglory?hide_gdpr_banner=1&background_color=0a0a0a&text_color=ffffff&primary_color=f97316" width="100%" height="500" frameBorder="0" title="Schedule a call" className="w-full rounded-xl" />
+        {/* Calendly Embed - scrollable */}
+        <div className="p-2 flex-1 min-h-0 overflow-auto">
+          <iframe src="https://calendly.com/gabriel-ageron/mywebglory?hide_gdpr_banner=1&background_color=0a0a0a&text_color=ffffff&primary_color=f97316" width="100%" height="400" frameBorder="0" title="Schedule a call" className="w-full rounded-xl min-h-[350px]" />
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-border text-center">
+        <div className="p-3 border-t border-border text-center shrink-0">
           <Button asChild variant="ghost" size="sm" className="text-muted-foreground">
             <Link to="/contact" onClick={handleDismiss}>
               View All Contact Options →
