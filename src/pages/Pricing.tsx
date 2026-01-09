@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navbar from "@/components/landing/Navbar";
 import FooterCTA from "@/components/landing/FooterCTA";
 import { Button } from "@/components/ui/button";
@@ -236,7 +237,7 @@ const performanceData: PerformanceMetric[] = [
   { name: "Estimated New Clients", icon: Award, values: [null, [6, 18], [15, 45], "Growth target"], highlight: true },
 ];
 
-const Offers = () => {
+const Pricing = () => {
   const [globalAdSpend, setGlobalAdSpend] = useState(10000);
 
   const getScaledValue = (baseValue: [number, number] | string | null, planIndex: number, costPerRegistrant: number): string => {
@@ -268,7 +269,12 @@ const Offers = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <motion.div 
+      className="min-h-screen bg-background"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       <Navbar />
       
       {/* Hero Section */}
@@ -281,14 +287,21 @@ const Offers = () => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-float" style={{ animationDelay: "-3s" }} />
         
         <div className="container relative z-10 px-4 md:px-6">
-          <div className="text-center max-w-4xl mx-auto">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 mb-6 animate-pulse-glow">
-              <Sparkles className="w-8 h-8 text-primary" />
+          <motion.div 
+            className="text-center max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            <div className="flex flex-col items-center justify-center mb-6">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 mb-4 animate-pulse-glow">
+                <Sparkles className="w-8 h-8 text-primary" />
+              </div>
+              
+              <span className="inline-block text-primary font-semibold tracking-wide uppercase text-sm px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
+                Investment Plans
+              </span>
             </div>
-            
-            <span className="inline-block text-primary font-semibold tracking-wide uppercase text-sm mb-4 px-4 py-2 bg-primary/10 rounded-full border border-primary/20">
-              Investment Plans
-            </span>
             
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               Choose Your{" "}
@@ -317,7 +330,7 @@ const Offers = () => {
                 <span>Scalable Results</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -716,8 +729,8 @@ const Offers = () => {
       </section>
 
       <FooterCTA />
-    </div>
+    </motion.div>
   );
 };
 
-export default Offers;
+export default Pricing;

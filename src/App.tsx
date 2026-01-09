@@ -9,7 +9,7 @@ import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import EventMarketing from "./pages/EventMarketing";
 import HowItWorks from "./pages/HowItWorks";
-import Offers from "./pages/Offers";
+import Pricing from "./pages/Pricing";
 import AdsAcquisition from "./pages/AdsAcquisition";
 import CaseStudies from "./pages/CaseStudies";
 import About from "./pages/About";
@@ -32,7 +32,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/event-marketing" element={<EventMarketing />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
-            <Route path="/offers" element={<Offers />} />
+            <Route path="/pricing" element={<Pricing />} />
             <Route path="/ads-acquisition" element={<AdsAcquisition />} />
             <Route path="/case-studies" element={<CaseStudies />} />
             <Route path="/about" element={<About />} />
