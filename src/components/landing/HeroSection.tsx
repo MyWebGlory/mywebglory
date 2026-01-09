@@ -30,34 +30,30 @@ const HeroSection = () => {
   const eventsCount = useCounter(150, 2000, 500);
   const attendeesCount = useCounter(50, 2000, 700);
   const showRate = useCounter(60, 2000, 900);
-  
+
   // Random viewer count for FOMO with gradual changes
   const [viewerCount, setViewerCount] = useState(0);
   const [isIncreasing, setIsIncreasing] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   // Booking notification state
   const [showBookingNotif, setShowBookingNotif] = useState(false);
-  
+
   // Play ting sound
   const playTingSound = () => {
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
-    
     oscillator.connect(gainNode);
     gainNode.connect(audioContext.destination);
-    
     oscillator.frequency.setValueAtTime(880, audioContext.currentTime);
     oscillator.frequency.setValueAtTime(1100, audioContext.currentTime + 0.1);
-    
     gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-    
     oscillator.start(audioContext.currentTime);
     oscillator.stop(audioContext.currentTime + 0.5);
   };
-  
+
   // Show counter after 10s delay
   useEffect(() => {
     const showTimeout = setTimeout(() => {
@@ -66,22 +62,20 @@ const HeroSection = () => {
     }, 10000);
     return () => clearTimeout(showTimeout);
   }, []);
-  
+
   // Show booking notification: first at 30-60s, then 5min wait, then 30-60s again, repeat
   useEffect(() => {
     let timeoutId: NodeJS.Timeout;
     let isFirstShow = true;
-    
     const showNotification = () => {
       setShowBookingNotif(true);
       playTingSound();
-      
+
       // Hide after 10s
       setTimeout(() => {
         setShowBookingNotif(false);
       }, 10000);
     };
-    
     const scheduleNext = () => {
       if (isFirstShow) {
         // First show: random 30-60s
@@ -89,7 +83,7 @@ const HeroSection = () => {
         timeoutId = setTimeout(() => {
           showNotification();
           isFirstShow = false;
-          
+
           // After first show, wait 5 min then schedule random 30-60s
           timeoutId = setTimeout(() => {
             scheduleNext();
@@ -100,7 +94,7 @@ const HeroSection = () => {
         const randomDelay = Math.floor(Math.random() * 30000) + 30000;
         timeoutId = setTimeout(() => {
           showNotification();
-          
+
           // Wait 5 min then schedule next
           timeoutId = setTimeout(() => {
             scheduleNext();
@@ -108,28 +102,24 @@ const HeroSection = () => {
         }, randomDelay);
       }
     };
-    
     scheduleNext();
-    
     return () => clearTimeout(timeoutId);
   }, []);
-  
+
   // Update counter every 30s with gradual changes
   useEffect(() => {
     if (!isVisible) return;
-    
     const interval = setInterval(() => {
       setViewerCount(prev => {
         // Random change between -3 and +3
         const change = Math.floor(Math.random() * 7) - 3;
         const newCount = prev + change;
-        
+
         // Keep between 1 and 12
         const clampedCount = Math.max(1, Math.min(12, newCount));
-        
+
         // Track if increasing for animation
         setIsIncreasing(clampedCount > prev);
-        
         return clampedCount;
       });
     }, 30000);
@@ -171,23 +161,39 @@ const HeroSection = () => {
       
       {/* Virtual Event Elements - Distant from center */}
       {/* Floating video play button - top left */}
-      <div className="absolute top-[12%] left-[8%] opacity-20 animate-float" style={{ animationDuration: "6s" }}>
+      <div className="absolute top-[12%] left-[8%] opacity-20 animate-float" style={{
+      animationDuration: "6s"
+    }}>
         <div className="w-12 h-12 rounded-xl bg-primary/30 backdrop-blur-sm border border-primary/20 flex items-center justify-center">
           <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-primary/60 border-b-[6px] border-b-transparent ml-1" />
         </div>
       </div>
       
       {/* Floating chat bubble - top right */}
-      <div className="absolute top-[15%] right-[6%] opacity-15 animate-float" style={{ animationDuration: "7s", animationDelay: "-2s" }}>
+      <div className="absolute top-[15%] right-[6%] opacity-15 animate-float" style={{
+      animationDuration: "7s",
+      animationDelay: "-2s"
+    }}>
         <div className="w-14 h-10 rounded-lg bg-secondary/30 backdrop-blur-sm border border-secondary/20 flex items-center justify-center gap-1">
-          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{ animationDuration: "1.5s" }} />
-          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{ animationDuration: "1.5s", animationDelay: "0.2s" }} />
-          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{ animationDuration: "1.5s", animationDelay: "0.4s" }} />
+          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{
+          animationDuration: "1.5s"
+        }} />
+          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{
+          animationDuration: "1.5s",
+          animationDelay: "0.2s"
+        }} />
+          <div className="w-1.5 h-1.5 rounded-full bg-secondary/60 animate-pulse" style={{
+          animationDuration: "1.5s",
+          animationDelay: "0.4s"
+        }} />
         </div>
       </div>
       
       {/* Floating screen share icon - bottom left */}
-      <div className="absolute bottom-[18%] left-[5%] opacity-20 animate-float" style={{ animationDuration: "8s", animationDelay: "-3s" }}>
+      <div className="absolute bottom-[18%] left-[5%] opacity-20 animate-float" style={{
+      animationDuration: "8s",
+      animationDelay: "-3s"
+    }}>
         <div className="w-16 h-12 rounded-lg bg-accent/20 backdrop-blur-sm border border-accent/15 flex items-center justify-center">
           <div className="w-8 h-5 rounded border border-accent/40 flex items-center justify-center">
             <div className="w-3 h-3 border-t-2 border-r-2 border-accent/50 rotate-[-45deg]" />
@@ -196,7 +202,10 @@ const HeroSection = () => {
       </div>
       
       {/* Floating participant grid - bottom right */}
-      <div className="absolute bottom-[22%] right-[7%] opacity-15 animate-float" style={{ animationDuration: "9s", animationDelay: "-1s" }}>
+      <div className="absolute bottom-[22%] right-[7%] opacity-15 animate-float" style={{
+      animationDuration: "9s",
+      animationDelay: "-1s"
+    }}>
         <div className="grid grid-cols-2 gap-1 p-2 rounded-lg bg-primary/20 backdrop-blur-sm border border-primary/15">
           <div className="w-4 h-4 rounded bg-primary/30" />
           <div className="w-4 h-4 rounded bg-primary/40" />
@@ -206,7 +215,10 @@ const HeroSection = () => {
       </div>
       
       {/* Floating microphone - left side */}
-      <div className="absolute top-[45%] left-[3%] opacity-15 animate-float" style={{ animationDuration: "5s", animationDelay: "-4s" }}>
+      <div className="absolute top-[45%] left-[3%] opacity-15 animate-float" style={{
+      animationDuration: "5s",
+      animationDelay: "-4s"
+    }}>
         <div className="w-8 h-12 flex flex-col items-center">
           <div className="w-6 h-8 rounded-t-full bg-secondary/30 border border-secondary/20" />
           <div className="w-2 h-3 bg-secondary/25" />
@@ -215,13 +227,14 @@ const HeroSection = () => {
       </div>
       
       {/* Floating calendar/event icon - right side */}
-      <div className="absolute top-[50%] right-[4%] opacity-20 animate-float" style={{ animationDuration: "7s", animationDelay: "-5s" }}>
+      <div className="absolute top-[50%] right-[4%] opacity-20 animate-float" style={{
+      animationDuration: "7s",
+      animationDelay: "-5s"
+    }}>
         <div className="w-10 h-12 rounded-lg bg-accent/25 backdrop-blur-sm border border-accent/20 flex flex-col">
           <div className="h-3 bg-accent/30 rounded-t-lg" />
           <div className="flex-1 p-1 grid grid-cols-3 gap-0.5">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-sm bg-accent/40" />
-            ))}
+            {[...Array(6)].map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-sm bg-accent/40" />)}
           </div>
         </div>
       </div>
@@ -280,7 +293,7 @@ const HeroSection = () => {
             <img src={avatarsSocialProof} alt="Happy event organizers" className="h-7 md:h-8 object-contain animate-scale-in" style={{
             animationDelay: "0.5s"
           }} />
-            <span className="text-sm text-muted-foreground">150+ Event Organizers Trust Us</span>
+            <span className="text-sm text-muted-foreground">100+ Event Organizers Trust Us</span>
           </div>
         </div>
         
@@ -334,8 +347,7 @@ const HeroSection = () => {
       {/* FOMO Elements Container */}
       <div className="fixed bottom-6 left-6 z-50 flex flex-col gap-2">
         {/* Booking Notification */}
-        {showBookingNotif && (
-          <div className="animate-fade-in">
+        {showBookingNotif && <div className="animate-fade-in">
             <div className="flex items-center gap-3 px-4 py-3 rounded-xl backdrop-blur-md bg-background/90 border border-border/50 shadow-xl">
               <span className="text-xl">🎉</span>
               <div className="flex flex-col">
@@ -343,29 +355,18 @@ const HeroSection = () => {
                 <span className="text-xs text-muted-foreground">A few seconds ago</span>
               </div>
             </div>
-          </div>
-        )}
+          </div>}
         
         {/* Live Viewers Pill */}
-        {isVisible && (
-          <div className="animate-fade-in">
-            <div 
-              className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 bg-background/80 border-border/50 ${
-                isIncreasing ? 'shadow-green-500/30' : ''
-              }`}
-            >
+        {isVisible && <div className="animate-fade-in">
+            <div className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 bg-background/80 border-border/50 ${isIncreasing ? 'shadow-green-500/30' : ''}`}>
               <span className="relative flex h-2 w-2">
-                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 ${
-                  isIncreasing ? 'animate-pulse' : ''
-                }`}></span>
-                <span className={`relative inline-flex rounded-full h-2 w-2 bg-green-500 ${
-                  isIncreasing ? 'animate-pulse' : ''
-                }`}></span>
+                <span className={`animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 ${isIncreasing ? 'animate-pulse' : ''}`}></span>
+                <span className={`relative inline-flex rounded-full h-2 w-2 bg-green-500 ${isIncreasing ? 'animate-pulse' : ''}`}></span>
               </span>
               <span className="text-xs text-muted-foreground">{viewerCount} viewing now</span>
             </div>
-          </div>
-        )}
+          </div>}
       </div>
       
       {/* Scroll Indicator */}
