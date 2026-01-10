@@ -1,17 +1,18 @@
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
-import { ArrowLeft, Users, Target, Heart, Zap, Award, Shield, Clock, Sparkles, Palette, Video, Phone, PenTool, TrendingUp, Megaphone } from "lucide-react";
+import { ArrowLeft, Users, Target, Heart, Zap, Award, Shield, Clock, Sparkles, Palette, Video, Phone, PenTool, TrendingUp, Megaphone, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import gabrielPhoto from "@/assets/gabriel-ageron.png";
+import linkedinIcon from "@/assets/linkedin-icon.png";
 
 const teamRoles = [
   { icon: TrendingUp, title: "Media Buyers", count: 3 },
   { icon: Palette, title: "Graphic Designers", count: 3 },
   { icon: Megaphone, title: "Community Managers", count: 2 },
   { icon: PenTool, title: "Copywriters", count: 2 },
-  { icon: Video, title: "Video Editors", count: 2 },
-  { icon: Phone, title: "Setters", count: 1 },
+  { icon: Video, title: "Video Editors", count: 1 },
+  { icon: Phone, title: "Setters", count: 2 },
   { icon: Target, title: "Strategists", count: 1 },
   { icon: Award, title: "Marketing Director", count: 1 },
 ];
@@ -35,7 +36,7 @@ const values = [
   {
     icon: Zap,
     title: "Speed Without Sacrifice",
-    description: "Event timelines are tight. We've built systems that let us move fast without cutting corners—because your launch date isn't negotiable."
+    description: "Event timelines are tight. We've built systems that let us move fast without cutting corners, because your launch date isn't negotiable."
   },
   {
     icon: Clock,
@@ -95,30 +96,39 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5" />
         
         <div className="container px-4 md:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="relative"
+              className="flex justify-center lg:justify-start"
             >
-              {/* Decorative elements around photo */}
-              <div className="absolute -top-6 -left-6 w-24 h-24 border-2 border-primary/30 rounded-2xl" />
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl blur-xl" />
-              
-              <div className="relative bg-gradient-to-br from-card to-muted rounded-3xl p-8 border border-border">
-                <div className="flex flex-col items-center">
-                  <div className="relative mb-6">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-full blur-xl opacity-50 scale-110" />
-                    <img 
-                      src={gabrielPhoto} 
-                      alt="Gabriel Ageron - Founder of MyWebGlory" 
-                      className="relative w-48 h-48 md:w-56 md:h-56 rounded-full object-cover border-4 border-background shadow-2xl"
-                    />
+              <div className="flex items-center gap-6">
+                <img 
+                  src={gabrielPhoto} 
+                  alt="Gabriel Ageron - Founder of MyWebGlory" 
+                  className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-primary/30 shadow-lg"
+                />
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Gabriel Ageron</h3>
+                  <p className="text-primary font-medium text-sm mb-3">Founder & CEO</p>
+                  <div className="flex items-center gap-3">
+                    <a 
+                      href="https://www.linkedin.com/in/gabriel-ageron/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="hover:opacity-80 transition-opacity"
+                    >
+                      <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6" />
+                    </a>
+                    <a 
+                      href="mailto:gabriel@mywebglory.com"
+                      className="flex items-center justify-center w-6 h-6 bg-primary rounded-full hover:opacity-80 transition-opacity"
+                    >
+                      <Mail className="w-3.5 h-3.5 text-primary-foreground" />
+                    </a>
                   </div>
-                  <h3 className="text-2xl font-bold text-foreground">Gabriel Ageron</h3>
-                  <p className="text-primary font-medium">Founder & CEO</p>
                 </div>
               </div>
             </motion.div>
@@ -136,7 +146,7 @@ const About = () => {
               
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  For five years, I worked in general marketing—running campaigns across every industry you can imagine. E-commerce, SaaS, real estate, you name it. I was good at it. But something was missing.
+                  For five years, I worked in general marketing, running campaigns across every industry you can imagine. E-commerce, SaaS, real estate, you name it. I was good at it. But something was missing.
                 </p>
                 <p>
                   Then came my first event marketing project. A client needed to fill seats for their annual conference, and they were desperate. I dove in headfirst, not knowing that this one project would change everything.
@@ -145,10 +155,10 @@ const About = () => {
                   The energy was different. The stakes felt real. When those seats filled up and I watched attendees flood through the doors, I felt something I hadn't felt in years: <span className="text-foreground font-medium">pure excitement</span>.
                 </p>
                 <p>
-                  I started getting more requests. Webinars, trade shows, product launches, networking events. Each one taught me something new about what makes people show up—not just register, but actually <span className="text-foreground font-medium">be there</span>.
+                  I started getting more requests. Webinars, trade shows, product launches, networking events. Each one taught me something new about what makes people show up, not just register, but actually <span className="text-foreground font-medium">be there</span>.
                 </p>
                 <p>
-                  In 2021, I made the leap. I stopped being a generalist and went all-in on event marketing. That's when MyWebGlory was born—a boutique agency built by someone who genuinely <span className="text-foreground font-medium">loves</span> this work.
+                  In 2021, I made the leap. I stopped being a generalist and went all-in on event marketing. That's when MyWebGlory was born, a boutique agency built by someone who genuinely <span className="text-foreground font-medium">loves</span> this work.
                 </p>
                 <p>
                   Today, our team of 15 specialists helps event organizers around the world turn empty rooms into standing-room-only experiences. And honestly? I still get that same rush every single time.
