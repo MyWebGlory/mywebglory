@@ -38,14 +38,15 @@ const experiences = [
 ];
 
 const teamRoles = [
-  { icon: TrendingUp, title: "Media Buyers", count: 3 },
-  { icon: Palette, title: "Graphic Designers", count: 3 },
+  { icon: TrendingUp, title: "Media Buyers", count: 2 },
+  { icon: Palette, title: "Graphic Designers", count: 2 },
   { icon: Megaphone, title: "Community Managers", count: 2 },
   { icon: PenTool, title: "Copywriters", count: 2 },
   { icon: Video, title: "Video Editors", count: 1 },
   { icon: Phone, title: "Setters", count: 2 },
-  { icon: Target, title: "Strategists", count: 1 },
+  { icon: Target, title: "Strategists", count: 2 },
   { icon: Award, title: "Marketing Director", count: 1 },
+  { icon: Zap, title: "Web Developers", count: 1 },
 ];
 
 const values = [
@@ -258,7 +259,7 @@ const About = () => {
                 In January 2022, I made the leap. I stopped being a generalist and went all-in on event marketing. That's when <span className="text-foreground font-medium">MyWebGlory</span> was born, a boutique agency built by someone who genuinely loves this work.
               </p>
               <p>
-                Since then, my entrepreneurial drive led me to co-found <span className="text-foreground font-medium">Mydrop</span> in 2023, an AI-powered social media management tool, and join <span className="text-foreground font-medium">Tope-la</span> as CTO in 2024, building France's first B2B platform for construction professionals. These ventures have sharpened my technical expertise and deepened my understanding of scalable marketing systems.
+                Since then, my entrepreneurial drive led me to found <span className="text-foreground font-medium">Mydrop</span> in 2023, an AI-powered social media management tool, and join <span className="text-foreground font-medium">Tope-la</span> as CTO in 2024, building France's first B2B platform for construction professionals. These ventures have sharpened my technical expertise and deepened my understanding of scalable marketing systems.
               </p>
               <p>
                 Today, our team of 15 specialists helps event organizers around the world turn empty rooms into standing-room-only experiences. And honestly? I still get that same rush every single time.
