@@ -1,6 +1,6 @@
-import { useRef, useState, useEffect } from "react";
-import { motion, useInView } from "framer-motion";
-import { ChevronLeft, ChevronRight, ArrowRight, Building2, Target, Zap, BarChart3, Rocket, TrendingUp, Award, Lightbulb, Globe, Mail, Phone, MessageSquare, Users, Calendar } from "lucide-react";
+import { useRef, useState, useEffect, createContext, useContext } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, ArrowRight, Building2, Target, Zap, BarChart3, Rocket, TrendingUp, Award, Lightbulb, Globe, Mail, Phone, MessageSquare, Users, Calendar, X, Sparkles, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import {
@@ -13,6 +13,125 @@ import {
 } from "@/components/ui/carousel";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+
+// Media Modal Context
+const MediaModalContext = createContext<{
+  openModal: (src: string, type: 'image' | 'video', alt?: string) => void;
+}>({ openModal: () => {} });
+
+const useMediaModal = () => useContext(MediaModalContext);
+
+// Media Modal Component
+const MediaModal = ({ 
+  isOpen, 
+  onClose, 
+  src, 
+  type, 
+  alt 
+}: { 
+  isOpen: boolean; 
+  onClose: () => void; 
+  src: string; 
+  type: 'image' | 'video'; 
+  alt?: string;
+}) => {
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
+    }
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative max-w-5xl max-h-[90vh] w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={onClose}
+              className="absolute -top-12 right-0 p-2 text-white/80 hover:text-white transition-colors"
+            >
+              <X className="w-8 h-8" />
+            </button>
+            
+            {type === 'image' ? (
+              <img 
+                src={src} 
+                alt={alt || 'Expanded view'} 
+                className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+              />
+            ) : (
+              <video 
+                src={src} 
+                controls 
+                autoPlay
+                className="w-full max-h-[85vh] object-contain rounded-lg"
+              />
+            )}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+// Expandable Media Component
+const ExpandableMedia = ({ 
+  src, 
+  type, 
+  alt, 
+  className 
+}: { 
+  src: string; 
+  type: 'image' | 'video'; 
+  alt?: string; 
+  className?: string;
+}) => {
+  const { openModal } = useMediaModal();
+  
+  return (
+    <div 
+      className={`relative cursor-pointer group ${className}`}
+      onClick={() => openModal(src, type, alt)}
+    >
+      {type === 'image' ? (
+        <img src={src} alt={alt || ''} className="w-full h-full object-contain" />
+      ) : (
+        <>
+          <video src={src} muted playsInline className="w-full h-full object-contain" />
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/40 transition-colors">
+            <Play className="w-8 h-8 text-white" />
+          </div>
+        </>
+      )}
+      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+        <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white text-xs bg-black/50 px-2 py-1 rounded">
+          Click to expand
+        </span>
+      </div>
+    </div>
+  );
+};
 
 // Import Kornit assets
 import kornitEventBanner from "@/assets/case-studies/kornit/event-banner.png";
@@ -68,6 +187,10 @@ interface CaseStudyData {
       insights: string[]; 
       quote?: { text: string; author: string };
       clientComments?: string[];
+    };
+    cta: {
+      headline: string;
+      subtext: string;
     };
   };
 }
@@ -180,6 +303,10 @@ const kornitCaseStudy: CaseStudyData = {
         "Future Kornit events can scale faster using this blueprint."
       ],
       clientComments: [kornitClientComment1, kornitClientComment2, kornitClientComment3]
+    },
+    cta: {
+      headline: "Ready to Build Your Revenue System?",
+      subtext: "Every case study started with a conversation. Let's explore what's possible for your business."
     }
   }
 };
@@ -198,7 +325,8 @@ const slideIcons = {
   execution: Rocket,
   results: TrendingUp,
   longTermImpact: Award,
-  takeaway: Lightbulb
+  takeaway: Lightbulb,
+  cta: Sparkles
 };
 
 // Hero Section
@@ -320,16 +448,16 @@ const StorySlide = ({
     if (type === 'takeaway') {
       const takeawayContent = content as CaseStudyData['slides']['takeaway'];
       return (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {/* Key Insights */}
-          <div className="space-y-3">
+          <div className="space-y-2">
             {takeawayContent.insights.map((insight, idx) => (
               <motion.p
                 key={idx}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.1 }}
-                className="text-sm sm:text-base text-foreground/90 border-l-2 border-primary pl-4"
+                transition={{ delay: idx * 0.05 }}
+                className="text-xs sm:text-sm text-foreground/90 border-l-2 border-primary pl-3"
               >
                 {insight}
               </motion.p>
@@ -347,12 +475,13 @@ const StorySlide = ({
                     initial={{ opacity: 0, y: 5 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.1 }}
-                    className="bg-muted/30 rounded-md overflow-hidden border border-border/50"
+                    className="bg-muted/30 rounded-md overflow-hidden border border-border/50 h-20"
                   >
-                    <img 
+                    <ExpandableMedia 
                       src={comment} 
+                      type="image"
                       alt={`Client testimonial ${idx + 1}`}
-                      className="w-full h-20 object-contain"
+                      className="w-full h-full"
                     />
                   </motion.div>
                 ))}
@@ -364,25 +493,57 @@ const StorySlide = ({
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-base sm:text-lg font-medium text-center pt-4 border-t border-border/50"
+            transition={{ delay: 0.3 }}
+            className="text-sm font-medium text-center pt-3 border-t border-border/50"
           >
             When you work with us, your success doesn't just happen.
-            <br />
-            <span className="text-primary">It runs through MWG.</span>
+            <span className="text-primary"> It runs through MWG.</span>
           </motion.p>
-          
-          <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
-            <Button asChild size="lg" className="group">
-              <Link to="/how-it-works">
-                See How This Applies to You
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link to="/contact">Book a Strategy Call</Link>
-            </Button>
+        </div>
+      );
+    }
+
+    if (type === 'cta') {
+      const ctaContent = content as CaseStudyData['slides']['cta'];
+      return (
+        <div className="h-full flex flex-col items-center justify-center text-center relative">
+          {/* Background decorations */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-4 left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
+            <div className="absolute bottom-4 right-4 w-40 h-40 bg-primary/5 rounded-full blur-3xl" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl" />
           </div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="relative z-10 space-y-6"
+          >
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/20 mb-2">
+              <Sparkles className="w-8 h-8 text-primary" />
+            </div>
+            
+            <h3 className="text-xl sm:text-2xl font-bold">
+              {ctaContent.headline}
+            </h3>
+            
+            <p className="text-sm text-muted-foreground max-w-md mx-auto">
+              {ctaContent.subtext}
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-3 justify-center pt-4">
+              <Button asChild size="lg" className="group">
+                <Link to="/how-it-works">
+                  See How We Work
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link to="/contact">Book Strategy Call</Link>
+              </Button>
+            </div>
+          </motion.div>
         </div>
       );
     }
@@ -415,14 +576,13 @@ const StorySlide = ({
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="rounded-lg overflow-hidden border border-border/50 bg-black/50"
+                  className="rounded-lg overflow-hidden border border-border/50 bg-black/50 h-28"
                 >
-                  <video 
+                  <ExpandableMedia 
                     src={video} 
-                    controls
-                    muted
-                    playsInline
-                    className="w-full h-28 object-contain"
+                    type="video"
+                    alt={`Video asset ${idx + 1}`}
+                    className="w-full h-full"
                   />
                 </motion.div>
               ))}
@@ -438,12 +598,13 @@ const StorySlide = ({
                   initial={{ opacity: 0, scale: 0.95 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.1 }}
-                  className="rounded-lg overflow-hidden border border-border/50 bg-muted/30"
+                  className="rounded-lg overflow-hidden border border-border/50 bg-muted/30 h-24"
                 >
-                  <img 
+                  <ExpandableMedia 
                     src={img} 
+                    type="image"
                     alt={`Execution asset ${idx + 1}`}
-                    className="w-full h-24 object-contain"
+                    className="w-full h-full"
                   />
                 </motion.div>
               ))}
@@ -478,12 +639,13 @@ const StorySlide = ({
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-3 rounded-lg overflow-hidden border border-border/50 shadow-md bg-muted/30"
+            className="mt-3 rounded-lg overflow-hidden border border-border/50 shadow-md bg-muted/30 h-36"
           >
-            <img 
+            <ExpandableMedia 
               src={slideContent.image} 
+              type="image"
               alt={slideContent.imageAlt || "Case study visual"}
-              className="w-full h-36 object-contain"
+              className="w-full h-full"
             />
           </motion.div>
         )}
@@ -494,14 +656,13 @@ const StorySlide = ({
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="mt-3 rounded-lg overflow-hidden border border-border/50 shadow-md bg-black/50"
+            className="mt-3 rounded-lg overflow-hidden border border-border/50 shadow-md bg-black/50 h-36"
           >
-            <video 
+            <ExpandableMedia 
               src={slideContent.video} 
-              controls
-              muted
-              playsInline
-              className="w-full h-36 object-contain"
+              type="video"
+              alt="Case study video"
+              className="w-full h-full"
             />
           </motion.div>
         )}
@@ -513,6 +674,7 @@ const StorySlide = ({
     if (type === 'results') return 'Results';
     if (type === 'takeaway') return 'Key Takeaway';
     if (type === 'longTermImpact') return 'Long-term Impact';
+    if (type === 'cta') return 'Next Steps';
     return (content as SlideContent).title;
   };
   
@@ -544,7 +706,7 @@ const HorizontalStoryBand = ({ caseStudy }: { caseStudy: CaseStudyData }) => {
   
   const slideTypes: (keyof typeof slideIcons)[] = [
     'context', 'challenge', 'strategy', 'system', 
-    'execution', 'results', 'longTermImpact', 'takeaway'
+    'execution', 'results', 'longTermImpact', 'takeaway', 'cta'
   ];
   
   useEffect(() => {
@@ -764,33 +926,59 @@ const FinalCTA = () => {
 
 // Main Page Component
 const CaseStudies = () => {
+  const [modalState, setModalState] = useState<{
+    isOpen: boolean;
+    src: string;
+    type: 'image' | 'video';
+    alt?: string;
+  }>({ isOpen: false, src: '', type: 'image' });
+
+  const openModal = (src: string, type: 'image' | 'video', alt?: string) => {
+    setModalState({ isOpen: true, src, type, alt });
+  };
+
+  const closeModal = () => {
+    setModalState(prev => ({ ...prev, isOpen: false }));
+  };
+
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      
-      <main>
-        <CaseStudiesHero />
+    <MediaModalContext.Provider value={{ openModal }}>
+      <div className="min-h-screen bg-background">
+        <Navbar />
         
-        {/* Case Studies List */}
-        <section className="py-12 px-4 sm:px-6 lg:px-8">
-          <div className="container mx-auto max-w-5xl">
-            <div className="space-y-8 sm:space-y-12">
-              {caseStudies.map((caseStudy, index) => (
-                <CaseModule 
-                  key={caseStudy.id} 
-                  caseStudy={caseStudy} 
-                  index={index}
-                />
-              ))}
+        <main>
+          <CaseStudiesHero />
+          
+          {/* Case Studies List */}
+          <section className="py-12 px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto max-w-5xl">
+              <div className="space-y-8 sm:space-y-12">
+                {caseStudies.map((caseStudy, index) => (
+                  <CaseModule 
+                    key={caseStudy.id} 
+                    caseStudy={caseStudy} 
+                    index={index}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+          
+          <FinalCTA />
+        </main>
         
-        <FinalCTA />
-      </main>
-      
-      <Footer />
-    </div>
+        <Footer />
+        
+        {/* Media Modal */}
+        <MediaModal
+          isOpen={modalState.isOpen}
+          onClose={closeModal}
+          src={modalState.src}
+          type={modalState.type}
+          alt={modalState.alt}
+        />
+      </div>
+    </MediaModalContext.Provider>
   );
 };
 
