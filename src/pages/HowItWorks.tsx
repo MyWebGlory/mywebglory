@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import {
@@ -1334,6 +1335,11 @@ const FinalCTA = () => {
 const HowItWorks = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <SEO
+        title="How We Work | Our 8-Step Event Marketing System | MyWebGlory"
+        description="From strategy to execution: discover our proven 8-step process that transforms events into pipeline machines. Limited to 4 clients monthly for quality delivery."
+        canonicalUrl="/how-it-works"
+      />
       <Navbar />
 
       <HeroTunnel />

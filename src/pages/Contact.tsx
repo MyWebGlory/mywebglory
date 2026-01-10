@@ -1,5 +1,6 @@
 import { Calendar, Mail, ArrowRight, Sparkles, Clock, MessageSquare } from "lucide-react";
 import { motion } from "framer-motion";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
@@ -50,6 +51,11 @@ const contactMethods = [
 const Contact = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Contact Us | Book a Free Strategy Call | MyWebGlory"
+        description="Ready to fill your next event? Book a free 30-minute strategy call, message us on WhatsApp, or email us. We typically respond within minutes."
+        canonicalUrl="/contact"
+      />
       <Navbar />
 
       {/* Hero Section */}

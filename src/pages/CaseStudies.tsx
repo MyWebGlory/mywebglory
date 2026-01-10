@@ -11,6 +11,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 
@@ -944,6 +945,11 @@ const CaseStudies = () => {
   return (
     <MediaModalContext.Provider value={{ openModal }}>
       <div className="min-h-screen bg-background">
+        <SEO
+          title="Case Studies | Real Event Marketing Results | MyWebGlory"
+          description="See how we generated 1,208 registrations for Kornit Digital in 8 weeks. Real events, real results, real pipeline. Explore our proven track record."
+          canonicalUrl="/case-studies"
+        />
         <Navbar />
         
         <main>

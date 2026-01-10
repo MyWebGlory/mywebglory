@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { ArrowLeft, Users, Target, Heart, Zap, Award, Shield, Clock, Sparkles, Palette, Video, Phone, PenTool, TrendingUp, Megaphone, Mail, ExternalLink } from "lucide-react";
@@ -85,6 +86,11 @@ const values = [
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="About MyWebGlory | Event Marketing Experts | Meet Gabriel Ageron"
+        description="Young, modern, and ROI-focused. MyWebGlory is a boutique event marketing agency of 15 specialists founded by Gabriel Ageron. We use the latest tech to deliver exceptional results."
+        canonicalUrl="/about"
+      />
       <Navbar />
       
       {/* Hero Section */}

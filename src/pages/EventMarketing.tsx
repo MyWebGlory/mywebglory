@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import {
@@ -1546,6 +1547,11 @@ const AmbientOrbs = () => (
 const EventMarketing = () => {
   return (
     <div className="min-h-screen bg-background relative">
+      <SEO
+        title="What is Event Marketing? | Complete Guide to Revenue-Driven Events | MyWebGlory"
+        description="Discover how event marketing turns attention into trust and conversations into revenue. Learn why top companies use events to accelerate growth. Expert insights from MyWebGlory."
+        canonicalUrl="/event-marketing"
+      />
       {/* Global ambient effects */}
       <NoiseOverlay />
       <AmbientOrbs />

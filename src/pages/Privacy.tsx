@@ -6,6 +6,9 @@ const Privacy = () => {
     <PageLayout 
       title="Privacy & Legal" 
       description="Terms of service, privacy policy, and legal information for MyWebGlory services."
+      seoTitle="Privacy Policy & Terms | MyWebGlory"
+      seoDescription="Privacy policy, terms of service, and legal information for MyWebGlory event marketing services. ADB International LLC."
+      canonicalUrl="/privacy"
     >
       <div className="max-w-4xl space-y-12">
         

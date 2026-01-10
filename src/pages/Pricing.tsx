@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import SEO, { serviceSchema } from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Button } from "@/components/ui/button";
@@ -275,6 +276,12 @@ const Pricing = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
+      <SEO
+        title="Event Marketing Pricing | Investment Plans from $9,000 | MyWebGlory"
+        description="Choose your revenue engine: Event Launch Engine ($9k), Revenue System ($25k), or Authority Flywheel ($50k). Transparent pricing with proven ROI. Get your custom quote."
+        canonicalUrl="/pricing"
+        structuredData={serviceSchema}
+      />
       <Navbar />
       
       {/* Hero Section */}
