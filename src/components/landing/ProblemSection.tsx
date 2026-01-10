@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Users, Target, Sparkles, CalendarX, StopCircle, AlertTriangle } from "lucide-react";
+import { Users, Target, Sparkles, CalendarX, StopCircle, AlertTriangle, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 const problems = [
   {
@@ -229,6 +231,21 @@ const ProblemSection = () => {
               ))}
             </motion.div>
           </motion.div>
+        </motion.div>
+
+        {/* CTA Button */}
+        <motion.div 
+          className="mt-10 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 1.2 }}
+        >
+          <Link to="/event-marketing">
+            <Button variant="outline" size="lg" className="group">
+              Learn More About Event Marketing
+              <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>
