@@ -28,7 +28,7 @@ const Footer = () => {
             <h4 className="font-semibold mb-4">Services</h4>
             <nav className="flex flex-col gap-2 text-sm text-muted-foreground">
               <Link to="/event-marketing" className="hover:text-foreground transition-colors">Event Marketing</Link>
-              <Link to="/ads-acquisition" className="hover:text-foreground transition-colors">Ads & Acquisition</Link>
+              <Link to="/case-studies" className="hover:text-foreground transition-colors">Case Studies</Link>
               <Link to="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
             </nav>
           </div>
