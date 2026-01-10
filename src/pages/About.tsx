@@ -1,10 +1,40 @@
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
-import { ArrowLeft, Users, Target, Heart, Zap, Award, Shield, Clock, Sparkles, Palette, Video, Phone, PenTool, TrendingUp, Megaphone, Mail } from "lucide-react";
+import { ArrowLeft, Users, Target, Heart, Zap, Award, Shield, Clock, Sparkles, Palette, Video, Phone, PenTool, TrendingUp, Megaphone, Mail, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import gabrielPhoto from "@/assets/gabriel-ageron.png";
 import linkedinIcon from "@/assets/linkedin-icon.png";
+import mwgLogo from "@/assets/logo-icon.png";
+import mydropLogo from "@/assets/mydrop-logo.png";
+import topelaLogo from "@/assets/tope-la-logo.webp";
+
+const experiences = [
+  {
+    logo: mwgLogo,
+    company: "MyWebGlory",
+    role: "Founder",
+    period: "Jan 2022 - Present",
+    description: "Event Marketing Systems | Authority & Lead Generation",
+    link: "https://mywebglory.com"
+  },
+  {
+    logo: mydropLogo,
+    company: "Mydrop",
+    role: "Founder",
+    period: "Feb 2023 - Present",
+    description: "AI Social Media Management Tool",
+    link: "https://mydropai.com"
+  },
+  {
+    logo: topelaLogo,
+    company: "Tope-la",
+    role: "Chief Technology Officer",
+    period: "Sep 2024 - Present",
+    description: "The Pro-to-Pro Construction Network in France",
+    link: "https://lp.tope-la.fr"
+  }
+];
 
 const teamRoles = [
   { icon: TrendingUp, title: "Media Buyers", count: 3 },
@@ -96,7 +126,8 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5" />
         
         <div className="container px-4 md:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+            {/* Founder Card */}
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -104,35 +135,66 @@ const About = () => {
               viewport={{ once: true }}
               className="flex justify-center lg:justify-start"
             >
-              <div className="flex items-center gap-6">
-                <img 
-                  src={gabrielPhoto} 
-                  alt="Gabriel Ageron - Founder of MyWebGlory" 
-                  className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-primary/30 shadow-lg"
-                />
-                <div>
-                  <h3 className="text-xl font-bold text-foreground">Gabriel Ageron</h3>
-                  <p className="text-primary font-medium text-sm mb-3">Founder & CEO</p>
-                  <div className="flex items-center gap-3">
-                    <a 
-                      href="https://www.linkedin.com/in/gabriel-ageron/" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="hover:opacity-80 transition-opacity"
-                    >
-                      <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6" />
-                    </a>
-                    <a 
-                      href="mailto:gabriel@mywebglory.com"
-                      className="flex items-center justify-center w-6 h-6 bg-primary rounded-full hover:opacity-80 transition-opacity"
-                    >
-                      <Mail className="w-3.5 h-3.5 text-primary-foreground" />
-                    </a>
+              <div className="bg-card/80 backdrop-blur-sm border border-border rounded-3xl p-8 max-w-md w-full">
+                {/* Profile Header */}
+                <div className="flex items-center gap-5 mb-6">
+                  <img 
+                    src={gabrielPhoto} 
+                    alt="Gabriel Ageron - Founder of MyWebGlory" 
+                    className="w-20 h-20 rounded-full object-cover border-2 border-primary/30 shadow-lg"
+                  />
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground">Gabriel Ageron</h3>
+                    <p className="text-primary font-medium text-sm mb-2">Founder & CEO</p>
+                    <div className="flex items-center gap-3">
+                      <a 
+                        href="https://www.linkedin.com/in/gabriel-ageron/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:opacity-80 transition-opacity"
+                      >
+                        <img src={linkedinIcon} alt="LinkedIn" className="w-5 h-5" />
+                      </a>
+                      <a 
+                        href="mailto:gabriel@mywebglory.com"
+                        className="flex items-center justify-center w-5 h-5 bg-primary rounded-full hover:opacity-80 transition-opacity"
+                      >
+                        <Mail className="w-3 h-3 text-primary-foreground" />
+                      </a>
+                    </div>
                   </div>
+                </div>
+
+                {/* Experiences */}
+                <div className="space-y-4">
+                  <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Experience</h4>
+                  {experiences.map((exp, index) => (
+                    <a 
+                      key={index}
+                      href={exp.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-start gap-4 p-3 rounded-xl bg-background/50 border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        <img src={exp.logo} alt={exp.company} className="w-7 h-7 object-contain" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2">
+                          <h5 className="font-semibold text-foreground text-sm">{exp.role}</h5>
+                          <ExternalLink className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <p className="text-sm text-primary font-medium">{exp.company}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{exp.period}</p>
+                        <p className="text-xs text-muted-foreground mt-1">{exp.description}</p>
+                      </div>
+                    </a>
+                  ))}
                 </div>
               </div>
             </motion.div>
 
+            {/* Story */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -158,7 +220,10 @@ const About = () => {
                   I started getting more requests. Webinars, trade shows, product launches, networking events. Each one taught me something new about what makes people show up, not just register, but actually <span className="text-foreground font-medium">be there</span>.
                 </p>
                 <p>
-                  In 2021, I made the leap. I stopped being a generalist and went all-in on event marketing. That's when MyWebGlory was born, a boutique agency built by someone who genuinely <span className="text-foreground font-medium">loves</span> this work.
+                  In January 2022, I made the leap. I stopped being a generalist and went all-in on event marketing. That's when <span className="text-foreground font-medium">MyWebGlory</span> was born, a boutique agency built by someone who genuinely loves this work.
+                </p>
+                <p>
+                  Since then, my entrepreneurial drive led me to co-found <span className="text-foreground font-medium">Mydrop</span> in 2023, an AI-powered social media management tool, and join <span className="text-foreground font-medium">Tope-la</span> as CTO in 2024, building France's first B2B platform for construction professionals. These ventures have sharpened my technical expertise and deepened my understanding of scalable marketing systems.
                 </p>
                 <p>
                   Today, our team of 15 specialists helps event organizers around the world turn empty rooms into standing-room-only experiences. And honestly? I still get that same rush every single time.
