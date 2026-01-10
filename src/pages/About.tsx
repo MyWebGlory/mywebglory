@@ -126,111 +126,202 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5" />
         
         <div className="container px-4 md:px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-            {/* Founder Card */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="flex justify-center lg:justify-start"
-            >
-              <div className="bg-card/80 backdrop-blur-sm border border-border rounded-3xl p-8 max-w-md w-full">
-                {/* Profile Header */}
-                <div className="flex items-center gap-5 mb-6">
+          {/* Founder Card - Horizontal Layout */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mb-16"
+          >
+            <div className="bg-card/80 backdrop-blur-sm border border-border rounded-3xl p-6 md:p-8">
+              <div className="flex flex-col lg:flex-row gap-8">
+                {/* Left: Profile */}
+                <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:min-w-[200px]">
                   <img 
                     src={gabrielPhoto} 
                     alt="Gabriel Ageron - Founder of MyWebGlory" 
-                    className="w-20 h-20 rounded-full object-cover border-2 border-primary/30 shadow-lg"
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-2 border-primary/30 shadow-lg mb-4"
                   />
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground">Gabriel Ageron</h3>
-                    <p className="text-primary font-medium text-sm mb-2">Founder & CEO</p>
-                    <div className="flex items-center gap-3">
+                  <h3 className="text-xl font-bold text-foreground">Gabriel Ageron</h3>
+                  <p className="text-primary font-medium text-sm mb-3">Founder & CEO</p>
+                  <div className="flex items-center gap-3">
+                    <a 
+                      href="https://www.linkedin.com/in/gabriel-ageron/" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="hover:opacity-80 transition-opacity"
+                    >
+                      <img src={linkedinIcon} alt="LinkedIn" className="w-5 h-5" />
+                    </a>
+                    <a 
+                      href="mailto:gabriel@mywebglory.com"
+                      className="flex items-center justify-center w-5 h-5 bg-primary rounded-full hover:opacity-80 transition-opacity"
+                    >
+                      <Mail className="w-3 h-3 text-primary-foreground" />
+                    </a>
+                  </div>
+                </div>
+
+                {/* Right: Experiences Grid */}
+                <div className="flex-1">
+                  <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">Experience</h4>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {/* Column 1: First 2 experiences stacked */}
+                    <div className="space-y-4">
+                      {experiences.slice(0, 2).map((exp, index) => (
+                        <a 
+                          key={index}
+                          href={exp.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group flex items-start gap-4 p-3 rounded-xl bg-background/50 border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all"
+                        >
+                          <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center flex-shrink-0 overflow-hidden">
+                            <img src={exp.logo} alt={exp.company} className="w-7 h-7 object-contain" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2">
+                              <h5 className="font-semibold text-foreground text-sm">{exp.role}</h5>
+                              <ExternalLink className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </div>
+                            <p className="text-sm text-primary font-medium">{exp.company}</p>
+                            <p className="text-xs text-muted-foreground mt-0.5">{exp.period}</p>
+                            <p className="text-xs text-muted-foreground mt-1">{exp.description}</p>
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                    {/* Column 2: Third experience */}
+                    <div className="flex">
                       <a 
-                        href="https://www.linkedin.com/in/gabriel-ageron/" 
-                        target="_blank" 
+                        href={experiences[2].link}
+                        target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:opacity-80 transition-opacity"
+                        className="group flex items-start gap-4 p-3 rounded-xl bg-background/50 border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all h-fit"
                       >
-                        <img src={linkedinIcon} alt="LinkedIn" className="w-5 h-5" />
-                      </a>
-                      <a 
-                        href="mailto:gabriel@mywebglory.com"
-                        className="flex items-center justify-center w-5 h-5 bg-primary rounded-full hover:opacity-80 transition-opacity"
-                      >
-                        <Mail className="w-3 h-3 text-primary-foreground" />
+                        <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center flex-shrink-0 overflow-hidden">
+                          <img src={experiences[2].logo} alt={experiences[2].company} className="w-7 h-7 object-contain" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <h5 className="font-semibold text-foreground text-sm">{experiences[2].role}</h5>
+                            <ExternalLink className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                          </div>
+                          <p className="text-sm text-primary font-medium">{experiences[2].company}</p>
+                          <p className="text-xs text-muted-foreground mt-0.5">{experiences[2].period}</p>
+                          <p className="text-xs text-muted-foreground mt-1">{experiences[2].description}</p>
+                        </div>
                       </a>
                     </div>
                   </div>
                 </div>
-
-                {/* Experiences */}
-                <div className="space-y-4">
-                  <h4 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Experience</h4>
-                  {experiences.map((exp, index) => (
-                    <a 
-                      key={index}
-                      href={exp.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-start gap-4 p-3 rounded-xl bg-background/50 border border-border/50 hover:border-primary/30 hover:bg-primary/5 transition-all"
-                    >
-                      <div className="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center flex-shrink-0 overflow-hidden">
-                        <img src={exp.logo} alt={exp.company} className="w-7 h-7 object-contain" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2">
-                          <h5 className="font-semibold text-foreground text-sm">{exp.role}</h5>
-                          <ExternalLink className="w-3 h-3 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                        <p className="text-sm text-primary font-medium">{exp.company}</p>
-                        <p className="text-xs text-muted-foreground mt-0.5">{exp.period}</p>
-                        <p className="text-xs text-muted-foreground mt-1">{exp.description}</p>
-                      </div>
-                    </a>
-                  ))}
-                </div>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
-            {/* Story */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold">
-                The Story Behind <span className="text-gradient">MyWebGlory</span>
-              </h2>
+          {/* Story */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+              The Story Behind <span className="text-gradient">MyWebGlory</span>
+            </h2>
+            
+            <div className="space-y-4 text-muted-foreground leading-relaxed text-center md:text-left">
+              <p>
+                For five years, I worked in general marketing, running campaigns across every industry you can imagine. E-commerce, SaaS, real estate, you name it. I was good at it. But something was missing.
+              </p>
+              <p>
+                Then came my first event marketing project. A client needed to fill seats for their annual conference, and they were desperate. I dove in headfirst, not knowing that this one project would change everything.
+              </p>
+              <p>
+                The energy was different. The stakes felt real. When those seats filled up and I watched attendees flood through the doors, I felt something I hadn't felt in years: <span className="text-foreground font-medium">pure excitement</span>.
+              </p>
+              <p>
+                I started getting more requests. Webinars, trade shows, product launches, networking events. Each one taught me something new about what makes people show up, not just register, but actually <span className="text-foreground font-medium">be there</span>.
+              </p>
+              <p>
+                In January 2022, I made the leap. I stopped being a generalist and went all-in on event marketing. That's when <span className="text-foreground font-medium">MyWebGlory</span> was born, a boutique agency built by someone who genuinely loves this work.
+              </p>
+              <p>
+                Since then, my entrepreneurial drive led me to co-found <span className="text-foreground font-medium">Mydrop</span> in 2023, an AI-powered social media management tool, and join <span className="text-foreground font-medium">Tope-la</span> as CTO in 2024, building France's first B2B platform for construction professionals. These ventures have sharpened my technical expertise and deepened my understanding of scalable marketing systems.
+              </p>
+              <p>
+                Today, our team of 15 specialists helps event organizers around the world turn empty rooms into standing-room-only experiences. And honestly? I still get that same rush every single time.
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Modern & Fast-Moving Section */}
+      <section className="py-16 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-secondary/5 to-transparent" />
+        <div className="absolute top-1/2 left-0 w-72 h-72 bg-accent/15 rounded-full blur-3xl -translate-y-1/2" />
+        
+        <div className="container px-4 md:px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="max-w-5xl mx-auto"
+          >
+            <div className="grid md:grid-cols-4 gap-6">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 rounded-2xl p-6 text-center"
+              >
+                <Zap className="w-10 h-10 text-primary mx-auto mb-3" />
+                <h3 className="font-bold text-foreground mb-2">Young & Agile</h3>
+                <p className="text-sm text-muted-foreground">A modern team that moves fast and adapts faster</p>
+              </motion.div>
               
-              <div className="space-y-4 text-muted-foreground leading-relaxed">
-                <p>
-                  For five years, I worked in general marketing, running campaigns across every industry you can imagine. E-commerce, SaaS, real estate, you name it. I was good at it. But something was missing.
-                </p>
-                <p>
-                  Then came my first event marketing project. A client needed to fill seats for their annual conference, and they were desperate. I dove in headfirst, not knowing that this one project would change everything.
-                </p>
-                <p>
-                  The energy was different. The stakes felt real. When those seats filled up and I watched attendees flood through the doors, I felt something I hadn't felt in years: <span className="text-foreground font-medium">pure excitement</span>.
-                </p>
-                <p>
-                  I started getting more requests. Webinars, trade shows, product launches, networking events. Each one taught me something new about what makes people show up, not just register, but actually <span className="text-foreground font-medium">be there</span>.
-                </p>
-                <p>
-                  In January 2022, I made the leap. I stopped being a generalist and went all-in on event marketing. That's when <span className="text-foreground font-medium">MyWebGlory</span> was born, a boutique agency built by someone who genuinely loves this work.
-                </p>
-                <p>
-                  Since then, my entrepreneurial drive led me to co-found <span className="text-foreground font-medium">Mydrop</span> in 2023, an AI-powered social media management tool, and join <span className="text-foreground font-medium">Tope-la</span> as CTO in 2024, building France's first B2B platform for construction professionals. These ventures have sharpened my technical expertise and deepened my understanding of scalable marketing systems.
-                </p>
-                <p>
-                  Today, our team of 15 specialists helps event organizers around the world turn empty rooms into standing-room-only experiences. And honestly? I still get that same rush every single time.
-                </p>
-              </div>
-            </motion.div>
-          </div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-secondary/20 to-secondary/5 border border-secondary/20 rounded-2xl p-6 text-center"
+              >
+                <Sparkles className="w-10 h-10 text-secondary mx-auto mb-3" />
+                <h3 className="font-bold text-foreground mb-2">Latest Tech</h3>
+                <p className="text-sm text-muted-foreground">Cutting-edge tools and AI to maximize efficiency</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-accent/20 to-accent/5 border border-accent/20 rounded-2xl p-6 text-center"
+              >
+                <TrendingUp className="w-10 h-10 text-accent mx-auto mb-3" />
+                <h3 className="font-bold text-foreground mb-2">ROI First</h3>
+                <p className="text-sm text-muted-foreground">Every action tied to measurable business outcomes</p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-primary/15 via-secondary/10 to-accent/15 border border-border rounded-2xl p-6 text-center"
+              >
+                <Target className="w-10 h-10 text-primary mx-auto mb-3" />
+                <h3 className="font-bold text-foreground mb-2">Streamlined</h3>
+                <p className="text-sm text-muted-foreground">Optimized processes that save time and boost results</p>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
