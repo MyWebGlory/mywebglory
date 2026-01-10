@@ -384,7 +384,7 @@ const Privacy = () => {
           <div className="text-muted-foreground">
             <p><strong>MyWebGlory</strong></p>
             <p>A DBA of ADB International LLC</p>
-            <p className="mt-2">Email: hello@mywebglory.com</p>
+            <p className="mt-2">Email: gabriel@mywebglory.com</p>
           </div>
         </section>
 
