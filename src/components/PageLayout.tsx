@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { ArrowLeft } from "lucide-react";
@@ -7,11 +8,21 @@ interface PageLayoutProps {
   title: string;
   description?: string;
   children?: React.ReactNode;
+  seoTitle?: string;
+  seoDescription?: string;
+  canonicalUrl?: string;
+  noIndex?: boolean;
 }
 
-const PageLayout = ({ title, description, children }: PageLayoutProps) => {
+const PageLayout = ({ title, description, children, seoTitle, seoDescription, canonicalUrl, noIndex }: PageLayoutProps) => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title={seoTitle || title}
+        description={seoDescription || description || "MyWebGlory - Event Marketing Agency"}
+        canonicalUrl={canonicalUrl}
+        noIndex={noIndex}
+      />
       <Navbar />
       
       {/* Hero Section */}

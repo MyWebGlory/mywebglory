@@ -1,4 +1,5 @@
 import { useParallax } from "@/hooks/useScrollAnimation";
+import SEO, { localBusinessSchema } from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import HeroSection from "@/components/landing/HeroSection";
 import WhyEventsSection from "@/components/landing/WhyEventsSection";
@@ -16,6 +17,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      <SEO
+        title="MyWebGlory | Event Marketing Agency - Fill Events & Generate Revenue"
+        description="Transform your events into revenue machines. MyWebGlory delivers end-to-end event marketing with proven systems for acquisition, show-up rates, and pipeline generation. Limited to 4 clients/month."
+        canonicalUrl="/"
+        structuredData={localBusinessSchema}
+      />
       <Navbar />
       <HeroSection />
       <WhyEventsSection />

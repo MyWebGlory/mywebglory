@@ -1,3 +1,4 @@
+import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { ArrowLeft, Target, DollarSign, Megaphone, Clock, Users, Building2, Rocket, ChevronRight } from "lucide-react";
@@ -289,9 +290,31 @@ const faqCategories: FAQCategory[] = [
   },
 ];
 
+// FAQ Schema for rich snippets
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqCategories.flatMap(category => 
+    category.questions.map(q => ({
+      "@type": "Question",
+      name: q.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: typeof q.answer === 'string' ? q.answer : "See our FAQ page for the detailed answer."
+      }
+    }))
+  )
+};
+
 const FAQ = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO
+        title="FAQ | Event Marketing Questions Answered | MyWebGlory"
+        description="Get answers to common event marketing questions: guarantees, pricing, ad platforms, timelines, and more. Everything you need to know before working with us."
+        canonicalUrl="/faq"
+        structuredData={faqSchema}
+      />
       <Navbar />
       
       {/* Hero Section */}
