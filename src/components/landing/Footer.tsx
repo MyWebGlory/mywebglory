@@ -23,16 +23,16 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* All Links */}
-          <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted-foreground md:items-start md:pt-2">
+          {/* All Links - Grid Layout */}
+          <nav className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-3 text-sm text-muted-foreground md:pt-2">
             <Link to="/event-marketing" className="hover:text-foreground transition-colors">Event Marketing</Link>
+            <Link to="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
+            <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
+            <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy & Legal</Link>
             <Link to="/how-it-works" className="hover:text-foreground transition-colors">How We Work</Link>
             <Link to="/case-studies" className="hover:text-foreground transition-colors">Case Studies</Link>
-            <Link to="/pricing" className="hover:text-foreground transition-colors">Pricing</Link>
             <Link to="/about" className="hover:text-foreground transition-colors">About</Link>
-            <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
             <Link to="/faq" className="hover:text-foreground transition-colors">FAQ</Link>
-            <Link to="/privacy" className="hover:text-foreground transition-colors">Privacy & Legal</Link>
           </nav>
         </div>
         
