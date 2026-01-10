@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import gabrielPhoto from "@/assets/gabriel-ageron.png";
 import linkedinIcon from "@/assets/linkedin-icon.png";
+import whatsappIcon from "@/assets/whatsapp-icon.png";
 import mwgLogo from "@/assets/logo-icon.png";
 import mydropLogo from "@/assets/mydrop-logo.png";
 import topelaLogo from "@/assets/tope-la-logo.webp";
@@ -135,9 +136,9 @@ const About = () => {
             className="mb-16"
           >
             <div className="bg-card/80 backdrop-blur-sm border border-border rounded-3xl p-6 md:p-8">
-              <div className="flex flex-col lg:flex-row gap-8">
+              <div className="flex flex-col md:flex-row gap-8">
                 {/* Left: Profile */}
-                <div className="flex flex-col items-center lg:items-start text-center lg:text-left lg:min-w-[200px]">
+                <div className="flex flex-col items-center md:items-start text-center md:text-left md:min-w-[180px] md:border-r md:border-border/50 md:pr-8">
                   <img 
                     src={gabrielPhoto} 
                     alt="Gabriel Ageron - Founder of MyWebGlory" 
@@ -153,6 +154,14 @@ const About = () => {
                       className="hover:opacity-80 transition-opacity"
                     >
                       <img src={linkedinIcon} alt="LinkedIn" className="w-5 h-5" />
+                    </a>
+                    <a 
+                      href="https://wa.me/33767096182"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:opacity-80 transition-opacity"
+                    >
+                      <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5" />
                     </a>
                     <a 
                       href="mailto:gabriel@mywebglory.com"
