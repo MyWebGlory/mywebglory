@@ -39,6 +39,7 @@ const caseStudies = [
 
 function AnimatedNumber({ value, suffix, isVisible }: { value: number; suffix: string; isVisible: boolean }) {
   const [count, setCount] = useState(0);
+  const isDecimal = value % 1 !== 0;
   
   useEffect(() => {
     if (!isVisible) return;
@@ -54,18 +55,16 @@ function AnimatedNumber({ value, suffix, isVisible }: { value: number; suffix: s
         setCount(value);
         clearInterval(timer);
       } else {
-        setCount(Math.floor(current));
+        setCount(isDecimal ? current : Math.floor(current));
       }
     }, duration / steps);
     
     return () => clearInterval(timer);
-  }, [value, isVisible]);
+  }, [value, isVisible, isDecimal]);
   
   return (
     <span>
-      {typeof value === "number" && value % 1 !== 0 
-        ? (count / 10).toFixed(1) 
-        : count.toLocaleString()}
+      {isDecimal ? count.toFixed(1) : count.toLocaleString()}
       {suffix}
     </span>
   );
