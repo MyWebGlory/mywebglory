@@ -15,6 +15,18 @@ interface ContactEmailRequest {
   message: string;
 }
 
+// Proper HTML escaping to prevent injection attacks
+function escapeHtml(text: string): string {
+  const map: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, (m) => map[m]);
+}
+
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
   if (req.method === "OPTIONS") {
@@ -43,11 +55,11 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Sanitize inputs
-    const sanitizedName = name.slice(0, 100).replace(/[<>]/g, "");
+    // Sanitize and escape inputs for HTML
+    const sanitizedName = escapeHtml(name.slice(0, 100));
     const sanitizedEmail = email.slice(0, 255);
-    const sanitizedCompany = company ? company.slice(0, 100).replace(/[<>]/g, "") : "Not provided";
-    const sanitizedMessage = message.slice(0, 2000).replace(/[<>]/g, "");
+    const sanitizedCompany = company ? escapeHtml(company.slice(0, 100)) : "Not provided";
+    const sanitizedMessage = escapeHtml(message.slice(0, 2000));
 
     console.log("Sending contact email from:", sanitizedEmail);
 
@@ -101,8 +113,9 @@ const handler = async (req: Request): Promise<Response> => {
     );
   } catch (error: any) {
     console.error("Error in send-contact-email function:", error);
+    // Return generic error message to prevent information disclosure
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: "Unable to send message. Please try again later." }),
       { status: 500, headers: { "Content-Type": "application/json", ...corsHeaders } }
     );
   }
