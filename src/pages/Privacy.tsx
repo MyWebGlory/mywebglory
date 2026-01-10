@@ -16,7 +16,7 @@ const Privacy = () => {
             All services, contracts, and agreements are legally binding under ADB International LLC.
           </p>
           <p className="text-sm text-muted-foreground">
-            Last updated: January 2025
+            Last updated: January 2026
           </p>
         </section>
 
