@@ -32,15 +32,15 @@ const Navbar = () => {
   const navLinks = [
     { label: "What's Event Marketing?", href: "/event-marketing" },
     { label: "How We Work", href: "/how-it-works" },
+    { label: "Case Studies", href: "/case-studies" },
     { label: "Pricing", href: "/pricing" },
   ];
 
   const allPages = [
     { label: "Event Marketing", href: "/event-marketing" },
     { label: "How We Work", href: "/how-it-works" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Ads & Acquisition", href: "/ads-acquisition" },
     { label: "Case Studies", href: "/case-studies" },
+    { label: "Pricing", href: "/pricing" },
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
     { label: "FAQ", href: "/faq" },

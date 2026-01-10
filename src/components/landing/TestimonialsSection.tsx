@@ -1,6 +1,8 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Star, Quote, MessageCircle } from "lucide-react";
+import { Star, Quote, MessageCircle, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 const testimonials = [
   {
@@ -200,6 +202,24 @@ const TestimonialsSection = () => {
               />
             </motion.div>
           ))}
+        </motion.div>
+        
+        {/* See Case Studies CTA */}
+        <motion.div 
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.8 }}
+        >
+          <p className="text-muted-foreground mb-4">
+            Want to see the full story behind these results?
+          </p>
+          <Button asChild size="lg" variant="outline" className="group">
+            <Link to="/case-studies">
+              See Our Case Studies
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </Button>
         </motion.div>
       </div>
     </section>
