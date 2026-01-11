@@ -11,7 +11,7 @@ import heroImage from "@/assets/blog/event-marketing-hero.jpg";
 import promotionStrategiesImage from "@/assets/blog/event-promotion-strategies.jpg";
 import icpTargetingImage from "@/assets/blog/icp-targeting.jpg";
 import eventGraphicImage from "@/assets/blog/event-marketing-graphic.jpg";
-import gabrielAvatar from "@/assets/gabriel-ageron.png";
+import authorAvatar from "@/assets/sarah-mitchell.png";
 
 // Structured data for the article
 const articleSchema = {
@@ -22,8 +22,8 @@ const articleSchema = {
   image: "https://mywebglory.com/assets/blog/event-marketing-hero.jpg",
   author: {
     "@type": "Person",
-    name: "Gabriel Ageron",
-    url: "https://www.linkedin.com/in/gabriel-ageron/"
+    name: "Sarah Mitchell",
+    url: "https://mywebglory.com/blog"
   },
   publisher: {
     "@type": "Organization",
@@ -147,11 +147,11 @@ const BlogPostUltimateGuideEventMarketing = () => {
               <div className="flex flex-wrap items-center gap-6 text-muted-foreground mb-8">
                 <div className="flex items-center gap-2">
                   <img 
-                    src={gabrielAvatar} 
-                    alt="Gabriel Ageron - Event Marketing Expert" 
+                    src={authorAvatar} 
+                    alt="Sarah Mitchell - Content Strategist" 
                     className="w-10 h-10 rounded-full object-cover"
                   />
-                  <span className="font-medium text-foreground">Gabriel Ageron</span>
+                  <span className="font-medium text-foreground">Sarah Mitchell</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
@@ -658,17 +658,17 @@ const BlogPostUltimateGuideEventMarketing = () => {
               <motion.section {...fadeInUp} className="border-t border-border pt-8">
                 <div className="flex items-start gap-6">
                   <img 
-                    src={gabrielAvatar} 
-                    alt="Gabriel Ageron - Founder of MyWebGlory" 
+                    src={authorAvatar} 
+                    alt="Sarah Mitchell - Content Strategist at MyWebGlory" 
                     className="w-20 h-20 rounded-full object-cover"
                   />
                   <div>
-                    <h3 className="font-semibold text-foreground text-lg">Gabriel Ageron</h3>
-                    <p className="text-primary text-sm mb-2">Founder & CEO at MyWebGlory</p>
+                    <h3 className="font-semibold text-foreground text-lg">Sarah Mitchell</h3>
+                    <p className="text-primary text-sm mb-2">Content Strategist at MyWebGlory</p>
                     <p className="text-muted-foreground text-sm">
-                      Gabriel helps B2B companies turn their events into revenue machines. 
-                      With years of experience in event marketing, he's helped clients generate 
-                      thousands of qualified registrations and millions in pipeline.
+                      Sarah specializes in creating compelling content that drives event registrations 
+                      and engagement. With a background in B2B marketing, she helps brands craft 
+                      stories that resonate with their target audiences.
                     </p>
                   </div>
                 </div>

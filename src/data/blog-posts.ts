@@ -28,8 +28,8 @@ export const blogPosts: BlogPost[] = [
     title: "The Ultimate Guide to Event Marketing: How to Turn Events Into Revenue",
     excerpt: "Discover the complete event marketing guide for B2B and B2C companies. Learn proven strategies to fill events, engage audiences, and generate revenue from every event.",
     author: {
-      name: "Gabriel Ageron",
-      role: "Founder & CEO"
+      name: "Sarah Mitchell",
+      role: "Content Strategist"
     },
     publishedAt: "2025-01-11",
     readTime: "12 min read",
