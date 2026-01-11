@@ -5,6 +5,7 @@ import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import RelatedPosts from "@/components/blog/RelatedPosts";
 
 // Images
 import heroImage from "@/assets/blog/event-marketing-hero.jpg";
@@ -677,6 +678,9 @@ const BlogPostUltimateGuideEventMarketing = () => {
             </div>
           </div>
         </article>
+
+        {/* Related Posts Banner */}
+        <RelatedPosts currentSlug="ultimate-guide-event-marketing" />
       </main>
 
       <Footer />
