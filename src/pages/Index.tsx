@@ -10,6 +10,7 @@ import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import CaseStudiesSection from "@/components/landing/CaseStudiesSection";
 import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import FAQSection from "@/components/landing/FAQSection";
+import BlogBannerSection from "@/components/landing/BlogBannerSection";
 import Footer from "@/components/landing/Footer";
 
 const Index = () => {
@@ -33,6 +34,7 @@ const Index = () => {
       <TestimonialsSection />
       <PricingSection />
       <FAQSection />
+      <BlogBannerSection />
       <Footer />
     </div>
   );
