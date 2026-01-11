@@ -10,6 +10,7 @@ import FAQ from './pages/FAQ';
 import Privacy from './pages/Privacy';
 import Blog from './pages/Blog';
 import BlogPostUltimateGuideEventMarketing from './pages/BlogPost-UltimateGuideEventMarketing';
+import BlogPostEventMarketingPlaybook from './pages/BlogPost-EventMarketingPlaybook';
 import NotFound from './pages/NotFound';
 
 export const routes: RouteRecord[] = [
@@ -24,5 +25,6 @@ export const routes: RouteRecord[] = [
   { path: '/privacy', element: <Privacy /> },
   { path: '/blog', element: <Blog /> },
   { path: '/blog/ultimate-guide-event-marketing', element: <BlogPostUltimateGuideEventMarketing /> },
+  { path: '/blog/event-marketing-playbook', element: <BlogPostEventMarketingPlaybook /> },
   { path: '*', element: <NotFound /> },
 ];

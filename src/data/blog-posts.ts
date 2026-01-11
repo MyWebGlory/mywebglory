@@ -40,6 +40,24 @@ export const blogPosts: BlogPost[] = [
       title: "The Ultimate Guide to Event Marketing: How to Turn Events Into Revenue",
       description: "Discover the complete event marketing guide for B2B and B2C companies. Learn proven strategies to fill events, engage audiences, and generate revenue from every event."
     }
+  },
+  {
+    slug: "event-marketing-playbook",
+    title: "The Complete Event Marketing Playbook: Strategy, Execution, and ROI",
+    excerpt: "Master event marketing with this complete guide. Learn how to plan, promote, execute, and measure events that generate leads, revenue, and brand authority.",
+    author: {
+      name: "Sarah Mitchell",
+      role: "Content Strategist"
+    },
+    publishedAt: "2025-01-11",
+    readTime: "15 min read",
+    category: "Event Marketing Playbook",
+    tags: ["event marketing", "ROI measurement", "event planning", "marketing funnel", "lead nurturing"],
+    featuredImage: "/src/assets/blog/event-marketing-playbook-hero.jpg",
+    seo: {
+      title: "The Complete Event Marketing Playbook: Strategy, Execution, and ROI",
+      description: "Master event marketing with this complete guide. Learn how to plan, promote, execute, and measure events that generate leads, revenue, and brand authority."
+    }
   }
 ];
 
