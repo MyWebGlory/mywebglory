@@ -55,7 +55,7 @@ const ServicesSection = () => {
             Full-Funnel Event Dominance
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            We don't just plan—we strategize and find your North-Star. From first impression to final reminder, we architect complete marketing systems.
+            We don't just plan, we strategize and find your North-Star. From first impression to final reminder, we architect complete marketing systems.
           </p>
         </div>
         

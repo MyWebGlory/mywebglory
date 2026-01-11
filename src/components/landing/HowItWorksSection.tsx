@@ -9,25 +9,25 @@ const steps = [
     icon: Phone,
     number: "01",
     title: "Discovery Call",
-    description: "We learn your event, audience, and mission. No fluff—just a razor-focused strategy session to find your North-Star.",
+    description: "We learn your event, audience, and mission. No fluff, just a razor-focused strategy session to find your North-Star.",
   },
   {
     icon: Lightbulb,
     number: "02",
     title: "Strategy & Setup",
-    description: "We architect your custom marketing system—precision ads, funnels, emails, and automations tailored to dominate your market.",
+    description: "We architect your custom marketing system: precision ads, funnels, emails, and automations tailored to dominate your market.",
   },
   {
     icon: Rocket,
     number: "03",
     title: "Launch & Optimize",
-    description: "Campaigns go live. We monitor, test, and optimize in real-time for maximum ROI—keeping your budget lean and results mean.",
+    description: "Campaigns go live. We monitor, test, and optimize in real-time for maximum ROI, keeping your budget lean and results mean.",
   },
   {
     icon: Trophy,
     number: "04",
     title: "Deliver Attendees",
-    description: "Watch your registration count climb. Our reminder sequences ensure attendees actually show up—turning signups into impact.",
+    description: "Watch your registration count climb. Our reminder sequences ensure attendees actually show up, turning signups into impact.",
   },
 ];
 
