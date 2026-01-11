@@ -61,21 +61,24 @@ const TestimonialsSection = () => {
     <section className="py-24 relative overflow-hidden" id="testimonials">
       {/* Animated background */}
       <motion.div 
-        className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-primary/5 to-transparent"
+        className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent via-primary/5 to-transparent gpu-accelerated"
+        style={{ transform: 'translateZ(0)' }}
         animate={{ opacity: [0.3, 0.6, 0.3] }}
         transition={{ duration: 8, repeat: Infinity }}
       />
       
       {/* Floating quote marks */}
       <motion.div 
-        className="absolute top-20 left-[10%] opacity-10"
+        className="absolute top-20 left-[10%] opacity-10 gpu-accelerated"
+        style={{ transform: 'translateZ(0)' }}
         animate={{ y: [0, -20, 0], rotate: [0, 10, 0] }}
         transition={{ duration: 6, repeat: Infinity }}
       >
         <Quote className="w-24 h-24 text-primary" />
       </motion.div>
       <motion.div 
-        className="absolute bottom-20 right-[10%] opacity-10"
+        className="absolute bottom-20 right-[10%] opacity-10 gpu-accelerated"
+        style={{ transform: 'translateZ(0)' }}
         animate={{ y: [0, 20, 0], rotate: [0, -10, 0] }}
         transition={{ duration: 7, repeat: Infinity, delay: 1 }}
       >

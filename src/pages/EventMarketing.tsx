@@ -78,15 +78,16 @@ const HeroTunnel = () => {
         {/* Tunnel rings */}
         <motion.div
           style={{ scale: tunnelScale, opacity: tunnelOpacity }}
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center gpu-accelerated"
         >
           {[...Array(12)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute border border-primary/20 rounded-full"
+              className="absolute border border-primary/20 rounded-full gpu-accelerated"
               style={{
                 width: `${(i + 1) * 80}px`,
                 height: `${(i + 1) * 80}px`,
+                transform: 'translateZ(0)',
               }}
               animate={{
                 scale: [1, 1.1, 1],
@@ -102,20 +103,21 @@ const HeroTunnel = () => {
           ))}
 
           {/* Center glow layers */}
-          <div className="absolute w-48 h-48 md:w-64 md:h-64 bg-primary/10 rounded-full blur-3xl animate-pulse" />
-          <div className="absolute w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-pulse" />
-          <div className="absolute w-16 h-16 bg-primary/40 rounded-full blur-xl animate-pulse" />
-          <div className="absolute w-8 h-8 bg-primary rounded-full blur-lg" />
+          <div className="absolute w-48 h-48 md:w-64 md:h-64 bg-primary/10 rounded-full blur-3xl animate-pulse gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-pulse gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute w-16 h-16 bg-primary/40 rounded-full blur-xl animate-pulse gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute w-8 h-8 bg-primary rounded-full blur-lg gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
         </motion.div>
 
         {/* Floating particles - more on desktop */}
         {[...Array(50)].map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute rounded-full ${i < 20 ? 'w-1 h-1' : i < 35 ? 'w-0.5 h-0.5' : 'w-1.5 h-1.5'} ${i % 3 === 0 ? 'bg-primary/80' : i % 3 === 1 ? 'bg-primary/40' : 'bg-primary/60'}`}
+            className={`absolute rounded-full gpu-accelerated ${i < 20 ? 'w-1 h-1' : i < 35 ? 'w-0.5 h-0.5' : 'w-1.5 h-1.5'} ${i % 3 === 0 ? 'bg-primary/80' : i % 3 === 1 ? 'bg-primary/40' : 'bg-primary/60'}`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
+              transform: 'translateZ(0)',
             }}
             animate={{
               y: [0, -40 - Math.random() * 20, 0],
@@ -136,10 +138,11 @@ const HeroTunnel = () => {
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={`spark-${i}`}
-            className="absolute w-2 h-2 bg-primary rounded-full hidden md:block"
+            className="absolute w-2 h-2 bg-primary rounded-full hidden md:block gpu-accelerated"
             style={{
               left: `${30 + Math.random() * 40}%`,
               top: `${30 + Math.random() * 40}%`,
+              transform: 'translateZ(0)',
             }}
             animate={{
               scale: [0, 2, 0],
@@ -488,8 +491,8 @@ const WhyPowerfulSection = () => {
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent w-full"
-            style={{ top: `${20 + i * 15}%` }}
+            className="absolute h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent w-full gpu-accelerated"
+            style={{ top: `${20 + i * 15}%`, transform: 'translateZ(0)' }}
             animate={{ x: ["-100%", "100%"] }}
             transition={{
               duration: 8,
@@ -576,10 +579,11 @@ const ResultsCascade = () => {
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-primary/30 rounded-full"
+            className="absolute w-2 h-2 bg-primary/30 rounded-full gpu-accelerated"
             style={{
               left: `${Math.random() * 100}%`,
               top: "-20px",
+              transform: 'translateZ(0)',
             }}
             animate={{
               y: ["0vh", "100vh"],
@@ -859,18 +863,19 @@ const SystemSection = () => {
 
         {/* Central glow */}
         <motion.div
-          className="absolute w-96 h-96 rounded-full bg-primary/20 blur-3xl"
-          style={{ scale: glowScale, opacity: glowOpacity }}
+          className="absolute w-96 h-96 rounded-full bg-primary/20 blur-3xl gpu-accelerated"
+          style={{ scale: glowScale, opacity: glowOpacity, transform: 'translateZ(0)' }}
         />
 
         {/* Electric spark effects */}
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1 h-1 bg-primary rounded-full"
+            className="absolute w-1 h-1 bg-primary rounded-full gpu-accelerated"
             style={{
               left: `${30 + Math.random() * 40}%`,
               top: `${30 + Math.random() * 40}%`,
+              transform: 'translateZ(0)',
             }}
             animate={{
               scale: [0, 2, 0],
@@ -887,7 +892,8 @@ const SystemSection = () => {
 
         {/* Rotating connection circle */}
         <motion.div
-          className="absolute w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10"
+          className="absolute w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10 gpu-accelerated"
+          style={{ transform: 'translateZ(0)' }}
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
         />
@@ -940,7 +946,8 @@ const SystemSection = () => {
                     >
                       {/* Pulse ring */}
                       <motion.div
-                        className="absolute inset-0 rounded-full border-2 border-primary/30"
+                        className="absolute inset-0 rounded-full border-2 border-primary/30 gpu-accelerated"
+                        style={{ transform: 'translateZ(0)' }}
                         animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
                         transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }}
                       />
@@ -1035,8 +1042,8 @@ const FailureSection = () => {
       {[...Array(5)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute h-px bg-destructive/30 w-full"
-          style={{ top: `${15 + i * 18}%` }}
+          className="absolute h-px bg-destructive/30 w-full gpu-accelerated"
+          style={{ top: `${15 + i * 18}%`, transform: 'translateZ(0)' }}
           animate={{
             x: [0, 10, -10, 0],
             opacity: [0.3, 0.6, 0.3],
@@ -1305,26 +1312,26 @@ const FinalCTA = () => {
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         {/* Animated portal rings - de-zoom from huge */}
         <motion.div
-          className="absolute w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full border-2 border-primary/20"
-          style={{ scale: ring1Scale, opacity: ringOpacity }}
+          className="absolute w-[300px] h-[300px] md:w-[600px] md:h-[600px] rounded-full border-2 border-primary/20 gpu-accelerated"
+          style={{ scale: ring1Scale, opacity: ringOpacity, transform: 'translateZ(0)' }}
         />
         <motion.div
-          className="absolute w-[220px] h-[220px] md:w-[450px] md:h-[450px] rounded-full border-2 border-primary/30"
-          style={{ scale: ring2Scale, opacity: ringOpacity }}
+          className="absolute w-[220px] h-[220px] md:w-[450px] md:h-[450px] rounded-full border-2 border-primary/30 gpu-accelerated"
+          style={{ scale: ring2Scale, opacity: ringOpacity, transform: 'translateZ(0)' }}
         />
         <motion.div
-          className="absolute w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full border-2 border-primary/40"
-          style={{ scale: ring3Scale, opacity: ringOpacity }}
+          className="absolute w-[150px] h-[150px] md:w-[300px] md:h-[300px] rounded-full border-2 border-primary/40 gpu-accelerated"
+          style={{ scale: ring3Scale, opacity: ringOpacity, transform: 'translateZ(0)' }}
         />
 
         {/* Central glow - de-zoom */}
         <motion.div
-          className="absolute w-[200px] h-[200px] md:w-[400px] md:h-[400px] rounded-full bg-primary/20 blur-3xl"
-          style={{ scale: glowScale, opacity: glowOpacity }}
+          className="absolute w-[200px] h-[200px] md:w-[400px] md:h-[400px] rounded-full bg-primary/20 blur-3xl gpu-accelerated"
+          style={{ scale: glowScale, opacity: glowOpacity, transform: 'translateZ(0)' }}
         />
         <motion.div
-          className="absolute w-[100px] h-[100px] md:w-[200px] md:h-[200px] rounded-full bg-primary/30 blur-2xl"
-          style={{ scale: glowScale, opacity: glowOpacity }}
+          className="absolute w-[100px] h-[100px] md:w-[200px] md:h-[200px] rounded-full bg-primary/30 blur-2xl gpu-accelerated"
+          style={{ scale: glowScale, opacity: glowOpacity, transform: 'translateZ(0)' }}
         />
 
         {/* Energy particles being absorbed */}
@@ -1335,8 +1342,8 @@ const FinalCTA = () => {
           return (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-primary rounded-full"
-              style={{ left: "50%", top: "50%" }}
+              className="absolute w-2 h-2 bg-primary rounded-full gpu-accelerated"
+              style={{ left: "50%", top: "50%", transform: 'translateZ(0)' }}
               animate={{
                 x: [startX, 0],
                 y: [startY, 0],
@@ -1355,18 +1362,19 @@ const FinalCTA = () => {
 
         {/* Rotating outer ring */}
         <motion.div
-          className="absolute w-[280px] h-[280px] md:w-[550px] md:h-[550px] rounded-full border border-primary/20 hidden md:block"
+          className="absolute w-[280px] h-[280px] md:w-[550px] md:h-[550px] rounded-full border border-primary/20 hidden md:block gpu-accelerated"
+          style={{ transform: 'translateZ(0)' }}
           animate={{ rotate: 360 }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
         >
           {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-3 h-3 bg-primary/60 rounded-full"
+              className="absolute w-3 h-3 bg-primary/60 rounded-full gpu-accelerated"
               style={{
                 top: "50%",
                 left: "50%",
-                transform: `rotate(${i * 45}deg) translateX(275px) translateY(-50%)`,
+                transform: `rotate(${i * 45}deg) translateX(275px) translateY(-50%) translateZ(0)`,
               }}
               animate={{ scale: [1, 1.5, 1], opacity: [0.6, 1, 0.6] }}
               transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }}
@@ -1379,10 +1387,10 @@ const FinalCTA = () => {
           {[...Array(6)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute top-1/2 left-1/2 w-1 bg-gradient-to-t from-primary/40 to-transparent origin-bottom"
+              className="absolute top-1/2 left-1/2 w-1 bg-gradient-to-t from-primary/40 to-transparent origin-bottom gpu-accelerated"
               style={{
                 height: "50vh",
-                transform: `rotate(${i * 60}deg)`,
+                transform: `rotate(${i * 60}deg) translateZ(0)`,
               }}
               animate={{ opacity: [0.1, 0.4, 0.1] }}
               transition={{ duration: 3, delay: i * 0.3, repeat: Infinity }}

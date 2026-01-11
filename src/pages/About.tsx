@@ -97,9 +97,9 @@ const About = () => {
       <section className="pt-32 pb-20 relative overflow-hidden">
         {/* Animated background elements */}
         <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />
-        <div className="absolute top-20 left-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-glow" />
-        <div className="absolute top-40 right-20 w-72 h-72 bg-secondary/15 rounded-full blur-3xl animate-float" />
-        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse-glow gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+        <div className="absolute top-40 right-20 w-72 h-72 bg-secondary/15 rounded-full blur-3xl animate-float gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+        <div className="absolute bottom-0 left-1/3 w-64 h-64 bg-accent/10 rounded-full blur-3xl gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
         
         <div className="container relative z-10 px-4 md:px-6">
           <Link 
@@ -278,7 +278,7 @@ const About = () => {
       {/* Modern & Fast-Moving Section */}
       <section className="py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-secondary/5 to-transparent" />
-        <div className="absolute top-1/2 left-0 w-72 h-72 bg-accent/15 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute top-1/2 left-0 w-72 h-72 bg-accent/15 rounded-full blur-3xl -translate-y-1/2 gpu-accelerated" style={{ transform: 'translateZ(0) translateY(-50%)' }} />
         
         <div className="container px-4 md:px-6 relative z-10">
           <motion.div
@@ -344,7 +344,7 @@ const About = () => {
       {/* Team Composition */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-radial opacity-50" />
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute top-1/2 right-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl -translate-y-1/2 gpu-accelerated" style={{ transform: 'translateZ(0) translateY(-50%)' }} />
         
         <div className="container px-4 md:px-6 relative z-10">
           <motion.div
@@ -454,7 +454,7 @@ const About = () => {
       {/* Why Choose Us */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-secondary/10" />
-        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-primary/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-primary/15 rounded-full blur-3xl gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
         
         <div className="container px-4 md:px-6 relative z-10">
           <motion.div

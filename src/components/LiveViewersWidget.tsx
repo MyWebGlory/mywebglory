@@ -44,7 +44,8 @@ const LiveViewersWidget = () => {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.9 }}
           transition={{ type: "spring", stiffness: 200 }}
-          className="fixed bottom-6 left-4 z-40"
+          className="fixed bottom-6 left-4 z-40 gpu-accelerated"
+          style={{ transform: 'translateZ(0)' }}
         >
           <div
             className={`flex items-center gap-2 px-3 py-2 rounded-full backdrop-blur-sm border shadow-lg transition-all duration-500 bg-background/80 border-border/50 ${
