@@ -64,7 +64,8 @@ const HowItWorksSection = () => {
     <section className="py-24 relative overflow-hidden" id="process">
       {/* Animated gradient background */}
       <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5"
+        className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5 gpu-accelerated"
+        style={{ transform: 'translateZ(0)' }}
         animate={{ 
           backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"],
         }}
@@ -124,7 +125,8 @@ const HowItWorksSection = () => {
           {/* Animated dots on the line */}
           {isInView && (
             <motion.div 
-              className="hidden lg:block absolute top-1/2 left-0 w-3 h-3 bg-primary rounded-full -translate-y-1/2"
+              className="hidden lg:block absolute top-1/2 left-0 w-3 h-3 bg-primary rounded-full -translate-y-1/2 gpu-accelerated"
+              style={{ transform: 'translateZ(0) translateY(-50%)' }}
               initial={{ left: "0%" }}
               animate={{ left: ["0%", "100%", "0%"] }}
               transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
@@ -165,6 +167,8 @@ const HowItWorksSection = () => {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <motion.div
+                      className="gpu-accelerated"
+                      style={{ transform: 'translateZ(0)' }}
                       animate={{ 
                         y: [0, -5, 0],
                       }}

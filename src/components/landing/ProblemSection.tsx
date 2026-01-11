@@ -81,7 +81,8 @@ const ProblemSection = () => {
       
       {/* Animated Warning Background */}
       <motion.div 
-        className="absolute top-1/3 left-1/4 w-96 h-96 bg-destructive/10 rounded-full blur-3xl"
+        className="absolute top-1/3 left-1/4 w-96 h-96 bg-destructive/10 rounded-full blur-3xl gpu-accelerated"
+        style={{ transform: 'translateZ(0)' }}
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.5, 0.3],
@@ -89,7 +90,8 @@ const ProblemSection = () => {
         transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-destructive/10 rounded-full blur-3xl"
+        className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-destructive/10 rounded-full blur-3xl gpu-accelerated"
+        style={{ transform: 'translateZ(0)' }}
         animate={{ 
           scale: [1.2, 1, 1.2],
           opacity: [0.4, 0.2, 0.4],
@@ -195,7 +197,8 @@ const ProblemSection = () => {
           >
             {/* Pulsing warning effect */}
             <motion.div 
-              className="absolute inset-0 bg-destructive/5"
+              className="absolute inset-0 bg-destructive/5 gpu-accelerated"
+              style={{ transform: 'translateZ(0)' }}
               animate={{ opacity: [0, 0.3, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
