@@ -7,6 +7,8 @@ import { generateSitemap } from "./scripts/generate-sitemap";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: mode === "production" ? "/mywebglory/" : "/",
+  
   server: {
     host: "::",
     port: 8080,
