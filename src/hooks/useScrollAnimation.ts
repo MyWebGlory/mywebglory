@@ -31,14 +31,21 @@ export function useParallax() {
   useEffect(() => {
     if (typeof window === 'undefined') return; // SSR guard
     
+    let ticking = false;
     const handleScroll = () => {
-      document.documentElement.style.setProperty(
-        "--scroll",
-        String(window.scrollY)
-      );
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          document.documentElement.style.setProperty(
+            "--scroll",
+            String(window.scrollY)
+          );
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 }
