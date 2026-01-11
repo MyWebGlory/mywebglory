@@ -90,6 +90,26 @@
     background-size: 200% 100%;
     animation: gradient-x 3s ease infinite;
   }
+  
+  /* GPU acceleration for animated elements */
+  .gpu-accelerated {
+    will-change: transform, opacity;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+}
+
+/* Performance: Reduce blur intensity on mobile */
+@media (max-width: 768px) {
+  .blur-3xl {
+    filter: blur(32px) !important;
+  }
+}
+
+/* Performance: CSS containment for sections */
+section {
+  contain: content;
 }
 
 @keyframes float {

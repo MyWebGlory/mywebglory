@@ -63,20 +63,22 @@ const WhyEventsSection = () => {
       
       {/* Animated Background Elements */}
       <motion.div 
-        className="absolute top-20 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
+        className="absolute top-20 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl gpu-accelerated"
         animate={{ 
           x: [0, 50, 0],
           y: [0, 30, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        style={{ transform: 'translateZ(0)' }}
       />
       <motion.div 
-        className="absolute bottom-20 right-10 w-80 h-80 bg-secondary/10 rounded-full blur-3xl"
+        className="absolute bottom-20 right-10 w-80 h-80 bg-secondary/10 rounded-full blur-3xl gpu-accelerated"
         animate={{ 
           x: [0, -40, 0],
           y: [0, -20, 0],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        style={{ transform: 'translateZ(0)' }}
       />
       
       <div className="container relative z-10 px-4 md:px-6" ref={ref}>
