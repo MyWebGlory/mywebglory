@@ -136,13 +136,8 @@ const BlogPostEventMarketingPlaybook = () => {
         description="Master event marketing with this complete guide. Learn how to plan, promote, execute, and measure events that generate leads, revenue, and brand authority."
         canonicalUrl="/blog/event-marketing-playbook"
         ogType="article"
-        structuredData={articleSchema}
+        structuredData={[articleSchema, faqSchema]}
       />
-      
-      {/* Additional FAQ Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify(faqSchema)}
-      </script>
 
       <Navbar />
 
