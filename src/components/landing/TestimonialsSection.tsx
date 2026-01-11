@@ -20,7 +20,7 @@ const testimonials = [
     avatar: "MJ",
   },
   {
-    quote: "They don't just run ads—they build complete systems. The email sequences alone were worth the investment. Absolutely recommend.",
+    quote: "They don't just run ads, they build complete systems. The email sequences alone were worth the investment. Absolutely recommend.",
     name: "Emily Rodriguez",
     title: "Marketing Lead",
     company: "Growth Academy",

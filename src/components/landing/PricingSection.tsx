@@ -45,7 +45,7 @@ const pricingPlans: PricingPlan[] = [
   {
     name: "Event Launch Engine",
     price: "$9,000",
-    duration: "30–45 days",
+    duration: "30-45 days",
     purpose: "🚀 Ready to test the waters? Launch your event with solid fundamentals, attract quality leads, and see what's possible!",
     acquisitionFocus: "Organic + light paid",
     icon: Zap,
@@ -135,7 +135,7 @@ const pricingPlans: PricingPlan[] = [
   {
     name: "Event Revenue System",
     price: "$25,000",
-    duration: "60–75 days",
+    duration: "60-75 days",
     purpose: "💰 Time to turn events into real pipeline! Generate sales-ready leads and watch your revenue grow.",
     acquisitionFocus: "Multi-channel organic + ads",
     icon: Crown,
@@ -408,7 +408,7 @@ const PricingSection = () => {
     };
   };
 
-  const formatRange = (range: [number, number]) => `${range[0].toLocaleString()}–${range[1].toLocaleString()}`;
+  const formatRange = (range: [number, number]) => `${range[0].toLocaleString()}-${range[1].toLocaleString()}`;
 
   const getPreviewFeatures = (plan: PricingPlan) => {
     const allItems: { category: string; item: string }[] = [];
@@ -440,7 +440,7 @@ const PricingSection = () => {
             Event Marketing Systems
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Price per event — ad spend not included
+            Price per event - ad spend not included
           </p>
         </div>
         
@@ -574,7 +574,7 @@ const PricingSection = () => {
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">Attendance Rate</span>
-                      <span className="text-sm font-semibold text-foreground">{scaledPerf.attendanceRate[0]}–{scaledPerf.attendanceRate[1]}%</span>
+                      <span className="text-sm font-semibold text-foreground">{scaledPerf.attendanceRate[0]}-{scaledPerf.attendanceRate[1]}%</span>
                     </div>
                     <div className="flex justify-between items-center">
                       <span className="text-sm text-muted-foreground">Live Attendees</span>
@@ -759,7 +759,7 @@ const PricingSection = () => {
         </div>
         
         <p className="text-center text-muted-foreground mt-12 text-sm max-w-xl mx-auto">
-          We promise ICP-aligned attendees, sales-ready leads, and authority — not revenue guarantees. That keeps us premium and accountable.
+          We promise ICP-aligned attendees, sales-ready leads, and authority, not revenue guarantees. That keeps us premium and accountable.
         </p>
       </div>
     </section>
