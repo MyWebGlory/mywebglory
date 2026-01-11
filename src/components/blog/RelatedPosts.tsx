@@ -5,12 +5,12 @@ import { blogPosts, type BlogPost } from "@/data/blog-posts";
 
 // Import blog images for SSG
 import eventMarketingHero from "@/assets/blog/event-marketing-hero.jpg";
-import eventMarketingPlaybookHero from "@/assets/blog/event-marketing-playbook-hero.jpg";
+import playbookHero from "@/assets/blog/playbook-hero.jpg";
 
 // Image lookup for SSG compatibility - add new images here when creating posts
 const blogImages: Record<string, string> = {
   "ultimate-guide-event-marketing": eventMarketingHero,
-  "event-marketing-playbook": eventMarketingPlaybookHero,
+  "event-marketing-playbook": playbookHero,
 };
 
 interface RelatedPostsProps {

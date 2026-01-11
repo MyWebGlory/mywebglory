@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
     readTime: "15 min read",
     category: "Event Marketing Playbook",
     tags: ["event marketing", "ROI measurement", "event planning", "marketing funnel", "lead nurturing"],
-    featuredImage: "/src/assets/blog/event-marketing-playbook-hero.jpg",
+    featuredImage: "/src/assets/blog/playbook-hero.jpg",
     seo: {
       title: "The Complete Event Marketing Playbook: Strategy, Execution, and ROI",
       description: "Master event marketing with this complete guide. Learn how to plan, promote, execute, and measure events that generate leads, revenue, and brand authority."
