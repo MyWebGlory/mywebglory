@@ -17,6 +17,7 @@ interface FAQCategory {
   questions: {
     question: string;
     answer: React.ReactNode;
+    answerText: string; // Plain text for schema
   }[];
 }
 
@@ -27,6 +28,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "Do you guarantee results?",
+        answerText: "We guarantee execution, systems, and best-in-class event marketing practices — not revenue. Events depend on multiple factors outside our control: your offer, pricing, sales process, and follow-up. What we do guarantee is: Qualified acquisition, High show-up engineering, Clean pipelines, Measurable outcomes. We build systems that make results possible and repeatable.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">We guarantee execution, systems, and best-in-class event marketing practices — not revenue.</p>
@@ -44,6 +46,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "Do you bring random attendees or qualified leads?",
+        answerText: "Never random. Every event is built around: A defined ICP, Market-specific messaging, Targeted acquisition channels. We optimize for quality over volume. Attendance is important — who attends is everything.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Never random.</p>
@@ -65,6 +68,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "Is ad spend included?",
+        answerText: "No. Ad spend is not included in our fees and is paid directly by the client to the platforms. This gives you: Full transparency, Full control, No hidden margins. We manage strategy, setup, creatives, and optimization.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">No.</p>
@@ -87,6 +91,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "Which ad platforms do you use?",
+        answerText: "It depends on your market and ICP. We regularly work with: Meta (Facebook & Instagram), LinkedIn, Google (where relevant), Other niche platforms when appropriate. Platform choice is strategy-driven, not preference-driven.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">It depends on your market and ICP.</p>
@@ -103,6 +108,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "Do you handle organic acquisition as well?",
+        answerText: "Yes. Depending on the plan, we deploy: Social content, Community activation, Comment & engagement strategies, Outreach campaigns, Email list activation. Organic is never improvised — it's structured and intentional.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Yes.</p>
@@ -120,6 +126,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "Do you work with any type of business?",
+        answerText: "No. We work best with companies that: Have a real offer, Sell high-ticket or B2B services/products, Understand the value of long-term systems, Are ready to follow up on leads. We are not a fit for early-stage projects or 'quick wins'.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">No.</p>
@@ -142,6 +149,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "How long does an event project take?",
+        answerText: "Most events run on a 30 to 90-day timeline, depending on: Market maturity, Acquisition channels, Event complexity. We define the timeline clearly before starting.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Most events run on a 30 to 90-day timeline, depending on:</p>
@@ -156,6 +164,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "Do you handle sales closing?",
+        answerText: "No. We build the pipeline and deliver qualified leads. Sales closing stays with you or your team. That separation keeps incentives clean and execution sharp.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">No.</p>
@@ -172,6 +181,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "Can you work with our internal team?",
+        answerText: "Yes. We regularly integrate with: Marketing teams, Sales teams, External partners. We provide structure, workflows, and clarity — not friction.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Yes.</p>
@@ -187,6 +197,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "Do you provide CRM setup?",
+        answerText: "Yes, depending on the plan. We can: Set up a CRM, Integrate with your existing one, Design pipelines and lead qualification stages. Advanced CRM systems are included in higher-tier plans.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Yes, depending on the plan.</p>
@@ -208,6 +219,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "Do you run in-person events?",
+        answerText: "Our core expertise is event marketing systems, not logistics. We can support: Acquisition, Registration, Follow-up, Post-event leverage. Physical event logistics (venues, catering, etc.) are handled by the client.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Our core expertise is event marketing systems, not logistics.</p>
@@ -224,6 +236,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "What happens after the event?",
+        answerText: "That's where most of the value is created. We: Activate post-event communications, Drive leads into your ecosystem, Repurpose content, Deliver analytics and insights. The event is a starting point — not the finish line.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">That's where most of the value is created.</p>
@@ -246,6 +259,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "How many clients do you work with at the same time?",
+        answerText: "We cap our capacity at 4 clients per month. This ensures: Focus, Speed, Quality, Accountability. If we're full, we'll tell you.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">We cap our capacity at 4 clients per month.</p>
@@ -262,6 +276,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "How do we get started?",
+        answerText: "Simple. Apply for a strategy call, We assess fit, We define the right plan, We build the system.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Simple.</p>
@@ -290,7 +305,7 @@ const faqCategories: FAQCategory[] = [
   },
 ];
 
-// FAQ Schema for rich snippets
+// FAQ Schema for rich snippets - uses plain text answers
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -300,7 +315,7 @@ const faqSchema = {
       name: q.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: typeof q.answer === 'string' ? q.answer : "See our FAQ page for the detailed answer."
+        text: q.answerText
       }
     }))
   )
