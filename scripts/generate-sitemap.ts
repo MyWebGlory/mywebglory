@@ -14,6 +14,7 @@ const routeConfigs: RouteConfig[] = [
   { path: "/blog", priority: 0.8, changefreq: "weekly" },
   { path: "/blog/ultimate-guide-event-marketing", priority: 0.8, changefreq: "monthly" },
   { path: "/blog/event-marketing-playbook", priority: 0.8, changefreq: "monthly" },
+  { path: "/blog/build-authority-event-content-marketing", priority: 0.8, changefreq: "monthly" },
   { path: "/case-studies", priority: 0.8, changefreq: "weekly" },
   { path: "/contact", priority: 0.8, changefreq: "monthly" },
   { path: "/about", priority: 0.7, changefreq: "monthly" },

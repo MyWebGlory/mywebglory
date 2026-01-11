@@ -11,6 +11,7 @@ import Privacy from './pages/Privacy';
 import Blog from './pages/Blog';
 import BlogPostUltimateGuideEventMarketing from './pages/BlogPost-UltimateGuideEventMarketing';
 import BlogPostEventMarketingPlaybook from './pages/BlogPost-EventMarketingPlaybook';
+import BlogPostBuildAuthorityEventContent from './pages/BlogPost-BuildAuthorityEventContent';
 import NotFound from './pages/NotFound';
 
 export const routes: RouteRecord[] = [
@@ -26,5 +27,6 @@ export const routes: RouteRecord[] = [
   { path: '/blog', element: <Blog /> },
   { path: '/blog/ultimate-guide-event-marketing', element: <BlogPostUltimateGuideEventMarketing /> },
   { path: '/blog/event-marketing-playbook', element: <BlogPostEventMarketingPlaybook /> },
+  { path: '/blog/build-authority-event-content-marketing', element: <BlogPostBuildAuthorityEventContent /> },
   { path: '*', element: <NotFound /> },
 ];

@@ -58,6 +58,24 @@ export const blogPosts: BlogPost[] = [
       title: "The Complete Event Marketing Playbook: Strategy, Execution, and ROI",
       description: "Master event marketing with this complete guide. Learn how to plan, promote, execute, and measure events that generate leads, revenue, and brand authority."
     }
+  },
+  {
+    slug: "build-authority-event-content-marketing",
+    title: "How to Build Authority Through Event Content Marketing",
+    excerpt: "Learn how to create event content that builds authority, engages audiences, and generates leads. Discover strategies for planning, promotion, and long-term impact.",
+    author: {
+      name: "Sarah Mitchell",
+      role: "Content Strategist"
+    },
+    publishedAt: "2025-01-11",
+    readTime: "14 min read",
+    category: "Authority Building",
+    tags: ["event content", "authority building", "thought leadership", "content strategy", "audience engagement"],
+    featuredImage: "/src/assets/blog/authority-content-hero.jpg",
+    seo: {
+      title: "How to Build Authority Through Event Content Marketing",
+      description: "Learn how to create event content that builds authority, engages audiences, and generates leads. Discover strategies for planning, promotion, and long-term impact."
+    }
   }
 ];
 
