@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, User, CheckCircle, Target, Users, BarChart3, Mail, Share2, Megaphone } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, CheckCircle, Target, Users, BarChart3, Mail, Share2, Megaphone, List } from "lucide-react";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
@@ -186,6 +186,41 @@ const BlogPostUltimateGuideEventMarketing = () => {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto">
               
+              {/* Table of Contents */}
+              <motion.nav 
+                {...fadeInUp} 
+                className="bg-card/50 border border-border rounded-2xl p-6 mb-12"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <List className="w-5 h-5 text-primary" />
+                  <h2 className="text-lg font-semibold text-foreground">Table of Contents</h2>
+                </div>
+                <ol className="grid md:grid-cols-2 gap-2 text-sm">
+                  {[
+                    { id: "what-is-event-marketing", label: "What is Event Marketing?" },
+                    { id: "why-event-marketing-works", label: "Why Event Marketing Works" },
+                    { id: "how-to-plan", label: "How to Plan a High-Impact Event" },
+                    { id: "event-promotion", label: "Event Promotion Strategies" },
+                    { id: "engaging-audience", label: "Engaging Your Audience" },
+                    { id: "post-event", label: "Post-Event Strategies" },
+                    { id: "tools", label: "Tools & Technologies" },
+                    { id: "case-study", label: "Case Study" },
+                    { id: "best-practices", label: "Best Practices" },
+                    { id: "conclusion", label: "Conclusion" },
+                  ].map((item, i) => (
+                    <li key={item.id}>
+                      <a 
+                        href={`#${item.id}`}
+                        className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors py-1"
+                      >
+                        <span className="text-primary font-medium">{i + 1}.</span>
+                        {item.label}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </motion.nav>
+
               {/* Introduction */}
               <motion.div {...fadeInUp} className="prose prose-lg prose-invert max-w-none mb-16">
                 <p className="text-xl text-muted-foreground leading-relaxed">
@@ -201,7 +236,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.div>
 
               {/* Section 1: What is Event Marketing */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="what-is-event-marketing" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Target className="w-6 h-6 text-primary" />
@@ -241,7 +276,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.section>
 
               {/* Section 2: Why Event Marketing Works */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="why-event-marketing-works" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <BarChart3 className="w-6 h-6 text-primary" />
@@ -293,7 +328,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.div>
 
               {/* Section 3: How to Plan */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="how-to-plan" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Users className="w-6 h-6 text-primary" />
@@ -356,7 +391,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.div>
 
               {/* Section 4: Event Promotion */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="event-promotion" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Megaphone className="w-6 h-6 text-primary" />
@@ -413,7 +448,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.div>
 
               {/* Section 5: Engaging Audience */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="engaging-audience" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Users className="w-6 h-6 text-primary" />
@@ -437,7 +472,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.section>
 
               {/* Section 6: Post-Event */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="post-event" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Mail className="w-6 h-6 text-primary" />
@@ -470,7 +505,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.section>
 
               {/* Section 7: Tools */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="tools" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <BarChart3 className="w-6 h-6 text-primary" />
@@ -498,7 +533,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.section>
 
               {/* Section 8: Case Study */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="case-study" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Target className="w-6 h-6 text-primary" />
@@ -538,7 +573,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.section>
 
               {/* Section 9: Best Practices */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="best-practices" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <CheckCircle className="w-6 h-6 text-primary" />
@@ -563,7 +598,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
               </motion.section>
 
               {/* Section 10: Conclusion */}
-              <motion.section {...fadeInUp} className="mb-16">
+              <motion.section {...fadeInUp} id="conclusion" className="mb-16 scroll-mt-24">
                 <div className="flex items-center gap-3 mb-6">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <Target className="w-6 h-6 text-primary" />
