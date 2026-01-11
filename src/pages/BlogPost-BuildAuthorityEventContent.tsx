@@ -1,16 +1,22 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { 
+  ArrowLeft, Calendar, Clock, CheckCircle, Target, Users, BarChart3, 
+  Megaphone, List, TrendingUp, BookOpen, Wrench, Award, AlertTriangle,
+  MessageSquare, Share2
+} from "lucide-react";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import RelatedPosts from "@/components/blog/RelatedPosts";
-import { ArrowLeft, Clock, Calendar, User, Share2, Linkedin, Twitter, BookOpen, Target, Users, Megaphone, MessageSquare, BarChart3, Wrench, Award, AlertTriangle, TrendingUp } from "lucide-react";
-import { motion } from "framer-motion";
 
 // Import images
 import heroImage from "@/assets/blog/authority-content-hero.jpg";
 import whyMattersImage from "@/assets/blog/authority-why-matters.jpg";
 import engagingAttendeesImage from "@/assets/blog/authority-engaging-attendees.jpg";
 import advancedStrategiesImage from "@/assets/blog/authority-advanced-strategies.jpg";
+import authorAvatar from "@/assets/sarah-mitchell.png";
 
 const blogPostSchema = {
   "@context": "https://schema.org",
@@ -85,535 +91,791 @@ const faqSchema = {
   ]
 };
 
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6 }
+};
+
+const staggerContainer = {
+  initial: {},
+  whileInView: {
+    transition: {
+      staggerChildren: 0.1
+    }
+  },
+  viewport: { once: true }
+};
+
 const tableOfContents = [
-  { id: "introduction", title: "Introduction", icon: BookOpen },
-  { id: "why-authority-matters", title: "Why Authority Matters", icon: Target },
-  { id: "understanding-audience", title: "Understanding Your Audience", icon: Users },
-  { id: "content-planning", title: "Content Planning", icon: Calendar },
-  { id: "creating-content", title: "Creating Compelling Content", icon: BookOpen },
-  { id: "promoting-content", title: "Promoting Your Content", icon: Megaphone },
-  { id: "engaging-attendees", title: "Engaging Attendees", icon: MessageSquare },
-  { id: "repurposing-content", title: "Repurposing Content", icon: Share2 },
-  { id: "measuring-performance", title: "Measuring Performance", icon: BarChart3 },
-  { id: "tools", title: "Tools", icon: Wrench },
-  { id: "case-studies", title: "Case Studies", icon: Award },
-  { id: "common-mistakes", title: "Common Mistakes", icon: AlertTriangle },
-  { id: "advanced-strategies", title: "Advanced Strategies", icon: TrendingUp },
-  { id: "conclusion", title: "Conclusion", icon: Target },
-  { id: "faqs", title: "FAQs", icon: MessageSquare },
+  { id: "introduction", label: "Introduction" },
+  { id: "why-authority-matters", label: "Why Authority Matters" },
+  { id: "understanding-audience", label: "Understanding Your Audience" },
+  { id: "content-planning", label: "Content Planning" },
+  { id: "creating-content", label: "Creating Compelling Content" },
+  { id: "promoting-content", label: "Promoting Your Content" },
+  { id: "engaging-attendees", label: "Engaging Attendees" },
+  { id: "repurposing-content", label: "Repurposing Content" },
+  { id: "measuring-performance", label: "Measuring Performance" },
+  { id: "tools", label: "Tools & Platforms" },
+  { id: "case-studies", label: "Case Studies" },
+  { id: "common-mistakes", label: "Common Mistakes" },
+  { id: "advanced-strategies", label: "Advanced Strategies" },
+  { id: "conclusion", label: "Conclusion" },
+  { id: "faqs", label: "FAQs" },
 ];
 
 const BlogPostBuildAuthorityEventContent = () => {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-background">
+    <>
       <SEO
         title="How to Build Authority Through Event Content Marketing"
         description="Learn how to create event content that builds authority, engages audiences, and generates leads. Discover strategies for planning, promotion, and long-term impact."
         canonicalUrl="/blog/build-authority-event-content-marketing"
+        ogType="article"
         structuredData={[blogPostSchema, faqSchema]}
       />
+
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="pt-24 pb-12 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container mx-auto px-4">
-          <Link 
-            to="/blog" 
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Blog
-          </Link>
+      <main className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section className="relative pt-24 pb-16 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl"
-          >
-            <span className="inline-block text-sm font-medium text-primary bg-primary/10 px-3 py-1 rounded-full mb-4">
-              Authority Building
-            </span>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
-              How to Build Authority Through Event Content Marketing
-            </h1>
-            
-            <div className="flex flex-wrap items-center gap-4 text-muted-foreground mb-8">
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4" />
-                <span>Sarah Mitchell</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                <span>January 11, 2025</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                <span>14 min read</span>
-              </div>
-            </div>
-
-            {/* Share buttons */}
-            <div className="flex items-center gap-4">
-              <span className="text-sm text-muted-foreground">Share:</span>
-              <a 
-                href="https://www.linkedin.com/sharing/share-offsite/?url=https://topela.com/blog/build-authority-event-content-marketing" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-muted hover:bg-primary/10 transition-colors"
-                aria-label="Share on LinkedIn"
+          <div className="container mx-auto px-4 relative z-10">
+            <motion.div {...fadeInUp} className="max-w-4xl mx-auto">
+              {/* Breadcrumb */}
+              <Link 
+                to="/blog" 
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 group"
               >
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://twitter.com/intent/tweet?url=https://topela.com/blog/build-authority-event-content-marketing&text=How to Build Authority Through Event Content Marketing" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-muted hover:bg-primary/10 transition-colors"
-                aria-label="Share on Twitter"
+                <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                Back to Blog
+              </Link>
+
+              {/* Category Badge */}
+              <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium mb-6">
+                Authority Building
+              </span>
+
+              {/* Title */}
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
+                How to Build Authority Through Event Content{" "}
+                <span className="text-gradient">Marketing</span>
+              </h1>
+
+              {/* Meta Info */}
+              <div className="flex flex-wrap items-center gap-6 text-muted-foreground mb-8">
+                <div className="flex items-center gap-2">
+                  <img 
+                    src={authorAvatar} 
+                    alt="Sarah Mitchell - Content Strategist" 
+                    className="w-10 h-10 rounded-full object-cover"
+                  />
+                  <span className="font-medium text-foreground">Sarah Mitchell</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  <span>January 11, 2025</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <span>14 min read</span>
+                </div>
+              </div>
+
+              {/* Hero Image */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="rounded-2xl overflow-hidden shadow-2xl"
               >
-                <Twitter className="w-4 h-4" />
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+                <img 
+                  src={heroImage} 
+                  alt="How to Build Authority Through Event Content Marketing"
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
+            </motion.div>
+          </div>
+        </section>
 
-      {/* Featured Image */}
-      <section className="pb-12">
-        <div className="container mx-auto px-4">
-          <motion.img
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            src={heroImage}
-            alt="How to Build Authority Through Event Content Marketing"
-            className="w-full max-w-4xl mx-auto rounded-xl shadow-lg"
-            loading="eager"
-          />
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <article className="pb-16">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-12">
-            {/* Table of Contents - Sidebar */}
-            <aside className="lg:w-72 flex-shrink-0">
-              <div className="lg:sticky lg:top-24">
-                <h3 className="font-semibold text-foreground mb-4">Table of Contents</h3>
-                <nav className="space-y-1">
-                  {tableOfContents.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className="flex items-center gap-2 w-full text-left text-sm text-muted-foreground hover:text-primary transition-colors py-1.5 px-2 rounded hover:bg-muted/50"
-                    >
-                      <item.icon className="w-3.5 h-3.5 flex-shrink-0" />
-                      <span className="line-clamp-1">{item.title}</span>
-                    </button>
+        {/* Article Content */}
+        <article className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto">
+              
+              {/* Table of Contents */}
+              <motion.nav 
+                {...fadeInUp} 
+                className="bg-card/50 border border-border rounded-2xl p-6 mb-12"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <List className="w-5 h-5 text-primary" />
+                  <h2 className="text-lg font-semibold text-foreground">Table of Contents</h2>
+                </div>
+                <ol className="grid md:grid-cols-2 gap-2 text-sm">
+                  {tableOfContents.map((item, i) => (
+                    <li key={item.id}>
+                      <a 
+                        href={`#${item.id}`}
+                        className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors py-1"
+                      >
+                        <span className="text-primary font-medium">{i + 1}.</span>
+                        {item.label}
+                      </a>
+                    </li>
                   ))}
-                </nav>
-              </div>
-            </aside>
+                </ol>
+              </motion.nav>
 
-            {/* Article Content */}
-            <div className="flex-1 max-w-3xl">
-              <div className="prose prose-lg max-w-none">
+              {/* Section 1: Introduction */}
+              <motion.section {...fadeInUp} id="introduction" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">1. Introduction</h2>
+                </div>
                 
-                {/* Introduction */}
-                <section id="introduction" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">1. Introduction</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Authority is the cornerstone of successful marketing. When people perceive your brand as an expert, they are more likely to engage, trust, and buy. One of the most effective ways to build authority is through event content marketing. This strategy combines live or virtual events with high-quality content designed to educate, inform, and engage your target audience.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    In this guide, you will learn how to plan, create, promote, and measure content for events in a way that positions your brand as an industry leader. Every step is actionable and designed to maximize your credibility and impact.
-                  </p>
-                </section>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Authority is the cornerstone of successful marketing. When people perceive your brand as an expert, 
+                  they are more likely to engage, trust, and buy. One of the most effective ways to build authority 
+                  is through event content marketing.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  This strategy combines live or virtual events with high-quality content designed to educate, 
+                  inform, and engage your target audience. In this guide, you will learn how to plan, create, 
+                  promote, and measure content for events in a way that positions your brand as an industry leader.
+                </p>
+              </motion.section>
 
-                {/* Why Authority Matters */}
-                <section id="why-authority-matters" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">2. Why Authority Matters in Event Marketing</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Authority gives your brand trust and credibility. Attendees are more likely to:
-                  </p>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                    <li>Attend your events consistently</li>
-                    <li>Engage with your content</li>
-                    <li>Share your content with peers</li>
-                    <li>Convert into customers</li>
-                  </ul>
-                  
+              {/* Section 2: Why Authority Matters */}
+              <motion.section {...fadeInUp} id="why-authority-matters" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Target className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">2. Why Authority Matters in Event Marketing</h2>
+                </div>
+
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Authority gives your brand trust and credibility. Attendees are more likely to:
+                </p>
+
+                <motion.div 
+                  variants={staggerContainer}
+                  initial="initial"
+                  whileInView="whileInView"
+                  viewport={{ once: true }}
+                  className="grid md:grid-cols-2 gap-3 mb-8"
+                >
+                  {[
+                    "Attend your events consistently",
+                    "Engage with your content",
+                    "Share your content with peers",
+                    "Convert into customers"
+                  ].map((item, i) => (
+                    <motion.div 
+                      key={i}
+                      variants={fadeInUp}
+                      className="flex items-center gap-3 bg-card/50 border border-border rounded-xl p-4"
+                    >
+                      <CheckCircle className="w-5 h-5 text-primary flex-shrink-0" />
+                      <span className="text-foreground">{item}</span>
+                    </motion.div>
+                  ))}
+                </motion.div>
+
+                {/* Image */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8 rounded-2xl overflow-hidden shadow-xl"
+                >
                   <img 
                     src={whyMattersImage} 
-                    alt="Why Authority Matters in Event Marketing" 
-                    className="w-full rounded-xl shadow-md mb-6"
-                    loading="lazy"
+                    alt="Why Authority Matters in Event Marketing"
+                    className="w-full h-auto"
                   />
-                  
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Events offer a unique platform to demonstrate knowledge, expertise, and thought leadership. Unlike ads, events allow you to showcase your skills and insights live, creating experiences that build lasting authority.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Authority also contributes to SEO indirectly. When authoritative content earns backlinks and shares, it signals trust to search engines, improving ranking potential.
-                  </p>
-                </section>
+                </motion.div>
 
-                {/* Understanding Your Audience */}
-                <section id="understanding-audience" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">3. Understanding Your Audience</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Before creating content, you must know who you are talking to. Event content only works when it aligns with the needs, challenges, and goals of your target audience.
+                <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-l-4 border-primary rounded-r-xl p-6">
+                  <p className="text-foreground">
+                    <strong>💡 Pro tip:</strong> Authority also contributes to SEO indirectly. When authoritative 
+                    content earns backlinks and shares, it signals trust to search engines, improving ranking potential.
                   </p>
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Steps to Understand Your Audience</h3>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                    <li>Segment by industry, role, and experience level.</li>
-                    <li>Identify pain points and key questions.</li>
-                    <li>Determine preferred content formats, such as webinars, workshops, or guides.</li>
-                    <li>Monitor competitor content to identify gaps.</li>
-                    <li>Collect feedback from past attendees and surveys.</li>
-                  </ul>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Understanding your audience ensures your content is relevant, actionable, and valuable, which builds authority more effectively than generic content.
-                  </p>
-                </section>
+                </div>
+              </motion.section>
 
-                {/* Content Planning */}
-                <section id="content-planning" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">4. Content Planning for Authority Events</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Planning is the foundation of successful event content marketing. A clear plan ensures your content resonates and positions you as an expert.
-                  </p>
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Steps for Content Planning</h3>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                    <li><strong>Define objectives:</strong> Lead generation, brand positioning, customer education.</li>
-                    <li><strong>Map content to audience journey:</strong> Awareness, consideration, and conversion stages.</li>
-                    <li><strong>Choose formats:</strong> Presentation slides, panels, workshops, breakout sessions, or videos.</li>
-                    <li><strong>Create an editorial calendar:</strong> Schedule content before, during, and after the event.</li>
-                    <li><strong>Assign responsibilities:</strong> Speakers, designers, content creators, and moderators.</li>
-                  </ul>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Planning ahead prevents rushed content and ensures a cohesive message that strengthens authority.
-                  </p>
-                </section>
-
-                {/* Creating Compelling Content */}
-                <section id="creating-content" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">5. Creating Compelling Event Content</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Content is the heart of authority-building. It should educate, inform, and leave a lasting impression.
-                  </p>
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Characteristics of Compelling Content</h3>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                    <li><strong>Clear and concise:</strong> Avoid jargon and complex language.</li>
-                    <li><strong>Data-driven:</strong> Include statistics, case studies, and references.</li>
-                    <li><strong>Actionable:</strong> Provide steps attendees can implement immediately.</li>
-                    <li><strong>Visual:</strong> Use slides, charts, diagrams, and infographics.</li>
-                    <li><strong>Storytelling:</strong> Use real examples to make points memorable.</li>
-                  </ul>
-
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Content Types</h3>
-                  <div className="bg-muted/30 rounded-xl p-6 mb-6">
-                    <ul className="space-y-3 text-muted-foreground">
-                      <li><strong>Keynotes and presentations:</strong> Showcase expertise in a structured format.</li>
-                      <li><strong>Panels and discussions:</strong> Show multiple perspectives and thought leadership.</li>
-                      <li><strong>Workshops:</strong> Provide hands-on, practical knowledge.</li>
-                      <li><strong>Guides and handouts:</strong> Extend the learning beyond the event.</li>
-                      <li><strong>Recorded sessions:</strong> Serve as evergreen content for ongoing authority.</li>
-                    </ul>
+              {/* Section 3: Understanding Your Audience */}
+              <motion.section {...fadeInUp} id="understanding-audience" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Users className="w-6 h-6 text-primary" />
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Every piece of content should answer a question or solve a problem for your audience.
-                  </p>
-                </section>
+                  <h2 className="text-3xl font-bold text-foreground">3. Understanding Your Audience</h2>
+                </div>
 
-                {/* Promoting Your Event Content */}
-                <section id="promoting-content" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">6. Promoting Your Event Content</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Even the best content fails if no one sees it. Promotion is critical to reach your target audience and build authority.
-                  </p>
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Channels</h3>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                    <li><strong>Email campaigns:</strong> Segment your lists for personalized invitations.</li>
-                    <li><strong>Social media:</strong> Share highlights, teasers, and registration links.</li>
-                    <li><strong>Paid ads:</strong> Retarget potential attendees on LinkedIn, Google, or Facebook.</li>
-                    <li><strong>Partnerships:</strong> Collaborate with industry experts to increase reach.</li>
-                    <li><strong>Content marketing:</strong> Write blog posts and articles that tie into event topics.</li>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Before creating content, you must know who you are talking to. Event content only works 
+                  when it aligns with the needs, challenges, and goals of your target audience.
+                </p>
+
+                <div className="bg-card/50 border border-border rounded-2xl p-6 mb-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Steps to Understand Your Audience</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Segment by industry, role, and experience level",
+                      "Identify pain points and key questions",
+                      "Determine preferred content formats (webinars, workshops, guides)",
+                      "Monitor competitor content to identify gaps",
+                      "Collect feedback from past attendees and surveys"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Promotion should begin 6 to 8 weeks before the event to build anticipation and maximize attendance.
-                  </p>
-                </section>
+                </div>
 
-                {/* Engaging Attendees */}
-                <section id="engaging-attendees" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">7. Engaging Attendees With Content</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Engagement turns attendees into advocates and reinforces authority.
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Understanding your audience ensures your content is relevant, actionable, and valuable, 
+                  which builds authority more effectively than generic content.
+                </p>
+              </motion.section>
+
+              {/* Section 4: Content Planning */}
+              <motion.section {...fadeInUp} id="content-planning" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Calendar className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">4. Content Planning for Authority Events</h2>
+                </div>
+
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Planning is the foundation of successful event content marketing. A clear plan ensures 
+                  your content resonates and positions you as an expert.
+                </p>
+
+                <div className="space-y-4">
+                  {[
+                    { title: "Define objectives", desc: "Lead generation, brand positioning, customer education" },
+                    { title: "Map content to audience journey", desc: "Awareness, consideration, and conversion stages" },
+                    { title: "Choose formats", desc: "Presentation slides, panels, workshops, breakout sessions, or videos" },
+                    { title: "Create an editorial calendar", desc: "Schedule content before, during, and after the event" },
+                    { title: "Assign responsibilities", desc: "Speakers, designers, content creators, and moderators" }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-card/50 border border-border rounded-xl p-5 hover:border-primary/50 transition-colors">
+                      <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
+                      <p className="text-muted-foreground text-sm">{item.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.section>
+
+              {/* Section 5: Creating Compelling Content */}
+              <motion.section {...fadeInUp} id="creating-content" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <BookOpen className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">5. Creating Compelling Event Content</h2>
+                </div>
+
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Content is the heart of authority-building. It should educate, inform, and leave a lasting impression.
+                </p>
+
+                <div className="bg-card/50 border border-border rounded-2xl p-6 mb-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Characteristics of Compelling Content</h3>
+                  <motion.div 
+                    variants={staggerContainer}
+                    initial="initial"
+                    whileInView="whileInView"
+                    viewport={{ once: true }}
+                    className="grid md:grid-cols-2 gap-4"
+                  >
+                    {[
+                      { title: "Clear and concise", desc: "Avoid jargon and complex language" },
+                      { title: "Data-driven", desc: "Include statistics, case studies, and references" },
+                      { title: "Actionable", desc: "Provide steps attendees can implement immediately" },
+                      { title: "Visual", desc: "Use slides, charts, diagrams, and infographics" },
+                      { title: "Storytelling", desc: "Use real examples to make points memorable" }
+                    ].map((item, i) => (
+                      <motion.div 
+                        key={i}
+                        variants={fadeInUp}
+                        className="bg-background/50 rounded-xl p-4"
+                      >
+                        <h4 className="font-semibold text-foreground mb-1">{item.title}</h4>
+                        <p className="text-sm text-muted-foreground">{item.desc}</p>
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </div>
+
+                <div className="bg-card/50 border border-border rounded-2xl p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Content Types</h3>
+                  <ul className="space-y-3">
+                    {[
+                      { title: "Keynotes and presentations", desc: "Showcase expertise in a structured format" },
+                      { title: "Panels and discussions", desc: "Show multiple perspectives and thought leadership" },
+                      { title: "Workshops", desc: "Provide hands-on, practical knowledge" },
+                      { title: "Guides and handouts", desc: "Extend the learning beyond the event" },
+                      { title: "Recorded sessions", desc: "Serve as evergreen content for ongoing authority" }
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span><strong className="text-foreground">{item.title}</strong> - {item.desc}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.section>
+
+              {/* Section 6: Promoting Your Content */}
+              <motion.section {...fadeInUp} id="promoting-content" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Megaphone className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">6. Promoting Your Event Content</h2>
+                </div>
+
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Even the best content fails if no one sees it. Promotion is critical to reach your 
+                  target audience and build authority.
+                </p>
+
+                <div className="space-y-4 mb-6">
+                  {[
+                    { channel: "Email Marketing", tips: "Segment lists, personalize invitations, send reminders" },
+                    { channel: "Social Media", tips: "Teasers, countdowns, speaker highlights, behind-the-scenes" },
+                    { channel: "Paid Ads", tips: "Targeted campaigns on LinkedIn, Google, and Facebook" },
+                    { channel: "Partner Outreach", tips: "Co-promotion with industry partners and influencers" },
+                    { channel: "Content Syndication", tips: "Share snippets on Medium, LinkedIn Articles, or industry forums" }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-card/50 border border-border rounded-xl p-5">
+                      <h3 className="font-semibold text-foreground mb-2">{item.channel}</h3>
+                      <p className="text-muted-foreground text-sm">{item.tips}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-6 border border-primary/20">
+                  <p className="text-lg text-foreground">
+                    <strong>📊 Data Point:</strong> Events promoted across 3+ channels see{" "}
+                    <span className="text-primary font-bold">45% higher registration rates</span>{" "}
+                    compared to single-channel promotion.
                   </p>
-                  
+                </div>
+              </motion.section>
+
+              {/* Section 7: Engaging Attendees */}
+              <motion.section {...fadeInUp} id="engaging-attendees" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">7. Engaging Attendees During Events</h2>
+                </div>
+
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Engagement is key to building authority. Interactive events leave lasting impressions 
+                  and encourage sharing.
+                </p>
+
+                {/* Image */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8 rounded-2xl overflow-hidden shadow-xl"
+                >
                   <img 
                     src={engagingAttendeesImage} 
-                    alt="Engaging Attendees With Content" 
-                    className="w-full rounded-xl shadow-md mb-6"
-                    loading="lazy"
+                    alt="Engaging Attendees During Events"
+                    className="w-full h-auto"
                   />
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Tactics for Engagement</h3>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                    <li>Interactive polls and surveys</li>
-                    <li>Q&A sessions to answer attendee questions live</li>
-                    <li>Breakout rooms for small-group discussions</li>
-                    <li>Gamification with quizzes and challenges</li>
-                    <li>Real-life examples and case studies</li>
+                </motion.div>
+
+                <div className="bg-card/50 border border-border rounded-2xl p-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Engagement Tactics</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Live polls and Q&A sessions",
+                      "Breakout rooms for networking",
+                      "Interactive workshops with hands-on exercises",
+                      "Gamification and prizes",
+                      "Real-time chat and community features"
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
-                  <p className="text-muted-foreground leading-relaxed">
-                    The goal is to make attendees active participants rather than passive listeners. Engagement ensures content is remembered and shared.
-                  </p>
-                </section>
+                </div>
+              </motion.section>
 
-                {/* Repurposing Content */}
-                <section id="repurposing-content" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">8. Repurposing Event Content for Maximum Authority</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Authority grows when content is reused and amplified across channels.
-                  </p>
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Repurposing Methods</h3>
-                  <div className="grid md:grid-cols-2 gap-4 mb-6">
-                    <div className="bg-muted/30 rounded-lg p-4">
-                      <p className="font-medium text-foreground">Blog posts</p>
-                      <p className="text-sm text-muted-foreground">Summarizing sessions</p>
-                    </div>
-                    <div className="bg-muted/30 rounded-lg p-4">
-                      <p className="font-medium text-foreground">Infographics</p>
-                      <p className="text-sm text-muted-foreground">From key statistics</p>
-                    </div>
-                    <div className="bg-muted/30 rounded-lg p-4">
-                      <p className="font-medium text-foreground">Video clips</p>
-                      <p className="text-sm text-muted-foreground">For social media</p>
-                    </div>
-                    <div className="bg-muted/30 rounded-lg p-4">
-                      <p className="font-medium text-foreground">Podcasts</p>
-                      <p className="text-sm text-muted-foreground">Audio recordings</p>
-                    </div>
-                    <div className="bg-muted/30 rounded-lg p-4 md:col-span-2">
-                      <p className="font-medium text-foreground">Slide decks</p>
-                      <p className="text-sm text-muted-foreground">For LinkedIn sharing</p>
-                    </div>
+              {/* Section 8: Repurposing Content */}
+              <motion.section {...fadeInUp} id="repurposing-content" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Share2 className="w-6 h-6 text-primary" />
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Repurposing allows content to reach a broader audience and continually build authority long after the event.
-                  </p>
-                </section>
+                  <h2 className="text-3xl font-bold text-foreground">8. Repurposing Event Content</h2>
+                </div>
 
-                {/* Measuring Performance */}
-                <section id="measuring-performance" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">9. Measuring Authority and Content Performance</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    Tracking performance shows whether your content is building authority effectively.
-                  </p>
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Metrics to Track</h3>
-                  <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                    <li>Attendance and participation rates</li>
-                    <li>Engagement metrics: Poll responses, chat activity, Q&A questions</li>
-                    <li>Content consumption: Downloads, views, or shares of session recordings</li>
-                    <li>Backlinks and mentions from published content</li>
-                    <li>Lead generation and conversions</li>
-                  </ul>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Regular analysis helps refine strategies and ensures authority grows sustainably.
-                  </p>
-                </section>
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Don't let your event content die after the event. Repurposing extends its lifespan 
+                  and multiplies authority-building opportunities.
+                </p>
 
-                {/* Tools */}
-                <section id="tools" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">10. Tools for Event Content Marketing</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-6">
-                    The right tools make content creation, distribution, and measurement easier.
-                  </p>
-                  
-                  <h3 className="text-xl font-semibold text-foreground mb-4">Recommended Tools</h3>
-                  <div className="space-y-4 mb-6">
-                    <div className="border border-border rounded-lg p-4">
-                      <p className="font-semibold text-foreground">CRM</p>
-                      <p className="text-muted-foreground">HubSpot, Salesforce</p>
-                    </div>
-                    <div className="border border-border rounded-lg p-4">
-                      <p className="font-semibold text-foreground">Event Platforms</p>
-                      <p className="text-muted-foreground">Zoom, Hopin, Demio</p>
-                    </div>
-                    <div className="border border-border rounded-lg p-4">
-                      <p className="font-semibold text-foreground">Marketing Automation</p>
-                      <p className="text-muted-foreground">Mailchimp, ActiveCampaign</p>
-                    </div>
-                    <div className="border border-border rounded-lg p-4">
-                      <p className="font-semibold text-foreground">Design & Content</p>
-                      <p className="text-muted-foreground">Canva, Figma, Adobe Creative Suite</p>
-                    </div>
-                    <div className="border border-border rounded-lg p-4">
-                      <p className="font-semibold text-foreground">Analytics</p>
-                      <p className="text-muted-foreground">Google Analytics, Google Search Console</p>
-                    </div>
+                <motion.div 
+                  variants={staggerContainer}
+                  initial="initial"
+                  whileInView="whileInView"
+                  viewport={{ once: true }}
+                  className="grid md:grid-cols-2 gap-4"
+                >
+                  {[
+                    { format: "Blog posts", desc: "Turn sessions into written articles" },
+                    { format: "Social clips", desc: "Share key moments on social media" },
+                    { format: "Podcasts", desc: "Audio versions of panels and interviews" },
+                    { format: "Infographics", desc: "Visual summaries of key insights" },
+                    { format: "Email series", desc: "Drip campaigns with event highlights" },
+                    { format: "E-books/Guides", desc: "Comprehensive resources from multiple sessions" }
+                  ].map((item, i) => (
+                    <motion.div 
+                      key={i}
+                      variants={fadeInUp}
+                      className="bg-card/50 border border-border rounded-xl p-5 hover:border-primary/50 transition-colors"
+                    >
+                      <h3 className="font-semibold text-foreground mb-2">{item.format}</h3>
+                      <p className="text-muted-foreground text-sm">{item.desc}</p>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.section>
+
+              {/* Section 9: Measuring Performance */}
+              <motion.section {...fadeInUp} id="measuring-performance" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <BarChart3 className="w-6 h-6 text-primary" />
                   </div>
-                  <p className="text-muted-foreground leading-relaxed">
-                    These tools help automate workflows, track metrics, and maintain high-quality content production.
-                  </p>
-                </section>
+                  <h2 className="text-3xl font-bold text-foreground">9. Measuring Content Performance</h2>
+                </div>
 
-                {/* Case Studies */}
-                <section id="case-studies" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">11. Case Studies</h2>
-                  
-                  <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 mb-6">
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  What gets measured gets improved. Track these metrics to optimize your authority-building efforts.
+                </p>
+
+                <div className="bg-card/50 border border-border rounded-2xl p-6 mb-6">
+                  <h3 className="text-xl font-semibold text-foreground mb-4">Key Metrics to Track</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      "Registration-to-attendance rate",
+                      "Session engagement scores",
+                      "Content downloads",
+                      "Social shares and mentions",
+                      "Backlinks earned",
+                      "Pipeline generated",
+                      "Post-event survey scores",
+                      "Repeat attendance rate"
+                    ].map((metric, i) => (
+                      <div key={i} className="flex items-center gap-2 text-muted-foreground">
+                        <div className="w-2 h-2 rounded-full bg-primary" />
+                        <span>{metric}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-primary/5 border-l-4 border-primary rounded-r-xl p-6">
+                  <p className="text-foreground font-medium">
+                    <strong>Key Goal:</strong> Use data to identify what resonates and double down on high-performing content.
+                  </p>
+                </div>
+              </motion.section>
+
+              {/* Section 10: Tools */}
+              <motion.section {...fadeInUp} id="tools" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Wrench className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">10. Tools & Platforms</h2>
+                </div>
+
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  The right tools streamline your event content workflow and maximize impact.
+                </p>
+
+                <div className="space-y-4">
+                  {[
+                    { category: "CRM", tools: "HubSpot, Salesforce" },
+                    { category: "Event Platforms", tools: "Zoom, Hopin, Demio" },
+                    { category: "Marketing Automation", tools: "Mailchimp, ActiveCampaign" },
+                    { category: "Design & Content", tools: "Canva, Figma, Adobe Creative Suite" },
+                    { category: "Analytics", tools: "Google Analytics, Google Search Console" }
+                  ].map((item, i) => (
+                    <div key={i} className="bg-card/50 border border-border rounded-xl p-5">
+                      <h3 className="font-semibold text-foreground mb-2">{item.category}</h3>
+                      <p className="text-muted-foreground">{item.tools}</p>
+                    </div>
+                  ))}
+                </div>
+              </motion.section>
+
+              {/* Section 11: Case Studies */}
+              <motion.section {...fadeInUp} id="case-studies" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Award className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">11. Case Studies</h2>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-6">
                     <h3 className="text-xl font-semibold text-foreground mb-3">Example 1: SaaS Summit</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      A software company hosted a three-day virtual summit. By aligning content with audience pain points and repurposing sessions into blogs and videos, they generated 2,500 new leads and earned 30 high-quality backlinks.
+                      A software company hosted a three-day virtual summit. By aligning content with audience 
+                      pain points and repurposing sessions into blogs and videos, they generated 2,500 new leads 
+                      and earned 30 high-quality backlinks.
                     </p>
                   </div>
                   
-                  <div className="bg-primary/5 border border-primary/20 rounded-xl p-6">
+                  <div className="bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 rounded-2xl p-6">
                     <h3 className="text-xl font-semibold text-foreground mb-3">Example 2: Industry Workshop Series</h3>
                     <p className="text-muted-foreground leading-relaxed">
-                      An agency ran monthly workshops. Each session was recorded and shared on social channels. This content strategy positioned the agency as a thought leader, resulting in consistent media mentions and a 25 percent increase in client inquiries.
+                      An agency ran monthly workshops. Each session was recorded and shared on social channels. 
+                      This content strategy positioned the agency as a thought leader, resulting in consistent 
+                      media mentions and a 25% increase in client inquiries.
                     </p>
                   </div>
-                </section>
+                </div>
+              </motion.section>
 
-                {/* Common Mistakes */}
-                <section id="common-mistakes" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">12. Common Mistakes in Event Content Marketing</h2>
-                  
-                  <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-6">
-                    <ul className="space-y-3 text-muted-foreground">
-                      <li className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                        <span>Focusing on sales instead of education</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                        <span>Ignoring audience needs</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                        <span>Creating content too late</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                        <span>Neglecting follow-up and repurposing</span>
-                      </li>
-                      <li className="flex items-start gap-3">
-                        <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                        <span>Overloading content with technical jargon</span>
-                      </li>
-                    </ul>
+              {/* Section 12: Common Mistakes */}
+              <motion.section {...fadeInUp} id="common-mistakes" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <AlertTriangle className="w-6 h-6 text-primary" />
                   </div>
-                  <p className="text-muted-foreground leading-relaxed mt-6">
-                    Avoiding these mistakes strengthens authority and ensures content is effective.
-                  </p>
-                </section>
+                  <h2 className="text-3xl font-bold text-foreground">12. Common Mistakes to Avoid</h2>
+                </div>
 
-                {/* Advanced Strategies */}
-                <section id="advanced-strategies" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">13. Advanced Strategies for Long-Term Authority</h2>
-                  
+                <div className="bg-destructive/5 border border-destructive/20 rounded-2xl p-6">
+                  <ul className="space-y-4">
+                    {[
+                      "Focusing on sales instead of education",
+                      "Ignoring audience needs and preferences",
+                      "Creating content too late in the planning process",
+                      "Neglecting follow-up and content repurposing",
+                      "Overloading content with technical jargon"
+                    ].map((mistake, i) => (
+                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                        <AlertTriangle className="w-5 h-5 text-destructive mt-0.5 flex-shrink-0" />
+                        <span>{mistake}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.section>
+
+              {/* Section 13: Advanced Strategies */}
+              <motion.section {...fadeInUp} id="advanced-strategies" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <TrendingUp className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">13. Advanced Strategies for Long-Term Authority</h2>
+                </div>
+
+                {/* Image */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8 rounded-2xl overflow-hidden shadow-xl"
+                >
                   <img 
                     src={advancedStrategiesImage} 
-                    alt="Advanced Strategies for Long-Term Authority" 
-                    className="w-full rounded-xl shadow-md mb-6"
-                    loading="lazy"
+                    alt="Advanced Strategies for Long-Term Authority"
+                    className="w-full h-auto"
                   />
-                  
-                  <ul className="list-disc list-inside text-muted-foreground space-y-2 mb-6">
-                    <li><strong>Recurring events:</strong> Build a loyal audience over time</li>
-                    <li><strong>Guest speakers and influencers:</strong> Extend reach and credibility</li>
-                    <li><strong>Content ecosystems:</strong> Integrate blogs, videos, and social posts</li>
-                    <li><strong>SEO for event content:</strong> Optimize all repurposed content for search engines</li>
-                    <li><strong>Feedback loops:</strong> Continuously improve content and topics based on attendee input</li>
+                </motion.div>
+
+                <div className="bg-card/50 border border-border rounded-2xl p-6">
+                  <ul className="space-y-3">
+                    {[
+                      { title: "Recurring events", desc: "Build a loyal audience over time" },
+                      { title: "Guest speakers and influencers", desc: "Extend reach and credibility" },
+                      { title: "Content ecosystems", desc: "Integrate blogs, videos, and social posts" },
+                      { title: "SEO for event content", desc: "Optimize all repurposed content for search engines" },
+                      { title: "Feedback loops", desc: "Continuously improve content based on attendee input" }
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-muted-foreground">
+                        <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span><strong className="text-foreground">{item.title}</strong> - {item.desc}</span>
+                      </li>
+                    ))}
                   </ul>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Authority grows when your content strategy is consistent, high-quality, and strategically amplified.
-                  </p>
-                </section>
+                </div>
+              </motion.section>
 
-                {/* Conclusion */}
-                <section id="conclusion" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">14. Conclusion</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
-                    Event content marketing is one of the most effective ways to build authority, engage audiences, and generate leads. By planning carefully, creating valuable content, promoting effectively, and measuring results, your brand can become a recognized expert in your industry.
-                  </p>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Focus on long-term authority by repurposing content, engaging audiences, and continuously improving your events. Each piece of content becomes a building block in your reputation as a trusted thought leader.
-                  </p>
-                </section>
-
-                {/* FAQs */}
-                <section id="faqs" className="scroll-mt-24 mb-12">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-6">15. FAQs</h2>
-                  
-                  <div className="space-y-6">
-                    <div className="border-b border-border pb-4">
-                      <h3 className="font-semibold text-foreground mb-2">Q1: How often should I host authority events?</h3>
-                      <p className="text-muted-foreground">Monthly or quarterly events work best depending on resources and audience size.</p>
-                    </div>
-                    <div className="border-b border-border pb-4">
-                      <h3 className="font-semibold text-foreground mb-2">Q2: Should I use heavy animations on event content pages?</h3>
-                      <p className="text-muted-foreground">Use subtle micro-interactions for engagement, but keep loading fast and content readable.</p>
-                    </div>
-                    <div className="border-b border-border pb-4">
-                      <h3 className="font-semibold text-foreground mb-2">Q3: How can I measure authority?</h3>
-                      <p className="text-muted-foreground">Track backlinks, social shares, content engagement, and repeat attendance.</p>
-                    </div>
-                    <div className="border-b border-border pb-4">
-                      <h3 className="font-semibold text-foreground mb-2">Q4: Do images help with authority and SEO?</h3>
-                      <p className="text-muted-foreground">Yes. Infographics, charts, and slides improve comprehension, engagement, and search visibility.</p>
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground mb-2">Q5: What is the most important factor for authority in event content?</h3>
-                      <p className="text-muted-foreground">Consistency, quality, and relevance to your target audience are key.</p>
-                    </div>
+              {/* Section 14: Conclusion */}
+              <motion.section {...fadeInUp} id="conclusion" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Target className="w-6 h-6 text-primary" />
                   </div>
-                </section>
+                  <h2 className="text-3xl font-bold text-foreground">14. Conclusion</h2>
+                </div>
 
-                {/* CTA */}
-                <section className="bg-primary/5 border border-primary/20 rounded-xl p-8 text-center">
-                  <h3 className="text-xl font-bold text-foreground mb-3">Ready to Build Authority Through Events?</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Let us help you create event content that positions your brand as an industry leader.
+                <p className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  Event content marketing is one of the most effective ways to build authority, engage audiences, 
+                  and generate leads. By planning carefully, creating valuable content, promoting effectively, 
+                  and measuring results, your brand can become a recognized expert in your industry.
+                </p>
+
+                <div className="grid md:grid-cols-3 gap-4 mb-8">
+                  {[
+                    "Generate qualified leads",
+                    "Build industry authority",
+                    "Create lasting relationships"
+                  ].map((benefit, i) => (
+                    <div key={i} className="bg-primary/10 border border-primary/20 rounded-xl p-4 text-center">
+                      <p className="font-medium text-foreground">{benefit}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Focus on long-term authority by repurposing content, engaging audiences, and continuously 
+                  improving your events. Each piece of content becomes a building block in your reputation 
+                  as a trusted thought leader.
+                </p>
+              </motion.section>
+
+              {/* Section 15: FAQs */}
+              <motion.section {...fadeInUp} id="faqs" className="mb-16 scroll-mt-24">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-primary" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-foreground">15. Frequently Asked Questions</h2>
+                </div>
+
+                <Accordion type="single" collapsible className="space-y-4">
+                  {[
+                    {
+                      q: "How often should I host authority events?",
+                      a: "Monthly or quarterly events work best depending on resources and audience size. Consistency is more important than frequency."
+                    },
+                    {
+                      q: "Should I use heavy animations on event content pages?",
+                      a: "Use subtle micro-interactions for engagement, but keep loading fast and content readable. Performance matters for SEO and user experience."
+                    },
+                    {
+                      q: "How can I measure authority?",
+                      a: "Track backlinks, social shares, content engagement, and repeat attendance. These metrics indicate growing trust and recognition in your industry."
+                    },
+                    {
+                      q: "Do images help with authority and SEO?",
+                      a: "Yes. Infographics, charts, and slides improve comprehension, engagement, and search visibility. Always use descriptive alt text for accessibility and SEO."
+                    },
+                    {
+                      q: "What is the most important factor for authority in event content?",
+                      a: "Consistency, quality, and relevance to your target audience are key. Deliver value at every touchpoint to build lasting authority."
+                    }
+                  ].map((faq, i) => (
+                    <AccordionItem 
+                      key={i} 
+                      value={`faq-${i}`}
+                      className="bg-card/50 border border-border rounded-xl px-6 data-[state=open]:border-primary/50"
+                    >
+                      <AccordionTrigger className="text-left text-foreground hover:text-primary py-6">
+                        {faq.q}
+                      </AccordionTrigger>
+                      <AccordionContent className="text-muted-foreground pb-6">
+                        {faq.a}
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </motion.section>
+
+              {/* CTA Section */}
+              <motion.section {...fadeInUp} className="mb-16">
+                <div className="bg-gradient-to-br from-primary/20 via-primary/10 to-accent/20 rounded-2xl p-8 md:p-12 text-center border border-primary/20">
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+                    Ready to Build Authority Through Events?
+                  </h2>
+                  <p className="text-muted-foreground mb-8 max-w-xl mx-auto">
+                    Let's discuss how we can help you create event content that positions your brand 
+                    as an industry leader and generates measurable results.
                   </p>
-                  <Link 
-                    to="/contact" 
-                    className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors"
-                  >
-                    Book a Strategy Call
-                  </Link>
-                </section>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link 
+                      to="/contact"
+                      className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-xl font-semibold hover:bg-primary/90 transition-colors"
+                    >
+                      Book a Strategy Call
+                    </Link>
+                    <Link 
+                      to="/how-it-works"
+                      className="inline-flex items-center justify-center px-8 py-4 bg-card border border-border text-foreground rounded-xl font-semibold hover:bg-card/80 transition-colors"
+                    >
+                      See How We Work
+                    </Link>
+                  </div>
+                </div>
+              </motion.section>
 
-              </div>
+              {/* Author Bio */}
+              <motion.div {...fadeInUp} className="bg-card/50 border border-border rounded-2xl p-8 mb-12">
+                <div className="flex items-start gap-6">
+                  <img 
+                    src={authorAvatar} 
+                    alt="Sarah Mitchell - Content Strategist"
+                    className="w-20 h-20 rounded-full object-cover"
+                  />
+                  <div>
+                    <h3 className="text-xl font-semibold text-foreground mb-2">Sarah Mitchell</h3>
+                    <p className="text-primary mb-3">Content Strategist at Tope La</p>
+                    <p className="text-muted-foreground">
+                      Sarah specializes in creating high-impact content strategies for B2B event marketing. 
+                      With extensive experience in digital marketing and authority building, she helps companies 
+                      maximize their event ROI through strategic content and promotion.
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Related Posts */}
+              <RelatedPosts currentSlug="build-authority-event-content-marketing" />
+
             </div>
           </div>
-        </div>
-      </article>
-
-      {/* Related Posts */}
-      <RelatedPosts currentSlug="build-authority-event-content-marketing" />
+        </article>
+      </main>
 
       <Footer />
-    </div>
+    </>
   );
 };
 
