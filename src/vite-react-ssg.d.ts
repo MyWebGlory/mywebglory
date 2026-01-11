@@ -26,4 +26,6 @@ declare module 'vite-react-ssg' {
     fn?: (context: SSGContext) => void | Promise<void>,
     wrapper?: (props: WrapperProps) => ReactNode
   ): void;
+  
+  export function Head(props: { children: ReactNode }): JSX.Element;
 }
