@@ -8,6 +8,7 @@ import CaseStudies from './pages/CaseStudies';
 import About from './pages/About';
 import FAQ from './pages/FAQ';
 import Privacy from './pages/Privacy';
+import Blog from './pages/Blog';
 import NotFound from './pages/NotFound';
 
 export const routes: RouteRecord[] = [
@@ -20,5 +21,6 @@ export const routes: RouteRecord[] = [
   { path: '/about', element: <About /> },
   { path: '/faq', element: <FAQ /> },
   { path: '/privacy', element: <Privacy /> },
+  { path: '/blog', element: <Blog /> },
   { path: '*', element: <NotFound /> },
 ];
