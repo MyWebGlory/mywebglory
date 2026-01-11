@@ -6,6 +6,14 @@ import { Link } from "react-router-dom";
 import { Calendar, Clock, ArrowRight, FileText } from "lucide-react";
 import { blogPosts, type BlogPost } from "@/data/blog-posts";
 
+// Import blog images for SSG
+import eventMarketingHero from "@/assets/blog/event-marketing-hero.jpg";
+
+// Image lookup for SSG compatibility
+const blogImages: Record<string, string> = {
+  "ultimate-guide-event-marketing": eventMarketingHero,
+};
+
 // Blog structured data schema
 const blogSchema = {
   "@context": "https://schema.org",
@@ -100,10 +108,10 @@ const BlogCard = ({ post, index }: { post: BlogPost; index: number }) => (
     transition={{ delay: index * 0.1 }}
     className="group bg-card border border-border rounded-xl overflow-hidden hover:border-primary/50 hover:shadow-lg transition-all duration-300"
   >
-    {post.featuredImage && (
+    {(blogImages[post.slug] || post.featuredImage) && (
       <div className="aspect-video bg-muted overflow-hidden">
         <img 
-          src={post.featuredImage} 
+          src={blogImages[post.slug] || post.featuredImage} 
           alt={post.title}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
           loading="lazy"

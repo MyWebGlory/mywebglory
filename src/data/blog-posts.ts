@@ -21,8 +21,27 @@ export interface BlogPost {
   };
 }
 
-// Blog posts array - empty for now, ready for future posts
-export const blogPosts: BlogPost[] = [];
+// Blog posts array
+export const blogPosts: BlogPost[] = [
+  {
+    slug: "ultimate-guide-event-marketing",
+    title: "The Ultimate Guide to Event Marketing: How to Turn Events Into Revenue",
+    excerpt: "Discover the complete event marketing guide for B2B and B2C companies. Learn proven strategies to fill events, engage audiences, and generate revenue from every event.",
+    author: {
+      name: "Gabriel Ageron",
+      role: "Founder & CEO"
+    },
+    publishedAt: "2025-01-11",
+    readTime: "12 min read",
+    category: "Event Marketing Strategy",
+    tags: ["event marketing", "B2B events", "lead generation", "webinars", "virtual events"],
+    featuredImage: "/src/assets/blog/event-marketing-hero.jpg",
+    seo: {
+      title: "The Ultimate Guide to Event Marketing: How to Turn Events Into Revenue",
+      description: "Discover the complete event marketing guide for B2B and B2C companies. Learn proven strategies to fill events, engage audiences, and generate revenue from every event."
+    }
+  }
+];
 
 // Helper function to get a post by slug
 export const getPostBySlug = (slug: string): BlogPost | undefined => {
