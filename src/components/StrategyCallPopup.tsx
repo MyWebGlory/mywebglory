@@ -15,6 +15,8 @@ const StrategyCallPopup = () => {
     }
   };
   useEffect(() => {
+    if (typeof window === 'undefined') return; // SSR guard
+    
     // TEMPORARY: Clear sessionStorage for testing - REMOVE THIS IN PRODUCTION
     sessionStorage.removeItem("popup-dismissed");
     console.log("📋 Popup component mounted, sessionStorage cleared for testing");

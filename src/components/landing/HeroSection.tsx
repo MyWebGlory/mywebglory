@@ -38,6 +38,7 @@ const HeroSection = () => {
 
   // Play ting sound
   const playTingSound = () => {
+    if (typeof window === 'undefined') return; // SSR guard
     const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
     const oscillator = audioContext.createOscillator();
     const gainNode = audioContext.createGain();
@@ -53,6 +54,8 @@ const HeroSection = () => {
 
   // Show booking notification: first at 30-60s, then 5min wait, then 30-60s again, repeat
   useEffect(() => {
+    if (typeof window === 'undefined') return; // SSR guard
+    
     let timeoutId: NodeJS.Timeout;
     let isFirstShow = true;
     const showNotification = () => {
