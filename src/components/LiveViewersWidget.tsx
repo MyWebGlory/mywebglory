@@ -8,6 +8,7 @@ const LiveViewersWidget = () => {
 
   // Show counter after 5s delay
   useEffect(() => {
+    if (typeof window === 'undefined') return; // SSR guard
     const showTimeout = setTimeout(() => {
       setViewerCount(Math.floor(Math.random() * 6) + 3);
       setIsVisible(true);
@@ -17,6 +18,7 @@ const LiveViewersWidget = () => {
 
   // Gradual changes every 15-45s
   useEffect(() => {
+    if (typeof window === 'undefined') return; // SSR guard
     if (!isVisible) return;
     
     const interval = setInterval(() => {

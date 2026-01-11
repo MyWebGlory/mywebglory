@@ -5,6 +5,8 @@ export function useScrollAnimation(threshold = 0.1) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    if (typeof window === 'undefined') return; // SSR guard
+    
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -27,6 +29,8 @@ export function useScrollAnimation(threshold = 0.1) {
 
 export function useParallax() {
   useEffect(() => {
+    if (typeof window === 'undefined') return; // SSR guard
+    
     const handleScroll = () => {
       document.documentElement.style.setProperty(
         "--scroll",

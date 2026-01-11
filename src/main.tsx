@@ -1,10 +1,35 @@
-import { createRoot } from "react-dom/client";
-import { HelmetProvider } from "react-helmet-async";
-import App from "./App.tsx";
-import "./index.css";
+import { ViteReactSSG } from 'vite-react-ssg';
+import { HelmetProvider } from 'react-helmet-async';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { TooltipProvider } from '@/components/ui/tooltip';
+import { Toaster } from '@/components/ui/toaster';
+import { Toaster as Sonner } from '@/components/ui/sonner';
+import ScrollToTop from './components/ScrollToTop';
+import AppLayout from './components/AppLayout';
+import { routes } from './routes';
+import './index.css';
 
-createRoot(document.getElementById("root")!).render(
-  <HelmetProvider>
-    <App />
-  </HelmetProvider>
+const queryClient = new QueryClient();
+
+export const createRoot = ViteReactSSG(
+  { routes },
+  ({ isClient }) => {
+    // Client-side initialization if needed
+  },
+  ({ app, router }) => {
+    return (
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <ScrollToTop />
+            <AppLayout>
+              {app}
+            </AppLayout>
+          </TooltipProvider>
+        </QueryClientProvider>
+      </HelmetProvider>
+    );
+  }
 );
