@@ -107,13 +107,8 @@ const BlogPostUltimateGuideEventMarketing = () => {
         description="Discover the complete event marketing guide for B2B and B2C companies. Learn proven strategies to fill events, engage audiences, and generate revenue from every event."
         canonicalUrl="/blog/ultimate-guide-event-marketing"
         ogType="article"
-        structuredData={articleSchema}
+        structuredData={[articleSchema, faqSchema]}
       />
-      
-      {/* Additional FAQ Schema */}
-      <script type="application/ld+json">
-        {JSON.stringify(faqSchema)}
-      </script>
 
       <Navbar />
 
