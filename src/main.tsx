@@ -1,5 +1,4 @@
 import { ViteReactSSG } from 'vite-react-ssg';
-import { HelmetProvider } from 'react-helmet-async';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/toaster';
@@ -11,25 +10,26 @@ import './index.css';
 
 const queryClient = new QueryClient();
 
-export const createRoot = ViteReactSSG(
-  { routes },
-  ({ isClient }) => {
-    // Client-side initialization if needed
-  },
-  ({ app, router }) => {
-    return (
-      <HelmetProvider>
-        <QueryClientProvider client={queryClient}>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <ScrollToTop />
-            <AppLayout>
-              {app}
-            </AppLayout>
-          </TooltipProvider>
-        </QueryClientProvider>
-      </HelmetProvider>
-    );
-  }
-);
+// Root layout component that provides all contexts
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <ScrollToTop />
+        <AppLayout>
+          {children}
+        </AppLayout>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+};
+
+// Wrap all routes with the layout
+const wrappedRoutes = routes.map(route => ({
+  ...route,
+  element: <RootLayout>{route.element}</RootLayout>,
+}));
+
+export const createRoot = ViteReactSSG({ routes: wrappedRoutes });
