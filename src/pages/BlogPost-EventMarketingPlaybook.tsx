@@ -12,9 +12,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import RelatedPosts from "@/components/blog/RelatedPosts";
 
 // Images
-import heroImage from "@/assets/blog/event-marketing-playbook-hero.jpg";
-import funnelImage from "@/assets/blog/event-funnel-infographic.jpg";
-import roiDashboard from "@/assets/blog/event-roi-dashboard.jpg";
+import heroImage from "@/assets/blog/playbook-hero.jpg";
+import funnelImage from "@/assets/blog/playbook-funnel.jpg";
+import mistakesImage from "@/assets/blog/playbook-common-mistakes.jpg";
+import promotionImage from "@/assets/blog/playbook-promotion-strategies.jpg";
 import authorAvatar from "@/assets/sarah-mitchell.png";
 
 // Structured data for the article
@@ -524,6 +525,21 @@ const BlogPostEventMarketingPlaybook = () => {
                   Promotion is key to attendance and ROI.
                 </p>
 
+                {/* Promotion Strategies Image */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8 rounded-2xl overflow-hidden shadow-xl"
+                >
+                  <img 
+                    src={promotionImage} 
+                    alt="Event Promotion Strategies - Email, Social Media, Paid Ads, Partnerships, Content Marketing"
+                    className="w-full h-auto"
+                  />
+                </motion.div>
+
                 <div className="bg-card/50 border border-border rounded-2xl p-6 mb-6">
                   <h3 className="text-xl font-semibold text-foreground mb-4">Channels</h3>
                   <div className="grid md:grid-cols-2 gap-4">
@@ -654,21 +670,6 @@ const BlogPostEventMarketingPlaybook = () => {
                   <h2 className="text-3xl font-bold text-foreground">8. Measuring Event Marketing ROI</h2>
                 </div>
 
-                {/* ROI Dashboard Image */}
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="mb-8 rounded-2xl overflow-hidden shadow-xl"
-                >
-                  <img 
-                    src={roiDashboard} 
-                    alt="Event ROI Measurement Dashboard with KPIs and analytics"
-                    className="w-full h-auto"
-                  />
-                </motion.div>
-
                 <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-6 mb-6 border border-primary/20">
                   <h3 className="text-xl font-semibold text-foreground mb-2">ROI Formula</h3>
                   <p className="text-2xl font-mono text-primary">
@@ -792,6 +793,21 @@ const BlogPostEventMarketingPlaybook = () => {
                   </div>
                   <h2 className="text-3xl font-bold text-foreground">11. Common Event Marketing Mistakes</h2>
                 </div>
+
+                {/* Common Mistakes Image */}
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-8 rounded-2xl overflow-hidden shadow-xl"
+                >
+                  <img 
+                    src={mistakesImage} 
+                    alt="Common Event Marketing Mistakes - Poor promotion, lack of objectives, ignoring segmentation, technical issues, no follow-up"
+                    className="w-full h-auto"
+                  />
+                </motion.div>
 
                 <motion.div 
                   className="bg-gradient-to-br from-red-500/10 via-red-500/5 to-background border border-red-500/30 rounded-2xl p-6"
