@@ -432,7 +432,7 @@ const MarketplaceSection = () => {
           <span className="text-foreground font-semibold">
             most profitable companies on the planet
           </span>{" "}
-          rely on events — online or offline — to grow.
+          rely on events, online or offline, to grow.
         </motion.p>
       </div>
     </section>
@@ -771,7 +771,7 @@ const WhoIsForSection = () => {
               If your offer requires{" "}
               <span className="font-bold">explanation</span>,{" "}
               <span className="font-bold">proof</span>, or{" "}
-              <span className="font-bold">credibility</span> —
+              <span className="font-bold">credibility</span>,
             </p>
             <p className="text-2xl md:text-3xl font-bold text-gradient mt-4">
               event marketing outperforms everything else.
@@ -1444,7 +1444,7 @@ const FinalCTA = () => {
               style={{ opacity: finalTextOpacity, scale: finalTextScale }}
               className="text-base md:text-lg text-muted-foreground mb-8 md:mb-12 max-w-2xl mx-auto px-4"
             >
-              Most companies never experience this — not because events don't
+              Most companies never experience this, not because events don't
               work, but because they never build the{" "}
               <span className="text-foreground font-semibold">system</span> behind
               them.

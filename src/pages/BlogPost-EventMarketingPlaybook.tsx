@@ -64,7 +64,7 @@ const faqSchema = {
       name: "How long should I plan before an event?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "At least 6–8 weeks for promotion, content prep, and technical setup. For larger conferences, consider 12 weeks."
+        text: "At least 6-8 weeks for promotion, content prep, and technical setup. For larger conferences, consider 12 weeks."
       }
     },
     {
@@ -88,7 +88,7 @@ const faqSchema = {
       name: "Do images help with SEO?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes — use optimized images with alt text, infographics, and charts to boost user experience and ranking potential."
+        text: "Yes, use optimized images with alt text, infographics, and charts to boost user experience and ranking potential."
       }
     }
   ]
@@ -306,7 +306,7 @@ const BlogPostEventMarketingPlaybook = () => {
                     ].map((item, i) => (
                       <li key={i} className="flex items-start gap-3 text-muted-foreground">
                         <CheckCircle className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                        <span><strong className="text-foreground">{item.title}</strong> – {item.desc}</span>
+                        <span><strong className="text-foreground">{item.title}</strong> - {item.desc}</span>
                       </li>
                     ))}
                   </ul>
@@ -500,7 +500,7 @@ const BlogPostEventMarketingPlaybook = () => {
                     </ul>
                     <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4">
                       <p className="text-foreground text-sm">
-                        <strong>💡 Tip:</strong> Always add a buffer of 10–20% for unexpected expenses.
+                        <strong>💡 Tip:</strong> Always add a buffer of 10-20% for unexpected expenses.
                       </p>
                     </div>
                   </div>
@@ -560,7 +560,7 @@ const BlogPostEventMarketingPlaybook = () => {
                   <h3 className="text-xl font-semibold text-foreground mb-4">Tips for Effective Promotion</h3>
                   <ul className="space-y-3">
                     {[
-                      "Start promotion 6–8 weeks in advance",
+                      "Start promotion 6-8 weeks in advance",
                       "Use countdown timers and early-bird incentives",
                       "Highlight key benefits of attending (learning, networking, access)",
                       "Track clicks, registrations, and conversions using UTM parameters"
@@ -651,7 +651,7 @@ const BlogPostEventMarketingPlaybook = () => {
 
                 <div className="bg-gradient-to-r from-primary/10 to-accent/10 border-l-4 border-primary rounded-r-xl p-6">
                   <p className="text-foreground">
-                    <strong>⚡ Pro tip:</strong> Send follow-ups within 24–48 hours while excitement is high.
+                    <strong>⚡ Pro tip:</strong> Send follow-ups within 24-48 hours while excitement is high.
                   </p>
                 </div>
               </motion.section>
@@ -939,7 +939,7 @@ const BlogPostEventMarketingPlaybook = () => {
                     },
                     {
                       q: "How long should I plan before an event?",
-                      a: "At least 6–8 weeks for promotion, content prep, and technical setup. For larger conferences, consider a 12-week planning cycle."
+                      a: "At least 6-8 weeks for promotion, content prep, and technical setup. For larger conferences, consider a 12-week planning cycle."
                     },
                     {
                       q: "Do I need to track ROI?",
@@ -951,7 +951,7 @@ const BlogPostEventMarketingPlaybook = () => {
                     },
                     {
                       q: "Do images help with SEO?",
-                      a: "Yes — use optimized images with alt text, infographics, and charts to boost user experience and ranking potential."
+                      a: "Yes, use optimized images with alt text, infographics, and charts to boost user experience and ranking potential."
                     }
                   ].map((faq, i) => (
                     <AccordionItem 
