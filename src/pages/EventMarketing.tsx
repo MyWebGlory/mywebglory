@@ -75,15 +75,16 @@ const HeroTunnel = () => {
         {/* Vignette overlay */}
         <div className="absolute inset-0 bg-radial-gradient from-transparent via-transparent to-background/80 pointer-events-none" />
 
-        {/* Tunnel rings */}
+        {/* Tunnel rings - reduced on mobile */}
         <motion.div
           style={{ scale: tunnelScale, opacity: tunnelOpacity }}
           className="absolute inset-0 flex items-center justify-center gpu-accelerated"
         >
+          {/* Only show 4 rings on mobile, 12 on desktop */}
           {[...Array(12)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute border border-primary/20 rounded-full gpu-accelerated"
+              className={`absolute border border-primary/20 rounded-full gpu-accelerated ${i >= 4 ? 'hidden md:block' : ''}`}
               style={{
                 width: `${(i + 1) * 80}px`,
                 height: `${(i + 1) * 80}px`,
@@ -102,18 +103,18 @@ const HeroTunnel = () => {
             />
           ))}
 
-          {/* Center glow layers */}
-          <div className="absolute w-48 h-48 md:w-64 md:h-64 bg-primary/10 rounded-full blur-3xl animate-pulse gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
-          <div className="absolute w-32 h-32 bg-primary/20 rounded-full blur-2xl animate-pulse gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
-          <div className="absolute w-16 h-16 bg-primary/40 rounded-full blur-xl animate-pulse gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
-          <div className="absolute w-8 h-8 bg-primary rounded-full blur-lg gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+          {/* Center glow layers - simplified on mobile */}
+          <div className="absolute w-32 h-32 md:w-64 md:h-64 bg-primary/10 rounded-full blur-2xl md:blur-3xl gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute w-20 h-20 md:w-32 md:h-32 bg-primary/20 rounded-full blur-xl md:blur-2xl gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute w-10 h-10 md:w-16 md:h-16 bg-primary/40 rounded-full blur-lg md:blur-xl gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
+          <div className="absolute w-6 h-6 md:w-8 md:h-8 bg-primary rounded-full blur-md md:blur-lg gpu-accelerated" style={{ transform: 'translateZ(0)' }} />
         </motion.div>
 
-        {/* Floating particles - more on desktop */}
+        {/* Floating particles - 8 on mobile, 50 on desktop */}
         {[...Array(50)].map((_, i) => (
           <motion.div
             key={i}
-            className={`absolute rounded-full gpu-accelerated ${i < 20 ? 'w-1 h-1' : i < 35 ? 'w-0.5 h-0.5' : 'w-1.5 h-1.5'} ${i % 3 === 0 ? 'bg-primary/80' : i % 3 === 1 ? 'bg-primary/40' : 'bg-primary/60'}`}
+            className={`absolute rounded-full gpu-accelerated ${i >= 8 ? 'hidden md:block' : ''} ${i < 20 ? 'w-1 h-1' : i < 35 ? 'w-0.5 h-0.5' : 'w-1.5 h-1.5'} ${i % 3 === 0 ? 'bg-primary/80' : i % 3 === 1 ? 'bg-primary/40' : 'bg-primary/60'}`}
             style={{
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
@@ -134,7 +135,7 @@ const HeroTunnel = () => {
           />
         ))}
 
-        {/* Spark bursts */}
+        {/* Spark bursts - desktop only */}
         {[...Array(6)].map((_, i) => (
           <motion.div
             key={`spark-${i}`}
@@ -486,8 +487,8 @@ const WhyPowerfulSection = () => {
       ref={ref}
       className="relative min-h-screen py-32 bg-background overflow-hidden"
     >
-      {/* Animated background lines */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Animated background lines - desktop only */}
+      <div className="absolute inset-0 overflow-hidden hidden md:block">
         {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
@@ -574,12 +575,12 @@ const ResultsCascade = () => {
       ref={ref}
       className="relative min-h-screen py-32 bg-background overflow-hidden"
     >
-      {/* Falling particle effect */}
+      {/* Falling particle effect - 6 on mobile, 20 on desktop */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-primary/30 rounded-full gpu-accelerated"
+            className={`absolute w-2 h-2 bg-primary/30 rounded-full gpu-accelerated ${i >= 6 ? 'hidden md:block' : ''}`}
             style={{
               left: `${Math.random() * 100}%`,
               top: "-20px",
@@ -867,32 +868,34 @@ const SystemSection = () => {
           style={{ scale: glowScale, opacity: glowOpacity, transform: 'translateZ(0)' }}
         />
 
-        {/* Electric spark effects */}
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary rounded-full gpu-accelerated"
-            style={{
-              left: `${30 + Math.random() * 40}%`,
-              top: `${30 + Math.random() * 40}%`,
-              transform: 'translateZ(0)',
-            }}
-            animate={{
-              scale: [0, 2, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              delay: i * 0.3,
-              repeat: Infinity,
-              repeatDelay: 2,
-            }}
-          />
-        ))}
+        {/* Electric spark effects - desktop only */}
+        <div className="hidden md:block">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-primary rounded-full gpu-accelerated"
+              style={{
+                left: `${30 + Math.random() * 40}%`,
+                top: `${30 + Math.random() * 40}%`,
+                transform: 'translateZ(0)',
+              }}
+              animate={{
+                scale: [0, 2, 0],
+                opacity: [0, 1, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                delay: i * 0.3,
+                repeat: Infinity,
+                repeatDelay: 2,
+              }}
+            />
+          ))}
+        </div>
 
-        {/* Rotating connection circle */}
+        {/* Rotating connection circle - desktop only */}
         <motion.div
-          className="absolute w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10 gpu-accelerated"
+          className="absolute w-[400px] h-[400px] md:w-[500px] md:h-[500px] rounded-full border border-primary/10 gpu-accelerated hidden md:block"
           style={{ transform: 'translateZ(0)' }}
           animate={{ rotate: 360 }}
           transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
@@ -944,9 +947,9 @@ const SystemSection = () => {
                       whileHover={{ scale: 1.15 }}
                       className="relative w-24 h-24 lg:w-28 lg:h-28 rounded-full bg-gradient-to-br from-card to-card/50 border-2 border-primary/40 flex flex-col items-center justify-center p-3 cursor-pointer group"
                     >
-                      {/* Pulse ring */}
+                    {/* Pulse ring - desktop only */}
                       <motion.div
-                        className="absolute inset-0 rounded-full border-2 border-primary/30 gpu-accelerated"
+                        className="absolute inset-0 rounded-full border-2 border-primary/30 gpu-accelerated hidden md:block"
                         style={{ transform: 'translateZ(0)' }}
                         animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
                         transition={{ duration: 2, delay: i * 0.2, repeat: Infinity }}
@@ -1038,24 +1041,26 @@ const FailureSection = () => {
       {/* Warning background */}
       <div className="absolute inset-0 bg-gradient-to-b from-destructive/5 via-background to-background" />
 
-      {/* Glitch lines */}
-      {[...Array(5)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute h-px bg-destructive/30 w-full gpu-accelerated"
-          style={{ top: `${15 + i * 18}%`, transform: 'translateZ(0)' }}
-          animate={{
-            x: [0, 10, -10, 0],
-            opacity: [0.3, 0.6, 0.3],
-          }}
-          transition={{
-            duration: 0.3,
-            delay: i * 0.1,
-            repeat: Infinity,
-            repeatDelay: 2,
-          }}
-        />
-      ))}
+      {/* Glitch lines - desktop only */}
+      <div className="hidden md:block">
+        {[...Array(5)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-px bg-destructive/30 w-full gpu-accelerated"
+            style={{ top: `${15 + i * 18}%`, transform: 'translateZ(0)' }}
+            animate={{
+              x: [0, 10, -10, 0],
+              opacity: [0.3, 0.6, 0.3],
+            }}
+            transition={{
+              duration: 0.3,
+              delay: i * 0.1,
+              repeat: Infinity,
+              repeatDelay: 2,
+            }}
+          />
+        ))}
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -1334,7 +1339,7 @@ const FinalCTA = () => {
           style={{ scale: glowScale, opacity: glowOpacity, transform: 'translateZ(0)' }}
         />
 
-        {/* Energy particles being absorbed */}
+        {/* Energy particles being absorbed - 4 on mobile, 12 on desktop */}
         {[...Array(12)].map((_, i) => {
           const angle = (i / 12) * 2 * Math.PI;
           const startX = Math.cos(angle) * 400;
@@ -1342,7 +1347,7 @@ const FinalCTA = () => {
           return (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 bg-primary rounded-full gpu-accelerated"
+              className={`absolute w-2 h-2 bg-primary rounded-full gpu-accelerated ${i >= 4 ? 'hidden md:block' : ''}`}
               style={{ left: "50%", top: "50%", transform: 'translateZ(0)' }}
               animate={{
                 x: [startX, 0],
@@ -1360,7 +1365,7 @@ const FinalCTA = () => {
           );
         })}
 
-        {/* Rotating outer ring */}
+        {/* Rotating outer ring - desktop only */}
         <motion.div
           className="absolute w-[280px] h-[280px] md:w-[550px] md:h-[550px] rounded-full border border-primary/20 hidden md:block gpu-accelerated"
           style={{ transform: 'translateZ(0)' }}
@@ -1382,7 +1387,7 @@ const FinalCTA = () => {
           ))}
         </motion.div>
 
-        {/* Light rays */}
+        {/* Light rays - desktop only */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
           {[...Array(6)].map((_, i) => (
             <motion.div
