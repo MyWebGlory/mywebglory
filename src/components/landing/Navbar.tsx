@@ -33,6 +33,7 @@ const Navbar = () => {
     { label: "What's Event Marketing?", href: "/event-marketing" },
     { label: "How We Work", href: "/how-it-works" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Blog", href: "/blog" },
   ];
 
   const allPages = [
@@ -40,6 +41,7 @@ const Navbar = () => {
     { label: "How We Work", href: "/how-it-works" },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Blog", href: "/blog" },
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
     { label: "FAQ", href: "/faq" },
