@@ -202,15 +202,15 @@ const kornitCaseStudy: CaseStudyData = {
   clientName: "Kornit Digital",
   clientLogo: kornitLogo,
   industry: "Apparel / Printing Technology",
-  offerChosen: "Event Dominance - $50k",
-  duration: "8 weeks (Sep-Oct 2025)",
+  offerChosen: "Event Dominance — $50k",
+  duration: "8 weeks (Sep–Oct 2025)",
   boldOutcome: "1,208 total registrations. Authority secured.",
   slides: {
     context: {
       title: "Context",
       points: [
         "Kornit Digital launched Evolve Summit 2025, their first large-scale virtual event under the Konnections brand.",
-        "Objective: Build awareness, trust, and engagement for Kornit's innovative ecosystem, from zero.",
+        "Objective: Build awareness, trust, and engagement for Kornit's innovative ecosystem — from zero.",
         "We engineered a full event system in just 8 weeks, turning a completely new brand identity into a recognized industry touchpoint.",
         "Global apparel producers, brands, and supply-chain innovators had never encountered 'Kornit Konnections' before.",
         "The goal: generate high-quality, revenue-ready registrations with authority and FOMO baked into every step."
@@ -223,8 +223,8 @@ const kornitCaseStudy: CaseStudyData = {
       points: [
         "Launching a large-scale event from scratch is brutal.",
         "No organic traffic. No historical event data.",
-        "Audience: cold, highly specialized - apparel decorators, print-on-demand operators, brand decision-makers.",
-        "Timeline: 8 weeks, aggressive, high-stakes.",
+        "Audience: cold, highly specialized — apparel decorators, print-on-demand operators, brand decision-makers.",
+        "Timeline: 8 weeks — aggressive, high-stakes.",
         "The challenge was to build a full-funnel system, create content assets, coordinate partners, and drive registrations without losing quality."
       ]
     },
@@ -257,12 +257,12 @@ const kornitCaseStudy: CaseStudyData = {
     execution: {
       title: "Execution",
       points: [
-        "Graphic design: banners, PDFs, slides, all premium quality",
-        "Social media posts & stories - consistent, branded content",
-        "Event videos & trailers - high-energy, attention-grabbing",
-        "Meta Ads campaign: multiple creative rounds, targeting cold and lookalike audiences",
-        "Emails: to existing leads + ad-generated leads",
-        "Calls & SMS: high-touch activation for high-value registrants",
+        "Graphic design: banners, PDFs, slides — all premium quality",
+        "Social media posts & stories — consistent, branded content",
+        "Event videos & trailers — high-energy, attention-grabbing",
+        "Meta Ads campaign → multiple creative rounds, targeting cold and lookalike audiences",
+        "Emails → to existing leads + ad-generated leads",
+        "Calls & SMS → high-touch activation for high-value registrants",
         "Post-production: session recordings, clips, highlight reels"
       ],
       images: [kornitSocialPosts, kornitEventBanners, kornitSignatureBanners, kornitEmailMarketing],
@@ -280,8 +280,8 @@ const kornitCaseStudy: CaseStudyData = {
         { label: "US Audience", value: "73%", icon: Users }
       ],
       highlights: [
-        "Meta Ads CPR: $9.50, top-quartile B2B performance",
-        "CTR: 2.33%, well above industry average (1-1.5%)",
+        "Meta Ads CPR: $9.50 — top-quartile B2B performance",
+        "CTR: 2.33% — well above industry average (1-1.5%)",
         "AI & UGC creatives drove 75% of ad registrations",
         "Multi-touch flows (email + SMS + phone) significantly boosted show-up rate"
       ]

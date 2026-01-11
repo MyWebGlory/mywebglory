@@ -242,7 +242,7 @@ const Pricing = () => {
   const [globalAdSpend, setGlobalAdSpend] = useState(10000);
 
   const getScaledValue = (baseValue: [number, number] | string | null, planIndex: number, costPerRegistrant: number): string => {
-    if (baseValue === null) return "-";
+    if (baseValue === null) return "—";
     if (typeof baseValue === "string") return baseValue;
     
     const plan = plans[planIndex];
@@ -263,7 +263,7 @@ const Pricing = () => {
   };
 
   const formatValue = (value: string | boolean | null): React.ReactNode => {
-    if (value === null) return <span className="text-muted-foreground">-</span>;
+    if (value === null) return <span className="text-muted-foreground">—</span>;
     if (value === true) return <Check className="w-5 h-5 text-primary mx-auto" />;
     if (value === false) return <X className="w-5 h-5 text-muted-foreground/50 mx-auto" />;
     return <span className="text-sm">{value}</span>;
@@ -320,7 +320,7 @@ const Pricing = () => {
             </p>
             
             <p className="text-lg text-muted-foreground mb-8">
-              These aren't costs, <span className="text-primary font-semibold">they're multipliers</span>.
+              These aren't costs — <span className="text-primary font-semibold">they're multipliers</span>.
             </p>
             
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-8">
@@ -444,8 +444,8 @@ const Pricing = () => {
               Think <span className="text-primary">Investment</span>, Not Expense
             </h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              A $25,000 investment that generates 10+ new clients paying $5,000-$50,000 each isn't a cost, 
-              <span className="text-foreground font-medium"> it's a 10x-20x return engine</span>. 
+              A $25,000 investment that generates 10+ new clients paying $5,000–$50,000 each isn't a cost — 
+              <span className="text-foreground font-medium"> it's a 10x–20x return engine</span>. 
               <span className="text-primary font-medium"> While others experiment, you execute.</span> Plus, every event builds retargetable audiences, email lists, and brand authority that compound for years.
             </p>
             
@@ -455,7 +455,7 @@ const Pricing = () => {
                   <TrendingUp className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-bold mb-2">Immediate Pipeline</h3>
-                <p className="text-sm text-muted-foreground">Qualified leads and booked calls from day one of your event, results your competitors can only dream of</p>
+                <p className="text-sm text-muted-foreground">Qualified leads and booked calls from day one of your event — results your competitors can only dream of</p>
               </div>
               
               <div className="p-6 bg-card rounded-xl border border-border">
@@ -463,7 +463,7 @@ const Pricing = () => {
                   <Users className="w-6 h-6 text-secondary" />
                 </div>
                 <h3 className="font-bold mb-2">Audience Assets</h3>
-                <p className="text-sm text-muted-foreground">Email lists, SMS lists, and retargeting pools you own forever, assets your competitors have to rebuild every time</p>
+                <p className="text-sm text-muted-foreground">Email lists, SMS lists, and retargeting pools you own forever — assets your competitors have to rebuild every time</p>
               </div>
               
               <div className="p-6 bg-card rounded-xl border border-border">
@@ -471,7 +471,7 @@ const Pricing = () => {
                   <Award className="w-6 h-6 text-accent" />
                 </div>
                 <h3 className="font-bold mb-2">Authority Positioning</h3>
-                <p className="text-sm text-muted-foreground">Brand authority that makes future sales easier and cheaper, while competitors struggle to be heard</p>
+                <p className="text-sm text-muted-foreground">Brand authority that makes future sales easier and cheaper — while competitors struggle to be heard</p>
               </div>
             </div>
           </div>
@@ -728,7 +728,7 @@ const Pricing = () => {
             </div>
             
             <p className="mt-8 text-sm text-muted-foreground">
-              We promise ICP-aligned attendees, sales-ready leads, and authority, not revenue guarantees. 
+              We promise ICP-aligned attendees, sales-ready leads, and authority — not revenue guarantees. 
               That keeps us premium and accountable.
             </p>
           </div>

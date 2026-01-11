@@ -675,7 +675,7 @@ const Step4Communication = () => (
       </div>
 
       <p className="text-muted-foreground">
-        We integrate with your team, or run independently if needed, while keeping everything streamlined and efficient.
+        We integrate with your team — or run independently if needed — while keeping everything streamlined and efficient.
       </p>
 
       <motion.div
@@ -1111,7 +1111,7 @@ const ScarcitySection = () => {
           >
             <Crown className="w-6 h-6 text-primary" />
             <span className="text-lg font-medium">
-              Your event becomes one of our <span className="text-primary font-bold">priorities</span>, not a line item.
+              Your event becomes one of our <span className="text-primary font-bold">priorities</span> — not a line item.
             </span>
           </motion.div>
         </motion.div>

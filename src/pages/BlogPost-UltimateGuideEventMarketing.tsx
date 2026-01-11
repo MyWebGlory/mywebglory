@@ -224,8 +224,8 @@ const BlogPostUltimateGuideEventMarketing = () => {
                   to create memorable experiences that build trust and accelerate conversions.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  In this guide, we'll explore everything you need to know about event marketing, from 
-                  strategy and planning to execution and measurement, so you can turn every event into 
+                  In this guide, we'll explore everything you need to know about event marketing — from 
+                  strategy and planning to execution and measurement — so you can turn every event into 
                   a profit-generating machine.
                 </p>
               </motion.div>
@@ -602,7 +602,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
                 </div>
 
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  Event marketing is more than just hosting an event. It's a strategic revenue engine. 
+                  Event marketing is more than just hosting an event — it's a strategic revenue engine. 
                   With careful planning, engaging content, and follow-up, your events can:
                 </p>
 

@@ -440,7 +440,7 @@ const PricingSection = () => {
             Event Marketing Systems
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Price per event - ad spend not included
+            Price per event — ad spend not included
           </p>
         </div>
         
@@ -759,7 +759,7 @@ const PricingSection = () => {
         </div>
         
         <p className="text-center text-muted-foreground mt-12 text-sm max-w-xl mx-auto">
-          We promise ICP-aligned attendees, sales-ready leads, and authority, not revenue guarantees. That keeps us premium and accountable.
+          We promise ICP-aligned attendees, sales-ready leads, and authority — not revenue guarantees. That keeps us premium and accountable.
         </p>
       </div>
     </section>

@@ -12,7 +12,7 @@ import { ArrowRight } from "lucide-react";
 const faqs = [
   {
     question: "Do you guarantee results?",
-    answer: "We guarantee execution, systems, and best-in-class event marketing practices, not revenue. Events depend on multiple factors outside our control. What we do guarantee is qualified acquisition, high show-up engineering, clean pipelines, and measurable outcomes."
+    answer: "We guarantee execution, systems, and best-in-class event marketing practices — not revenue. Events depend on multiple factors outside our control. What we do guarantee is qualified acquisition, high show-up engineering, clean pipelines, and measurable outcomes."
   },
   {
     question: "Is ad spend included?",
@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     question: "Do you bring random attendees or qualified leads?",
-    answer: "Never random. Every event is built around a defined ICP, market-specific messaging, and targeted acquisition channels. We optimize for quality over volume. Attendance is important, who attends is everything."
+    answer: "Never random. Every event is built around a defined ICP, market-specific messaging, and targeted acquisition channels. We optimize for quality over volume. Attendance is important — who attends is everything."
   },
   {
     question: "How long does an event project take?",

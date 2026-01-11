@@ -132,7 +132,7 @@ const ProblemSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            Not because events don't work, but because they're built backwards.
+            Not because events don't work — but because they're built backwards.
           </motion.p>
         </motion.div>
 

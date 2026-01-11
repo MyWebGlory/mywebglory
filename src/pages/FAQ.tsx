@@ -28,10 +28,10 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "Do you guarantee results?",
-        answerText: "We guarantee execution, systems, and best-in-class event marketing practices, not revenue. Events depend on multiple factors outside our control: your offer, pricing, sales process, and follow-up. What we do guarantee is: Qualified acquisition, High show-up engineering, Clean pipelines, Measurable outcomes. We build systems that make results possible and repeatable.",
+        answerText: "We guarantee execution, systems, and best-in-class event marketing practices — not revenue. Events depend on multiple factors outside our control: your offer, pricing, sales process, and follow-up. What we do guarantee is: Qualified acquisition, High show-up engineering, Clean pipelines, Measurable outcomes. We build systems that make results possible and repeatable.",
         answer: (
           <div className="space-y-4">
-            <p className="font-medium text-foreground">We guarantee execution, systems, and best-in-class event marketing practices, not revenue.</p>
+            <p className="font-medium text-foreground">We guarantee execution, systems, and best-in-class event marketing practices — not revenue.</p>
             <p className="text-muted-foreground">Events depend on multiple factors outside our control: your offer, pricing, sales process, and follow-up.</p>
             <p className="text-muted-foreground">What we do guarantee is:</p>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground ml-2">
@@ -46,7 +46,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "Do you bring random attendees or qualified leads?",
-        answerText: "Never random. Every event is built around: A defined ICP, Market-specific messaging, Targeted acquisition channels. We optimize for quality over volume. Attendance is important, who attends is everything.",
+        answerText: "Never random. Every event is built around: A defined ICP, Market-specific messaging, Targeted acquisition channels. We optimize for quality over volume. Attendance is important — who attends is everything.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Never random.</p>
@@ -56,7 +56,7 @@ const faqCategories: FAQCategory[] = [
               <li>Market-specific messaging</li>
               <li>Targeted acquisition channels</li>
             </ul>
-            <p className="text-muted-foreground">We optimize for quality over volume. Attendance is important, who attends is everything.</p>
+            <p className="text-muted-foreground">We optimize for quality over volume. Attendance is important — who attends is everything.</p>
           </div>
         ),
       },
@@ -108,7 +108,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "Do you handle organic acquisition as well?",
-        answerText: "Yes. Depending on the plan, we deploy: Social content, Community activation, Comment & engagement strategies, Outreach campaigns, Email list activation. Organic is never improvised, it's structured and intentional.",
+        answerText: "Yes. Depending on the plan, we deploy: Social content, Community activation, Comment & engagement strategies, Outreach campaigns, Email list activation. Organic is never improvised — it's structured and intentional.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Yes.</p>
@@ -120,7 +120,7 @@ const faqCategories: FAQCategory[] = [
               <li>Outreach campaigns</li>
               <li>Email list activation</li>
             </ul>
-            <p className="text-muted-foreground">Organic is never improvised, it's structured and intentional.</p>
+            <p className="text-muted-foreground">Organic is never improvised — it's structured and intentional.</p>
           </div>
         ),
       },
@@ -181,7 +181,7 @@ const faqCategories: FAQCategory[] = [
     questions: [
       {
         question: "Can you work with our internal team?",
-        answerText: "Yes. We regularly integrate with: Marketing teams, Sales teams, External partners. We provide structure, workflows, and clarity, not friction.",
+        answerText: "Yes. We regularly integrate with: Marketing teams, Sales teams, External partners. We provide structure, workflows, and clarity — not friction.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">Yes.</p>
@@ -191,7 +191,7 @@ const faqCategories: FAQCategory[] = [
               <li>Sales teams</li>
               <li>External partners</li>
             </ul>
-            <p className="text-muted-foreground">We provide structure, workflows, and clarity, not friction.</p>
+            <p className="text-muted-foreground">We provide structure, workflows, and clarity — not friction.</p>
           </div>
         ),
       },
@@ -236,7 +236,7 @@ const faqCategories: FAQCategory[] = [
       },
       {
         question: "What happens after the event?",
-        answerText: "That's where most of the value is created. We: Activate post-event communications, Drive leads into your ecosystem, Repurpose content, Deliver analytics and insights. The event is a starting point, not the finish line.",
+        answerText: "That's where most of the value is created. We: Activate post-event communications, Drive leads into your ecosystem, Repurpose content, Deliver analytics and insights. The event is a starting point — not the finish line.",
         answer: (
           <div className="space-y-4">
             <p className="font-medium text-foreground">That's where most of the value is created.</p>
@@ -247,7 +247,7 @@ const faqCategories: FAQCategory[] = [
               <li>Repurpose content</li>
               <li>Deliver analytics and insights</li>
             </ul>
-            <p className="text-muted-foreground">The event is a starting point, not the finish line.</p>
+            <p className="text-muted-foreground">The event is a starting point — not the finish line.</p>
           </div>
         ),
       },
