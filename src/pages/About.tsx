@@ -498,7 +498,7 @@ const About = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-foreground mb-1">Full-Service Team</h4>
-                    <p className="text-sm text-muted-foreground">From strategy to design to execution—everything under one roof.</p>
+                    <p className="text-sm text-muted-foreground">From strategy to design to execution, everything under one roof.</p>
                   </div>
                 </div>
                 

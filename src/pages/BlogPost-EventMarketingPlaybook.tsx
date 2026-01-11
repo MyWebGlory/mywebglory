@@ -88,7 +88,7 @@ const faqSchema = {
       name: "Do images help with SEO?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes — use optimized images with alt text, infographics, and charts to boost user experience and ranking potential."
+        text: "Yes, use optimized images with alt text, infographics, and charts to boost user experience and ranking potential."
       }
     }
   ]
@@ -951,7 +951,7 @@ const BlogPostEventMarketingPlaybook = () => {
                     },
                     {
                       q: "Do images help with SEO?",
-                      a: "Yes — use optimized images with alt text, infographics, and charts to boost user experience and ranking potential."
+                      a: "Yes, use optimized images with alt text, infographics, and charts to boost user experience and ranking potential."
                     }
                   ].map((faq, i) => (
                     <AccordionItem 
