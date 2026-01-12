@@ -24,6 +24,23 @@ export interface BlogPost {
 // Blog posts array
 export const blogPosts: BlogPost[] = [
   {
+    slug: "trade-show-roi",
+    title: "How to Maximize ROI from Trade Shows and Conferences",
+    excerpt: "Learn proven strategies to maximize your return on investment from trade shows and conferences. From pre-event planning to post-event follow-up, discover how to turn every exhibition into measurable business results.",
+    author: {
+      name: "Sarah Mitchell",
+      role: "Content Strategist"
+    },
+    publishedAt: "2025-01-12",
+    readTime: "15 min read",
+    category: "Trade Shows & Conferences",
+    tags: ["trade shows", "conferences", "ROI", "B2B marketing", "lead generation", "event strategy"],
+    seo: {
+      title: "How to Maximize ROI from Trade Shows and Conferences",
+      description: "Learn proven strategies to maximize your return on investment from trade shows and conferences. From pre-event planning to post-event follow-up, discover how to turn every exhibition into measurable business results."
+    }
+  },
+  {
     slug: "ultimate-guide-event-marketing",
     title: "The Ultimate Guide to Event Marketing: How to Turn Events Into Revenue",
     excerpt: "Discover the complete event marketing guide for B2B and B2C companies. Learn proven strategies to fill events, engage audiences, and generate revenue from every event.",

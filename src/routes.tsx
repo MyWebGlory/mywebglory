@@ -12,6 +12,7 @@ import Blog from './pages/Blog';
 import BlogPostUltimateGuideEventMarketing from './pages/BlogPost-UltimateGuideEventMarketing';
 import BlogPostEventMarketingPlaybook from './pages/BlogPost-EventMarketingPlaybook';
 import BlogPostBuildAuthorityEventContent from './pages/BlogPost-BuildAuthorityEventContent';
+import BlogPostTradeShowROI from './pages/BlogPost-TradeShowROI';
 import NotFound from './pages/NotFound';
 
 export const routes: RouteRecord[] = [
@@ -28,5 +29,6 @@ export const routes: RouteRecord[] = [
   { path: '/blog/ultimate-guide-event-marketing', element: <BlogPostUltimateGuideEventMarketing /> },
   { path: '/blog/event-marketing-playbook', element: <BlogPostEventMarketingPlaybook /> },
   { path: '/blog/build-authority-event-content-marketing', element: <BlogPostBuildAuthorityEventContent /> },
+  { path: '/blog/trade-show-roi', element: <BlogPostTradeShowROI /> },
   { path: '*', element: <NotFound /> },
 ];
