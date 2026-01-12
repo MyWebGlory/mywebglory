@@ -7,6 +7,7 @@ import Footer from "@/components/landing/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import RelatedPosts from "@/components/blog/RelatedPosts";
 import authorAvatar from "@/assets/sarah-mitchell.png";
+import heroImage from "@/assets/blog/trade-show-roi-hero.jpg";
 
 // Structured data for the article
 const articleSchema = {
@@ -107,11 +108,8 @@ const BlogPostTradeShowROI = () => {
       <Navbar />
 
       <main className="min-h-screen bg-background">
-        {/* Hero Section - Title Only Banner */}
+        {/* Hero Section - Image Banner with Title */}
         <section className="relative pt-24 pb-16 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-primary/5 to-transparent" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-50" />
-          
           <div className="container mx-auto px-4 relative z-10">
             <motion.div {...fadeInUp} className="max-w-4xl mx-auto">
               {/* Breadcrumb */}
@@ -128,13 +126,27 @@ const BlogPostTradeShowROI = () => {
                 Trade Shows & Conferences
               </span>
 
-              {/* Title Banner */}
-              <div className="bg-gradient-to-br from-primary/20 via-primary/10 to-accent/10 border border-primary/20 rounded-3xl p-8 md:p-12 mb-8">
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-center">
-                  How to Maximize ROI from Trade Shows and{" "}
-                  <span className="text-gradient">Conferences</span>
-                </h1>
-              </div>
+              {/* Hero Banner with Image */}
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative rounded-3xl overflow-hidden shadow-2xl mb-8"
+              >
+                <img 
+                  src={heroImage} 
+                  alt="Trade show exhibition hall with professional booths and networking"
+                  className="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover"
+                />
+                {/* Dark overlay for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
+                {/* Title overlay */}
+                <div className="absolute inset-0 flex items-center justify-center p-6 md:p-12">
+                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight text-center drop-shadow-lg">
+                    How to Maximize ROI from Trade Shows and Conferences
+                  </h1>
+                </div>
+              </motion.div>
 
               {/* Meta Info */}
               <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground">
