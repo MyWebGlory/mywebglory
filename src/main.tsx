@@ -1,4 +1,6 @@
-import { ViteReactSSG } from 'vite-react-ssg';
+import React, { Suspense } from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/toaster';
@@ -10,26 +12,27 @@ import './index.css';
 
 const queryClient = new QueryClient();
 
-// Root layout component that provides all contexts
-const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  return (
+const rootElement = document.getElementById('root')!;
+
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <ScrollToTop />
-        <AppLayout>
-          {children}
-        </AppLayout>
+        <BrowserRouter>
+          <ScrollToTop />
+          <AppLayout>
+            <Suspense fallback={null}>
+              <Routes>
+                {routes.map(({ path, element }) => (
+                  <Route key={path} path={path} element={element} />
+                ))}
+              </Routes>
+            </Suspense>
+          </AppLayout>
+        </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
-  );
-};
-
-// Wrap all routes with the layout
-const wrappedRoutes = routes.map(route => ({
-  ...route,
-  element: <RootLayout>{route.element}</RootLayout>,
-}));
-
-export const createRoot = ViteReactSSG({ routes: wrappedRoutes });
+  </React.StrictMode>
+);
