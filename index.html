@@ -167,8 +167,29 @@
 
   <body>
     <div id="root">
-      <!-- Static SEO content for crawlers — replaced when React hydrates -->
-      <div style="display:none" aria-hidden="true">
+      <!-- Static SEO content for crawlers + loading skeleton — replaced when React hydrates -->
+      <div aria-hidden="true" style="background:#0a0e1a;color:#fafafa;min-height:100vh;font-family:system-ui,sans-serif;overflow:hidden">
+        <!-- Visible loading skeleton -->
+        <div style="max-width:1200px;margin:0 auto;padding:24px 16px">
+          <!-- Nav skeleton -->
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;margin-bottom:48px">
+            <div style="width:140px;height:32px;background:#1a1f35;border-radius:8px"></div>
+            <div style="display:flex;gap:24px">
+              <div style="width:60px;height:16px;background:#1a1f35;border-radius:4px"></div>
+              <div style="width:60px;height:16px;background:#1a1f35;border-radius:4px"></div>
+              <div style="width:60px;height:16px;background:#1a1f35;border-radius:4px"></div>
+            </div>
+          </div>
+          <!-- Hero skeleton -->
+          <div style="text-align:center;padding:64px 0">
+            <div style="width:80%;max-width:600px;height:40px;background:#1a1f35;border-radius:8px;margin:0 auto 16px"></div>
+            <div style="width:60%;max-width:450px;height:20px;background:#1a1f35;border-radius:6px;margin:0 auto 12px"></div>
+            <div style="width:50%;max-width:350px;height:20px;background:#1a1f35;border-radius:6px;margin:0 auto 32px"></div>
+            <div style="width:180px;height:48px;background:#6d28d9;border-radius:10px;margin:0 auto;opacity:0.5"></div>
+          </div>
+        </div>
+        <!-- Hidden SEO text for crawlers (visually hidden but accessible to search engines) -->
+        <div style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">
         <header>
           <nav>
             <a href="https://mywebglory.com">MyWebGlory</a>
@@ -188,117 +209,39 @@
         <main>
           <section>
             <h1>Transform Your Events Into Revenue Machines</h1>
-            <p>
-              MyWebGlory delivers end-to-end event marketing with proven systems for acquisition, show-up rates, and
-              pipeline generation. Limited to 4 clients per month.
-            </p>
+            <p>MyWebGlory delivers end-to-end event marketing with proven systems for acquisition, show-up rates, and pipeline generation. Limited to 4 clients per month.</p>
           </section>
-
           <section>
             <h2>Why Events Are the #1 Growth Channel</h2>
-            <p>
-              Events generate 3-5x higher conversion rates than any other marketing channel. They create real
-              connections that drive pipeline and revenue.
-            </p>
+            <p>Events generate 3-5x higher conversion rates than any other marketing channel.</p>
           </section>
-
           <section>
             <h2>Our Event Marketing Services</h2>
             <ul>
-              <li>Event Marketing Strategy — Complete go-to-market plans tailored to your event goals</li>
-              <li>Audience Acquisition — Multi-channel campaigns to fill your events with qualified attendees</li>
-              <li>Show-Up Rate Optimization — Proven systems to maximize attendance from 60% to 90%+</li>
-              <li>Pipeline Generation — Turn event attendees into qualified leads and revenue</li>
-              <li>Content & Creative — High-converting landing pages, emails, ads, and event collateral</li>
-              <li>Analytics & Reporting — Full-funnel tracking and ROI measurement</li>
+              <li>Event Marketing Strategy</li>
+              <li>Audience Acquisition</li>
+              <li>Show-Up Rate Optimization</li>
+              <li>Pipeline Generation</li>
+              <li>Content &amp; Creative</li>
+              <li>Analytics &amp; Reporting</li>
             </ul>
           </section>
-
-          <section>
-            <h2>How It Works</h2>
-            <ol>
-              <li>Strategy Call — We analyze your event goals and create a custom plan</li>
-              <li>Launch Campaign — We execute multi-channel acquisition campaigns</li>
-              <li>Optimize & Scale — We continuously optimize for maximum attendance and ROI</li>
-              <li>Generate Pipeline — We help convert attendees into qualified opportunities</li>
-            </ol>
-          </section>
-
           <section>
             <h2>Pricing</h2>
-            <article>
-              <h3>Event Launch Engine — $9,000</h3>
-              <p>
-                Essential event marketing package for launching your event. Includes strategy, landing page, email
-                sequences, and basic ad campaigns.
-              </p>
-            </article>
-            <article>
-              <h3>Revenue System — $25,000</h3>
-              <p>
-                Complete revenue-focused event marketing system. Includes everything in Launch Engine plus advanced
-                targeting, retargeting, show-up optimization, and pipeline generation.
-              </p>
-            </article>
-            <article>
-              <h3>Authority Flywheel — $50,000</h3>
-              <p>
-                Premium event marketing with authority building. Includes everything in Revenue System plus content
-                repurposing, thought leadership positioning, and ongoing brand building.
-              </p>
-            </article>
+            <article><h3>Event Launch Engine — $9,000</h3></article>
+            <article><h3>Revenue System — $25,000</h3></article>
+            <article><h3>Authority Flywheel — $50,000</h3></article>
           </section>
-
-          <section>
-            <h2>Testimonials</h2>
-            <blockquote>
-              <p>
-                MyWebGlory transformed our event marketing. We went from struggling to fill seats to selling out in 3
-                weeks. Their systems just work.
-              </p>
-              <cite>Sarah Chen, VP of Events, TechForward Inc.</cite>
-            </blockquote>
-            <blockquote>
-              <p>
-                The ROI was incredible. For every dollar we spent, we got $6 back in ticket sales. Plus, our show rate
-                jumped from 60% to 91%.
-              </p>
-              <cite>Marcus Johnson, Conference Director, Finance Leaders Summit</cite>
-            </blockquote>
-            <blockquote>
-              <p>
-                They don't just run ads, they build complete systems. The email sequences alone were worth the
-                investment. Absolutely recommend.
-              </p>
-              <cite>Emily Rodriguez, Marketing Lead, Growth Academy</cite>
-            </blockquote>
-          </section>
-
           <section>
             <h2>Frequently Asked Questions</h2>
-            <dl>
-              <dt>What types of events do you work with?</dt>
-              <dd>
-                We work with conferences, summits, trade shows, webinars, and corporate events across B2B and B2C
-                industries.
-              </dd>
-              <dt>How quickly can you launch a campaign?</dt>
-              <dd>We can launch within 2 weeks of kickoff, with full campaigns running within 30 days.</dd>
-              <dt>What results can I expect?</dt>
-              <dd>Our clients typically see 90%+ show-up rates and 3-6x ROI on their event marketing investment.</dd>
-            </dl>
           </section>
         </main>
 
         <footer>
           <p>MyWebGlory — Boutique Event Marketing Agency</p>
-          <address>
-            Email: <a href="mailto:gabriel@mywebglory.com">gabriel@mywebglory.com</a><br />
-            Phone: <a href="tel:+33767096182">+33 7 67 09 61 82</a><br />
-            WhatsApp: <a href="https://wa.me/33767096182">Chat with us</a>
-          </address>
-          <p>Founded by <a href="https://www.linkedin.com/in/gabriel-ageron/">Gabriel Ageron</a></p>
+          <address>Email: <a href="mailto:gabriel@mywebglory.com">gabriel@mywebglory.com</a></address>
         </footer>
+        </div>
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
