@@ -7,7 +7,7 @@ import { generateSitemap } from "./scripts/generate-sitemap";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: "/",
+  base: "/mywebglory/",
   
   server: {
     host: "::",
