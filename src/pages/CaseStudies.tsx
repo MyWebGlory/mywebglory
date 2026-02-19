@@ -770,31 +770,28 @@ const HorizontalStoryBand = ({ caseStudy }: { caseStudy: CaseStudyData }) => {
   );
 };
 
-// Case Header
-const CaseHeader = ({ 
-  caseStudy, 
-  onExplore,
-  isExpanded 
-}: { 
-  caseStudy: CaseStudyData; 
-  onExplore: () => void;
-  isExpanded: boolean;
-}) => {
+// Case Study Card (Grid item)
+const CaseStudyCard = ({ caseStudy, index, onClick }: { caseStudy: CaseStudyData; index: number; onClick: () => void }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  
+  // Pick top 3 metrics for the card preview
+  const previewMetrics = caseStudy.slides.results.metrics.slice(0, 3);
   
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6 }}
-      className="mb-6"
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-        <div className="flex items-center gap-4">
-          {/* Client Logo */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-white flex items-center justify-center border border-border/50 overflow-hidden p-1.5">
+      <button
+        onClick={onClick}
+        className="w-full text-left bg-gradient-to-br from-card to-card/50 border border-border/50 rounded-2xl p-6 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300 group cursor-pointer"
+      >
+        {/* Header: Logo + Info */}
+        <div className="flex items-center gap-4 mb-4">
+          <div className="w-14 h-14 rounded-xl bg-white flex items-center justify-center border border-border/50 overflow-hidden p-1.5 flex-shrink-0">
             {caseStudy.clientLogo ? (
               <img 
                 src={caseStudy.clientLogo} 
@@ -802,91 +799,149 @@ const CaseHeader = ({
                 className="w-full h-full object-contain"
               />
             ) : (
-              <span className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent">
+              <span className="text-xl font-bold bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent">
                 {caseStudy.clientName.charAt(0)}
               </span>
             )}
           </div>
           
-          <div>
-            <h2 className="text-xl sm:text-2xl font-bold">{caseStudy.clientName}</h2>
-            <div className="flex flex-wrap items-center gap-2 mt-1">
+          <div className="min-w-0">
+            <h3 className="text-lg font-bold truncate">{caseStudy.clientName}</h3>
+            <div className="flex flex-wrap items-center gap-2 mt-0.5">
               <span className="text-xs px-2 py-0.5 bg-primary/10 text-primary rounded-full">
                 {caseStudy.industry}
               </span>
-              <span className="text-xs text-muted-foreground">
-                {caseStudy.offerChosen}
+              <span className="text-xs text-muted-foreground hidden sm:inline">
+                {caseStudy.duration}
               </span>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              {caseStudy.duration}
-            </p>
           </div>
         </div>
         
-        <Button 
-          onClick={onExplore}
-          variant={isExpanded ? "secondary" : "default"}
-          className="group sm:self-start"
-        >
-          {isExpanded ? "Collapse" : "Explore Case"}
-          <ChevronRight className={`ml-2 h-4 w-4 transition-transform ${isExpanded ? 'rotate-90' : 'group-hover:translate-x-1'}`} />
-        </Button>
-      </div>
-      
-      <p className="text-lg sm:text-xl font-medium text-primary">
-        {caseStudy.boldOutcome}
-      </p>
+        {/* Bold Outcome */}
+        <p className="text-base font-semibold text-primary mb-4 line-clamp-2">
+          {caseStudy.boldOutcome}
+        </p>
+        
+        {/* Offer badge */}
+        <div className="text-xs text-muted-foreground mb-4">
+          {caseStudy.offerChosen}
+        </div>
+        
+        {/* Preview Metrics */}
+        <div className="grid grid-cols-3 gap-2 mb-5">
+          {previewMetrics.map((metric, idx) => {
+            const MetricIcon = metric.icon;
+            return (
+              <div
+                key={idx}
+                className="bg-primary/5 rounded-lg p-2 text-center"
+              >
+                {MetricIcon && (
+                  <MetricIcon className="w-3.5 h-3.5 text-primary mx-auto mb-1" />
+                )}
+                <div className="text-sm font-bold text-primary">{metric.value}</div>
+                <div className="text-[10px] text-muted-foreground leading-tight">{metric.label}</div>
+              </div>
+            );
+          })}
+        </div>
+        
+        {/* CTA */}
+        <div className="flex items-center justify-between">
+          <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">
+            View Full Case Study
+          </span>
+          <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+        </div>
+      </button>
     </motion.div>
   );
 };
 
-// Case Module
-const CaseModule = ({ caseStudy, index }: { caseStudy: CaseStudyData; index: number }) => {
-  const [isExpanded, setIsExpanded] = useState(index === 0); // First case expanded by default
-  const moduleRef = useRef<HTMLDivElement>(null);
-  
-  const handleExplore = () => {
-    setIsExpanded(!isExpanded);
-    if (!isExpanded && moduleRef.current) {
-      setTimeout(() => {
-        moduleRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 100);
+// Case Study Modal (full preview with slider)
+const CaseStudyModal = ({ 
+  caseStudy, 
+  isOpen, 
+  onClose 
+}: { 
+  caseStudy: CaseStudyData | null; 
+  isOpen: boolean; 
+  onClose: () => void;
+}) => {
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'hidden';
     }
-  };
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.body.style.overflow = 'unset';
+    };
+  }, [isOpen, onClose]);
+
+  if (!caseStudy) return null;
   
   return (
-    <motion.div
-      ref={moduleRef}
-      id={caseStudy.id}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="scroll-mt-24"
-    >
-      <div className="bg-gradient-to-br from-card to-card/50 border border-border/50 rounded-2xl p-6 sm:p-8">
-        <CaseHeader 
-          caseStudy={caseStudy} 
-          onExplore={handleExplore}
-          isExpanded={isExpanded}
-        />
-        
+    <AnimatePresence>
+      {isOpen && (
         <motion.div
-          initial={false}
-          animate={{ 
-            height: isExpanded ? 'auto' : 0,
-            opacity: isExpanded ? 1 : 0
-          }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-          className="overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 backdrop-blur-sm"
+          onClick={onClose}
         >
-          <div className="pt-6 border-t border-border/50">
-            <HorizontalStoryBand caseStudy={caseStudy} />
-          </div>
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.95, opacity: 0, y: 20 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative w-full max-w-4xl max-h-[90vh] bg-background border border-border/50 rounded-2xl overflow-hidden flex flex-col"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-5 border-b border-border/50 flex-shrink-0">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center border border-border/50 overflow-hidden p-1">
+                  {caseStudy.clientLogo ? (
+                    <img 
+                      src={caseStudy.clientLogo} 
+                      alt={`${caseStudy.clientName} logo`}
+                      className="w-full h-full object-contain"
+                    />
+                  ) : (
+                    <span className="text-sm font-bold bg-gradient-to-r from-violet-500 to-cyan-500 bg-clip-text text-transparent">
+                      {caseStudy.clientName.charAt(0)}
+                    </span>
+                  )}
+                </div>
+                <div>
+                  <h2 className="text-lg font-bold">{caseStudy.clientName}</h2>
+                  <p className="text-xs text-muted-foreground">{caseStudy.industry} &middot; {caseStudy.duration}</p>
+                </div>
+              </div>
+              <button
+                onClick={onClose}
+                className="p-2 rounded-lg hover:bg-muted/50 transition-colors"
+              >
+                <X className="w-5 h-5 text-muted-foreground" />
+              </button>
+            </div>
+            
+            {/* Modal Body - Slider */}
+            <div className="flex-1 overflow-y-auto p-5">
+              <p className="text-base font-semibold text-primary mb-5">{caseStudy.boldOutcome}</p>
+              <HorizontalStoryBand caseStudy={caseStudy} />
+            </div>
+          </motion.div>
         </motion.div>
-      </div>
-    </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
@@ -934,12 +989,24 @@ const CaseStudies = () => {
     alt?: string;
   }>({ isOpen: false, src: '', type: 'image' });
 
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState<CaseStudyData | null>(null);
+  const [isCaseModalOpen, setIsCaseModalOpen] = useState(false);
+
   const openModal = (src: string, type: 'image' | 'video', alt?: string) => {
     setModalState({ isOpen: true, src, type, alt });
   };
 
   const closeModal = () => {
     setModalState(prev => ({ ...prev, isOpen: false }));
+  };
+
+  const openCaseStudy = (caseStudy: CaseStudyData) => {
+    setSelectedCaseStudy(caseStudy);
+    setIsCaseModalOpen(true);
+  };
+
+  const closeCaseStudy = () => {
+    setIsCaseModalOpen(false);
   };
 
   return (
@@ -955,18 +1022,40 @@ const CaseStudies = () => {
         <main>
           <CaseStudiesHero />
           
-          {/* Case Studies List */}
+          {/* Case Studies Grid */}
           <section className="py-12 px-4 sm:px-6 lg:px-8">
             <div className="container mx-auto max-w-5xl">
-              <div className="space-y-8 sm:space-y-12">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {caseStudies.map((caseStudy, index) => (
-                  <CaseModule 
+                  <CaseStudyCard 
                     key={caseStudy.id} 
                     caseStudy={caseStudy} 
                     index={index}
+                    onClick={() => openCaseStudy(caseStudy)}
                   />
                 ))}
               </div>
+              
+              {/* Placeholder for upcoming case studies */}
+              {caseStudies.length < 4 && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                  {Array.from({ length: Math.min(4 - caseStudies.length, 3) }).map((_, idx) => (
+                    <motion.div
+                      key={`placeholder-${idx}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.3 + idx * 0.1 }}
+                      className="border border-dashed border-border/40 rounded-2xl p-6 flex flex-col items-center justify-center min-h-[280px] text-center"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-primary/5 flex items-center justify-center mb-3">
+                        <Rocket className="w-5 h-5 text-primary/30" />
+                      </div>
+                      <p className="text-sm text-muted-foreground/60 font-medium">New case study coming soon</p>
+                      <p className="text-xs text-muted-foreground/40 mt-1">Results speak louder than promises</p>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
           
@@ -975,7 +1064,14 @@ const CaseStudies = () => {
         
         <Footer />
         
-        {/* Media Modal */}
+        {/* Case Study Detail Modal */}
+        <CaseStudyModal
+          caseStudy={selectedCaseStudy}
+          isOpen={isCaseModalOpen}
+          onClose={closeCaseStudy}
+        />
+        
+        {/* Media Modal (for expanding images/videos within the case study modal) */}
         <MediaModal
           isOpen={modalState.isOpen}
           onClose={closeModal}
