@@ -149,6 +149,14 @@ import kornitTeamMeeting from "@/assets/case-studies/kornit/team-meeting.png";
 import kornitEventTrailer from "@/assets/case-studies/kornit/event-trailer.mp4";
 import kornitAiAdUgc from "@/assets/case-studies/kornit/ai-ad-ugc.mp4";
 
+// Import RxVP assets
+import rxvpEventFlyer from "@/assets/case-studies/rxvp/event-flyer.jpeg";
+import rxvpLandingPage from "@/assets/case-studies/rxvp/landing-page.png";
+import rxvpClientTestimonial from "@/assets/case-studies/rxvp/client-testimonial.png";
+import rxvpVideoCall from "@/assets/case-studies/rxvp/video-call-with-client.png";
+import rxvpLogo from "@/assets/case-studies/rxvp/rxvp-logo.png";
+import rxvpTemplateInviteVideo from "@/assets/case-studies/rxvp/template-invite-video.mp4"
+
 // Types
 interface SlideContent {
   title: string;
@@ -312,9 +320,131 @@ const kornitCaseStudy: CaseStudyData = {
   }
 };
 
-// All case studies (Kornit is the real one, others are placeholders for structure)
+// RxVP International Women's Day Case Study
+const rxvpCaseStudy: CaseStudyData = {
+  id: "rxvp-iwd",
+  clientName: "RxVP",
+  clientLogo: rxvpLogo,
+  industry: "Life Sciences / Speakers Bureau",
+  offerChosen: "Event Launch - $9k",
+  duration: "6 weeks (Jan-Mar 2026)",
+  boldOutcome: "5,000+ registrations. World-record-scale IWD event launched from zero.",
+  slides: {
+    context: {
+      title: "Context",
+      points: [
+        "RxVP is the first and only global speakers bureau for the life sciences industry, co-founded by Bonnie Lappin, HBA Visionary Leader award recipient and PharmaVoice100 honoree.",
+        "The mission: organize a world-record-scale International Women's Day virtual event spanning 4 global regions (Asia, India, Europe, Americas) with senior pharma executives as panelists.",
+        "This was a first-of-its-kind initiative, no precedent, no competitor, no historical data. A concept that didn't exist in the industry, positioned to become the definitive platform for women leaders in Life Sciences.",
+        "Corporate memberships at $2,500 per company (capped at 20 founding companies), each unlocking up to 700 employee invitations across all panels.",
+        "The goal: generate massive B2B registrations, establish RxVP as the undisputed authority, and create a repeatable event system for future editions."
+      ],
+      image: rxvpEventFlyer,
+      imageAlt: "RxVP International Women's Day World Record Event Flyer"
+    },
+    challenge: {
+      title: "The Challenge",
+      points: [
+        "Building a global, multi-timezone virtual event from absolute zero, no existing audience, no prior event data, no organic traffic.",
+        "Target audience: C-suite pharma executives, ERG leaders, DEI directors, and HR decision-makers, the hardest B2B segment to reach.",
+        "Strict B2B positioning: this was not a public webinar. Corporate seats only, sold through authority and scarcity, not ads.",
+        "Multi-region complexity: 4 rolling panels across Asia, India, Europe, and Americas, each requiring geo-targeted messaging and culturally sensitive visuals.",
+        "Timeline: 6 weeks to build the entire marketing engine, LinkedIn strategy, email flows, creative assets, landing page, video production, and custom corporate invitation systems.",
+        "The client's vision was bold: 'Go big or go home. We want to become THE name people think of for speakers in life sciences.'"
+      ]
+    },
+    strategy: {
+      title: "The Strategy",
+      points: [
+        "Authority Funnel for Corporate Membership Sales, every piece of content, outreach, and creative pointed to one goal: filling 20 founding corporate slots.",
+        "3-pillar approach: Authority (why RxVP matters), Scarcity (only 20 companies, world record attempt), Conversion (book a conversation).",
+        "LinkedIn as the single primary channel, where pharma decision-makers, ERG leaders, and DEI directors actually live.",
+        "12 authority-driven LinkedIn posts across 4 strategic themes: IWD corporate legitimacy, RxVP differentiation, ERG value proposition, and scarcity-driven urgency.",
+        "Custom corporate invitation system: personalized invite templates with each company's branding, so internal champions could forward to 700+ employees.",
+        "Multi-touch email/reminder campaign: 5 pre-event + 1 post-event, with SMS and direct outreach for high-value registrants."
+      ],
+      image: rxvpVideoCall,
+      imageAlt: "Strategy session video call with Bonnie Lappin"
+    },
+    system: {
+      title: "The System",
+      points: [
+        "High-converting branded landing page, designed to communicate prestige, scarcity, and clear corporate value proposition.",
+        "Custom corporate invitation templates, each company received personalized invite assets with their logo, enabling internal distribution to hundreds of employees.",
+        "Email campaign flow: 5. pre-event reminder sequence + 1 post-event follow-up, segmented by region and engagement level.",
+        "LinkedIn content calendar: 12 posts strategically sequenced over 4 weeks, mixing graphic design posts, video content, and text-based thought leadership.",
+        "AI-powered video trailers: custom promo videos featuring company logos and panelist highlights for each region.",
+        "Light engagement support: 10–15 strategic comment replies and community drops per week to boost organic reach.",
+        "Coordination via Slack, ClickUp, and Drive, fully integrated with Bonnie's team for real-time asset approvals and speaker management."
+      ],
+      image: rxvpLandingPage,
+      imageAlt: "RxVP event landing page with registration flow"
+    },
+    execution: {
+      title: "Execution",
+      points: [
+        "12 LinkedIn posts including 4 custom graphic design posts, delivered + scheduled in a 1-month posting calendar.",
+        "1 professional promo video reel (10–15 seconds), high-energy, attention-grabbing, designed for LinkedIn autoplay.",
+        "Event flyer design, premium, internationally-aware creative featuring diverse panelists from J&J, Takeda, Novo Nordisk, Bristol Myers Squibb.",
+        "Custom corporate invite templates, personalized per company with their branding, enabling effortless internal distribution.",
+        "AI-generated video trailers with company logos, each founding company received a custom video asset to share internally.",
+        "5 pre-event email reminders + 1 post-event recap email, crafted for urgency and executive tone.",
+        "Landing page build, fully branded experience optimized for corporate registration and conveying world-record ambition.",
+        "Direct outreach: 40–50 highly targeted LinkedIn messages to ERG leaders, DEI directors, and pharma executives."
+      ],
+      images: [rxvpEventFlyer, rxvpLandingPage],
+      videos: [rxvpTemplateInviteVideo]
+    },
+    results: {
+      metrics: [
+        { label: "Total Registrations", value: "5,000+", icon: Users },
+        { label: "Founding Companies", value: "20", icon: Building2 },
+        { label: "Global Regions", value: "4", icon: Globe },
+        { label: "LinkedIn Posts", value: "12", icon: Target },
+        { label: "Email Campaigns", value: "6", icon: Mail },
+        { label: "Countries Reached", value: "50+", icon: Globe },
+        { label: "Employee Invites/Co.", value: "700", icon: Users },
+        { label: "Custom Videos", value: "20+", icon: Calendar }
+      ],
+      highlights: [
+        "5,000+ registrations achieved on a $9K budget, exceptional cost-per-registration for premium B2B pharma audience.",
+        "All 20 founding corporate membership slots filled at $2,500 each, $50K+ in direct revenue generated.",
+        "Multi-region coverage: Asia, India, Europe, Americas, with culturally-adapted messaging for each geography.",
+        "Custom corporate invitation system drove viral internal distribution, single companies registering 200-500 employees.",
+        "LinkedIn-only organic strategy outperformed paid alternatives, authority positioning drove inbound interest."
+      ]
+    },
+    longTermImpact: {
+      title: "Long-term Impact",
+      points: [
+        "RxVP established as the definitive platform for women leaders in Life Sciences, a category that didn't exist before.",
+        "20 founding companies now form a recurring corporate network for future RxVP events and initiatives.",
+        "Reusable corporate invitation system, scalable template for future events without rebuilding from scratch.",
+        "Library of video assets, panel recordings, and highlights, repurposable content for year-round authority building.",
+        "Proven playbook: from zero to 5,000+ registrations in 6 weeks, a blueprint Bonnie can replicate for IWD 2027 and beyond.",
+        "World-record positioning created massive PR potential and media interest for the RxVP brand."
+      ]
+    },
+    takeaway: {
+      insights: [
+        "You don't need a massive budget to create a massive event. You need a precise system: authority + scarcity + one clear CTA.",
+        "Custom corporate invitation templates were the force multiplier, turning 20 companies into 5,000 registrants through internal viral distribution.",
+        "LinkedIn-only, organic-first B2B strategy outperformed what most companies achieve with 5x the ad spend.",
+        "When the positioning is right, the product sells itself. 'The first and only global speakers bureau' isn't marketing, it's a moat."
+      ],
+      clientComments: [rxvpClientTestimonial]
+    },
+    cta: {
+      headline: "Ready to Build Your Revenue System?",
+      subtext: "Every case study started with a conversation. Let's explore what's possible for your business."
+    }
+  }
+};
+
+// All case studies
 const caseStudies: CaseStudyData[] = [
-  kornitCaseStudy
+  kornitCaseStudy,
+  rxvpCaseStudy
 ];
 
 // Slide icon mapping
@@ -393,13 +523,76 @@ const StorySlide = ({
 }) => {
   const Icon = slideIcons[type];
   
+  // Helper: render bullet points
+  const renderPoints = (points: string[]) => (
+    <ul className="space-y-2">
+      {points.map((point, idx) => (
+        <motion.li
+          key={idx}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: idx * 0.05 }}
+          className="flex items-start gap-2"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+          <span className="text-xs sm:text-sm text-foreground/80">{point}</span>
+        </motion.li>
+      ))}
+    </ul>
+  );
+
+  // Helper: render a media column (images + videos)
+  const renderMediaColumn = (images?: string[], videos?: string[], imageAlt?: string) => {
+    const hasMedia = (images && images.length > 0) || (videos && videos.length > 0);
+    if (!hasMedia) return null;
+    return (
+      <div className="space-y-3">
+        {videos && videos.map((video, idx) => (
+          <motion.div
+            key={`v-${idx}`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: idx * 0.1 }}
+            className="rounded-lg overflow-hidden border border-border/50 bg-black/50 aspect-video"
+          >
+            <ExpandableMedia src={video} type="video" alt={`Video ${idx + 1}`} className="w-full h-full" />
+          </motion.div>
+        ))}
+        {images && images.map((img, idx) => (
+          <motion.div
+            key={`i-${idx}`}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: idx * 0.1 }}
+            className="rounded-lg overflow-hidden border border-border/50 shadow-md bg-muted/30"
+          >
+            <ExpandableMedia src={img} type="image" alt={imageAlt || `Image ${idx + 1}`} className="w-full h-auto" />
+          </motion.div>
+        ))}
+      </div>
+    );
+  };
+
+  // Two-column wrapper: text left, media right (stacked on mobile)
+  const TwoColumnLayout = ({ textContent, mediaContent }: { textContent: React.ReactNode; mediaContent: React.ReactNode | null }) => {
+    if (!mediaContent) {
+      return <div>{textContent}</div>;
+    }
+    return (
+      <div className="flex flex-col md:flex-row gap-4 md:gap-6">
+        <div className="md:w-1/2 flex-shrink-0">{textContent}</div>
+        <div className="md:w-1/2 overflow-y-auto max-h-[420px] sm:max-h-[520px] pr-1">{mediaContent}</div>
+      </div>
+    );
+  };
+
   const renderContent = () => {
     if (type === 'results') {
       const resultsContent = content as CaseStudyData['slides']['results'];
       return (
         <div className="space-y-3">
           {/* Metrics Grid */}
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {resultsContent.metrics.map((metric, idx) => {
               const MetricIcon = metric.icon;
               return (
@@ -448,9 +641,8 @@ const StorySlide = ({
     
     if (type === 'takeaway') {
       const takeawayContent = content as CaseStudyData['slides']['takeaway'];
-      return (
+      const textPart = (
         <div className="space-y-4">
-          {/* Key Insights */}
           <div className="space-y-2">
             {takeawayContent.insights.map((insight, idx) => (
               <motion.p
@@ -464,33 +656,6 @@ const StorySlide = ({
               </motion.p>
             ))}
           </div>
-          
-          {/* Client Comments */}
-          {takeawayContent.clientComments && (
-            <div className="space-y-2">
-              <h4 className="text-xs font-semibold text-primary">What the Client Said</h4>
-              <div className="grid grid-cols-3 gap-2">
-                {takeawayContent.clientComments.map((comment, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 5 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="bg-muted/30 rounded-md overflow-hidden border border-border/50 h-20"
-                  >
-                    <ExpandableMedia 
-                      src={comment} 
-                      type="image"
-                      alt={`Client testimonial ${idx + 1}`}
-                      className="w-full h-full"
-                    />
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Closing statement */}
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -502,13 +667,38 @@ const StorySlide = ({
           </motion.p>
         </div>
       );
+
+      const mediaPart = takeawayContent.clientComments && takeawayContent.clientComments.length > 0 ? (
+        <div className="space-y-2">
+          <h4 className="text-xs font-semibold text-primary">What the Client Said</h4>
+          <div className="space-y-3">
+            {takeawayContent.clientComments.map((comment, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.1 }}
+                className="bg-muted/30 rounded-lg overflow-hidden border border-border/50"
+              >
+                <ExpandableMedia 
+                  src={comment} 
+                  type="image"
+                  alt={`Client testimonial ${idx + 1}`}
+                  className="w-full h-auto"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      ) : null;
+
+      return <TwoColumnLayout textContent={textPart} mediaContent={mediaPart} />;
     }
 
     if (type === 'cta') {
       const ctaContent = content as CaseStudyData['slides']['cta'];
       return (
         <div className="h-full flex flex-col items-center justify-center text-center relative">
-          {/* Background decorations */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             <div className="absolute top-4 left-4 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
             <div className="absolute bottom-4 right-4 w-40 h-40 bg-primary/5 rounded-full blur-3xl" />
@@ -551,113 +741,38 @@ const StorySlide = ({
 
     if (type === 'execution') {
       const execContent = content as SlideContent & { images?: string[]; videos?: string[] };
-      return (
-        <div className="space-y-4">
-          <ul className="space-y-2">
-            {execContent.points.map((point, idx) => (
-              <motion.li
-                key={idx}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: idx * 0.05 }}
-                className="flex items-start gap-2"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                <span className="text-xs sm:text-sm text-foreground/80">{point}</span>
-              </motion.li>
-            ))}
-          </ul>
-          
-          {/* Execution Videos */}
-          {execContent.videos && execContent.videos.length > 0 && (
-            <div className="grid grid-cols-2 gap-2 mt-3">
-              {execContent.videos.map((video, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="rounded-lg overflow-hidden border border-border/50 bg-black/50 h-28"
-                >
-                  <ExpandableMedia 
-                    src={video} 
-                    type="video"
-                    alt={`Video asset ${idx + 1}`}
-                    className="w-full h-full"
-                  />
-                </motion.div>
-              ))}
-            </div>
-          )}
-          
-          {/* Execution Images Grid */}
-          {execContent.images && (
-            <div className="grid grid-cols-2 gap-2 mt-2">
-              {execContent.images.map((img, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="rounded-lg overflow-hidden border border-border/50 bg-muted/30 h-24"
-                >
-                  <ExpandableMedia 
-                    src={img} 
-                    type="image"
-                    alt={`Execution asset ${idx + 1}`}
-                    className="w-full h-full"
-                  />
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </div>
-      );
+      const textPart = renderPoints(execContent.points);
+      const mediaPart = renderMediaColumn(execContent.images, execContent.videos);
+      return <TwoColumnLayout textContent={textPart} mediaContent={mediaPart} />;
     }
     
-    // Default content rendering for other slide types
+    // Default content rendering for other slide types (context, challenge, strategy, system, longTermImpact)
     const slideContent = content as SlideContent;
-    return (
-      <div className="space-y-4">
-        <ul className="space-y-2 sm:space-y-3">
-          {slideContent.points.map((point, idx) => (
-            <motion.li
-              key={idx}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              className="flex items-start gap-2"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-              <span className="text-xs sm:text-sm text-foreground/80">{point}</span>
-            </motion.li>
-          ))}
-        </ul>
-        
-        {/* Slide Image */}
+    const hasMedia = slideContent.image || slideContent.video;
+    const textPart = renderPoints(slideContent.points);
+    const mediaPart = hasMedia ? (
+      <div className="space-y-3">
         {slideContent.image && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="mt-3 rounded-lg overflow-hidden border border-border/50 shadow-md bg-muted/30 h-36"
+            className="rounded-lg overflow-hidden border border-border/50 shadow-md bg-muted/30"
           >
             <ExpandableMedia 
               src={slideContent.image} 
               type="image"
               alt={slideContent.imageAlt || "Case study visual"}
-              className="w-full h-full"
+              className="w-full h-auto"
             />
           </motion.div>
         )}
-        
-        {/* Slide Video */}
         {slideContent.video && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
-            className="mt-3 rounded-lg overflow-hidden border border-border/50 shadow-md bg-black/50 h-36"
+            className="rounded-lg overflow-hidden border border-border/50 shadow-md bg-black/50 aspect-video"
           >
             <ExpandableMedia 
               src={slideContent.video} 
@@ -668,7 +783,9 @@ const StorySlide = ({
           </motion.div>
         )}
       </div>
-    );
+    ) : null;
+
+    return <TwoColumnLayout textContent={textPart} mediaContent={mediaPart} />;
   };
   
   const getSlideTitle = () => {
@@ -680,13 +797,13 @@ const StorySlide = ({
   };
   
   return (
-    <div className="relative h-[380px] sm:h-[420px] flex flex-col justify-start px-4 sm:px-8 py-4 overflow-y-auto">
+    <div className="relative min-h-[400px] sm:min-h-[480px] flex flex-col justify-start px-4 sm:px-8 py-5 overflow-y-auto">
       {/* Large slide number watermark */}
       <div className="absolute top-1 right-4 sm:top-2 sm:right-8 text-[50px] sm:text-[80px] font-bold text-primary/5 select-none pointer-events-none">
         {String(slideNumber).padStart(2, '0')}
       </div>
       
-      <div className="relative z-10 max-w-2xl">
+      <div className="relative z-10 w-full">
         <div className="flex items-center gap-2 mb-3">
           <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
             <Icon className="w-4 h-4 text-primary" />
@@ -847,6 +964,43 @@ const CaseStudyCard = ({ caseStudy, index, onClick }: { caseStudy: CaseStudyData
           })}
         </div>
         
+        {/* Media Preview 2x2 */}
+        {(caseStudy.slides.execution.images || caseStudy.slides.execution.videos) && (
+          <div className="grid grid-cols-2 gap-1.5 mb-4 rounded-xl overflow-hidden">
+            {[
+              ...(caseStudy.slides.execution.images?.slice(0, 3) || []).map(src => ({ src, type: 'image' as const })),
+              ...(caseStudy.slides.execution.videos?.slice(0, 1) || []).map(src => ({ src, type: 'video' as const }))
+            ].slice(0, 4).map((media, idx) => (
+              <div
+                key={idx}
+                className="relative rounded-lg overflow-hidden bg-muted/30 border border-border/30 h-20"
+              >
+                {media.type === 'image' ? (
+                  <img
+                    src={media.src}
+                    alt={`Preview ${idx + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <>
+                    <video
+                      src={media.src}
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                      <div className="w-6 h-6 rounded-full bg-white/90 flex items-center justify-center">
+                        <Play className="w-3 h-3 text-black fill-black ml-0.5" />
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* CTA */}
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium text-muted-foreground group-hover:text-primary transition-colors">
@@ -901,7 +1055,7 @@ const CaseStudyModal = ({
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.95, opacity: 0, y: 20 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-4xl max-h-[90vh] bg-background border border-border/50 rounded-2xl overflow-hidden flex flex-col"
+            className="relative w-full max-w-6xl max-h-[95vh] bg-background border border-border/50 rounded-2xl overflow-hidden flex flex-col"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}

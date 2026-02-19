@@ -33,16 +33,13 @@ const Navbar = () => {
     { label: "What's Event Marketing?", href: "/event-marketing" },
     { label: "How We Work", href: "/how-it-works" },
     { label: "Pricing", href: "/pricing" },
+    { label: "Case Studies", href: "/case-studies" },
   ];
 
   const allPages = [
-    { label: "Event Marketing", href: "/event-marketing" },
-    { label: "How We Work", href: "/how-it-works" },
-    { label: "Case Studies", href: "/case-studies" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Blog", href: "/blog" },
-    { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
+    { label: "About Us", href: "/about" },
+    { label: "Blog", href: "/blog" },
     { label: "FAQ", href: "/faq" },
     { label: "Privacy & Legal", href: "/privacy" },
   ];
@@ -93,7 +90,7 @@ const Navbar = () => {
               {isMoreMenuOpen && (
                 <div className="absolute top-full right-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-xl py-2 animate-fade-in z-50">
                   <div className="px-3 py-2 border-b border-border mb-1">
-                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">All Pages</span>
+                    <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Other Pages</span>
                   </div>
                   {allPages.map((page) => (
                     <Link

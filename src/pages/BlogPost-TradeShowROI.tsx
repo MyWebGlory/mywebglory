@@ -217,13 +217,13 @@ const BlogPostTradeShowROI = () => {
               <motion.section {...fadeInUp} id="introduction" className="mb-16 scroll-mt-24">
                 <div className="prose prose-lg prose-invert max-w-none">
                   <p className="text-xl text-muted-foreground leading-relaxed mb-6">
-                    Trade shows and conferences represent one of the largest investments in most B2B marketing budgets. Between booth costs, travel expenses, marketing materials, and staff time, a single major trade show can easily cost $50,000 to $200,000 or more. Yet despite these significant investments, many companies struggle to measure—let alone maximize—their return on investment.
+                    Trade shows and conferences represent one of the largest investments in most B2B marketing budgets. Between booth costs, travel expenses, marketing materials, and staff time, a single major trade show can easily cost $50,000 to $200,000 or more. Yet despite these significant investments, many companies struggle to measure, let alone maximize, their return on investment.
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                     The difference between companies that achieve exceptional trade show ROI and those that see their investment disappear into the ether comes down to three critical phases: strategic pre-event planning, intentional on-site execution, and systematic post-event follow-up. Miss any one of these, and your ROI suffers dramatically.
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed">
-                    In this comprehensive guide, we'll walk through every aspect of maximizing your trade show and conference ROI—from the moment you decide to exhibit to months after the event concludes. Whether you're a seasoned trade show veteran or planning your first major exhibition, these proven strategies will help you transform your trade show presence from a cost center into a revenue-generating powerhouse.
+                    In this comprehensive guide, we'll walk through every aspect of maximizing your trade show and conference ROI, from the moment you decide to exhibit to months after the event concludes. Whether you're a seasoned trade show veteran or planning your first major exhibition, these proven strategies will help you transform your trade show presence from a cost center into a revenue-generating powerhouse.
                   </p>
                 </div>
               </motion.section>
@@ -261,7 +261,7 @@ const BlogPostTradeShowROI = () => {
                 </div>
 
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  Research consistently shows that 81% of trade show attendees have buying authority, and 77% of executive decision-makers found at least one new supplier at the last trade show they attended. These aren't casual browsers—they're motivated buyers actively looking for solutions.
+                  Research consistently shows that 81% of trade show attendees have buying authority, and 77% of executive decision-makers found at least one new supplier at the last trade show they attended. These aren't casual browsers, they're motivated buyers actively looking for solutions.
                 </p>
 
                 <div className="bg-gradient-to-r from-primary/10 to-accent/10 rounded-2xl p-6 border border-primary/20">
@@ -342,7 +342,7 @@ const BlogPostTradeShowROI = () => {
                 </div>
 
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  Your booth is your storefront at the trade show. It needs to attract attention, communicate your value proposition instantly, and facilitate meaningful conversations. This doesn't necessarily mean the biggest or most expensive booth—it means the most strategically designed one.
+                  Your booth is your storefront at the trade show. It needs to attract attention, communicate your value proposition instantly, and facilitate meaningful conversations. This doesn't necessarily mean the biggest or most expensive booth, it means the most strategically designed one.
                 </p>
 
                 <div className="bg-card/50 border border-border rounded-2xl p-6 mb-6">
@@ -420,7 +420,7 @@ const BlogPostTradeShowROI = () => {
                       Small behaviors make a big difference in how visitors perceive your brand:
                     </p>
                     <ul className="space-y-2 text-muted-foreground">
-                      <li>• Never sit in the booth—standing shows energy and accessibility</li>
+                      <li>• Never sit in the booth, standing shows energy and accessibility</li>
                       <li>• Avoid phone use and side conversations that signal unavailability</li>
                       <li>• Make eye contact and greet every person who approaches</li>
                       <li>• Ask open-ended questions rather than "Can I help you?"</li>
@@ -829,7 +829,7 @@ const BlogPostTradeShowROI = () => {
 
                 <div className="prose prose-lg prose-invert max-w-none">
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    Trade shows and conferences represent a unique opportunity in B2B marketing—the chance to meet motivated buyers face-to-face, demonstrate your value in real-time, and build relationships that accelerate the sales cycle. But this opportunity comes with significant investment, making strategic execution essential.
+                    Trade shows and conferences represent a unique opportunity in B2B marketing, the chance to meet motivated buyers face-to-face, demonstrate your value in real-time, and build relationships that accelerate the sales cycle. But this opportunity comes with significant investment, making strategic execution essential.
                   </p>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                     The companies that achieve exceptional trade show ROI don't leave success to chance. They approach each event with clear objectives, thorough preparation, disciplined execution, and systematic follow-up. They invest as much in their people and processes as they do in their booth. And they measure everything, using data to continuously improve their approach.

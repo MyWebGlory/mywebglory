@@ -129,6 +129,71 @@ const About = () => {
         </div>
       </section>
 
+      {/* Photo Grid */}
+      <section className="pb-16 relative overflow-hidden">
+        <div className="container px-4 md:px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 max-w-5xl mx-auto">
+            {/* Large image left */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
+              className="md:col-span-7 relative group overflow-hidden rounded-2xl"
+            >
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <img
+                src="/images/about/office-main.png"
+                alt="MyWebGlory Paris office – our workspace where event marketing strategies come to life"
+                className="w-full h-72 md:h-[420px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+              <div className="absolute bottom-0 left-0 right-0 p-5 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                <p className="text-white font-semibold text-sm">Our Paris Office</p>
+                <p className="text-white/70 text-xs mt-1">Where great events are planned</p>
+              </div>
+            </motion.div>
+
+            {/* Two stacked images right */}
+            <div className="md:col-span-5 flex flex-col gap-4">
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.45, ease: "easeOut" }}
+                className="relative group overflow-hidden rounded-2xl flex-1"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <img
+                  src="/images/about/team-meeting.png"
+                  alt="MyWebGlory team in a strategy meeting, planning an event marketing campaign"
+                  className="w-full h-52 md:h-[196px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-4 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  <p className="text-white font-semibold text-sm">Strategy Sessions</p>
+                  <p className="text-white/70 text-xs mt-1">Every campaign starts here</p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.6, ease: "easeOut" }}
+                className="relative group overflow-hidden rounded-2xl flex-1"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <img
+                  src="/images/about/team-selfie.png"
+                  alt="The MyWebGlory team – 15 event marketing specialists ready to grow your events"
+                  className="w-full h-52 md:h-[196px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+                <div className="absolute bottom-0 left-0 right-0 p-4 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                  <p className="text-white font-semibold text-sm">The Team</p>
+                  <p className="text-white/70 text-xs mt-1">15 specialists, one mission</p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Founder Section */}
       <section className="py-20 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-secondary/5" />
