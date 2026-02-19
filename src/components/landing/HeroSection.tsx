@@ -358,7 +358,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 1.2 }}
           >
             <img src={avatarsSocialProof} alt="Happy event organizers" className="h-6 sm:h-7 md:h-8 object-contain" />
-            <span className="text-xs sm:text-sm text-muted-foreground">100+ Event Organizers Trust Us</span>
+            <span className="text-xs sm:text-sm text-muted-foreground">40+ Event Organizers Trust Us</span>
           </motion.div>
         </motion.div>
         
