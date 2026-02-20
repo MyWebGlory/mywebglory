@@ -27,28 +27,28 @@ interface Edge {
 // y: 145–745 (content block, below navbar ~80px, above logos)
 // Nodes orbit OUTSIDE this zone, between navbar (y≈80) and logos (y≈790)
 const nodes: Node[] = [
-  // ── Top arc (y 110–160, below navbar) ──
-  { id: 1,  x: 320,  y: 145, label: "ICP Study",    iconId: "icon-search",    r: 13, colorClass: "primary"   },
-  { id: 2,  x: 570,  y: 120, label: "Creatives",    iconId: "icon-palette",   r: 12, colorClass: "secondary"  },
-  { id: 3,  x: 870,  y: 120, label: "Outreach",     iconId: "icon-send",      r: 12, colorClass: "primary"   },
-  { id: 4,  x: 1120, y: 145, label: "Ads",          iconId: "icon-megaphone", r: 13, colorClass: "accent"    },
-  // === ICP Persona nodes — spread across visible spots ===
-  { id: 201, x: 720,  y: 105, label: "CEOs",       iconId: "icon-crown",    r: 13, colorClass: "icp" }, // top center
-  { id: 202, x: 260,  y: 250, label: "Directors",  iconId: "icon-user-tie", r: 12, colorClass: "icp" }, // left, near SMS
-  { id: 203, x: 1100, y: 250, label: "Founders",   iconId: "icon-rocket",   r: 12, colorClass: "icp" }, // right, near Ads
-  // ── Left side (x 90–230, y 200–760) ──
-  { id: 5,  x: 200,  y: 320, label: "SMS",          iconId: "icon-sms",       r: 12, colorClass: "accent"    },
-  { id: 6,  x: 170,  y: 450, label: "Automation",   iconId: "icon-zap",       r: 15, colorClass: "primary"   },
-  { id: 7,  x: 200,  y: 600, label: "Posts",        iconId: "icon-posts",     r: 12, colorClass: "secondary"  },
-  // ── Right side (x 1210–1350, y 200–760) ──
-  { id: 8,  x: 1260, y: 320, label: "Reminders",    iconId: "icon-bell",      r: 12, colorClass: "secondary"  },
-  { id: 9,  x: 1290, y: 450, label: "Registrants",  iconId: "icon-userplus",  r: 15, colorClass: "primary"   },
-  { id: 10, x: 1260, y: 600, label: "Landing Page", iconId: "icon-landing",   r: 12, colorClass: "accent"    },
-  // ── Bottom arc (y 775–830, above logos label) ──
-  { id: 11, x: 320,  y: 800, label: "Emails",       iconId: "icon-mail",      r: 13, colorClass: "primary"   },
-  { id: 12, x: 570,  y: 830, label: "Follow-ups",   iconId: "icon-repeat",    r: 12, colorClass: "accent"    },
-  { id: 13, x: 870,  y: 830, label: "Analytics",    iconId: "icon-barchart",  r: 12, colorClass: "secondary"  },
-  { id: 14, x: 1120, y: 800, label: "Retargeting",  iconId: "icon-target",    r: 13, colorClass: "primary"   },
+  // ── Top — staggered heights, not a clean arc ──
+  { id: 1,  x: 200,  y: 130, label: "ICP Study",    iconId: "icon-search",    r: 13, colorClass: "primary"   },
+  { id: 2,  x: 490,  y: 75,  label: "Creatives",    iconId: "icon-palette",   r: 12, colorClass: "secondary"  },
+  { id: 3,  x: 960,  y: 80,  label: "Outreach",     iconId: "icon-send",      r: 12, colorClass: "primary"   },
+  { id: 4,  x: 1250, y: 125, label: "Ads",          iconId: "icon-megaphone", r: 13, colorClass: "accent"    },
+  // === ICP Persona nodes ===
+    { id: 201, x: 720,  y: 110, label: "CEOs",       iconId: "icon-crown",    r: 13, colorClass: "icp" }, // top center, lowered
+    { id: 202, x: 220,  y: 340, label: "Directors",  iconId: "icon-user-tie", r: 12, colorClass: "icp" }, // left, closer to center
+    { id: 203, x: 1220, y: 300, label: "Founders",   iconId: "icon-rocket",   r: 12, colorClass: "icp" }, // right, closer to center
+  // ── Left side — varied x, not a straight column ──
+  { id: 5,  x: 240,  y: 280, label: "SMS",          iconId: "icon-sms",       r: 12, colorClass: "accent"    },
+  { id: 6,  x: 115,  y: 470, label: "Automation",   iconId: "icon-zap",       r: 15, colorClass: "primary"   },
+  { id: 7,  x: 210,  y: 660, label: "Posts",        iconId: "icon-posts",     r: 12, colorClass: "secondary"  },
+  // ── Right side — varied x, not a straight column ──
+  { id: 8,  x: 1310, y: 340, label: "Reminders",    iconId: "icon-bell",      r: 12, colorClass: "secondary"  },
+  { id: 9,  x: 1200, y: 490, label: "Registrants",  iconId: "icon-userplus",  r: 15, colorClass: "primary"   },
+  { id: 10, x: 1350, y: 650, label: "Landing Page", iconId: "icon-landing",   r: 12, colorClass: "accent"    },
+  // ── Bottom — staggered heights, not a clean arc ──
+  { id: 11, x: 230,  y: 830, label: "Emails",       iconId: "icon-mail",      r: 13, colorClass: "primary"   },
+  { id: 12, x: 530,  y: 870, label: "Follow-ups",   iconId: "icon-repeat",    r: 12, colorClass: "accent"    },
+  { id: 13, x: 920,  y: 865, label: "Analytics",    iconId: "icon-barchart",  r: 12, colorClass: "secondary"  },
+  { id: 14, x: 1230, y: 825, label: "Retargeting",  iconId: "icon-target",    r: 13, colorClass: "primary"   },
 
 ];
 
@@ -56,8 +56,8 @@ const nodes: Node[] = [
 const edges: Edge[] = [
   // ICP persona — each connected to their nearest main node only
   { id: "e2-201",  from: 2,  to: 201, dur: 2.8, delay: 0.3 }, // CEOs ← Creatives (top center)
-  { id: "e1-202",  from: 1,  to: 202, dur: 2.8, delay: 0.4 }, // Directors ← ICP Study (left mid)
-  { id: "e9-203",  from: 9,  to: 203, dur: 2.8, delay: 0.5 }, // Founders ← Registrants (right mid-low)
+  { id: "e5-202",  from: 5,  to: 202, dur: 2.8, delay: 0.4 }, // Directors ← SMS (upper-left)
+  { id: "e8-203",  from: 8,  to: 203, dur: 2.8, delay: 0.5 }, // Founders ← Reminders (upper-right)
   // Top arc chain
   { id: "e1-2",    from: 1,  to: 2,   dur: 3.5, delay: 0    },
   { id: "e2-3",    from: 2,  to: 3,   dur: 3.0, delay: 0.4  },
@@ -98,18 +98,18 @@ const dotEdgeIds = new Set([
   "e1-5", "e5-6", "e6-7", "e7-11",
   "e4-8", "e8-9", "e9-10", "e10-14",
   "e11-12", "e12-13", "e13-14",
-  "e2-201", "e1-202", "e9-203",
+  "e2-201", "e5-202", "e8-203",
 ]);
 // Out-of-bounds ghost nodes for outgoing web lines
 const outNodes: Node[] = [
-  { id: 1002, x: -60,  y: 450, label: '', iconId: '', r: 0, colorClass: 'primary'   },
-  { id: 1004, x: 1480, y: 300, label: '', iconId: '', r: 0, colorClass: 'secondary'  },
-  { id: 1005, x: 1500, y: 440, label: '', iconId: '', r: 0, colorClass: 'primary'   },
-  { id: 1009, x: 1220, y: 30,  label: '', iconId: '', r: 0, colorClass: 'accent'    },
-  { id: 1010, x: 1330, y: 200, label: '', iconId: '', r: 0, colorClass: 'accent'    },
-  { id: 1011, x: 1430, y: 660, label: '', iconId: '', r: 0, colorClass: 'accent'    },
-  { id: 1013, x: 1140, y: 920, label: '', iconId: '', r: 0, colorClass: 'primary'   },
-  { id: 1015, x: 90,   y: 820, label: '', iconId: '', r: 0, colorClass: 'secondary'  },
+  { id: 1002, x: -60,  y: 480, label: '', iconId: '', r: 0, colorClass: 'primary'   }, // off left (from Automation)
+  { id: 1004, x: 1500, y: 320, label: '', iconId: '', r: 0, colorClass: 'secondary'  }, // off right (from Reminders)
+  { id: 1005, x: 1500, y: 500, label: '', iconId: '', r: 0, colorClass: 'primary'   }, // off right (from Registrants)
+  { id: 1009, x: 1380, y: 20,  label: '', iconId: '', r: 0, colorClass: 'accent'    }, // off top-right (from Ads)
+  { id: 1010, x: 1480, y: 180, label: '', iconId: '', r: 0, colorClass: 'accent'    }, // off right (from Ads)
+  { id: 1011, x: 1480, y: 670, label: '', iconId: '', r: 0, colorClass: 'accent'    }, // off right (from Landing Page)
+  { id: 1013, x: 1300, y: 940, label: '', iconId: '', r: 0, colorClass: 'primary'   }, // off bottom (from Retargeting)
+  { id: 1015, x: 60,   y: 860, label: '', iconId: '', r: 0, colorClass: 'secondary'  }, // off bottom-left (from Posts)
 ];
 
 const nodeMap = Object.fromEntries([...nodes, ...outNodes].map(n => [n.id, n]));

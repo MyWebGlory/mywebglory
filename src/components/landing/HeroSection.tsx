@@ -57,7 +57,7 @@ const HeroSection = () => {
   useEffect(() => {
     if (typeof window === 'undefined') return; // SSR guard
     
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: number;
     let isFirstShow = true;
     const showNotification = () => {
       setShowBookingNotif(true);
@@ -198,7 +198,8 @@ const HeroSection = () => {
         </div>
         
         <motion.p 
-          className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 sm:mb-8 px-2"
+          className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-[660px] mx-auto mb-6 sm:mb-8 px-2 text-center leading-snug"
+          style={{ wordBreak: 'break-word' }}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
@@ -391,27 +392,7 @@ const HeroSection = () => {
         </div>
       </div>
       
-      {/* FOMO Elements Container - positioned above the viewing widget */}
-      <div className="fixed bottom-20 left-4 z-50 flex flex-col gap-2">
-        {/* Booking Notification */}
-        {showBookingNotif && (
-          <motion.div
-            initial={{ opacity: 0, x: -100, scale: 0.8 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <div className="flex items-center gap-3 px-4 py-3 rounded-xl backdrop-blur-md bg-background/90 border border-border/50 shadow-xl">
-              <span className="text-xl">🎉</span>
-              <div className="flex flex-col">
-                <span className="text-sm font-medium text-foreground">Someone just booked a call</span>
-                <span className="text-xs text-muted-foreground">A few seconds ago</span>
-              </div>
-            </div>
-          </motion.div>
-        )}
-        
-      </div>
+      {/* ...existing code... */}
       
     </section>
   );

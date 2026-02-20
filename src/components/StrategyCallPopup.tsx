@@ -7,6 +7,39 @@ const StrategyCallPopup = () => {
   const [isDismissed, setIsDismissed] = useState(false);
   const hasTriggered = useRef(false);
   const lastScrollY = useRef(0);
+  const CALENDLY_URL = "https://calendly.com/gabriel-ageron/mywebglory?hide_gdpr_banner=1&background_color=0a0a0a&text_color=ffffff&primary_color=f97316";
+
+  // Single persisted iframe – created once, moved between containers
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const preloadSlotRef = useRef<HTMLDivElement>(null);
+  const popupSlotRef = useRef<HTMLDivElement>(null);
+
+  // Create the iframe once on mount and park it in the hidden preload slot
+  useEffect(() => {
+    const iframe = document.createElement('iframe');
+    iframe.src = CALENDLY_URL;
+    iframe.setAttribute('width', '100%');
+    iframe.setAttribute('height', '400');
+    iframe.setAttribute('frameBorder', '0');
+    iframe.setAttribute('title', 'Schedule a call');
+    iframe.className = 'w-full rounded-xl min-h-[350px]';
+    iframe.style.display = 'block';
+    iframeRef.current = iframe;
+    preloadSlotRef.current?.appendChild(iframe);
+    return () => { iframe.remove(); };
+  }, []);
+
+  // Move the iframe into the popup slot when visible, back to preload when hidden
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+    if (isVisible && popupSlotRef.current) {
+      popupSlotRef.current.appendChild(iframe);
+    } else if (!isVisible && preloadSlotRef.current) {
+      preloadSlotRef.current.appendChild(iframe);
+    }
+  }, [isVisible]);
+
   const showPopup = () => {
     if (!hasTriggered.current && !isDismissed) {
       console.log("🚀 POPUP TRIGGERED!");
@@ -72,8 +105,16 @@ const StrategyCallPopup = () => {
     setIsDismissed(true);
     sessionStorage.setItem("popup-dismissed", "true");
   };
-  if (isDismissed || !isVisible) return null;
-  return <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 py-8">
+  return <>
+      {/* Hidden preload slot – iframe lives here until popup opens */}
+      <div
+        ref={preloadSlotRef}
+        aria-hidden="true"
+        style={{ position: 'fixed', left: -9999, top: -9999, width: 1, height: 1, overflow: 'hidden', pointerEvents: 'none', opacity: 0 }}
+      />
+
+      {/* Popup modal - only shown when triggered */}
+      {isVisible && !isDismissed && <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 py-8">
       {/* Backdrop */}
       <div className="absolute inset-0 bg-background/80 backdrop-blur-sm animate-fade-in" onClick={handleDismiss} />
       
@@ -83,7 +124,6 @@ const StrategyCallPopup = () => {
         <button onClick={handleDismiss} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors z-20 bg-card/80 backdrop-blur-sm rounded-full p-1.5 hover:bg-muted">
           <X className="w-5 h-5" />
         </button>
-        
         {/* Header */}
         <div className="p-4 pb-3 text-center border-b border-border shrink-0">
           <p className="text-primary font-medium mb-1 text-sm">⚡ Special Offer For You...</p>
@@ -96,12 +136,10 @@ const StrategyCallPopup = () => {
             🎯 Free 30-min strategy call • 🔥 Limited spots this week
           </p>
         </div>
-
-        {/* Calendly Embed - scrollable */}
+        {/* Calendly Embed slot – iframe is moved here from preload when popup opens */}
         <div className="p-2 flex-1 min-h-0 overflow-auto">
-          <iframe src="https://calendly.com/gabriel-ageron/mywebglory?hide_gdpr_banner=1&background_color=0a0a0a&text_color=ffffff&primary_color=f97316" width="100%" height="400" frameBorder="0" title="Schedule a call" className="w-full rounded-xl min-h-[350px]" />
+          <div ref={popupSlotRef} style={{ width: '100%' }} />
         </div>
-
         {/* Footer */}
         <div className="p-3 border-t border-border text-center shrink-0">
           <Button asChild variant="ghost" size="sm" className="text-muted-foreground">
@@ -111,6 +149,7 @@ const StrategyCallPopup = () => {
           </Button>
         </div>
       </div>
-    </div>;
+    </div>}
+  </>;
 };
 export default StrategyCallPopup;
