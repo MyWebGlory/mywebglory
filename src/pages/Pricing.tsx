@@ -444,7 +444,7 @@ const Pricing = () => {
               Think <span className="text-primary">Investment</span>, Not Expense
             </h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              A $25,000 investment that generates 10+ new clients paying $5,000-$50,000 each isn't a cost, 
+              A $25,000 investment that generates 60+ new clients paying $5,000-$50,000 each isn't a cost, 
               <span className="text-foreground font-medium"> it's a 10x-20x return engine</span>. 
               <span className="text-primary font-medium"> While others experiment, you execute.</span> Plus, every event builds retargetable audiences, email lists, and brand authority that compound for years.
             </p>
