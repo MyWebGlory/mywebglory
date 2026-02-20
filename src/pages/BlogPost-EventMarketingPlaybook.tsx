@@ -113,7 +113,7 @@ const staggerContainer = {
 
 const tableOfContents = [
   { id: "introduction", label: "Introduction" },
-  { id: "what-is-event-marketing", label: "What is Event Marketing?" },
+  { id: "what-is-event-marketing", label: "Why Market My Event?" },
   { id: "event-marketing-funnel", label: "The Event Marketing Funnel" },
   { id: "planning-your-event", label: "Planning Your Event" },
   { id: "promoting-your-event", label: "Promoting Your Event" },

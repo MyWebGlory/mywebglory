@@ -157,6 +157,25 @@ import rxvpVideoCall from "@/assets/case-studies/rxvp/video-call-with-client.png
 import rxvpLogo from "@/assets/case-studies/rxvp/rxvp-logo.png";
 import rxvpTemplateInviteVideo from "@/assets/case-studies/rxvp/template-invite-video.mp4"
 
+// Import CBHN assets
+import cbhnLogo from "@/assets/case-studies/cbhn/cbhn-square.png";
+import cbhnLandingPage from "@/assets/case-studies/cbhn/landing-page.jpeg";
+import cbhnSocialMediaFlyer from "@/assets/case-studies/cbhn/social-media-flyer.png";
+import cbhnSquareAlt from "@/assets/case-studies/cbhn/cbhn-square-alt.png";
+import cbhnEarlyBird from "@/assets/case-studies/cbhn/early-bird-countdown.png";
+import cbhnRegistrationOpen from "@/assets/case-studies/cbhn/registration-open.png";
+import cbhnSponsorTemplate from "@/assets/case-studies/cbhn/sponsor-recognition-template.png";
+import cbhnTinaArmstrong from "@/assets/case-studies/cbhn/tina-armstrong.png";
+
+// RxVP Attendee Logos
+import logoAverita from "@/assets/case-studies/rxvp/attendee-logos/averitas.png";
+import logoBMGF from "@/assets/case-studies/rxvp/attendee-logos/bill-and-melinda-gates-foundation.png";
+import logoBMS from "@/assets/case-studies/rxvp/attendee-logos/bristol-myers-squibb.png";
+import logoFortrea from "@/assets/case-studies/rxvp/attendee-logos/fortrea.png";
+import logoMerck from "@/assets/case-studies/rxvp/attendee-logos/merck.png";
+import logoOneWeReach from "@/assets/case-studies/rxvp/attendee-logos/one-we-reach.png";
+import logoSandos from "@/assets/case-studies/rxvp/attendee-logos/sandos.png";
+
 // Types
 interface SlideContent {
   title: string;
@@ -173,6 +192,11 @@ interface ResultMetric {
   icon?: React.ElementType;
 }
 
+interface AttendeeLogoEntry {
+  src: string;
+  alt: string;
+}
+
 interface CaseStudyData {
   id: string;
   clientName: string;
@@ -181,6 +205,7 @@ interface CaseStudyData {
   offerChosen: string;
   duration: string;
   boldOutcome: string;
+  attendeeLogos?: AttendeeLogoEntry[];
   slides: {
     context: SlideContent;
     challenge: SlideContent;
@@ -326,6 +351,15 @@ const rxvpCaseStudy: CaseStudyData = {
   clientName: "RxVP",
   clientLogo: rxvpLogo,
   industry: "Life Sciences / Speakers Bureau",
+  attendeeLogos: [
+    { src: logoBMGF, alt: "Bill & Melinda Gates Foundation" },
+    { src: logoBMS, alt: "Bristol Myers Squibb" },
+    { src: logoMerck, alt: "Merck" },
+    { src: logoFortrea, alt: "Fortrea" },
+    { src: logoAverita, alt: "Averitas" },
+    { src: logoOneWeReach, alt: "One We Reach" },
+    { src: logoSandos, alt: "Sandos" },
+  ],
   offerChosen: "Event Launch - $9k",
   duration: "6 weeks (Jan-Mar 2026)",
   boldOutcome: "5,000+ registrations. World-record-scale IWD event launched from zero.",
@@ -441,10 +475,124 @@ const rxvpCaseStudy: CaseStudyData = {
   }
 };
 
+// CBHN Virtual Behavioral and Mental Health Conference Case Study
+const cbhnCaseStudy: CaseStudyData = {
+  id: "cbhn-mental-health-conference",
+  clientName: "California Black Health Network",
+  clientLogo: cbhnLogo,
+  industry: "Public Health / Nonprofit",
+  offerChosen: "Event Launch - $9k",
+  duration: "8 weeks (Mar-May 2026)",
+  boldOutcome: "Full event launch system built from zero, sponsorship package, landing page, 12 social posts, and branded flyers for a mission-critical mental health conference.",
+  slides: {
+    context: {
+      title: "Context",
+      points: [
+        "California Black Health Network (CBHN) is a statewide nonprofit dedicated to improving the health and wellness of Black Californians.",
+        "Their 2026 initiative: a Virtual Behavioral and Mental Health Conference, 'Hidden Crises: Stress, Mental Health & Brain Health in the Black Community', a first-of-its-kind event tackling toxic stress, rising suicide rates among Black men and boys, and Alzheimer's disparities.",
+        "The event would bring together behavioral health professionals, policymakers, community members, and lived-experience advocates on May 13, 2026.",
+        "Keynote speakers included Rhonda Smith (CBHN Executive Director), Dr. Curley Bonds (Chief Medical Officer, LA County Dept. of Mental Health), and Dr. Le Ondra Clark Harvey (CEO, California Behavioral Health Association).",
+        "CBHN needed a complete event marketing system: from brand identity and sponsorship materials, to landing page, social content, and email campaigns, all delivered with cultural sensitivity and professional authority."
+      ],
+      image: cbhnLandingPage,
+      imageAlt: "CBHN Virtual Mental Health Conference Landing Page"
+    },
+    challenge: {
+      title: "The Challenge",
+      points: [
+        "Mental health in the Black community is deeply underserved, and so is its marketing. Generic event promotion wouldn't land.",
+        "CBHN needed materials that felt culturally resonant, authoritative, and urgency-driven, without stigmatizing the very audience they serve.",
+        "Multiple audience segments required different messaging: behavioral health professionals, policymakers, community advocates, researchers, and individuals with lived experience.",
+        "The event also needed to attract sponsors and external partners, requiring a custom, high-end sponsorship package PDF with tiered offerings and an embedded contact form.",
+        "Timeline: 8 weeks to deliver a full launch system, from scratch, while CBHN managed speakers, CEU accreditation, and registrations simultaneously."
+      ]
+    },
+    strategy: {
+      title: "The Strategy",
+      points: [
+        "Messaging first, deep alignment with CBHN's mission and the raw urgency of the issues: toxic stress, suicide among Black men, cognitive decline, and the connection between them.",
+        "Authority positioning, leveraging world-class speakers (LA County Dept. of Mental Health, CBHA) to legitimize the event and drive professional registrations.",
+        "Multi-tier registration strategy, $50 early bird to $115 CEU package, designed to maximize revenue and professional development uptake.",
+        "Sponsorship-as-partnership, custom branded PDF framing sponsorship as community investment, not just brand placement, with tiered recognition and embedded inquiry form.",
+        "Organic-first social media, 12 posts across awareness, urgency, speaker spotlights, and early bird countdowns targeting LinkedIn, Instagram, and Facebook.",
+        "Email reminders sequenced through key milestones: launch announcement, early bird deadline, speaker reveals, final countdown, and day-of logistics."
+      ],
+      image: cbhnTinaArmstrong,
+      imageAlt: "Dr. Tina Houston Armstrong, Workshop Speaker on Toxic Stress"
+    },
+    system: {
+      title: "The System",
+      points: [
+        "High-converting branded landing page with full agenda, speaker bios, tiered registration fees, and culturally resonant design.",
+        "Custom branded sponsorship package PDF, full event description, sponsor tier benefits (Bronze, Silver, Gold), audience demographics, and embedded contact form.",
+        "12 social media posts, crafted across 4 content themes: mission awareness, speaker spotlights, early bird urgency, and registration open announcements.",
+        "4 premium graphic designs, event flyer, social square, early bird countdown graphic, and sponsor recognition template.",
+        "Email reminder campaign, sequenced send plan covering pre-launch, early bird close, and final countdown touchpoints.",
+        "Full program documentation, speaker bios, session descriptions, agenda structure, and CEU details formatted for professional communications."
+      ]
+    },
+    execution: {
+      title: "Execution",
+      points: [
+        "Landing page design, fully branded conference page with agenda, speaker lineup, registration tiers, and conversion-focused layout.",
+        "Sponsorship package PDF, custom branded document with full program overview, tiered sponsor benefits, contact form, and professional design reflecting CBHN's authority.",
+        "Event flyer, premium print-ready and digital flyer featuring key speakers, date, and registration details.",
+        "Social media content, 12 posts across 4 strategic themes with post copy, hashtags, and scheduling calendar.",
+        "4 custom graphic designs, social square, early bird countdown, registration announcement, and sponsor recognition template.",
+        "Email reminder sequence, launch, early bird deadline, speaker spotlight, and final week reminders."
+      ],
+      images: [cbhnSocialMediaFlyer, cbhnSquareAlt, cbhnEarlyBird, cbhnRegistrationOpen, cbhnSponsorTemplate]
+    },
+    results: {
+      metrics: [
+        { label: "Social Posts Created", value: "12", icon: Target },
+        { label: "Graphic Designs", value: "4", icon: Award },
+        { label: "Email Sequences", value: "5+", icon: Mail },
+        { label: "Sponsor Package", value: "Custom", icon: Building2 },
+        { label: "Landing Page", value: "Live", icon: Globe },
+        { label: "Event Flyer", value: "Done", icon: Rocket },
+        { label: "Speaker Spotlights", value: "6", icon: Users },
+        { label: "Registration Tiers", value: "4", icon: Calendar }
+      ],
+      highlights: [
+        "Complete event marketing system delivered in 8 weeks, from zero assets to a fully operational launch machine.",
+        "Custom branded sponsorship package with embedded contact form, designed to attract nonprofit and healthcare sponsors.",
+        "4-tier registration strategy ($50–$115) maximizing revenue potential while making the event accessible to underserved professionals.",
+        "Culturally responsive messaging across all assets, speaking directly to Black behavioral health professionals, policymakers, and community advocates.",
+        "Speaker-led authority content featuring LA County Dept. of Mental Health CMO and California Behavioral Health Association CEO."
+      ]
+    },
+    longTermImpact: {
+      title: "Long-term Impact",
+      points: [
+        "CBHN now has a reusable event marketing playbook, every asset, template, and system built for this conference scales to future events.",
+        "The branded sponsorship package establishes a new revenue stream for the organization through corporate and institutional partnerships.",
+        "CEU-accredited sessions attract repeat professional attendees, building a qualified B2B mailing list for future programming.",
+        "Social content library and graphic templates reduce production time and cost for future CBHN events significantly.",
+        "Conference recording and session clips create a post-event content library for year-round community education and authority building."
+      ]
+    },
+    takeaway: {
+      insights: [
+        "Mission-driven events require more than promotion, they require messaging that respects lived experience while driving professional credibility.",
+        "A custom sponsorship package isn't a nice-to-have. For nonprofits, it's the difference between self-funded events and fully-sponsored programs.",
+        "Multi-tier registration with CEU options doubled the event's professional appeal and revenue potential without increasing the core marketing budget.",
+        "When your speakers carry institutional authority, LA County DMH, CBHA, the content does half the selling. The system just needed to amplify it."
+      ],
+      clientComments: []
+    },
+    cta: {
+      headline: "Ready to Build Your Event Marketing System?",
+      subtext: "Whether you're a nonprofit, healthcare org, or enterprise, if your event matters, we'll make sure the right people show up."
+    }
+  }
+};
+
 // All case studies
 const caseStudies: CaseStudyData[] = [
   kornitCaseStudy,
-  rxvpCaseStudy
+  rxvpCaseStudy,
+  cbhnCaseStudy
 ];
 
 // Slide icon mapping
@@ -457,6 +605,7 @@ const slideIcons = {
   results: TrendingUp,
   longTermImpact: Award,
   takeaway: Lightbulb,
+  attendees: Users,
   cta: Sparkles
 };
 
@@ -695,6 +844,37 @@ const StorySlide = ({
       return <TwoColumnLayout textContent={textPart} mediaContent={mediaPart} />;
     }
 
+    if (type === 'attendees') {
+      const logos = caseStudy.attendeeLogos || [];
+      return (
+        <div className="space-y-4">
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            These are some of the companies that purchased corporate seats and sent their employees to the event. Each received custom-branded video invitations and personalized onboarding.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            {logos.map((logo, idx) => {
+              const isOneWeReach = logo.alt.toLowerCase().includes("one we reach");
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: idx * 0.05 }}
+                  className={`border border-border/50 rounded-xl p-3 flex items-center justify-center h-16 ${isOneWeReach ? "bg-transparent" : "bg-white"}`}
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+
     if (type === 'cta') {
       const ctaContent = content as CaseStudyData['slides']['cta'];
       return (
@@ -792,6 +972,7 @@ const StorySlide = ({
     if (type === 'results') return 'Results';
     if (type === 'takeaway') return 'Key Takeaway';
     if (type === 'longTermImpact') return 'Long-term Impact';
+    if (type === 'attendees') return 'Founding Companies';
     if (type === 'cta') return 'Next Steps';
     return (content as SlideContent).title;
   };
@@ -824,7 +1005,9 @@ const HorizontalStoryBand = ({ caseStudy }: { caseStudy: CaseStudyData }) => {
   
   const slideTypes: (keyof typeof slideIcons)[] = [
     'context', 'challenge', 'strategy', 'system', 
-    'execution', 'results', 'longTermImpact', 'takeaway', 'cta'
+    'execution', 'results', 'longTermImpact', 'takeaway',
+    ...(caseStudy.attendeeLogos && caseStudy.attendeeLogos.length > 0 ? ['attendees' as const] : []),
+    'cta'
   ];
   
   useEffect(() => {
@@ -857,7 +1040,7 @@ const HorizontalStoryBand = ({ caseStudy }: { caseStudy: CaseStudyData }) => {
                 <StorySlide
                   slideNumber={index + 1}
                   type={type}
-                  content={caseStudy.slides[type]}
+                  content={type === 'attendees' ? { title: 'Founding Companies', points: [] } : caseStudy.slides[type as keyof typeof caseStudy.slides]}
                   caseStudy={caseStudy}
                 />
               </div>

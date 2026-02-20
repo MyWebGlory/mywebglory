@@ -30,7 +30,7 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { label: "What's Event Marketing?", href: "/event-marketing" },
+    { label: "Why Market My Event?", href: "/event-marketing" },
     { label: "How We Work", href: "/how-it-works" },
     { label: "Pricing", href: "/pricing" },
     { label: "Case Studies", href: "/case-studies" },
@@ -125,7 +125,20 @@ const Navbar = () => {
           <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-lg border-b border-border animate-fade-in">
             <div className="container px-4 py-6 flex flex-col gap-2">
               <div className="pb-2 mb-2 border-b border-border">
-                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Navigate</span>
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Main</span>
+              </div>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-base text-muted-foreground hover:text-foreground transition-colors py-2"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="pb-2 mb-2 mt-4 border-b border-border">
+                <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">More</span>
               </div>
               {allPages.map((page) => (
                 <Link

@@ -28,7 +28,7 @@ const WhatsAppWidget = () => {
       aria-label="Chat on WhatsApp"
     >
       <img src={whatsappIcon} alt="WhatsApp" className="w-5 h-5" />
-      <span>Send a WhatsApp</span>
+      <span>Chat on WhatsApp</span>
     </a>
   );
 };

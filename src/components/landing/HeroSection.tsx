@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import avatarsSocialProof from "@/assets/avatars-social-proof.png";
+import NetworkBackground from "./NetworkBackground";
 
 // Animated counter hook
 const useCounter = (end: number, duration: number = 2000, delay: number = 0) => {
@@ -29,8 +30,8 @@ const useCounter = (end: number, duration: number = 2000, delay: number = 0) => 
 };
 
 const HeroSection = () => {
-  const eventsCount = useCounter(150, 2000, 1500);
-  const attendeesCount = useCounter(50, 2000, 1700);
+  const eventsCount = useCounter(50, 2000, 1500);
+  const attendeesCount = useCounter(40, 2000, 1700);
   const showRate = useCounter(60, 2000, 1900);
 
   // Booking notification state
@@ -98,7 +99,13 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative overflow-hidden">
+      <style>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+      `}</style>
       {/* Enhanced Background Effects */}
       <div className="absolute inset-0 bg-gradient-radial" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.2)_0%,transparent_50%)]" />
@@ -135,140 +142,14 @@ const HeroSection = () => {
       
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
-      
-      {/* Network Connection Lines */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-20">
-        <motion.line 
-          x1="12%" y1="18%" x2="88%" y2="25%" 
-          stroke="url(#lineGradient)" 
-          strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 2, delay: 1 }}
-        />
-        <motion.line 
-          x1="8%" y1="55%" x2="90%" y2="40%" 
-          stroke="url(#lineGradient)" 
-          strokeWidth="1"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{ duration: 2, delay: 1.5 }}
-        />
-        <defs>
-          <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-            <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-      </svg>
-      
-      {/* Floating Elements with Framer Motion */}
-      <motion.div 
-        className="absolute top-[12%] left-[8%] opacity-20"
-        animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      >
-        <div className="w-12 h-12 rounded-xl bg-primary/30 backdrop-blur-sm border border-primary/20 flex items-center justify-center">
-          <div className="w-0 h-0 border-t-[6px] border-t-transparent border-l-[10px] border-l-primary/60 border-b-[6px] border-b-transparent ml-1" />
+
+      {/* ── ABOVE-FOLD PANEL: exactly viewport height, content nudged slightly below center ── */}
+      <div className="relative z-10 h-screen min-h-[640px] flex flex-col items-center justify-center pt-14 sm:pt-16 overflow-hidden">
+        {/* Interconnected System Network — scoped to this panel so viewBox maps 1:1 to viewport */}
+        <div className="absolute inset-0 opacity-55 pointer-events-none">
+          <NetworkBackground />
         </div>
-      </motion.div>
-      
-      <motion.div 
-        className="absolute top-[15%] right-[6%] opacity-15"
-        animate={{ y: [0, 10, 0], rotate: [0, -3, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-      >
-        <div className="w-14 h-10 rounded-lg bg-secondary/30 backdrop-blur-sm border border-secondary/20 flex items-center justify-center gap-1">
-          <motion.div 
-            className="w-1.5 h-1.5 rounded-full bg-secondary/60"
-            animate={{ scale: [1, 1.5, 1] }}
-            transition={{ duration: 1, repeat: Infinity, delay: 0 }}
-          />
-          <motion.div 
-            className="w-1.5 h-1.5 rounded-full bg-secondary/60"
-            animate={{ scale: [1, 1.5, 1] }}
-            transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-          />
-          <motion.div 
-            className="w-1.5 h-1.5 rounded-full bg-secondary/60"
-            animate={{ scale: [1, 1.5, 1] }}
-            transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-          />
-        </div>
-      </motion.div>
-      
-      <motion.div 
-        className="absolute bottom-[18%] left-[5%] opacity-20"
-        animate={{ y: [0, -20, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-      >
-        <div className="w-16 h-12 rounded-lg bg-accent/20 backdrop-blur-sm border border-accent/15 flex items-center justify-center">
-          <div className="w-8 h-5 rounded border border-accent/40 flex items-center justify-center">
-            <div className="w-3 h-3 border-t-2 border-r-2 border-accent/50 rotate-[-45deg]" />
-          </div>
-        </div>
-      </motion.div>
-      
-      <motion.div 
-        className="absolute bottom-[22%] right-[7%] opacity-15"
-        animate={{ y: [0, 15, 0], scale: [1, 1.05, 1] }}
-        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1.5 }}
-      >
-        <div className="grid grid-cols-2 gap-1 p-2 rounded-lg bg-primary/20 backdrop-blur-sm border border-primary/15">
-          <div className="w-4 h-4 rounded bg-primary/30" />
-          <div className="w-4 h-4 rounded bg-primary/40" />
-          <div className="w-4 h-4 rounded bg-primary/35" />
-          <div className="w-4 h-4 rounded bg-primary/25" />
-        </div>
-      </motion.div>
-      
-      <motion.div 
-        className="absolute top-[45%] left-[3%] opacity-15"
-        animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-      >
-        <div className="w-8 h-12 flex flex-col items-center">
-          <div className="w-6 h-8 rounded-t-full bg-secondary/30 border border-secondary/20" />
-          <div className="w-2 h-3 bg-secondary/25" />
-          <div className="w-6 h-1 rounded-full bg-secondary/20" />
-        </div>
-      </motion.div>
-      
-      <motion.div 
-        className="absolute top-[50%] right-[4%] opacity-20"
-        animate={{ y: [0, -12, 0], rotate: [0, 3, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 4 }}
-      >
-        <div className="w-10 h-12 rounded-lg bg-accent/25 backdrop-blur-sm border border-accent/20 flex flex-col">
-          <div className="h-3 bg-accent/30 rounded-t-lg" />
-          <div className="flex-1 p-1 grid grid-cols-3 gap-0.5">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-sm bg-accent/40" />
-            ))}
-          </div>
-        </div>
-      </motion.div>
-      
-      {/* Animated Particles */}
-      <motion.div 
-        className="absolute top-[20%] left-[25%] w-2 h-2 bg-primary/40 rounded-full"
-        animate={{ 
-          scale: [1, 2, 1],
-          opacity: [0.4, 0.8, 0.4],
-        }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
-      <motion.div 
-        className="absolute bottom-[35%] right-[20%] w-1.5 h-1.5 bg-secondary/40 rounded-full"
-        animate={{ 
-          scale: [1, 2.5, 1],
-          opacity: [0.4, 1, 0.4],
-        }}
-        transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-      />
-      
-      <div className="container relative z-10 px-4 sm:px-6 text-center pt-20 md:pt-0">
+      <div className="container relative z-10 px-4 sm:px-6 text-center">
         {/* Live Badge */}
         <motion.div 
           className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6"
@@ -322,7 +203,7 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          We market premium events that attract only your ideal clients, generate high-quality leads, and make your brand the one everyone talks about.
+          We build complete virtual event marketing systems that attract only your ideal clients and make your brand the talk of your industry.
         </motion.p>
         
         {/* Social Proof Bar */}
@@ -372,7 +253,7 @@ const HeroSection = () => {
           {/* Event Marketing Button (Left) */}
           <Button asChild size="lg" variant="outline" className="group border-primary/50 hover:bg-primary/10 px-4 sm:px-6 py-5 sm:py-6 text-sm sm:text-base w-full sm:w-auto">
             <Link to="/event-marketing">
-              What is Event Marketing?
+              Why Market My Event?
               <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
@@ -386,7 +267,7 @@ const HeroSection = () => {
             />
             <Button asChild size="lg" className="relative group bg-primary hover:bg-primary/90 text-primary-foreground px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto">
               <Link to="/contact">
-                Apply for a Free Strategy Call
+                I Book a Free Strategy Call
                 <ArrowRight className="ml-2 w-4 sm:w-5 h-4 sm:h-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
@@ -436,25 +317,78 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Scarcity Badge */}
+        {/* Scroll Indicator — inline, just below stats */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
-          className="flex justify-center"
+          className="flex justify-center mt-5 sm:mt-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, 10, 0] }}
+          transition={{
+            opacity: { delay: 2, duration: 0.5 },
+            y: { delay: 2, duration: 1.5, repeat: Infinity }
+          }}
         >
-          <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/50 bg-primary/10 backdrop-blur-sm">
+          <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
             <motion.div
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
-            </motion.div>
-            <span className="text-xs sm:text-sm font-medium">
-              Limited to <span className="text-primary font-bold">4 clients</span> per month
-            </span>
+              className="w-1 h-2 bg-muted-foreground/50 rounded-full"
+              animate={{ y: [0, 6, 0], opacity: [1, 0.3, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
           </div>
         </motion.div>
+
+      </div>
+      </div>{/* end above-fold panel */}
+
+      {/* ── BELOW-FOLD PANEL: logos + scarcity badge ── */}
+      <div className="relative z-10 py-14 sm:py-20">
+        <div className="container px-4 sm:px-6">
+
+          {/* Client Logo Slider */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+            className="w-full pb-2 sm:pb-4"
+          >
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-muted-foreground/50 text-center mb-5 font-medium">
+              Brands that trust us to fill their events
+            </p>
+            <div className="relative overflow-hidden">
+              <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none" />
+              <div className="flex items-center" style={{ animation: 'marquee 60s linear infinite', width: 'max-content' }}>
+                {[...Array(8)].map((_, i) => (
+                  <div key={i} className="flex items-center gap-16 sm:gap-24 px-8 sm:px-12 shrink-0">
+                    <img src="/images/client-logos/kornit-digital.png" alt="Kornit Digital" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" />
+                    <img src="/images/client-logos/konnections.png" alt="Kornit Konnections" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" />
+                    <img src="/images/client-logos/rxvp-logo.png" alt="RXVP" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" />
+                    <img src="/images/client-logos/bill-and-melinda-gates-foundation.png" alt="Bill & Melinda Gates Foundation" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" />
+                    <img src="/images/client-logos/cbhn-white.png" alt="CBHN" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Scarcity Badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex justify-center mt-6 sm:mt-8"
+          >
+            <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/50 bg-primary/10 backdrop-blur-sm">
+              <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>
+                <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+              </motion.div>
+              <span className="text-xs sm:text-sm font-medium">
+                Limited to <span className="text-primary font-bold">4 clients</span> per month
+              </span>
+            </div>
+          </motion.div>
+
+        </div>
       </div>
       
       {/* FOMO Elements Container - positioned above the viewing widget */}
@@ -479,24 +413,6 @@ const HeroSection = () => {
         
       </div>
       
-      {/* Scroll Indicator */}
-      <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 10, 0] }}
-        transition={{ 
-          opacity: { delay: 2, duration: 0.5 },
-          y: { delay: 2, duration: 1.5, repeat: Infinity }
-        }}
-      >
-        <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
-          <motion.div 
-            className="w-1 h-2 bg-muted-foreground/50 rounded-full"
-            animate={{ y: [0, 6, 0], opacity: [1, 0.3, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          />
-        </div>
-      </motion.div>
     </section>
   );
 };

@@ -192,7 +192,7 @@ const BlogPostUltimateGuideEventMarketing = () => {
                 </div>
                 <ol className="grid md:grid-cols-2 gap-2 text-sm">
                   {[
-                    { id: "what-is-event-marketing", label: "What is Event Marketing?" },
+                    { id: "what-is-event-marketing", label: "Why Market My Event?" },
                     { id: "why-event-marketing-works", label: "Why Event Marketing Works" },
                     { id: "how-to-plan", label: "How to Plan a High-Impact Event" },
                     { id: "event-promotion", label: "Event Promotion Strategies" },
