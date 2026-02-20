@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 
 // Viewbox dimensions
@@ -28,12 +29,12 @@ interface Edge {
 // Nodes orbit OUTSIDE this zone, between navbar (y≈80) and logos (y≈790)
 const nodes: Node[] = [
   // ── Top — staggered heights, not a clean arc ──
-  { id: 1,  x: 200,  y: 130, label: "ICP Study",    iconId: "icon-search",    r: 13, colorClass: "primary"   },
-  { id: 2,  x: 490,  y: 75,  label: "Creatives",    iconId: "icon-palette",   r: 12, colorClass: "secondary"  },
-  { id: 3,  x: 960,  y: 80,  label: "Outreach",     iconId: "icon-send",      r: 12, colorClass: "primary"   },
-  { id: 4,  x: 1250, y: 125, label: "Ads",          iconId: "icon-megaphone", r: 13, colorClass: "accent"    },
+  { id: 1,  x: 200,  y: 180, label: "ICP Study",    iconId: "icon-search",    r: 13, colorClass: "primary"   },
+  { id: 2,  x: 490,  y: 125, label: "Creatives",    iconId: "icon-palette",   r: 12, colorClass: "secondary"  },
+  { id: 3,  x: 960,  y: 130, label: "Outreach",     iconId: "icon-send",      r: 12, colorClass: "primary"   },
+  { id: 4,  x: 1250, y: 175, label: "Ads",          iconId: "icon-megaphone", r: 13, colorClass: "accent"    },
   // === ICP Persona nodes ===
-    { id: 201, x: 720,  y: 110, label: "CEOs",       iconId: "icon-crown",    r: 13, colorClass: "icp" }, // top center, lowered
+    { id: 201, x: 720,  y: 120, label: "CEOs",       iconId: "icon-crown",    r: 13, colorClass: "icp" }, // top center, moved up
     { id: 202, x: 220,  y: 340, label: "Directors",  iconId: "icon-user-tie", r: 12, colorClass: "icp" }, // left, closer to center
     { id: 203, x: 1220, y: 300, label: "Founders",   iconId: "icon-rocket",   r: 12, colorClass: "icp" }, // right, closer to center
   // ── Left side — varied x, not a straight column ──
@@ -135,10 +136,16 @@ const colorVars = {
   primary:   { fill: "rgba(109,40,217,0.18)", stroke: "rgba(139,92,246,0.55)", glow: "rgba(139,92,246,0.25)", dot: "#a78bfa" },
   secondary: { fill: "rgba(124,58,237,0.14)", stroke: "rgba(167,139,250,0.5)", glow: "rgba(167,139,250,0.2)", dot: "#c4b5fd" },
   accent:    { fill: "rgba(91,33,182,0.15)",  stroke: "rgba(196,181,253,0.4)", glow: "rgba(196,181,253,0.2)", dot: "#ddd6fe" },
-  icp:       { fill: "rgba(255,215,0,0.18)", stroke: "rgba(255,215,0,0.55)", glow: "rgba(255,215,0,0.25)", dot: "#ffe066" }, // gold/yellow
+  icp:       { fill: "rgba(255,215,0,0.18)", stroke: "rgba(255,215,0,0.55)", glow: "rgba(255,215,0,0.25)", dot: "#ffe066" },
 };
 
-export default function NetworkBackground() {
+// Pre-compute all path strings once at module level — avoids repeated trig per render
+const pathCache: Record<string, string> = {};
+for (const e of edges) {
+  pathCache[e.id] = getPathD(nodeMap[e.from], nodeMap[e.to]);
+}
+
+const NetworkBackground = memo(function NetworkBackground() {
   return (
     <svg
       className="absolute inset-0 w-full h-full pointer-events-none"
@@ -291,40 +298,31 @@ export default function NetworkBackground() {
           <circle cx="12" cy="12" r="2" />
         </symbol>
 
-        {/* Define path refs for animateMotion */}
-        {edges.map(e => {
-          const fromNode = nodeMap[e.from];
-          const toNode   = nodeMap[e.to];
-          return (
-            <path
-              key={`path-def-${e.id}`}
-              id={`path-${e.id}`}
-              d={getPathD(fromNode, toNode)}
-              fill="none"
-            />
-          );
-        })}
+        {/* Define path refs for animateMotion — uses pre-computed cache */}
+        {edges.map(e => (
+          <path
+            key={`path-def-${e.id}`}
+            id={`path-${e.id}`}
+            d={pathCache[e.id]}
+            fill="none"
+          />
+        ))}
       </defs>
 
-      {/* === Wires (edges) === */}
-      {edges.map((e, i) => {
-        const fromNode = nodeMap[e.from];
-        const toNode   = nodeMap[e.to];
-        const d = getPathD(fromNode, toNode);
-        return (
-          <motion.path
-            key={`wire-${e.id}`}
-            d={d}
-            fill="none"
-            stroke="url(#wireGrad)"
-            strokeWidth="0.8"
-            opacity={0.41}
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.41 }}
-            transition={{ duration: 1.6, delay: 0.4 + i * 0.08, ease: "easeOut" }}
-          />
-        );
-      })}
+      {/* === Wires (edges) — uses pre-computed path cache === */}
+      {edges.map((e, i) => (
+        <motion.path
+          key={`wire-${e.id}`}
+          d={pathCache[e.id]}
+          fill="none"
+          stroke="url(#wireGrad)"
+          strokeWidth="0.8"
+          opacity={0.41}
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 0.41 }}
+          transition={{ duration: 1.6, delay: 0.4 + i * 0.08, ease: "easeOut" }}
+        />
+      ))}
 
       {/* === Traveling dots — main structural edges only === */}
       {edges.filter(e => dotEdgeIds.has(e.id)).map(e => {
@@ -355,17 +353,18 @@ export default function NetworkBackground() {
             transition={{ duration: 0.6, delay: 0.8 + i * 0.1, ease: "backOut" }}
             style={{ transformOrigin: `${node.x}px ${node.y}px` }}
           >
-            {/* Outer pulse ring */}
-            <motion.circle
+            {/* Outer pulse ring — SMIL animation: GPU-only, no JS loop */}
+            <circle
               cx={node.x}
               cy={node.y}
-              r={node.r + 8}
+              r={node.r + 6}
               fill="none"
               stroke={c.glow}
               strokeWidth="0.7"
-              animate={{ r: [node.r + 6, node.r + 12, node.r + 6], opacity: [0.23, 0.0, 0.23] }}
-              transition={{ duration: 3.5 + i * 0.3, repeat: Infinity, ease: "easeInOut", delay: i * 0.4 }}
-            />
+            >
+              <animate attributeName="r" values={`${node.r + 6};${node.r + 12};${node.r + 6}`} dur={`${3.5 + i * 0.3}s`} begin={`${i * 0.4}s`} repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" />
+              <animate attributeName="opacity" values="0.23;0;0.23" dur={`${3.5 + i * 0.3}s`} begin={`${i * 0.4}s`} repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0.4 0 0.6 1" />
+            </circle>
             {/* Inner glow circle */}
             <circle
               cx={node.x}
@@ -415,4 +414,6 @@ export default function NetworkBackground() {
       })}
     </svg>
   );
-}
+});
+
+export default NetworkBackground;
