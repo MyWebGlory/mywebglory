@@ -106,39 +106,32 @@ const HeroSection = () => {
           100% { transform: translateX(-50%); }
         }
       `}</style>
-      {/* Enhanced Background Effects */}
-      <div className="absolute inset-0 bg-gradient-radial" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,hsl(var(--primary)/0.2)_0%,transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,hsl(var(--secondary)/0.15)_0%,transparent_50%)]" />
-      
-      {/* Animated Gradient Orbs */}
-      <motion.div 
-        className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl gpu-accelerated"
-        animate={{ 
-          y: [0, -30, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={{ transform: 'translateZ(0)' }}
-      />
-      <motion.div 
-        className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-secondary/20 rounded-full blur-3xl gpu-accelerated"
-        animate={{ 
-          y: [0, 20, 0],
-          scale: [1, 0.9, 1],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        style={{ transform: 'translateZ(0)' }}
-      />
-      <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/10 rounded-full blur-3xl gpu-accelerated"
-        animate={{ 
-          rotate: [0, 360],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        style={{ transform: 'translateZ(0)' }}
-      />
+      {/* Center-focused background: bright core, dark edges */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_50%_45%,hsl(var(--primary)/0.18)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_45%,transparent_40%,hsl(var(--background)/0.7)_100%)]" />
+
+      {/* Animated Gradient Orbs — all centered behind hero content */}
+      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <motion.div
+          className="w-[700px] h-[700px] bg-accent/10 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.2, 1], rotate: [0, 360] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
+      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <motion.div
+          className="w-[520px] h-[520px] bg-primary/25 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.15, 1] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+      <div className="absolute top-[40%] left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <motion.div
+          className="w-[340px] h-[340px] bg-secondary/20 rounded-full blur-3xl"
+          animate={{ scale: [1, 0.88, 1] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        />
+      </div>
       
       {/* Grid Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
