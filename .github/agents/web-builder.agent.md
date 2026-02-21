@@ -68,9 +68,9 @@ src/
 - Keep imports organized: React → third-party → local
 
 ### Performance
-- Lazy load routes with React.lazy()
+- **Do NOT use React.lazy() for page routes** — this project uses react-snap for SEO prerendering, and lazy loading prevents react-snap from capturing page content. Use eager imports for all pages in `src/routes.tsx`.
 - Optimize images (use appropriate formats and sizes)
-- Implement code splitting for large bundles
+- Implement code splitting for large bundles (non-page components only)
 - Minimize re-renders with proper memoization
 
 ### Accessibility

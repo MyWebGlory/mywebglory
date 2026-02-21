@@ -95,26 +95,48 @@ This project uses **react-snap** for build-time prerendering to solve the SPA SE
 | `src/components/SEO.tsx` | Central SEO component — sets title, description, OG, Twitter, JSON-LD via `react-helmet-async` |
 | `src/main.tsx` | Conditional hydration: `hydrateRoot()` if prerendered, `createRoot()` if not |
 | `src/routes.tsx` | **Eager imports only** — no `React.lazy()`. Lazy loading prevents react-snap from capturing content |
-| `package.json` → `"reactSnap"` | react-snap config: `skipThirdPartyRequests: true`, `concurrency: 1` (both critical — see below) |
+| `scripts/react-snap.cjs` | react-snap runner — all config lives here. Reads `PUPPETEER_EXECUTABLE_PATH` env var for CI (Linux), falls back to macOS Chrome path for local dev |
 | `index.html` | Minimal fallback only — no hardcoded JSON-LD, no OG tags. All head content managed per-page by SEO component |
 
-### react-snap Config (package.json)
+### react-snap Config (scripts/react-snap.cjs)
 
-```json
-"reactSnap": {
-  "source": "dist",
-  "inlineCss": true,
-  "skipThirdPartyRequests": true,
-  "concurrency": 1,
-  "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
-  "puppeteerExecutablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-}
+```js
+const { run } = require('react-snap');
+
+const defaultChromePath =
+  process.platform === 'darwin'
+    ? '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+    : '/usr/bin/google-chrome-stable';
+
+run({
+  source: 'dist',
+  inlineCss: true,
+  skipThirdPartyRequests: true,
+  concurrency: 1,
+  puppeteerArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
+  puppeteerExecutablePath: process.env.PUPPETEER_EXECUTABLE_PATH || defaultChromePath,
+});
 ```
 
 **Why these settings matter:**
 - `skipThirdPartyRequests: true` — blocks Calendly iframe from making network requests that prevent `networkidle0`, which would cause react-snap to capture the page before Helmet runs
 - `concurrency: 1` — renders pages sequentially. With higher concurrency, some pages were captured before `react-helmet-async` updated `<head>`, resulting in the default homepage title on all pages
-- `puppeteerExecutablePath` — points to system Chrome. react-snap's bundled Chromium is too old to parse modern JS (`?.` syntax throws)
+- `puppeteerExecutablePath` — reads from `PUPPETEER_EXECUTABLE_PATH` env var (set in CI) or falls back to system Chrome. react-snap's bundled Chromium is too old to parse modern JS (`?.` syntax throws)
+
+### GitHub Actions (deploy.yml)
+
+The workflow installs Chrome and passes its path via env var:
+```yaml
+- name: Install Google Chrome
+  run: |
+    sudo apt-get update
+    sudo apt-get install -y google-chrome-stable
+
+- name: Build
+  run: npm run build
+  env:
+    PUPPETEER_EXECUTABLE_PATH: /usr/bin/google-chrome-stable
+```
 
 ### SEO Component Usage Pattern
 

@@ -431,8 +431,7 @@ const rxvpCaseStudy: CaseStudyData = {
         "Landing page build, fully branded experience optimized for corporate registration and conveying world-record ambition.",
         "Direct outreach: 40–50 highly targeted LinkedIn messages to ERG leaders, DEI directors, and pharma executives."
       ],
-      images: [rxvpEventFlyer, rxvpLandingPage],
-      images: [rxvpEventFlyer, rxvpLandingPage, 
+      images: [rxvpEventFlyer, rxvpLandingPage,
         rxvpHappyAboutVideo,
         satisfactionVideoRxvp],
       videos: [rxvpTemplateInviteVideo]
