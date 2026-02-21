@@ -1,6 +1,7 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import ClientLogosSlider from "@/components/landing/ClientLogosSlider";
 import { ArrowLeft, Target, DollarSign, Megaphone, Clock, Users, Building2, Rocket, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -356,7 +357,11 @@ const FAQ = () => {
           </p>
         </div>
       </section>
-      
+
+      <div className="container px-4 md:px-6">
+        <ClientLogosSlider />
+      </div>
+
       {/* FAQ Content */}
       <section className="py-16">
         <div className="container px-4 md:px-6">

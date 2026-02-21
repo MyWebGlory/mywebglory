@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import SEO, { serviceSchema } from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import ClientLogosSlider from "@/components/landing/ClientLogosSlider";
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { 
@@ -340,6 +341,10 @@ const Pricing = () => {
           </motion.div>
         </div>
       </section>
+
+      <div className="container px-4 md:px-6">
+        <ClientLogosSlider />
+      </div>
 
       {/* FOMO Banner */}
       <section className="py-6 bg-gradient-to-r from-primary/20 via-primary/10 to-secondary/20 border-y border-primary/20">

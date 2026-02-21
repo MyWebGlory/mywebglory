@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import ClientLogosSlider from "@/components/landing/ClientLogosSlider";
 import {
   Target,
   Sparkles,
@@ -194,6 +195,9 @@ const HeroTunnel = () => {
             <ChevronDown className="w-6 h-6 text-primary" />
           </motion.div>
         </motion.div>
+      </div>
+      <div className="container px-4 md:px-6">
+        <ClientLogosSlider />
       </div>
     </section>
   );

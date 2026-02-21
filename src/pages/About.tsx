@@ -1,6 +1,7 @@
 import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import ClientLogosSlider from "@/components/landing/ClientLogosSlider";
 import { ArrowLeft, Users, Target, Heart, Zap, Award, Shield, Clock, Sparkles, Palette, Video, Phone, PenTool, TrendingUp, Megaphone, Mail, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -129,6 +130,10 @@ const About = () => {
         </div>
       </section>
 
+      <div className="container px-4 md:px-6">
+        <ClientLogosSlider />
+      </div>
+
       {/* Photo Grid */}
       <section className="pb-16 relative overflow-hidden">
         <div className="container px-4 md:px-6 relative z-10">
@@ -143,11 +148,11 @@ const About = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <img
                 src="/images/about/office-main.png"
-                alt="MyWebGlory Paris office – our workspace where event marketing strategies come to life"
+                alt="MyWebGlory Singapore office – our workspace where event marketing strategies come to life"
                 className="w-full h-72 md:h-[420px] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
               />
               <div className="absolute bottom-0 left-0 right-0 p-5 z-20 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                <p className="text-white font-semibold text-sm">Our Paris Office</p>
+                <p className="text-white font-semibold text-sm">Our Singapore Office</p>
                 <p className="text-white/70 text-xs mt-1">Where great events are planned</p>
               </div>
             </motion.div>

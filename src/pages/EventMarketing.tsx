@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import ClientLogosSlider from "@/components/landing/ClientLogosSlider";
 import {
   Target,
   Users,
@@ -235,6 +236,9 @@ const HeroTunnel = () => {
             backgroundSize: "40px 40px",
           }}
         />
+      </div>
+      <div className="container px-4 md:px-6">
+        <ClientLogosSlider />
       </div>
     </section>
   );

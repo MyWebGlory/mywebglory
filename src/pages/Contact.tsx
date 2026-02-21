@@ -2,6 +2,7 @@ import { Calendar, Mail, ArrowRight, Sparkles, Clock, MessageSquare } from "luci
 import { motion } from "framer-motion";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
+import ClientLogosSlider from "@/components/landing/ClientLogosSlider";
 import Footer from "@/components/landing/Footer";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
 
@@ -86,6 +87,10 @@ const Contact = () => {
           </motion.div>
         </div>
       </section>
+
+      <div className="container px-4 md:px-6">
+        <ClientLogosSlider />
+      </div>
 
       {/* Contact Methods */}
       <section className="py-12 relative">

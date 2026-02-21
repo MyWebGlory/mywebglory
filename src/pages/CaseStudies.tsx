@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/carousel";
 import SEO from "@/components/SEO";
 import Navbar from "@/components/landing/Navbar";
+import ClientLogosSlider from "@/components/landing/ClientLogosSlider";
 import Footer from "@/components/landing/Footer";
 
 // Media Modal Context
@@ -1367,6 +1368,9 @@ const CaseStudies = () => {
         
         <main>
           <CaseStudiesHero />
+          <div className="container px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+            <ClientLogosSlider />
+          </div>
           
           {/* Case Studies Grid */}
           <section className="py-12 px-4 sm:px-6 lg:px-8">
