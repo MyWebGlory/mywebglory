@@ -91,6 +91,8 @@ const edges: Edge[] = [
   { id: "e10-1011",from: 10, to: 1011, dur: 5.5, delay: 1.3 },
   { id: "e14-1013",from: 14, to: 1013, dur: 5.5, delay: 1.4 },
   { id: "e7-1015", from: 7,  to: 1015, dur: 5.5, delay: 1.7 },
+  { id: "e1-1020", from: 1, to: 1020, dur: 5.5, delay: 1.5 },
+  { id: "e1-1021", from: 1, to: 1021, dur: 5.5, delay: 1.6 },
 ];
 
 // Edges that get animated traveling dots (main structural lines only)
@@ -111,6 +113,8 @@ const outNodes: Node[] = [
   { id: 1011, x: 1480, y: 670, label: '', iconId: '', r: 0, colorClass: 'accent'    }, // off right (from Landing Page)
   { id: 1013, x: 1300, y: 940, label: '', iconId: '', r: 0, colorClass: 'primary'   }, // off bottom (from Retargeting)
   { id: 1015, x: 60,   y: 860, label: '', iconId: '', r: 0, colorClass: 'secondary'  }, // off bottom-left (from Posts)
+  { id: 1020, x: 60,   y: 60,  label: '', iconId: '', r: 0, colorClass: 'primary'   }, // off top-left (from ICP STUDY)
+  { id: 1021, x: -60,  y: 120, label: '', iconId: '', r: 0, colorClass: 'primary'   }, // off left (from ICP STUDY)
 ];
 
 const nodeMap = Object.fromEntries([...nodes, ...outNodes].map(n => [n.id, n]));

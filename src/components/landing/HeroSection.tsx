@@ -144,12 +144,12 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
 
       {/* ── ABOVE-FOLD PANEL: exactly viewport height, content nudged slightly below center ── */}
-      <div className="relative z-10 h-screen min-h-[640px] flex flex-col items-center justify-center pt-14 sm:pt-16 overflow-hidden">
+      <div className="relative z-10 h-screen min-h-[640px] flex flex-col items-center justify-center overflow-hidden mb-14 sm:mb-20">
         {/* Interconnected System Network — scoped to this panel so viewBox maps 1:1 to viewport */}
         <div className="absolute inset-0 opacity-55 pointer-events-none">
           <NetworkBackground />
         </div>
-      <div className="container relative z-10 px-4 sm:px-6 text-center">
+      <div className="container relative z-10 px-4 mt-20 sm:px-6 text-center">
         {/* Live Badge */}
         <motion.div 
           className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6"
@@ -341,7 +341,7 @@ const HeroSection = () => {
       </div>{/* end above-fold panel */}
 
       {/* ── BELOW-FOLD PANEL: logos + scarcity badge ── */}
-      <div className="relative z-10 py-14 sm:py-20">
+      <div className="relative z-10">
         <div className="container px-4 sm:px-6">
 
           {/* Client Logo Slider */}
@@ -358,6 +358,7 @@ const HeroSection = () => {
                     <img src="/images/client-logos/kornit-digital.png" alt="Kornit Digital" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" loading="eager" />
                     <img src="/images/client-logos/konnections.png" alt="Kornit Konnections" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" loading="eager" />
                     <img src="/images/client-logos/rxvp-logo.png" alt="RXVP" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" loading="eager" />
+                    <img src="/images/client-logos/portfoliometrics.png" alt="Portfoliometrics" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" loading="eager" />
                     <img src="/images/client-logos/bill-and-melinda-gates-foundation.png" alt="Bill & Melinda Gates Foundation" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" loading="eager" />
                     <img src="/images/client-logos/cbhn-white.png" alt="CBHN" className="h-6 sm:h-8 object-contain opacity-70 hover:opacity-100 transition-all duration-300 grayscale-[0.4] hover:grayscale-0 brightness-110" loading="eager" />
                   </div>
@@ -372,7 +373,7 @@ const HeroSection = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.5 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex justify-center mt-6 sm:mt-8"
+            className="flex justify-center mt-6 mb-6 sm:mt-8"
           >
             <div className="inline-flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border border-primary/50 bg-primary/10 backdrop-blur-sm">
               <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ duration: 2, repeat: Infinity }}>

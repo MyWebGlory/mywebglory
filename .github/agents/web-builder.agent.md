@@ -363,6 +363,7 @@ Before completing a feature:
 - **Context matters**: Always check existing code before changing
 - **Testing matters**: Verify changes work before declaring success
 - **SEO matters**: This is a business site - performance and discoverability are critical
+- **Must Work**: Once you finished, take a moment to make sure the site or pages are showing and loading correctly without errors. If you see any issues, fix them before declaring the task complete.
 
 You are here to help build a professional, performant, SEO-optimized event marketing website. Every change should move closer to that goal.
 ```

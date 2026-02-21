@@ -84,9 +84,8 @@ const Navbar = () => {
                 className="p-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                 aria-label="More pages"
               >
-                <MoreVertical className="w-5 h-5" />
+                <Menu className="w-5 h-5" />
               </button>
-              
               {isMoreMenuOpen && (
                 <div className="absolute top-full right-0 mt-2 w-56 bg-card border border-border rounded-xl shadow-xl py-2 animate-fade-in z-50">
                   <div className="px-3 py-2 border-b border-border mb-1">

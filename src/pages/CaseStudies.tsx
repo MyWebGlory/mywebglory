@@ -141,9 +141,9 @@ import kornitEmailMarketing from "@/assets/case-studies/kornit/email-marketing.p
 import kornitSocialPosts from "@/assets/case-studies/kornit/social-posts.png";
 import kornitEventBanners from "@/assets/case-studies/kornit/event-banners.png";
 import kornitSignatureBanners from "@/assets/case-studies/kornit/signature-banners.png";
-import kornitClientComment1 from "@/assets/case-studies/kornit/client-comment-1.png";
-import kornitClientComment2 from "@/assets/case-studies/kornit/client-comment-2.png";
-import kornitClientComment3 from "@/assets/case-studies/kornit/client-comment-3.png";
+import kornitClientComment1 from "@/assets/case-studies/kornit/kornit-client-comment-1.png";
+import kornitClientComment2 from "@/assets/case-studies/kornit/kornit-client-comment-2.png";
+import kornitClientComment3 from "@/assets/case-studies/kornit/kornit-client-comment-3.png";
 import kornitLogo from "@/assets/case-studies/kornit/kornit-logo.png";
 import kornitTeamMeeting from "@/assets/case-studies/kornit/team-meeting.png";
 import kornitEventTrailer from "@/assets/case-studies/kornit/event-trailer.mp4";
@@ -152,10 +152,12 @@ import kornitAiAdUgc from "@/assets/case-studies/kornit/ai-ad-ugc.mp4";
 // Import RxVP assets
 import rxvpEventFlyer from "@/assets/case-studies/rxvp/event-flyer.jpeg";
 import rxvpLandingPage from "@/assets/case-studies/rxvp/landing-page.png";
-import rxvpClientTestimonial from "@/assets/case-studies/rxvp/client-testimonial.png";
-import rxvpVideoCall from "@/assets/case-studies/rxvp/video-call-with-client.png";
+import rxvpClientTestimonial from "@/assets/case-studies/rxvp/rxvp-client-testimonial.png";
+import rxvpVideoCall from "@/assets/case-studies/rxvp/rxvp-video-call-with-client.png";
 import rxvpLogo from "@/assets/case-studies/rxvp/rxvp-logo.png";
-import rxvpTemplateInviteVideo from "@/assets/case-studies/rxvp/template-invite-video.mp4"
+import rxvpTemplateInviteVideo from "@/assets/case-studies/rxvp/template-invite-video.mp4";
+import rxvpHappyAboutVideo from "@/assets/case-studies/rxvp/rxvp-happy-about-video.png";
+import satisfactionVideoRxvp from "@/assets/case-studies/rxvp/satisfaction-video-rxvp.png";
 
 // Import CBHN assets
 import cbhnLogo from "@/assets/case-studies/cbhn/cbhn-square.png";
@@ -166,6 +168,8 @@ import cbhnEarlyBird from "@/assets/case-studies/cbhn/early-bird-countdown.png";
 import cbhnRegistrationOpen from "@/assets/case-studies/cbhn/registration-open.png";
 import cbhnSponsorTemplate from "@/assets/case-studies/cbhn/sponsor-recognition-template.png";
 import cbhnTinaArmstrong from "@/assets/case-studies/cbhn/tina-armstrong.png";
+import satisfactionCommentCbhn from "@/assets/case-studies/cbhn/satisfaction-comment-cbhn.png";
+import satisfactionCommentCbhnAlt from "@/assets/case-studies/cbhn/satisfaction-comment-cbhn-alt.png";
 
 // RxVP Attendee Logos
 import logoAverita from "@/assets/case-studies/rxvp/attendee-logos/averitas.png";
@@ -427,6 +431,9 @@ const rxvpCaseStudy: CaseStudyData = {
         "Direct outreach: 40–50 highly targeted LinkedIn messages to ERG leaders, DEI directors, and pharma executives."
       ],
       images: [rxvpEventFlyer, rxvpLandingPage],
+      images: [rxvpEventFlyer, rxvpLandingPage, 
+        rxvpHappyAboutVideo,
+        satisfactionVideoRxvp],
       videos: [rxvpTemplateInviteVideo]
     },
     results: {
@@ -541,7 +548,9 @@ const cbhnCaseStudy: CaseStudyData = {
         "4 custom graphic designs, social square, early bird countdown, registration announcement, and sponsor recognition template.",
         "Email reminder sequence, launch, early bird deadline, speaker spotlight, and final week reminders."
       ],
-      images: [cbhnSocialMediaFlyer, cbhnSquareAlt, cbhnEarlyBird, cbhnRegistrationOpen, cbhnSponsorTemplate]
+      images: [cbhnSocialMediaFlyer, cbhnSquareAlt, cbhnEarlyBird, cbhnRegistrationOpen, cbhnSponsorTemplate, 
+        satisfactionCommentCbhn,
+        satisfactionCommentCbhnAlt]
     },
     results: {
       metrics: [
