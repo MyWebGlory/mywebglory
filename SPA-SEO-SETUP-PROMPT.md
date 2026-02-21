@@ -86,7 +86,7 @@ Add the `postbuild` script and the `reactSnap` config block. This is the most cr
   },
   "reactSnap": {
     "source": "dist",
-    "inlineCss": true,
+    "inlineCss": false,
     "skipThirdPartyRequests": true,
     "concurrency": 1,
     "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
@@ -100,7 +100,7 @@ Add the `postbuild` script and the `reactSnap` config block. This is the most cr
 | Setting | Why it's critical |
 |---------|-------------------|
 | `"source": "dist"` | Tells react-snap where Vite outputs the build |
-| `"inlineCss": true` | Inlines critical CSS so pages look correct even without JS |
+| `"inlineCss": false` | **Must be false** — setting this to `true` causes react-snap to use `penthouse` to extract "critical" CSS, which strips complex Tailwind utilities like `blur-*`, `backdrop-blur`, gradient opacity variants, and animation classes. The result is broken visual effects on the deployed site. Leave it `false` so the full CSS loads normally via the `<link>` tag. SEO is unaffected. |
 | `"skipThirdPartyRequests": true` | **Critical** — blocks third-party iframes (Calendly, HubSpot, etc.) from making network requests. Without this, react-snap waits for `networkidle0` forever and captures the page before `react-helmet-async` has run, causing all pages to get the homepage's default title |
 | `"concurrency": 1` | **Critical** — renders one page at a time. With higher concurrency (default is 4), pages race and some are captured before Helmet updates `<head>`, resulting in the wrong title/meta on all non-home pages |
 | `puppeteerArgs` | Required to run headless Chrome without sandbox in most environments |
@@ -519,7 +519,7 @@ Use these schema types per page type. Every page should have at minimum: **Organ
 | JSON-LD structured data | ✅ Yes |
 | New page or route added | ✅ Yes |
 | Component used in prerendered HTML | ✅ Yes |
-| Tailwind class changes (colors, spacing) | ⚠️ Optional (doesn't affect SEO, but inlineCss will be stale) |
+| Tailwind class changes (colors, spacing) | ⚠️ Optional for local dev, required before deploy |
 | CSS-only visual changes | ⚠️ Optional for local dev, required before deploy |
 | Client-side JS behavior (UI interactions) | ❌ No (rebuild not needed for SEO) |
 

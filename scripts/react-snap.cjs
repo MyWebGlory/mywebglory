@@ -12,7 +12,7 @@ const chromePath = process.env.PUPPETEER_EXECUTABLE_PATH || defaultChromePath;
 
 run({
   source: 'dist',
-  inlineCss: true,
+  inlineCss: false,
   skipThirdPartyRequests: true,
   concurrency: 1,
   puppeteerArgs: ['--no-sandbox', '--disable-setuid-sandbox'],

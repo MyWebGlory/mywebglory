@@ -110,7 +110,7 @@ const defaultChromePath =
 
 run({
   source: 'dist',
-  inlineCss: true,
+  inlineCss: false,
   skipThirdPartyRequests: true,
   concurrency: 1,
   puppeteerArgs: ['--no-sandbox', '--disable-setuid-sandbox'],
