@@ -1,14 +1,24 @@
 import PageLayout from "@/components/PageLayout";
 import { Separator } from "@/components/ui/separator";
 
+const privacyBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "Privacy & Legal", "item": "https://mywebglory.com/privacy" }
+  ]
+};
+
 const Privacy = () => {
   return (
     <PageLayout 
       title="Privacy & Legal" 
       description="Terms of service, privacy policy, and legal information for MyWebGlory services."
-      seoTitle="Privacy Policy & Terms | MyWebGlory"
-      seoDescription="Privacy policy, terms of service, and legal information for MyWebGlory event marketing services. ADB International LLC."
+      seoTitle="Privacy Policy & Terms of Service | MyWebGlory"
+      seoDescription="Read MyWebGlory's privacy policy, terms of service, and legal information. Operated by ADB International LLC. Learn how we handle your data and our service agreements."
       canonicalUrl="/privacy"
+      structuredData={privacyBreadcrumbSchema}
     >
       <div className="max-w-4xl space-y-12">
         

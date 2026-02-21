@@ -1561,6 +1561,43 @@ const AmbientOrbs = () => (
 // ============================================
 // MAIN PAGE COMPONENT
 // ============================================
+// Structured data for Event Marketing service page
+const eventMarketingPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Event Marketing Services",
+  "serviceType": "Event Marketing",
+  "url": "https://mywebglory.com/event-marketing",
+  "description": "End-to-end event marketing services including audience acquisition, show-up rate optimization, pipeline generation, and post-event revenue systems. Proven to deliver 200-500+ qualified registrations per event.",
+  "provider": {
+    "@type": "Organization",
+    "name": "MyWebGlory",
+    "url": "https://mywebglory.com"
+  },
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Event Marketing Services",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Audience Acquisition & Paid Advertising" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Show-Up Rate Optimization" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pipeline & Revenue Generation" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Event Branding & Creative" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Email & Nurture Sequences" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Post-Event Content Repurposing" } }
+    ]
+  }
+};
+
+const eventMarketingBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "Event Marketing", "item": "https://mywebglory.com/event-marketing" }
+  ]
+};
+
 const EventMarketing = () => {
   return (
     <div className="min-h-screen bg-background relative">
@@ -1568,6 +1605,7 @@ const EventMarketing = () => {
         title="What is Event Marketing? | Complete Guide to Revenue-Driven Events | MyWebGlory"
         description="Discover how event marketing turns attention into trust and conversations into revenue. Learn why top companies use events to accelerate growth. Expert insights from MyWebGlory."
         canonicalUrl="/event-marketing"
+        structuredData={[eventMarketingPageSchema, eventMarketingBreadcrumbSchema]}
       />
       {/* Global ambient effects */}
       <NoiseOverlay />

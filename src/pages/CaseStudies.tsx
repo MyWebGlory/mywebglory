@@ -1327,6 +1327,47 @@ const FinalCTA = () => {
   );
 };
 
+// Structured data for Case Studies page
+const caseStudiesCollectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Event Marketing Case Studies",
+  "url": "https://mywebglory.com/case-studies",
+  "description": "Real event marketing results from MyWebGlory clients. See how we generated 1,208 registrations for Kornit Digital, drove 95% show-up rates, and built measurable pipeline.",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Kornit Digital — 1,208 Registrations in 8 Weeks",
+        "description": "End-to-end event marketing campaign generating over 1,200 qualified registrations for Kornit Digital's virtual event through multi-channel paid acquisition and email nurture."
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "CBHN — 35% Show-Up Rate Increase for Healthcare Conference",
+        "description": "Event marketing campaign that boosted registration-to-attendance conversion by 35% for a healthcare networking conference using show-up rate optimization."
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "RXVP — Pipeline Generation Through Virtual Event Series",
+        "description": "A multi-event campaign for RXVP that turned virtual events into a consistent pipeline generation machine, with measurable revenue attribution."
+      }
+    ]
+  }
+};
+
+const caseStudiesBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "Case Studies", "item": "https://mywebglory.com/case-studies" }
+  ]
+};
+
 // Main Page Component
 const CaseStudies = () => {
   const [modalState, setModalState] = useState<{
@@ -1363,6 +1404,7 @@ const CaseStudies = () => {
           title="Case Studies | Real Event Marketing Results | MyWebGlory"
           description="See how we generated 1,208 registrations for Kornit Digital in 8 weeks. Real events, real results, real pipeline. Explore our proven track record."
           canonicalUrl="/case-studies"
+          structuredData={[caseStudiesCollectionSchema, caseStudiesBreadcrumbSchema]}
         />
         <Navbar />
         

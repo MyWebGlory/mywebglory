@@ -84,6 +84,38 @@ const values = [
   },
 ];
 
+// Structured data: AboutPage + Person (founder)
+const aboutPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About MyWebGlory",
+  "url": "https://mywebglory.com/about",
+  "description": "MyWebGlory is a boutique event marketing agency founded in 2022 by Gabriel Ageron. A team of 15 specialists serving global B2B clients with proven event marketing systems.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "MyWebGlory",
+    "url": "https://mywebglory.com",
+    "foundingDate": "2022",
+    "numberOfEmployees": { "@type": "QuantitativeValue", "value": 15 },
+    "founder": {
+      "@type": "Person",
+      "name": "Gabriel Ageron",
+      "jobTitle": "Founder & CEO",
+      "url": "https://www.linkedin.com/in/gabriel-ageron/",
+      "sameAs": ["https://www.linkedin.com/in/gabriel-ageron/", "https://wa.me/33767096182"]
+    }
+  }
+};
+
+const aboutBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "About", "item": "https://mywebglory.com/about" }
+  ]
+};
+
 const About = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -91,6 +123,7 @@ const About = () => {
         title="About MyWebGlory | Event Marketing Experts | Meet Gabriel Ageron"
         description="Young, modern, and ROI-focused. MyWebGlory is a boutique event marketing agency of 15 specialists founded by Gabriel Ageron. We use the latest tech to deliver exceptional results."
         canonicalUrl="/about"
+        structuredData={[aboutPageSchema, aboutBreadcrumbSchema]}
       />
       <Navbar />
       

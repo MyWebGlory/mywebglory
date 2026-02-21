@@ -77,6 +77,98 @@ Every page should have:
 - **Analytics** - Google Analytics (to be added)
 - **Images** - Store in `/public/images/`, optimize for web
 
+## SEO Architecture (Critical — Do Not Break)
+
+This project uses **react-snap** for build-time prerendering to solve the SPA SEO problem. Every page gets a static HTML snapshot with its own unique `<title>`, meta tags, and JSON-LD structured data — visible to crawlers without JavaScript.
+
+### How It Works
+
+1. `npm run build` runs Vite (outputs to `/dist`)
+2. `postbuild` hook auto-runs `react-snap`, which uses headless Chrome to crawl all 15 routes and save static HTML snapshots into `/dist`
+3. Each snapshot includes the fully rendered `<head>` from `react-helmet-async`
+4. On user visit: if the div#root already has children (prerendered), React hydrates instead of re-rendering
+
+### Key Files
+
+| File | Role |
+|------|------|
+| `src/components/SEO.tsx` | Central SEO component — sets title, description, OG, Twitter, JSON-LD via `react-helmet-async` |
+| `src/main.tsx` | Conditional hydration: `hydrateRoot()` if prerendered, `createRoot()` if not |
+| `src/routes.tsx` | **Eager imports only** — no `React.lazy()`. Lazy loading prevents react-snap from capturing content |
+| `package.json` → `"reactSnap"` | react-snap config: `skipThirdPartyRequests: true`, `concurrency: 1` (both critical — see below) |
+| `index.html` | Minimal fallback only — no hardcoded JSON-LD, no OG tags. All head content managed per-page by SEO component |
+
+### react-snap Config (package.json)
+
+```json
+"reactSnap": {
+  "source": "dist",
+  "inlineCss": true,
+  "skipThirdPartyRequests": true,
+  "concurrency": 1,
+  "puppeteerArgs": ["--no-sandbox", "--disable-setuid-sandbox"],
+  "puppeteerExecutablePath": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+}
+```
+
+**Why these settings matter:**
+- `skipThirdPartyRequests: true` — blocks Calendly iframe from making network requests that prevent `networkidle0`, which would cause react-snap to capture the page before Helmet runs
+- `concurrency: 1` — renders pages sequentially. With higher concurrency, some pages were captured before `react-helmet-async` updated `<head>`, resulting in the default homepage title on all pages
+- `puppeteerExecutablePath` — points to system Chrome. react-snap's bundled Chromium is too old to parse modern JS (`?.` syntax throws)
+
+### SEO Component Usage Pattern
+
+Every page must use the `<SEO>` component with unique, page-specific content:
+
+```tsx
+import SEO from "@/components/SEO";
+
+// Inside the page's JSX:
+<SEO
+  title="Unique Page Title"
+  description="Unique page description, 150-160 chars, includes target keywords."
+  canonicalUrl="/page-slug"
+  structuredData={[pageSpecificSchema, breadcrumbSchema]}
+/>
+```
+
+### JSON-LD Structured Data Per Page
+
+| Page | Schemas |
+|------|---------|
+| `/` | Organization + LocalBusiness |
+| `/event-marketing` | Organization + Service + BreadcrumbList |
+| `/how-it-works` | Organization + HowTo + BreadcrumbList |
+| `/pricing` | Organization + Service (with Offers) + BreadcrumbList |
+| `/case-studies` | Organization + CollectionPage + BreadcrumbList |
+| `/about` | Organization + AboutPage + BreadcrumbList |
+| `/contact` | Organization + ContactPage + BreadcrumbList |
+| `/faq` | Organization + FAQPage + BreadcrumbList |
+| `/blog` | Organization + Blog + BreadcrumbList |
+| `/blog/*` | Organization + Article + BreadcrumbList |
+| `/privacy` | Organization + BreadcrumbList |
+
+### When to Rebuild
+
+Run `npm run build` (which triggers react-snap automatically via postbuild) whenever you:
+- Change page copy, headings, or CTAs
+- Update SEO titles, descriptions, or JSON-LD
+- Add a new page or route
+- Update any component used in the server-rendered HTML
+
+For pure style changes (Tailwind classes, colors) that don't affect SEO output, rebuilding is optional for local development but required before deploying.
+
+### Verification After Build
+
+```bash
+# Quick check: all pages should have unique titles and data-rh attributes
+grep -o '<title>[^<]*</title>' dist/pricing/index.html
+grep -c 'data-rh' dist/pricing/index.html         # should be ≥1
+grep -c 'application/ld.json' dist/pricing/index.html  # should be ≥2
+```
+
+If `data-rh=0` or title shows the default homepage title on other pages, something broke the Helmet capture — check the `concurrency` and `skipThirdPartyRequests` settings first.
+
 ## Content Guidelines
 
 ### Headlines
@@ -158,7 +250,8 @@ Use conventional commits:
 The site is:
 - Deployed on GitHub Pages
 - Connected to custom domain (mywebglory.com)
-- SEO-optimized with JSON-LD schemas
+- **Prerendered with react-snap** — all 15 routes have unique static HTML
+- SEO-optimized with per-page JSON-LD structured data (2–3 schemas per page)
 - Mobile-responsive
 - Ongoing content optimization
 - A/B testing CTAs

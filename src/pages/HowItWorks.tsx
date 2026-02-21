@@ -1336,6 +1336,36 @@ const FinalCTA = () => {
 };
 
 // ============ MAIN PAGE ============
+// HowToSchema: structured data describing the 8-step process
+const howToSchema = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How MyWebGlory's 8-Step Event Marketing System Works",
+  "description": "Our proven 8-step process transforms events into pipeline-generating machines. From deep strategy immersion to post-event revenue systems, every step is designed to maximize ROI.",
+  "url": "https://mywebglory.com/how-it-works",
+  "totalTime": "P8W",
+  "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "9000" },
+  "step": [
+    { "@type": "HowToStep", "position": 1, "name": "Deep Immersion", "text": "We study your ICP, competitors, and market positioning to build a data-driven event strategy tailored to your goals." },
+    { "@type": "HowToStep", "position": 2, "name": "Event Branding & Creative", "text": "We design your event identity — landing pages, email templates, social assets, and ad creatives that convert." },
+    { "@type": "HowToStep", "position": 3, "name": "Pipeline Architecture", "text": "We build multi-channel acquisition funnels across paid ads, email outreach, LinkedIn, and partner networks." },
+    { "@type": "HowToStep", "position": 4, "name": "Audience Acquisition", "text": "We launch targeted campaigns to fill your event with qualified decision-makers and high-intent prospects." },
+    { "@type": "HowToStep", "position": 5, "name": "Show-Up Rate Optimization", "text": "Multi-touch reminder sequences, social proof triggers, and urgency tactics to maximize attendance rates." },
+    { "@type": "HowToStep", "position": 6, "name": "Live Event Support", "text": "Real-time monitoring, engagement optimization, and technical support during your live event." },
+    { "@type": "HowToStep", "position": 7, "name": "Post-Event Revenue System", "text": "Automated follow-up sequences, content repurposing, and sales handoff to convert attendees into pipeline." },
+    { "@type": "HowToStep", "position": 8, "name": "Authority Flywheel", "text": "Transform event content into 30+ pieces of authority content that drives organic leads for months." }
+  ]
+};
+
+const howItWorksBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "How It Works", "item": "https://mywebglory.com/how-it-works" }
+  ]
+};
+
 const HowItWorks = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
@@ -1343,6 +1373,7 @@ const HowItWorks = () => {
         title="How We Work | Our 8-Step Event Marketing System | MyWebGlory"
         description="From strategy to execution: discover our proven 8-step process that transforms events into pipeline machines. Limited to 4 clients monthly for quality delivery."
         canonicalUrl="/how-it-works"
+        structuredData={[howToSchema, howItWorksBreadcrumbSchema]}
       />
       <Navbar />
 

@@ -38,14 +38,23 @@ const blogSchema = {
   }
 };
 
+const blogBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://mywebglory.com/blog" }
+  ]
+};
+
 const Blog = () => {
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <SEO
-        title="Blog | Event Marketing Insights & Strategies"
-        description="Expert event marketing insights, strategies, and case studies. Learn how to fill your events with qualified attendees and generate revenue."
+        title="Blog | Event Marketing Insights & Strategies | MyWebGlory"
+        description="Expert event marketing insights, strategies, and case studies from MyWebGlory. Learn how to fill your events with qualified attendees, maximize show-up rates, and generate measurable revenue."
         canonicalUrl="/blog"
-        structuredData={blogSchema}
+        structuredData={[blogSchema, blogBreadcrumbSchema]}
       />
       <Navbar />
       

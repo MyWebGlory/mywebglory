@@ -322,6 +322,15 @@ const faqSchema = {
   )
 };
 
+const faqBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "FAQ", "item": "https://mywebglory.com/faq" }
+  ]
+};
+
 const FAQ = () => {
   return (
     <div className="min-h-screen bg-background">
@@ -329,7 +338,7 @@ const FAQ = () => {
         title="FAQ | Event Marketing Questions Answered | MyWebGlory"
         description="Get answers to common event marketing questions: guarantees, pricing, ad platforms, timelines, and more. Everything you need to know before working with us."
         canonicalUrl="/faq"
-        structuredData={faqSchema}
+        structuredData={[faqSchema, faqBreadcrumbSchema]}
       />
       <Navbar />
       

@@ -1,21 +1,18 @@
-import { lazy } from 'react';
 import Index from './pages/Index';
-
-// Lazy-load all pages except the homepage for faster initial load
-const Contact = lazy(() => import('./pages/Contact'));
-const EventMarketing = lazy(() => import('./pages/EventMarketing'));
-const HowItWorks = lazy(() => import('./pages/HowItWorks'));
-const Pricing = lazy(() => import('./pages/Pricing'));
-const CaseStudies = lazy(() => import('./pages/CaseStudies'));
-const About = lazy(() => import('./pages/About'));
-const FAQ = lazy(() => import('./pages/FAQ'));
-const Privacy = lazy(() => import('./pages/Privacy'));
-const Blog = lazy(() => import('./pages/Blog'));
-const BlogPostUltimateGuideEventMarketing = lazy(() => import('./pages/BlogPost-UltimateGuideEventMarketing'));
-const BlogPostEventMarketingPlaybook = lazy(() => import('./pages/BlogPost-EventMarketingPlaybook'));
-const BlogPostBuildAuthorityEventContent = lazy(() => import('./pages/BlogPost-BuildAuthorityEventContent'));
-const BlogPostTradeShowROI = lazy(() => import('./pages/BlogPost-TradeShowROI'));
-const NotFound = lazy(() => import('./pages/NotFound'));
+import Contact from './pages/Contact';
+import EventMarketing from './pages/EventMarketing';
+import HowItWorks from './pages/HowItWorks';
+import Pricing from './pages/Pricing';
+import CaseStudies from './pages/CaseStudies';
+import About from './pages/About';
+import FAQ from './pages/FAQ';
+import Privacy from './pages/Privacy';
+import Blog from './pages/Blog';
+import BlogPostUltimateGuideEventMarketing from './pages/BlogPost-UltimateGuideEventMarketing';
+import BlogPostEventMarketingPlaybook from './pages/BlogPost-EventMarketingPlaybook';
+import BlogPostBuildAuthorityEventContent from './pages/BlogPost-BuildAuthorityEventContent';
+import BlogPostTradeShowROI from './pages/BlogPost-TradeShowROI';
+import NotFound from './pages/NotFound';
 
 export const routes = [
   { path: '/', element: <Index /> },

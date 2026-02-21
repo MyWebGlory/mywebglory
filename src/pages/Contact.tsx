@@ -49,6 +49,42 @@ const contactMethods = [
   },
 ];
 
+// Structured data: ContactPage
+const contactPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact MyWebGlory",
+  "url": "https://mywebglory.com/contact",
+  "description": "Get in touch with MyWebGlory to discuss your event marketing needs. Book a free 30-minute strategy call, message us on WhatsApp, or email us directly.",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "MyWebGlory",
+    "url": "https://mywebglory.com",
+    "email": "gabriel@mywebglory.com",
+    "telephone": "+33767096182",
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+33767096182",
+        "email": "gabriel@mywebglory.com",
+        "availableLanguage": ["English", "French"],
+        "contactOption": "TollFree",
+        "areaServed": "Worldwide"
+      }
+    ]
+  }
+};
+
+const contactBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://mywebglory.com/contact" }
+  ]
+};
+
 const Contact = () => {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -56,6 +92,7 @@ const Contact = () => {
         title="Contact Us | Book a Free Strategy Call | MyWebGlory"
         description="Ready to fill your next event? Book a free 30-minute strategy call, message us on WhatsApp, or email us. We typically respond within minutes."
         canonicalUrl="/contact"
+        structuredData={[contactPageSchema, contactBreadcrumbSchema]}
       />
       <Navbar />
 

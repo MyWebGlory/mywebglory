@@ -12,9 +12,10 @@ interface PageLayoutProps {
   seoDescription?: string;
   canonicalUrl?: string;
   noIndex?: boolean;
+  structuredData?: object | object[];
 }
 
-const PageLayout = ({ title, description, children, seoTitle, seoDescription, canonicalUrl, noIndex }: PageLayoutProps) => {
+const PageLayout = ({ title, description, children, seoTitle, seoDescription, canonicalUrl, noIndex, structuredData }: PageLayoutProps) => {
   return (
     <div className="min-h-screen bg-background">
       <SEO
@@ -22,6 +23,7 @@ const PageLayout = ({ title, description, children, seoTitle, seoDescription, ca
         description={seoDescription || description || "MyWebGlory - Event Marketing Agency"}
         canonicalUrl={canonicalUrl}
         noIndex={noIndex}
+        structuredData={structuredData}
       />
       <Navbar />
       

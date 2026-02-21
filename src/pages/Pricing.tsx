@@ -239,6 +239,15 @@ const performanceData: PerformanceMetric[] = [
   { name: "Estimated New Clients", icon: Award, values: [null, [6, 18], [15, 45], "Growth target"], highlight: true },
 ];
 
+const pricingBreadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mywebglory.com" },
+    { "@type": "ListItem", "position": 2, "name": "Pricing", "item": "https://mywebglory.com/pricing" }
+  ]
+};
+
 const Pricing = () => {
   const [globalAdSpend, setGlobalAdSpend] = useState(10000);
 
@@ -281,7 +290,7 @@ const Pricing = () => {
         title="Event Marketing Pricing | Investment Plans from $9,000 | MyWebGlory"
         description="Choose your revenue engine: Event Launch Engine ($9k), Revenue System ($25k), or Authority Flywheel ($50k). Transparent pricing with proven ROI. Get your custom quote."
         canonicalUrl="/pricing"
-        structuredData={serviceSchema}
+        structuredData={[serviceSchema, pricingBreadcrumbSchema]}
       />
       <Navbar />
       
